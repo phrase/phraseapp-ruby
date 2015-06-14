@@ -1,12 +1,16 @@
 # -*- encoding: utf-8 -*-
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'version'
+
 Gem::Specification.new do |gem|
   gem.name          = "phraseapp-ruby"
-  gem.version       = "0.0.1"
+  gem.version       = PhraseApp::VERSION
   gem.authors       = ["PhraseApp"]
   gem.email         = ["info@phraseapp.com"]
   gem.description   = "PhraseApp API client libary"
   gem.summary       = "Interact with the PhraseApp API"
   gem.homepage      = "https://github.com/phrase/phraseapp-ruby"
-  gem.files         = ["lib/phraseapp-ruby.rb", "lib/request_handler.rb", "lib/auth.rb"]
+  gem.files         = `git ls-files ./lib`.split($/)
   gem.license       = "BSD"
 end
