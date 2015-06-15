@@ -817,7 +817,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -832,7 +832,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -847,7 +847,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -862,7 +862,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -882,7 +882,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -902,7 +902,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -917,7 +917,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -932,7 +932,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -952,7 +952,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -967,7 +967,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -987,7 +987,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1002,7 +1002,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1017,7 +1017,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1032,7 +1032,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1047,7 +1047,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PUT", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1062,7 +1062,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1077,7 +1077,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1097,7 +1097,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1112,7 +1112,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1186,7 +1186,7 @@ class PhraseApp::Client
 
 
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1201,7 +1201,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1221,7 +1221,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1236,7 +1236,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1310,7 +1310,7 @@ class PhraseApp::Client
 
 
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1330,7 +1330,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1345,7 +1345,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1365,7 +1365,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1380,7 +1380,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1395,7 +1395,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1415,7 +1415,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1430,7 +1430,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1450,7 +1450,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1465,7 +1465,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1480,7 +1480,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1495,7 +1495,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1515,7 +1515,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1530,7 +1530,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1545,7 +1545,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1560,7 +1560,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1580,7 +1580,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1595,7 +1595,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1615,7 +1615,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1630,7 +1630,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1645,7 +1645,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1660,7 +1660,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1680,7 +1680,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1700,7 +1700,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1715,7 +1715,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
     if err != nil
       return nil, err
@@ -1730,7 +1730,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1745,7 +1745,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1765,7 +1765,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1785,7 +1785,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1805,7 +1805,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1825,7 +1825,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1840,7 +1840,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1860,7 +1860,7 @@ class PhraseApp::Client
     if err != nil
       return nil, err
     end
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1920,7 +1920,7 @@ class PhraseApp::Client
 
 
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
     if err != nil
       return nil, err
@@ -1935,7 +1935,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err
@@ -1950,7 +1950,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
     if err != nil
       return nil, err
@@ -1965,7 +1965,7 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
-    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body) 
+    reqHelper = PhraseApp::RequestHelper.new(data_hash, post_body)
     rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
     if err != nil
       return nil, err

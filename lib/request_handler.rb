@@ -1,4 +1,9 @@
+require 'version'
+
 module PhraseApp
+
+  API_CLIENT_IDENTIFIER = "PhraseApp Ruby " + VERSION
+
   class ErrorResponse
     attr_accessor :message
 
@@ -36,7 +41,7 @@ module PhraseApp
     attr_accessor :limit, :remaining, :reset
     
     def initialize(resp)
-	    re = RateLimitingError.new(resp)
+	  re = RateLimitingError.new(resp)
       puts resp.body.inspect
       re.limit = resp["X-Rate-Limit-Limit"].to_i
 	    re.remaining = resp["X-Rate-Limit-Remaining"].to_i
@@ -78,6 +83,8 @@ module PhraseApp
         Module.const_get("Net::HTTP::#{method.capitalize}::REQUEST_HAS_BODY"), 
         Module.const_get("Net::HTTP::#{method.capitalize}::RESPONSE_HAS_BODY"), 
         path)
+
+
 
     puts "data:"
     puts data.inspect
