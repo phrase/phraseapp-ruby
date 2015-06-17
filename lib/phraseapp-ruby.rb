@@ -804,6 +804,213 @@ class PhraseApp::RequestHelper
   end
 end
 
+class PhraseApp::ParamsError < StandardError; end
+
+
+class PhraseApp::KeyListParams < ::OpenStruct
+  # :locale_id, :order, :sort, :translated, 
+  def locale_id=(val)
+    self.locale_id = val
+  end
+
+  def order=(val)
+    self.order = val
+  end
+
+  def sort=(val)
+    self.sort = val
+  end
+
+  def translated=(val)
+    if val == "true"
+      self.translated = true
+    elsif val == "false" #ignore
+      self.translated = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def validate
+    
+  end
+end
+
+class PhraseApp::LocaleDownloadParams < ::OpenStruct
+  # :convert_emoji, :format, :format_options, :include_empty_translations, :keep_notranslate_tags, :tag_id, 
+  def convert_emoji=(val)
+    if val == "true"
+      self.convert_emoji = true
+    elsif val == "false" #ignore
+      self.convert_emoji = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def format=(val)
+    self.format = val
+  end
+
+  def format_options=(val)
+    self.format_options = JSON.load(val)
+  end
+
+  def include_empty_translations=(val)
+    if val == "true"
+      self.include_empty_translations = true
+    elsif val == "false" #ignore
+      self.include_empty_translations = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def keep_notranslate_tags=(val)
+    if val == "true"
+      self.keep_notranslate_tags = true
+    elsif val == "false" #ignore
+      self.keep_notranslate_tags = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def tag_id=(val)
+    self.tag_id = val
+  end
+
+  def validate
+    if self.format == nil || self.format == "" 
+      raise PhraseApp::ParamsValidationError.new("Required parameter \"format\" of \"locale_downloadParams\" not set")
+    end
+  end
+end
+
+class PhraseApp::TranslationListAllParams < ::OpenStruct
+  # :order, :since, :sort, :unverified, 
+  def order=(val)
+    self.order = val
+  end
+
+  def since=(val)
+    self.since = Time.parse(val)
+  end
+
+  def sort=(val)
+    self.sort = val
+  end
+
+  def unverified=(val)
+    if val == "true"
+      self.unverified = true
+    elsif val == "false" #ignore
+      self.unverified = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def validate
+    
+  end
+end
+
+class PhraseApp::TranslationListKeyParams < ::OpenStruct
+  # :order, :since, :sort, :unverified, 
+  def order=(val)
+    self.order = val
+  end
+
+  def since=(val)
+    self.since = Time.parse(val)
+  end
+
+  def sort=(val)
+    self.sort = val
+  end
+
+  def unverified=(val)
+    if val == "true"
+      self.unverified = true
+    elsif val == "false" #ignore
+      self.unverified = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def validate
+    
+  end
+end
+
+class PhraseApp::TranslationListLocaleParams < ::OpenStruct
+  # :order, :since, :sort, :unverified, 
+  def order=(val)
+    self.order = val
+  end
+
+  def since=(val)
+    self.since = Time.parse(val)
+  end
+
+  def sort=(val)
+    self.sort = val
+  end
+
+  def unverified=(val)
+    if val == "true"
+      self.unverified = true
+    elsif val == "false" #ignore
+      self.unverified = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def validate
+    
+  end
+end
+
+class PhraseApp::TranslationUpdateParams < ::OpenStruct
+  # :content, :excluded, :plural_suffix, :unverified, 
+  def content=(val)
+    self.content = val
+  end
+
+  def excluded=(val)
+    if val == "true"
+      self.excluded = true
+    elsif val == "false" #ignore
+      self.excluded = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def plural_suffix=(val)
+    self.plural_suffix = val
+  end
+
+  def unverified=(val)
+    if val == "true"
+      self.unverified = true
+    elsif val == "false" #ignore
+      self.unverified = b
+    else
+      PhraseApp::ParamsValidationError.new("invalid value #{val}")
+    end
+  end
+
+  def validate
+    if self.content == nil || self.content == "" 
+      raise PhraseApp::ParamsValidationError.new("Required parameter \"content\" of \"translation_updateParams\" not set")
+    end
+  end
+end
+
 class PhraseApp::Client
 
   # Create a new authorization.
@@ -811,6 +1018,12 @@ class PhraseApp::Client
     path = sprintf("/v2/authorizations")
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::AuthorizationCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::AuthorizationCreateParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -877,6 +1090,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::AuthorizationUpdateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::AuthorizationUpdateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -896,6 +1115,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/blacklisted_keys", project_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::BlacklistKeyCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::BlacklistKeyCreateParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -947,6 +1172,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::BlacklistKeyUpdateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::BlacklistKeyUpdateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -981,6 +1212,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/keys/%s/comments", project_id, key_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::CommentCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::CommentCreateParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -1092,6 +1329,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::CommentUpdateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::CommentUpdateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1126,6 +1369,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/keys", project_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::KeyCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::KeyCreateParams")
+      end
+    end
     if params.data_type != nil
       data_hash["data_type"] = params.data_type
     end
@@ -1216,6 +1465,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::KeyListParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::KeyListParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1250,6 +1505,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/keys/%s", project_id, id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::KeyUpdateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::KeyUpdateParams")
+      end
+    end
     if params.data_type != nil
       data_hash["data_type"] = params.data_type
     end
@@ -1325,6 +1586,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::LocaleCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::LocaleCreateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1359,6 +1626,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/locales/%s/download", project_id, id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::LocaleDownloadParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::LocaleDownloadParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -1410,6 +1683,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::LocaleUpdateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::LocaleUpdateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1444,6 +1723,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/orders", project_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::OrderCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::OrderCreateParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -1510,6 +1795,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::ProjectCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::ProjectCreateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1575,6 +1866,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::ProjectUpdateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::ProjectUpdateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1609,6 +1906,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/styleguides", project_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::StyleguideCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::StyleguideCreateParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -1675,6 +1978,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::StyleguideUpdateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::StyleguideUpdateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1694,6 +2003,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/tags", project_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::TagCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::TagCreateParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -1760,6 +2075,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::TranslationCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::TranslationCreateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1779,6 +2100,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/translations", project_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::TranslationListAllParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::TranslationListAllParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -1800,6 +2127,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::TranslationListKeyParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::TranslationListKeyParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1819,6 +2152,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/locales/%s/translations", project_id, locale_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::TranslationListLocaleParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::TranslationListLocaleParams")
+      end
+    end
 
     data_hash = params.to_h
     err = params.validate
@@ -1855,6 +2194,12 @@ class PhraseApp::Client
     data_hash = {}
     post_body = nil
 
+    if params.present?
+      unless params.kind_of?(PhraseApp::TranslationUpdateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::TranslationUpdateParams")
+      end
+    end
+
     data_hash = params.to_h
     err = params.validate
     if err != nil
@@ -1874,6 +2219,12 @@ class PhraseApp::Client
     path = sprintf("/v2/projects/%s/uploads", project_id)
     data_hash = {}
     post_body = nil
+
+    if params.present?
+      unless params.kind_of?(PhraseApp::UploadCreateParams)
+        raise PhraseApp::ParamsError.new("Expected params to be kind_of PhraseApp::UploadCreateParams")
+      end
+    end
     if params.convert_emoji != nil
       data_hash["convert_emoji"] = (params.convert_emoji == "true")
     end
