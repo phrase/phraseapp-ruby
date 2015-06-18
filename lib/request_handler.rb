@@ -101,10 +101,12 @@ module PhraseApp
   end
 
   def self.send(req, status)
-  	err = PhraseApp::Auth.authenticate(req)
+    err = PhraseApp::Auth.authenticate(req)
     if err != nil
-  		return nil, err
+      return nil, err
     end
+    
+    req["User-Agent"] = API_CLIENT_IDENTIFIER
 
     uri = URI.parse(PhraseApp::URL)
     http = Net::HTTP.new(uri.host, uri.port)
