@@ -4,53 +4,55 @@ module PhraseApp
 
   API_CLIENT_IDENTIFIER = "PhraseApp Ruby " + VERSION
 
-  class ErrorResponse
-    attr_accessor :message
+  module RequestErrors
+    class ErrorResponse
+      attr_accessor :message
 
-    def initialize(http_response)
+      def initialize(http_response)
+      end
+
+      def error
+        self.message
+      end
     end
 
-    def error
-      self.message
+    class ValidationErrorResponse
+    	attr_accessor :error_response
+      attr_accessor :errors
+
+      def initialize(http_response)
+        hash = JSON.load(http_response.body)
+        puts hash.inspect
+      end
+
+      def errors
+        self.error + "\n" + self.errors.join("\n")
+      end
     end
-  end
 
-  class ValidationErrorResponse
-  	attr_accessor :error_response
-    attr_accessor :errors
+    class ValidationErrorMessage
+    	attr_accessor :resource, :field, :message
 
-    def initialize(http_response)
-      hash = JSON.load(http_response.body)
-      puts hash.inspect
+      def to_s
+  	    return sprintf("\t[%s:%s] %s", self.resource, self.field, self.message)
+      end
     end
 
-    def errors
-      self.error + "\n" + self.errors.join("\n")
-    end
-  end
-
-  class ValidationErrorMessage
-  	attr_accessor :resource, :field, :message
-
-    def to_s
-	    return sprintf("\t[%s:%s] %s", self.resource, self.field, self.message)
-    end
-  end
-
-  class RateLimitingError
-    attr_accessor :limit, :remaining, :reset
+    class RateLimitingError
+      attr_accessor :limit, :remaining, :reset
+      
+      def initialize(resp)
+  	  re = RateLimitingError.new(resp)
+        puts resp.body.inspect
+        re.limit = resp["X-Rate-Limit-Limit"].to_i
+  	    re.remaining = resp["X-Rate-Limit-Remaining"].to_i
+        re.reset = Time.at(resp["X-Rate-Limit-Reset"].to_i)
+      	return re, nil
+      end
     
-    def initialize(resp)
-	  re = RateLimitingError.new(resp)
-      puts resp.body.inspect
-      re.limit = resp["X-Rate-Limit-Limit"].to_i
-	    re.remaining = resp["X-Rate-Limit-Remaining"].to_i
-      re.reset = Time.at(resp["X-Rate-Limit-Reset"].to_i)
-    	return re, nil
-    end
-  
-    def to_s
-	    sprintf("Rate limit exceeded: from %d requests %d are remaning (reset in %d seconds)", self.limit, self.remaining, int64(rle.Reset.Sub(time.Now()).Seconds()))
+      def to_s
+  	    sprintf("Rate limit exceeded: from %d requests %d are remaning (reset in %d seconds)", self.limit, self.remaining, int64(rle.Reset.Sub(time.Now()).Seconds()))
+      end
     end
   end
 
@@ -129,18 +131,18 @@ module PhraseApp
       when expectedStatus
 	    	return
       when 400
-    		e = ErrorResponse.new(resp)
+    		e = PhraseApp::RequestErrors::ErrorResponse.new(resp)
 		    return e
       when 404
     		return raise("not found")
       when 422
-    		e = ValidationErrorResponse.new(resp)
+    		e = PhraseApp::RequestErrors::ValidationErrorResponse.new(resp)
 		    if e != nil
     			return e
 		    end
     		return e
       when 429
-		    e, err = RateLimitError.new(resp)
+		    e, err = PhraseApp::RequestErrors::RateLimitError.new(resp)
         if err != nil
     			return err
         end
