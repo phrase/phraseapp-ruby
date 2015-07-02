@@ -1260,6 +1260,22 @@ module RequestParams
 end
 
 
+  # Usage example:
+  #
+  # Require the gem
+  #   require 'phraseapp-ruby'
+  # Setup Authentication 
+  #   auth_handler = PhraseApp::Auth::AuthHandler.new({:token => "YOUR_ACCESS_TOKEN"})
+  #   PhraseApp::Auth.register_auth_handler(auth_handler)
+  # Create a client
+  #   client = PhraseApp::Client
+  # List Projects
+  #   rsp, err = client.projects_list(1, 10)
+  #   puts rsp
+  # Create a new key
+  #   params = PhraseApp::RequestParams::TranslationKeyParams.new(:name => "foo")
+  #   rsp, err = client.key_create('YOUR_PROJECT_ID', params)
+  #   puts rsp
   class Client
   
     # Create a new authorization.
