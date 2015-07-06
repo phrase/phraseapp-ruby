@@ -293,8 +293,15 @@ module ResponseObjects
 end
 
 module RequestParams
+  # AuthorizationParams
+  # == Parameters:
+  # expires_at::
+  #   expires_at
+  # note::
+  #   note
+  # scopes::
+  #   scopes
   class AuthorizationParams < ::OpenStruct
-    # :expires_at, :note, :scopes, 
     def expires_at=(val)
       self.expires_at = Time.parse(val)
     end
@@ -317,8 +324,11 @@ end
 
 
 module RequestParams
+  # CommentParams
+  # == Parameters:
+  # message::
+  #   message
   class CommentParams < ::OpenStruct
-    # :message, 
     def message=(val)
       self.message = val
     end
@@ -333,8 +343,11 @@ end
 
 
 module RequestParams
+  # ExcludeRuleParams
+  # == Parameters:
+  # name::
+  #   name
   class ExcludeRuleParams < ::OpenStruct
-    # :name, 
     def name=(val)
       self.name = val
     end
@@ -349,8 +362,37 @@ end
 
 
 module RequestParams
+  # TranslationKeyParams
+  # == Parameters:
+  # data_type::
+  #   data_type
+  # description::
+  #   description
+  # localized_format_key::
+  #   localized_format_key
+  # localized_format_string::
+  #   localized_format_string
+  # max_characters_allowed::
+  #   max_characters_allowed
+  # name::
+  #   name
+  # name_plural::
+  #   name_plural
+  # original_file::
+  #   original_file
+  # plural::
+  #   plural
+  # remove_screenshot::
+  #   remove_screenshot
+  # screenshot::
+  #   screenshot
+  # tags::
+  #   tags
+  # unformatted::
+  #   unformatted
+  # xml_space_preserve::
+  #   xml_space_preserve
   class TranslationKeyParams < ::OpenStruct
-    # :data_type, :description, :localized_format_key, :localized_format_string, :max_characters_allowed, :name, :name_plural, :original_file, :plural, :remove_screenshot, :screenshot, :tags, :unformatted, :xml_space_preserve, 
     def data_type=(val)
       self.data_type = val
     end
@@ -441,8 +483,21 @@ end
 
 
 module RequestParams
+  # LocaleParams
+  # == Parameters:
+  # code::
+  #   code
+  # default::
+  #   default
+  # main::
+  #   main
+  # name::
+  #   name
+  # rtl::
+  #   rtl
+  # source_locale_id::
+  #   source_locale_id
   class LocaleParams < ::OpenStruct
-    # :code, :default, :main, :name, :rtl, :source_locale_id, 
     def code=(val)
       self.code = val
     end
@@ -497,8 +552,35 @@ end
 
 
 module RequestParams
+  # TranslationOrderParams
+  # == Parameters:
+  # category::
+  #   category
+  # include_untranslated_keys::
+  #   include_untranslated_keys
+  # include_unverified_translations::
+  #   include_unverified_translations
+  # lsp::
+  #   lsp
+  # message::
+  #   message
+  # priority::
+  #   priority
+  # quality::
+  #   quality
+  # source_locale_id::
+  #   source_locale_id
+  # styleguide_id::
+  #   styleguide_id
+  # tag::
+  #   tag
+  # target_locale_ids::
+  #   target_locale_ids
+  # translation_type::
+  #   translation_type
+  # unverify_translations_upon_delivery::
+  #   unverify_translations_upon_delivery
   class TranslationOrderParams < ::OpenStruct
-    # :category, :include_untranslated_keys, :include_unverified_translations, :lsp, :message, :priority, :quality, :source_locale_id, :styleguide_id, :tag, :target_locale_ids, :translation_type, :unverify_translations_upon_delivery, 
     def category=(val)
       self.category = val
     end
@@ -599,8 +681,13 @@ end
 
 
 module RequestParams
+  # ProjectParams
+  # == Parameters:
+  # name::
+  #   name
+  # shares_translation_memory::
+  #   shares_translation_memory
   class ProjectParams < ::OpenStruct
-    # :name, :shares_translation_memory, 
     def name=(val)
       self.name = val
     end
@@ -625,8 +712,35 @@ end
 
 
 module RequestParams
+  # StyleguideParams
+  # == Parameters:
+  # audience::
+  #   audience
+  # business::
+  #   business
+  # company_branding::
+  #   company_branding
+  # formatting::
+  #   formatting
+  # glossary_terms::
+  #   glossary_terms
+  # grammar_consistency::
+  #   grammar_consistency
+  # grammatical_person::
+  #   grammatical_person
+  # literal_translation::
+  #   literal_translation
+  # overall_tone::
+  #   overall_tone
+  # samples::
+  #   samples
+  # target_audience::
+  #   target_audience
+  # title::
+  #   title
+  # vocabulary_type::
+  #   vocabulary_type
   class StyleguideParams < ::OpenStruct
-    # :audience, :business, :company_branding, :formatting, :glossary_terms, :grammar_consistency, :grammatical_person, :literal_translation, :overall_tone, :samples, :target_audience, :title, :vocabulary_type, 
     def audience=(val)
       self.audience = val
     end
@@ -689,8 +803,11 @@ end
 
 
 module RequestParams
+  # TagParams
+  # == Parameters:
+  # name::
+  #   name
   class TagParams < ::OpenStruct
-    # :name, 
     def name=(val)
       self.name = val
     end
@@ -705,8 +822,21 @@ end
 
 
 module RequestParams
+  # TranslationParams
+  # == Parameters:
+  # content::
+  #   content
+  # excluded::
+  #   excluded
+  # key_id::
+  #   key_id
+  # locale_id::
+  #   locale_id
+  # plural_suffix::
+  #   plural_suffix
+  # unverified::
+  #   unverified
   class TranslationParams < ::OpenStruct
-    # :content, :excluded, :key_id, :locale_id, :plural_suffix, :unverified, 
     def content=(val)
       self.content = val
     end
@@ -757,8 +887,27 @@ end
 
 
 module RequestParams
+  # LocaleFileImportParams
+  # == Parameters:
+  # convert_emoji::
+  #   convert_emoji
+  # file::
+  #   file
+  # file_format::
+  #   file_format
+  # format_options::
+  #   format_options
+  # locale_id::
+  #   locale_id
+  # skip_unverification::
+  #   skip_unverification
+  # skip_upload_tags::
+  #   skip_upload_tags
+  # tags::
+  #   tags
+  # update_translations::
+  #   update_translations
   class LocaleFileImportParams < ::OpenStruct
-    # :convert_emoji, :file, :file_format, :format_options, :locale_id, :skip_unverification, :skip_upload_tags, :tags, :update_translations, 
     def convert_emoji=(val)
       if val == "true"
         self.convert_emoji = true
@@ -873,8 +1022,13 @@ module PhraseApp
     
 
 module RequestParams
+  # KeysDeleteParams
+  # == Parameters:
+  # locale_id::
+  #   locale_id
+  # q::
+  #   q
   class KeysDeleteParams < ::OpenStruct
-    # :locale_id, :q, 
     def locale_id=(val)
       self.locale_id = val
     end
@@ -891,8 +1045,17 @@ end
 
 
 module RequestParams
+  # KeysListParams
+  # == Parameters:
+  # locale_id::
+  #   locale_id
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class KeysListParams < ::OpenStruct
-    # :locale_id, :order, :q, :sort, 
     def locale_id=(val)
       self.locale_id = val
     end
@@ -917,8 +1080,17 @@ end
 
 
 module RequestParams
+  # KeysSearchParams
+  # == Parameters:
+  # locale_id::
+  #   locale_id
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class KeysSearchParams < ::OpenStruct
-    # :locale_id, :order, :q, :sort, 
     def locale_id=(val)
       self.locale_id = val
     end
@@ -943,8 +1115,15 @@ end
 
 
 module RequestParams
+  # KeysTagParams
+  # == Parameters:
+  # locale_id::
+  #   locale_id
+  # q::
+  #   q
+  # tags::
+  #   tags
   class KeysTagParams < ::OpenStruct
-    # :locale_id, :q, :tags, 
     def locale_id=(val)
       self.locale_id = val
     end
@@ -967,8 +1146,15 @@ end
 
 
 module RequestParams
+  # KeysUntagParams
+  # == Parameters:
+  # locale_id::
+  #   locale_id
+  # q::
+  #   q
+  # tags::
+  #   tags
   class KeysUntagParams < ::OpenStruct
-    # :locale_id, :q, :tags, 
     def locale_id=(val)
       self.locale_id = val
     end
@@ -991,8 +1177,21 @@ end
 
 
 module RequestParams
+  # LocaleDownloadParams
+  # == Parameters:
+  # convert_emoji::
+  #   convert_emoji
+  # file_format::
+  #   file_format
+  # format_options::
+  #   format_options
+  # include_empty_translations::
+  #   include_empty_translations
+  # keep_notranslate_tags::
+  #   keep_notranslate_tags
+  # tag_id::
+  #   tag_id
   class LocaleDownloadParams < ::OpenStruct
-    # :convert_emoji, :file_format, :format_options, :include_empty_translations, :keep_notranslate_tags, :tag_id, 
     def convert_emoji=(val)
       if val == "true"
         self.convert_emoji = true
@@ -1045,8 +1244,17 @@ end
 
 
 module RequestParams
+  # TranslationUpdateParams
+  # == Parameters:
+  # content::
+  #   content
+  # excluded::
+  #   excluded
+  # plural_suffix::
+  #   plural_suffix
+  # unverified::
+  #   unverified
   class TranslationUpdateParams < ::OpenStruct
-    # :content, :excluded, :plural_suffix, :unverified, 
     def content=(val)
       self.content = val
     end
@@ -1085,8 +1293,15 @@ end
 
 
 module RequestParams
+  # TranslationsByKeyParams
+  # == Parameters:
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class TranslationsByKeyParams < ::OpenStruct
-    # :order, :q, :sort, 
     def order=(val)
       self.order = val
     end
@@ -1107,8 +1322,15 @@ end
 
 
 module RequestParams
+  # TranslationsByLocaleParams
+  # == Parameters:
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class TranslationsByLocaleParams < ::OpenStruct
-    # :order, :q, :sort, 
     def order=(val)
       self.order = val
     end
@@ -1129,8 +1351,15 @@ end
 
 
 module RequestParams
+  # TranslationsExcludeParams
+  # == Parameters:
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class TranslationsExcludeParams < ::OpenStruct
-    # :order, :q, :sort, 
     def order=(val)
       self.order = val
     end
@@ -1151,8 +1380,15 @@ end
 
 
 module RequestParams
+  # TranslationsIncludeParams
+  # == Parameters:
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class TranslationsIncludeParams < ::OpenStruct
-    # :order, :q, :sort, 
     def order=(val)
       self.order = val
     end
@@ -1173,8 +1409,15 @@ end
 
 
 module RequestParams
+  # TranslationsListParams
+  # == Parameters:
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class TranslationsListParams < ::OpenStruct
-    # :order, :q, :sort, 
     def order=(val)
       self.order = val
     end
@@ -1195,8 +1438,15 @@ end
 
 
 module RequestParams
+  # TranslationsSearchParams
+  # == Parameters:
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class TranslationsSearchParams < ::OpenStruct
-    # :order, :q, :sort, 
     def order=(val)
       self.order = val
     end
@@ -1217,8 +1467,15 @@ end
 
 
 module RequestParams
+  # TranslationsUnverifyParams
+  # == Parameters:
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class TranslationsUnverifyParams < ::OpenStruct
-    # :order, :q, :sort, 
     def order=(val)
       self.order = val
     end
@@ -1239,8 +1496,15 @@ end
 
 
 module RequestParams
+  # TranslationsVerifyParams
+  # == Parameters:
+  # order::
+  #   order
+  # q::
+  #   q
+  # sort::
+  #   sort
   class TranslationsVerifyParams < ::OpenStruct
-    # :order, :q, :sort, 
     def order=(val)
       self.order = val
     end
