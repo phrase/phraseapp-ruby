@@ -109,43 +109,53 @@
 <h2 id="label-Parameters%3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>category
 <dd>
-<p>category</p>
+<p>Category to use (required for orders processed by TextMaster). &lt;a
+href=“#categories”&gt;Category List&lt;/a&gt;</p>
 </dd><dt>include_untranslated_keys
 <dd>
-<p>include_untranslated_keys</p>
+<p>Order translations for keys with untranslated content in the selected
+target locales.</p>
 </dd><dt>include_unverified_translations
 <dd>
-<p>include_unverified_translations</p>
+<p>Order translations for keys with unverified content in the selected target
+locales.</p>
 </dd><dt>lsp
 <dd>
-<p>lsp</p>
+<p>Name of the LSP that should process this order. Can be one of gengo,
+textmaster.</p>
 </dd><dt>message
 <dd>
-<p>message</p>
+<p>Message that is displayed to the translators for description.</p>
 </dd><dt>priority
 <dd>
-<p>priority</p>
+<p>Indicates whether the priority option should be ordered which decreases
+turnaround time by 30%. Available only for orders processed by TextMaster.</p>
 </dd><dt>quality
 <dd>
-<p>quality</p>
+<p>Extra proofreading option to ensure consistency in vocabulary and style.
+Only available for orders processed by TextMaster.</p>
 </dd><dt>source_locale_id
 <dd>
-<p>source_locale_id</p>
+<p>Source locale for the order. Can be the name or public id of the source
+locale. Preferred is the public id.</p>
 </dd><dt>styleguide_id
 <dd>
-<p>styleguide_id</p>
+<p>Style guide for translators to be sent with the order.</p>
 </dd><dt>tag
 <dd>
-<p>tag</p>
+<p>Tag you want to order translations for.</p>
 </dd><dt>target_locale_ids
 <dd>
-<p>target_locale_ids</p>
+<p>Target locales you want the source content translate to. Can be the name or
+public id of the target locales. Preferred is the public id.</p>
 </dd><dt>translation_type
 <dd>
-<p>translation_type</p>
+<p>Name of the quality level, availability depends on the LSP. Can be one of: 
+standard, pro (for orders processed by Gengo) and one of regular, premium,
+enterprise (for orders processed by TextMaster)</p>
 </dd><dt>unverify_translations_upon_delivery
 <dd>
-<p>unverify_translations_upon_delivery</p>
+<p>Unverify translations upon delivery.</p>
 </dd></dl>
 
 
@@ -992,7 +1002,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Jul  6 17:00:28 2015 by
+  Generated on Mon Jul  6 17:15:37 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.2).
 </div>

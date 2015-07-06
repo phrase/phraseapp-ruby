@@ -296,11 +296,11 @@ module RequestParams
   # AuthorizationParams
   # == Parameters:
   # expires_at::
-  #   expires_at
+  #   Expiration date for the authorization token. Null means no expiration date (default).
   # note::
-  #   note
+  #   A note to help you remember what the access is used for.
   # scopes::
-  #   scopes
+  #   A list of scopes that the access can be used for.
   class AuthorizationParams < ::OpenStruct
     def expires_at=(val)
       self.expires_at = Time.parse(val)
@@ -327,7 +327,7 @@ module RequestParams
   # CommentParams
   # == Parameters:
   # message::
-  #   message
+  #   Comment message
   class CommentParams < ::OpenStruct
     def message=(val)
       self.message = val
@@ -346,7 +346,7 @@ module RequestParams
   # ExcludeRuleParams
   # == Parameters:
   # name::
-  #   name
+  #   Blacklisted key name
   class ExcludeRuleParams < ::OpenStruct
     def name=(val)
       self.name = val
@@ -365,33 +365,33 @@ module RequestParams
   # TranslationKeyParams
   # == Parameters:
   # data_type::
-  #   data_type
+  #   Type of the key. Can be one of the following: string, number, boolean, number, array.
   # description::
-  #   description
+  #   Key description (usually includes contextual information for translators)
   # localized_format_key::
-  #   localized_format_key
+  #   NSStringLocalizedFormatKey attribute. Used in .stringsdict format.
   # localized_format_string::
-  #   localized_format_string
+  #   NSStringLocalizedFormatKey attribute. Used in .stringsdict format.
   # max_characters_allowed::
-  #   max_characters_allowed
+  #   Max. number of characters translations for this key can have.
   # name::
-  #   name
+  #   Key name
   # name_plural::
-  #   name_plural
+  #   Plural name for the key (used in some file formats, e.g. Gettext)
   # original_file::
-  #   original_file
+  #   Original file attribute. Used in some formats, e.g. XLIFF.
   # plural::
-  #   plural
+  #   Indicates whether key supports pluralization
   # remove_screenshot::
-  #   remove_screenshot
+  #   Indicates whether the screenshot will be deleted.
   # screenshot::
-  #   screenshot
+  #   Screenshot/image for the key.
   # tags::
-  #   tags
+  #   List of tags (identified by their name) to be associated with the key.
   # unformatted::
-  #   unformatted
+  #   Indicates whether the key should be exported as "unformatted". Supported by Android XML and other formats.
   # xml_space_preserve::
-  #   xml_space_preserve
+  #   Indicates whether the key should be exported with "xml:space=preserve". Supported by several XML-based formats.
   class TranslationKeyParams < ::OpenStruct
     def data_type=(val)
       self.data_type = val
@@ -486,17 +486,17 @@ module RequestParams
   # LocaleParams
   # == Parameters:
   # code::
-  #   code
+  #   Locale ISO code
   # default::
-  #   default
+  #   Indicates whether locale is the default locale. If set to true, the previous default locale the project is no longer the default locale.
   # main::
-  #   main
+  #   Indicates whether locale is a main locale.
   # name::
-  #   name
+  #   Locale name
   # rtl::
-  #   rtl
+  #   Indicates whether locale is a RTL (Right-to-Left) locale.
   # source_locale_id::
-  #   source_locale_id
+  #   Source locale. Can be the name or public id of the locale. Preferred is the public id.
   class LocaleParams < ::OpenStruct
     def code=(val)
       self.code = val
@@ -555,31 +555,31 @@ module RequestParams
   # TranslationOrderParams
   # == Parameters:
   # category::
-  #   category
+  #   Category to use (required for orders processed by TextMaster). <a href="#categories">Category List</a>
   # include_untranslated_keys::
-  #   include_untranslated_keys
+  #   Order translations for keys with untranslated content in the selected target locales.
   # include_unverified_translations::
-  #   include_unverified_translations
+  #   Order translations for keys with unverified content in the selected target locales.
   # lsp::
-  #   lsp
+  #   Name of the LSP that should process this order. Can be one of gengo, textmaster.
   # message::
-  #   message
+  #   Message that is displayed to the translators for description.
   # priority::
-  #   priority
+  #   Indicates whether the priority option should be ordered which decreases turnaround time by 30%. Available only for orders processed by TextMaster.
   # quality::
-  #   quality
+  #   Extra proofreading option to ensure consistency in vocabulary and style. Only available for orders processed by TextMaster.
   # source_locale_id::
-  #   source_locale_id
+  #   Source locale for the order. Can be the name or public id of the source locale. Preferred is the public id.
   # styleguide_id::
-  #   styleguide_id
+  #   Style guide for translators to be sent with the order.
   # tag::
-  #   tag
+  #   Tag you want to order translations for.
   # target_locale_ids::
-  #   target_locale_ids
+  #   Target locales you want the source content translate to. Can be the name or public id of the target locales. Preferred is the public id.
   # translation_type::
-  #   translation_type
+  #   Name of the quality level, availability depends on the LSP. Can be one of:  standard, pro (for orders processed by Gengo) and one of regular, premium, enterprise (for orders processed by TextMaster)
   # unverify_translations_upon_delivery::
-  #   unverify_translations_upon_delivery
+  #   Unverify translations upon delivery.
   class TranslationOrderParams < ::OpenStruct
     def category=(val)
       self.category = val
@@ -684,9 +684,9 @@ module RequestParams
   # ProjectParams
   # == Parameters:
   # name::
-  #   name
+  #   Name of the project
   # shares_translation_memory::
-  #   shares_translation_memory
+  #   Indicates whether the project should share the account's translation memory
   class ProjectParams < ::OpenStruct
     def name=(val)
       self.name = val
@@ -715,31 +715,31 @@ module RequestParams
   # StyleguideParams
   # == Parameters:
   # audience::
-  #   audience
+  #   Audience description
   # business::
-  #   business
+  #   Description of the business
   # company_branding::
-  #   company_branding
+  #   Company branding to remain consistent.
   # formatting::
-  #   formatting
+  #   Formatting requirements and character limitations.
   # glossary_terms::
-  #   glossary_terms
+  #   List of terms and/or phrases that need to be translated consistently.
   # grammar_consistency::
-  #   grammar_consistency
+  #   Formal or informal pronouns, consistent conjugation, grammatical gender
   # grammatical_person::
-  #   grammatical_person
+  #   Can be one of: not_specified, first_person_singular, second_person_singular, third_person_singular_masculine, third_person_singular_feminine, third_person_singular_neuter, first_person_plural, second_person_plural, third_person_plural.
   # literal_translation::
-  #   literal_translation
+  #   Can be one of: Cultural/Conversational, Literal, Neutral.
   # overall_tone::
-  #   overall_tone
+  #   Tone requirement descriptions
   # samples::
-  #   samples
+  #   Provide links to sample product pages, FAQ pages, etc. to give the translator a point of reference. You can also provide past translations. Even snippets or short paragraphs are helpful for maintaining consistency.
   # target_audience::
-  #   target_audience
+  #   Can be one of: not_specified, children, teenager, young_adults, adults, old_adults.
   # title::
-  #   title
+  #   Style guide title
   # vocabulary_type::
-  #   vocabulary_type
+  #   Can be one of: not_specified, popular, technical, fictional.
   class StyleguideParams < ::OpenStruct
     def audience=(val)
       self.audience = val
@@ -806,7 +806,7 @@ module RequestParams
   # TagParams
   # == Parameters:
   # name::
-  #   name
+  #   Name of the tag
   class TagParams < ::OpenStruct
     def name=(val)
       self.name = val
@@ -825,17 +825,17 @@ module RequestParams
   # TranslationParams
   # == Parameters:
   # content::
-  #   content
+  #   Translation content
   # excluded::
-  #   excluded
+  #   Indicates whether translation is excluded.
   # key_id::
-  #   key_id
+  #   Key
   # locale_id::
-  #   locale_id
+  #   Locale. Can be the name or public id of the locale. Preferred is the public id.
   # plural_suffix::
-  #   plural_suffix
+  #   Plural suffix. Can be one of: zero, one, two, few, many, other.
   # unverified::
-  #   unverified
+  #   Indicates whether translation is unverified.
   class TranslationParams < ::OpenStruct
     def content=(val)
       self.content = val
@@ -890,23 +890,23 @@ module RequestParams
   # LocaleFileImportParams
   # == Parameters:
   # convert_emoji::
-  #   convert_emoji
+  #   Indicates whether the file contains Emoji symbols that should be converted.
   # file::
-  #   file
+  #   File to be imported
   # file_format::
-  #   file_format
+  #   File format. Auto-detected when possible and not specified.
   # format_options::
-  #   format_options
+  #   Additional options available for specific formats. See our format guide for complete list.
   # locale_id::
-  #   locale_id
+  #   Locale of the file's content. Can be the name or public id of the locale. Preferred is the public id.
   # skip_unverification::
-  #   skip_unverification
+  #   Indicates whether the upload should unverify updated translations.
   # skip_upload_tags::
-  #   skip_upload_tags
+  #   Indicates whether the upload should not create upload tags.
   # tags::
-  #   tags
+  #   Tags to be assigned to the new keys, contained in the upload.
   # update_translations::
-  #   update_translations
+  #   Indicates whether existing translations should be updated with the file content.
   class LocaleFileImportParams < ::OpenStruct
     def convert_emoji=(val)
       if val == "true"
@@ -1025,9 +1025,9 @@ module RequestParams
   # KeysDeleteParams
   # == Parameters:
   # locale_id::
-  #   locale_id
+  #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   q
+  #   Filter the results. Supports text queries for key name with 'name:key_name' and qualifiers like translated/untranslated 'translated:true/false'. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
   class KeysDeleteParams < ::OpenStruct
     def locale_id=(val)
       self.locale_id = val
@@ -1048,13 +1048,13 @@ module RequestParams
   # KeysListParams
   # == Parameters:
   # locale_id::
-  #   locale_id
+  #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries for name:key_name and qualifiers translated:true/false as well as date range queries. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
   # sort::
-  #   sort
+  #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysListParams < ::OpenStruct
     def locale_id=(val)
       self.locale_id = val
@@ -1083,13 +1083,13 @@ module RequestParams
   # KeysSearchParams
   # == Parameters:
   # locale_id::
-  #   locale_id
+  #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries for name:key_name and qualifiers translated:true/false as well as date range queries. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
   # sort::
-  #   sort
+  #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysSearchParams < ::OpenStruct
     def locale_id=(val)
       self.locale_id = val
@@ -1118,11 +1118,11 @@ module RequestParams
   # KeysTagParams
   # == Parameters:
   # locale_id::
-  #   locale_id
+  #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   q
+  #   Filter the results. Supports text queries for key name with 'name:key_name' and qualifiers like translated/untranslated 'translated:true/false'. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
   # tags::
-  #   tags
+  #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysTagParams < ::OpenStruct
     def locale_id=(val)
       self.locale_id = val
@@ -1149,11 +1149,11 @@ module RequestParams
   # KeysUntagParams
   # == Parameters:
   # locale_id::
-  #   locale_id
+  #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   q
+  #   Filter the results. Supports text queries for key name with 'name:key_name' and qualifiers like translated/untranslated 'translated:true/false'. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
   # tags::
-  #   tags
+  #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysUntagParams < ::OpenStruct
     def locale_id=(val)
       self.locale_id = val
@@ -1180,17 +1180,17 @@ module RequestParams
   # LocaleDownloadParams
   # == Parameters:
   # convert_emoji::
-  #   convert_emoji
+  #   Indicates whether Emoji symbols should be converted to actual Emojis.
   # file_format::
-  #   file_format
+  #   File format name. See the format guide for all supported file formats.
   # format_options::
-  #   format_options
+  #   Additional options available for specific formats. See our format guide for complete list. [EXAMPLE]
   # include_empty_translations::
-  #   include_empty_translations
+  #   Indicates whether keys without translations should be included in the output as well.
   # keep_notranslate_tags::
-  #   keep_notranslate_tags
+  #   Indicates whether [NOTRANSLATE] tags should be kept.
   # tag_id::
-  #   tag_id
+  #   Limit result to keys tagged with the given tag (identified by its id).
   class LocaleDownloadParams < ::OpenStruct
     def convert_emoji=(val)
       if val == "true"
@@ -1247,13 +1247,13 @@ module RequestParams
   # TranslationUpdateParams
   # == Parameters:
   # content::
-  #   content
+  #   Translation content
   # excluded::
-  #   excluded
+  #   Indicates whether translation is excluded.
   # plural_suffix::
-  #   plural_suffix
+  #   Plural suffix. Can be one of: zero, one, two, few, many, other.
   # unverified::
-  #   unverified
+  #   Indicates whether translation is unverified.
   class TranslationUpdateParams < ::OpenStruct
     def content=(val)
       self.content = val
@@ -1296,11 +1296,11 @@ module RequestParams
   # TranslationsByKeyParams
   # == Parameters:
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
   # sort::
-  #   sort
+  #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByKeyParams < ::OpenStruct
     def order=(val)
       self.order = val
@@ -1325,11 +1325,11 @@ module RequestParams
   # TranslationsByLocaleParams
   # == Parameters:
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
   # sort::
-  #   sort
+  #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByLocaleParams < ::OpenStruct
     def order=(val)
       self.order = val
@@ -1354,11 +1354,11 @@ module RequestParams
   # TranslationsExcludeParams
   # == Parameters:
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries with same results as in Translation Center and qualifiers such as unverified:true/false as well as date range queries.
   # sort::
-  #   sort
+  #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsExcludeParams < ::OpenStruct
     def order=(val)
       self.order = val
@@ -1383,11 +1383,11 @@ module RequestParams
   # TranslationsIncludeParams
   # == Parameters:
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries with same results as in Translation Center and qualifiers such as unverified:true/false as well as date range queries.
   # sort::
-  #   sort
+  #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsIncludeParams < ::OpenStruct
     def order=(val)
       self.order = val
@@ -1412,11 +1412,11 @@ module RequestParams
   # TranslationsListParams
   # == Parameters:
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
   # sort::
-  #   sort
+  #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsListParams < ::OpenStruct
     def order=(val)
       self.order = val
@@ -1441,11 +1441,11 @@ module RequestParams
   # TranslationsSearchParams
   # == Parameters:
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
   # sort::
-  #   sort
+  #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsSearchParams < ::OpenStruct
     def order=(val)
       self.order = val
@@ -1470,11 +1470,11 @@ module RequestParams
   # TranslationsUnverifyParams
   # == Parameters:
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries with same results as in Translation Center and qualifiers such as unverified:true/false as well as date range queries.
   # sort::
-  #   sort
+  #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsUnverifyParams < ::OpenStruct
     def order=(val)
       self.order = val
@@ -1499,11 +1499,11 @@ module RequestParams
   # TranslationsVerifyParams
   # == Parameters:
   # order::
-  #   order
+  #   Order direction. Can be one of: asc, desc.
   # q::
-  #   q
+  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
   # sort::
-  #   sort
+  #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsVerifyParams < ::OpenStruct
     def order=(val)
       self.order = val

@@ -109,46 +109,49 @@
 <h2 id="label-Parameters%3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>data_type
 <dd>
-<p>data_type</p>
+<p>Type of the key. Can be one of the following: string, number, boolean,
+number, array.</p>
 </dd><dt>description
 <dd>
-<p>description</p>
+<p>Key description (usually includes contextual information for translators)</p>
 </dd><dt>localized_format_key
 <dd>
-<p>localized_format_key</p>
+<p>NSStringLocalizedFormatKey attribute. Used in .stringsdict format.</p>
 </dd><dt>localized_format_string
 <dd>
-<p>localized_format_string</p>
+<p>NSStringLocalizedFormatKey attribute. Used in .stringsdict format.</p>
 </dd><dt>max_characters_allowed
 <dd>
-<p>max_characters_allowed</p>
+<p>Max. number of characters translations for this key can have.</p>
 </dd><dt>name
 <dd>
-<p>name</p>
+<p>Key name</p>
 </dd><dt>name_plural
 <dd>
-<p>name_plural</p>
+<p>Plural name for the key (used in some file formats, e.g. Gettext)</p>
 </dd><dt>original_file
 <dd>
-<p>original_file</p>
+<p>Original file attribute. Used in some formats, e.g. XLIFF.</p>
 </dd><dt>plural
 <dd>
-<p>plural</p>
+<p>Indicates whether key supports pluralization</p>
 </dd><dt>remove_screenshot
 <dd>
-<p>remove_screenshot</p>
+<p>Indicates whether the screenshot will be deleted.</p>
 </dd><dt>screenshot
 <dd>
-<p>screenshot</p>
+<p>Screenshot/image for the key.</p>
 </dd><dt>tags
 <dd>
-<p>tags</p>
+<p>List of tags (identified by their name) to be associated with the key.</p>
 </dd><dt>unformatted
 <dd>
-<p>unformatted</p>
+<p>Indicates whether the key should be exported as “unformatted”. Supported by
+Android XML and other formats.</p>
 </dd><dt>xml_space_preserve
 <dd>
-<p>xml_space_preserve</p>
+<p>Indicates whether the key should be exported with “xml:space=preserve”.
+Supported by several XML-based formats.</p>
 </dd></dl>
 
 
@@ -1019,7 +1022,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Jul  6 17:00:28 2015 by
+  Generated on Mon Jul  6 17:15:37 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.2).
 </div>
