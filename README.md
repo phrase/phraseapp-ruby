@@ -2,6 +2,8 @@
 
 phraseapp-ruby is a Ruby gem that allows you to interact with the [PhraseApp API](http://docs.phraseapp.com/api/v2/). 
 
+PhraseApp is a translation management platform for software projects. You can collaborate on language file translation with your team or order translations through our platform. The API allows you to import locale files, download locale files, tag keys or interact in other ways with the localization data stored in PhraseApp for your account.
+
 ## Installation
 
 Install the gem:
@@ -42,7 +44,7 @@ Setup a [Access Token](https://phraseapp.com/me/oauth_access_tokens) for Authent
 
 ## Documentation
 
-    For a full list of available client actions, see the [phraseapp-ruby Documentation](http://www.rubydoc.info/gems/phraseapp-ruby/PhraseApp/Client)
+For a full list of available client actions, see the [phraseapp-ruby Documentation](http://www.rubydoc.info/gems/phraseapp-ruby/PhraseApp/Client)
 
 ## Contributing 
 
