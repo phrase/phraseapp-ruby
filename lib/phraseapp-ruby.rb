@@ -1294,7 +1294,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::AuthorizationCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::AuthorizationCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::AuthorizationParams")
         end
       end
   
@@ -1376,7 +1376,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::AuthorizationUpdateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::AuthorizationUpdateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::AuthorizationParams")
         end
       end
   
@@ -1435,7 +1435,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::CommentCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentParams")
         end
       end
   
@@ -1610,7 +1610,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::CommentUpdateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentUpdateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentParams")
         end
       end
   
@@ -1671,7 +1671,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::ExcludeRuleCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ExcludeRuleCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ExcludeRuleParams")
         end
       end
   
@@ -1759,7 +1759,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::ExcludeRuleUpdateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ExcludeRuleUpdateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ExcludeRuleParams")
         end
       end
   
@@ -1839,7 +1839,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::KeyCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeyCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationKeyParams")
         end
       end
       if params.data_type != nil
@@ -1985,7 +1985,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::KeyUpdateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeyUpdateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationKeyParams")
         end
       end
       if params.data_type != nil
@@ -2259,7 +2259,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::LocaleCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleParams")
         end
       end
   
@@ -2385,7 +2385,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::LocaleUpdateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleUpdateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleParams")
         end
       end
   
@@ -2469,7 +2469,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::OrderCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::OrderCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationOrderParams")
         end
       end
   
@@ -2576,7 +2576,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::ProjectCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectParams")
         end
       end
   
@@ -2658,7 +2658,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::ProjectUpdateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectUpdateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectParams")
         end
       end
   
@@ -2736,7 +2736,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::StyleguideCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::StyleguideCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::StyleguideParams")
         end
       end
   
@@ -2824,7 +2824,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::StyleguideUpdateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::StyleguideUpdateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::StyleguideParams")
         end
       end
   
@@ -2883,7 +2883,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TagCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TagCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TagParams")
         end
       end
   
@@ -2992,7 +2992,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationParams")
         end
       end
   
@@ -3383,7 +3383,7 @@ end
   
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::UploadCreateParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::UploadCreateParams")
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleFileImportParams")
         end
       end
       if params.convert_emoji != nil
