@@ -116,10 +116,17 @@ untranslated or translated keys.</p>
 <p>Order direction. Can be one of: asc, desc.</p>
 </dd><dt>q
 <dd>
-<p>Filter the results. Supports text queries for name:key_name and qualifiers
-translated:true/false as well as date range queries. Requires an additional
-<code>locale_id</code> parameter if &#39;translated:true/false&#39; is
-used.</p>
+<p>Specify a &lt;a
+href=“/guides/working-with-phraseapp/search-terms”&gt;search term
+query&lt;/a&gt; including wildcard or exact matching. It will search the
+key metadata for matching results. Searched fields include key name,
+description, tags, translations.<br> Also supports the following qualifiers
+in the query:<br> &lt;ul&gt; &lt;li&gt;<code>name:key_name</code> for text
+queries on key names&lt;/li&gt;
+&lt;li&gt;<code>translated:{true|false}</code> for translation
+status*&lt;/li&gt; &lt;li&gt;<code>updated_at{&gt;=|&lt;=}21-02-2013</code>
+for date range queries&lt;/li&gt; &lt;/ul&gt; *Also requires
+<code>locale_id</code> to be specified.</p>
 </dd><dt>sort
 <dd>
 <p>Sort by field. Can be one of: name, created_at, updated_at.</p>
@@ -421,7 +428,7 @@ used.</p>
 </div>
 
     <div id="footer">
-  Generated on Mon Jul  6 17:15:37 2015 by
+  Generated on Tue Jul  7 11:20:35 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.2).
 </div>

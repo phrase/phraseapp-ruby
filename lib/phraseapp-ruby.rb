@@ -1052,7 +1052,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries for name:key_name and qualifiers translated:true/false as well as date range queries. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
+  #   Specify a <a href="/guides/working-with-phraseapp/search-terms">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status*</li> <li><code>updated_at{>=|<=}21-02-2013</code> for date range queries</li> </ul> *Also requires <code>locale_id</code> to be specified.
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysListParams < ::OpenStruct
@@ -1583,7 +1583,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.authorization_delete(id)
       path = sprintf("/v2/authorizations/%s", id)
@@ -1728,7 +1727,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.comment_delete(project_id, key_id, id)
       path = sprintf("/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
@@ -1755,7 +1753,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.comment_mark_check(project_id, key_id, id)
       path = sprintf("/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
@@ -1782,7 +1779,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.comment_mark_read(project_id, key_id, id)
       path = sprintf("/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
@@ -1809,7 +1805,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.comment_mark_unread(project_id, key_id, id)
       path = sprintf("/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
@@ -1962,7 +1957,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.exclude_rule_delete(project_id, id)
       path = sprintf("/v2/projects/%s/blacklisted_keys/%s", project_id, id)
@@ -2188,7 +2182,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.key_delete(project_id, id)
       path = sprintf("/v2/projects/%s/keys/%s", project_id, id)
@@ -2334,7 +2327,6 @@ end
     #   Parameters of type PhraseApp::RequestParams::KeysDeleteParams
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.keys_delete(project_id, params)
       path = sprintf("/v2/projects/%s/keys", project_id)
@@ -2442,7 +2434,6 @@ end
     #   Parameters of type PhraseApp::RequestParams::KeysTagParams
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.keys_tag(project_id, params)
       path = sprintf("/v2/projects/%s/keys/tag", project_id)
@@ -2478,7 +2469,6 @@ end
     #   Parameters of type PhraseApp::RequestParams::KeysUntagParams
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.keys_untag(project_id, params)
       path = sprintf("/v2/projects/%s/keys/tag", project_id)
@@ -2550,7 +2540,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.locale_delete(project_id, id)
       path = sprintf("/v2/projects/%s/locales/%s", project_id, id)
@@ -2577,7 +2566,6 @@ end
     #   Parameters of type PhraseApp::RequestParams::LocaleDownloadParams
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.locale_download(project_id, id, params)
       path = sprintf("/v2/projects/%s/locales/%s/download", project_id, id)
@@ -2760,7 +2748,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.order_delete(project_id, id)
       path = sprintf("/v2/projects/%s/orders/%s", project_id, id)
@@ -2865,7 +2852,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.project_delete(id)
       path = sprintf("/v2/projects/%s", id)
@@ -3027,7 +3013,6 @@ end
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.styleguide_delete(project_id, id)
       path = sprintf("/v2/projects/%s/styleguides/%s", project_id, id)
@@ -3174,7 +3159,6 @@ end
     #   name
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::
     #   err
     def self.tag_delete(project_id, name)
       path = sprintf("/v2/projects/%s/tags/%s", project_id, name)
