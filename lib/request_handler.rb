@@ -40,7 +40,7 @@ module PhraseApp
 
     class RateLimitingError
       attr_accessor :limit, :remaining, :reset
-      
+
       def initialize(resp)
   	  re = RateLimitingError.new(resp)
         puts resp.body.inspect
@@ -49,7 +49,7 @@ module PhraseApp
         re.reset = Time.at(resp["X-Rate-Limit-Reset"].to_i)
       	return re, nil
       end
-    
+
       def to_s
   	    sprintf("Rate limit exceeded: from %d requests %d are remaning (reset in %d seconds)", self.limit, self.remaining, int64(rle.Reset.Sub(time.Now()).Seconds()))
       end
@@ -73,7 +73,7 @@ module PhraseApp
     hash = if uri.query then CGI::parse(uri.query) else {} end
     hash["page"] = page
     hash["per_page"] = per_page
-    
+
     query_str = URI.encode_www_form(hash)
     path = [uri.path, query_str].compact.join('?')
 
@@ -81,9 +81,9 @@ module PhraseApp
   end
 
   def self.send_request(method, path, ctype, data, status)
-    req = Net::HTTPGenericRequest.new(method, 
-        Module.const_get("Net::HTTP::#{method.capitalize}::REQUEST_HAS_BODY"), 
-        Module.const_get("Net::HTTP::#{method.capitalize}::RESPONSE_HAS_BODY"), 
+    req = Net::HTTPGenericRequest.new(method,
+        Module.const_get("Net::HTTP::#{method.capitalize}::REQUEST_HAS_BODY"),
+        Module.const_get("Net::HTTP::#{method.capitalize}::RESPONSE_HAS_BODY"),
         path)
 
 
@@ -98,7 +98,7 @@ module PhraseApp
 
     resp, err = send(req, status)
 
-    
+
     return resp, err
   end
 
@@ -107,10 +107,10 @@ module PhraseApp
     if err != nil
       return nil, err
     end
-    
+
     req["User-Agent"] = API_CLIENT_IDENTIFIER
 
-    uri = URI.parse(PhraseApp::URL)
+    uri = URI.parse(PhraseApp::Auth.host)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_PEER
@@ -125,7 +125,7 @@ module PhraseApp
 
     return resp, err
   end
-  
+
   def self.handleResponseStatus(resp, expectedStatus)
     case resp.code.to_i
       when expectedStatus

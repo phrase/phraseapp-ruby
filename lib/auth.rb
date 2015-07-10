@@ -1,4 +1,7 @@
 module PhraseApp
+
+  URL = "https://api.phraseapp.com"
+
   module Auth
 
     class AuthHandler < OpenStruct
@@ -33,6 +36,10 @@ module PhraseApp
           self.tfa = tmpA.tfa
         end
 
+        if tmpA.host && self.username.nil?
+          self.host = tmpA.host
+        end
+
         return nil
       end
     end
@@ -44,7 +51,15 @@ module PhraseApp
     def self.register_auth_handler(a)
       @@authH = a
     end
-    
+
+    def self.host
+      if authH.host && authH.host != ""
+        return authH.host
+      else
+        return PhraseApp::URL
+      end
+    end
+
     def self.authenticate(req)
       if authH == nil
         raise("no auth handler registered")
