@@ -36,7 +36,7 @@ module PhraseApp
           self.tfa = tmpA.tfa
         end
 
-        if tmpA.host && self.username.nil?
+        if tmpA.host
           self.host = tmpA.host
         end
 
