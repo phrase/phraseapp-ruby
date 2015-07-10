@@ -117,12 +117,14 @@
 
 <p>Create a client</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_client'>client</span> <span class='op'>=</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Client</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_client'>client</span> <span class='op'>=</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Client</span>
+</code></pre>
 
 <p>List Projects</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rsp'>rsp</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_projects_list'>projects_list</span><span class='lparen'>(</span><span class='int'>1</span><span class='comma'>,</span> <span class='int'>10</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_rsp'>rsp</span></code></pre>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_rsp'>rsp</span>
+</code></pre>
 
 <p>Create a new key</p>
 
@@ -1832,16 +1834,17 @@ limitations on translations list.</p>
     
 <p>Create a new authorization. API Path: /v2/authorizations</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>params
 <dd>
 <p>Parameters of type PhraseApp::RequestParams::AuthorizationCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>AuthorizationWithToken</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -1855,6 +1858,7 @@ limitations on translations list.</p>
       <pre class="lines">
 
 
+1553
 1554
 1555
 1556
@@ -1877,11 +1881,10 @@ limitations on translations list.</p>
 1573
 1574
 1575
-1576
-1577</pre>
+1576</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1554</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1553</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_authorization_create'>authorization_create</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/authorizations</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1927,15 +1930,16 @@ limitations on translations list.</p>
 <p>Delete an existing authorization. API calls using that token will stop
 working. API Path: /v2/authorizations/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>id
 <dd>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -1949,6 +1953,7 @@ working. API Path: /v2/authorizations/:id</p>
       <pre class="lines">
 
 
+1586
 1587
 1588
 1589
@@ -1960,11 +1965,10 @@ working. API Path: /v2/authorizations/:id</p>
 1595
 1596
 1597
-1598
-1599</pre>
+1598</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1587</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1586</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_authorization_delete'>authorization_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/authorizations/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -1998,16 +2002,17 @@ working. API Path: /v2/authorizations/:id</p>
     
 <p>Get details on a single authorization. API Path: /v2/authorizations/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>id
 <dd>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Authorization</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2021,6 +2026,7 @@ working. API Path: /v2/authorizations/:id</p>
       <pre class="lines">
 
 
+1609
 1610
 1611
 1612
@@ -2032,11 +2038,10 @@ working. API Path: /v2/authorizations/:id</p>
 1618
 1619
 1620
-1621
-1622</pre>
+1621</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1610</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1609</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_authorization_show'>authorization_show</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/authorizations/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -2070,7 +2075,7 @@ working. API Path: /v2/authorizations/:id</p>
     
 <p>Update an existing authorization. API Path: /v2/authorizations/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>id
 <dd>
 <p>id</p>
@@ -2079,10 +2084,11 @@ working. API Path: /v2/authorizations/:id</p>
 <p>Parameters of type PhraseApp::RequestParams::AuthorizationUpdateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Authorization</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2096,6 +2102,7 @@ working. API Path: /v2/authorizations/:id</p>
       <pre class="lines">
 
 
+1634
 1635
 1636
 1637
@@ -2118,11 +2125,10 @@ working. API Path: /v2/authorizations/:id</p>
 1654
 1655
 1656
-1657
-1658</pre>
+1657</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1635</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1634</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_authorization_update'>authorization_update</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/authorizations/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -2167,12 +2173,13 @@ working. API Path: /v2/authorizations/:id</p>
     
 <p>List all your authorizations. API Path: /v2/authorizations</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Authorization</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2186,6 +2193,7 @@ working. API Path: /v2/authorizations/:id</p>
       <pre class="lines">
 
 
+1666
 1667
 1668
 1669
@@ -2197,11 +2205,10 @@ working. API Path: /v2/authorizations/:id</p>
 1675
 1676
 1677
-1678
-1679</pre>
+1678</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1667</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1666</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_authorizations_list'>authorizations_list</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/authorizations</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -2236,7 +2243,7 @@ working. API Path: /v2/authorizations/:id</p>
 <p>Create a new comment for a key. API Path:
 /v2/projects/:project_id/keys/:key_id/comments</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2248,10 +2255,11 @@ working. API Path: /v2/authorizations/:id</p>
 <p>Parameters of type PhraseApp::RequestParams::CommentCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Comment</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2265,6 +2273,7 @@ working. API Path: /v2/authorizations/:id</p>
       <pre class="lines">
 
 
+1693
 1694
 1695
 1696
@@ -2287,11 +2296,10 @@ working. API Path: /v2/authorizations/:id</p>
 1713
 1714
 1715
-1716
-1717</pre>
+1716</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1694</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1693</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_comment_create'>comment_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='rparen'>)</span>
@@ -2337,7 +2345,7 @@ working. API Path: /v2/authorizations/:id</p>
 <p>Delete an existing comment. API Path:
 /v2/projects/:project_id/keys/:key_id/comments/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2349,9 +2357,10 @@ working. API Path: /v2/authorizations/:id</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2365,6 +2374,7 @@ working. API Path: /v2/authorizations/:id</p>
       <pre class="lines">
 
 
+1730
 1731
 1732
 1733
@@ -2376,11 +2386,10 @@ working. API Path: /v2/authorizations/:id</p>
 1739
 1740
 1741
-1742
-1743</pre>
+1742</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1731</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1730</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_comment_delete'>comment_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/comments/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -2415,7 +2424,7 @@ working. API Path: /v2/authorizations/:id</p>
 <p>Check if comment was marked as read. Returns 204 if read, 404 if unread.
 API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2427,9 +2436,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2443,6 +2453,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1756
 1757
 1758
 1759
@@ -2454,11 +2465,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1765
 1766
 1767
-1768
-1769</pre>
+1768</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1757</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1756</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_comment_mark_check'>comment_mark_check</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/comments/%s/read</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -2493,7 +2503,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Mark a comment as read. API Path:
 /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2505,9 +2515,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2521,6 +2532,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1782
 1783
 1784
 1785
@@ -2532,11 +2544,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1791
 1792
 1793
-1794
-1795</pre>
+1794</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1783</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1782</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_comment_mark_read'>comment_mark_read</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/comments/%s/read</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -2571,7 +2582,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Mark a comment as unread. API Path:
 /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2583,9 +2594,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2599,6 +2611,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1808
 1809
 1810
 1811
@@ -2610,11 +2623,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1817
 1818
 1819
-1820
-1821</pre>
+1820</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1809</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1808</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_comment_mark_unread'>comment_mark_unread</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/comments/%s/read</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -2649,7 +2661,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Get details on a single comment. API Path:
 /v2/projects/:project_id/keys/:key_id/comments/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2661,10 +2673,11 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Comment</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2678,6 +2691,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1835
 1836
 1837
 1838
@@ -2689,11 +2703,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1844
 1845
 1846
-1847
-1848</pre>
+1847</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1836</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1835</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_comment_show'>comment_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/comments/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -2728,7 +2741,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Update an existing comment. API Path:
 /v2/projects/:project_id/keys/:key_id/comments/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2743,10 +2756,11 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Parameters of type PhraseApp::RequestParams::CommentUpdateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Comment</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2760,6 +2774,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1864
 1865
 1866
 1867
@@ -2782,11 +2797,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1884
 1885
 1886
-1887
-1888</pre>
+1887</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1865</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1864</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_comment_update'>comment_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/comments/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -2832,7 +2846,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>List all comments for a key. API Path:
 /v2/projects/:project_id/keys/:key_id/comments</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2841,10 +2855,11 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>key_id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Comment</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2858,6 +2873,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1900
 1901
 1902
 1903
@@ -2869,11 +2885,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1909
 1910
 1911
-1912
-1913</pre>
+1912</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1901</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1900</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_comments_list'>comments_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='rparen'>)</span>
@@ -2908,7 +2923,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Create a new blacklisted key. API Path:
 /v2/projects/:project_id/blacklisted_keys</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -2917,10 +2932,11 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Parameters of type PhraseApp::RequestParams::ExcludeRuleCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>BlacklistedKey</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -2934,6 +2950,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1925
 1926
 1927
 1928
@@ -2956,11 +2973,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1945
 1946
 1947
-1948
-1949</pre>
+1948</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1926</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1925</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclude_rule_create'>exclude_rule_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/blacklisted_keys</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -3006,7 +3022,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Delete an existing blacklisted key. API Path:
 /v2/projects/:project_id/blacklisted_keys/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -3015,9 +3031,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3031,6 +3048,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1960
 1961
 1962
 1963
@@ -3042,11 +3060,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1969
 1970
 1971
-1972
-1973</pre>
+1972</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1961</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1960</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclude_rule_delete'>exclude_rule_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/blacklisted_keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3081,7 +3098,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Get details on a single blacklisted key for a given project. API Path:
 /v2/projects/:project_id/blacklisted_keys/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -3090,10 +3107,11 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>BlacklistedKey</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3107,6 +3125,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+1985
 1986
 1987
 1988
@@ -3118,11 +3137,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 1994
 1995
 1996
-1997
-1998</pre>
+1997</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1986</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1985</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclude_rule_show'>exclude_rule_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/blacklisted_keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3157,7 +3175,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Update an existing blacklisted key. API Path:
 /v2/projects/:project_id/blacklisted_keys/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -3169,10 +3187,11 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Parameters of type PhraseApp::RequestParams::ExcludeRuleUpdateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>BlacklistedKey</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3186,6 +3205,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+2012
 2013
 2014
 2015
@@ -3208,11 +3228,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 2032
 2033
 2034
-2035
-2036</pre>
+2035</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2013</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2012</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclude_rule_update'>exclude_rule_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/blacklisted_keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3258,16 +3277,17 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>List all blacklisted keys for the given project. API Path:
 /v2/projects/:project_id/blacklisted_keys</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>BlacklistedKey</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3281,6 +3301,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
       <pre class="lines">
 
 
+2046
 2047
 2048
 2049
@@ -3292,11 +3313,10 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 2055
 2056
 2057
-2058
-2059</pre>
+2058</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2047</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2046</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclude_rules_index'>exclude_rules_index</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/blacklisted_keys</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -3331,12 +3351,13 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>Get a handy list of all localization file formats supported in PhraseApp.
 API Path: /v2/formats</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Format</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3350,6 +3371,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2067
 2068
 2069
 2070
@@ -3361,11 +3383,10 @@ API Path: /v2/formats</p>
 2076
 2077
 2078
-2079
-2080</pre>
+2079</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2068</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2067</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_formats_list'>formats_list</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/formats</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -3399,7 +3420,7 @@ API Path: /v2/formats</p>
     
 <p>Create a new key. API Path: /v2/projects/:project_id/keys</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -3408,10 +3429,11 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::KeyCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationKeyDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3425,6 +3447,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2092
 2093
 2094
 2095
@@ -3505,11 +3528,10 @@ API Path: /v2/formats</p>
 2170
 2171
 2172
-2173
-2174</pre>
+2173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2093</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2092</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key_create'>key_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -3612,7 +3634,7 @@ API Path: /v2/formats</p>
     
 <p>Delete an existing key. API Path: /v2/projects/:project_id/keys/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -3621,9 +3643,10 @@ API Path: /v2/formats</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3637,6 +3660,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2185
 2186
 2187
 2188
@@ -3648,11 +3672,10 @@ API Path: /v2/formats</p>
 2194
 2195
 2196
-2197
-2198</pre>
+2197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2186</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2185</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key_delete'>key_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3687,7 +3710,7 @@ API Path: /v2/formats</p>
 <p>Get details on a single key for a given project. API Path:
 /v2/projects/:project_id/keys/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -3696,10 +3719,11 @@ API Path: /v2/formats</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationKeyDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3713,6 +3737,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2210
 2211
 2212
 2213
@@ -3724,11 +3749,10 @@ API Path: /v2/formats</p>
 2219
 2220
 2221
-2222
-2223</pre>
+2222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2211</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2210</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key_show'>key_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3762,7 +3786,7 @@ API Path: /v2/formats</p>
     
 <p>Update an existing key. API Path: /v2/projects/:project_id/keys/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -3774,10 +3798,11 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::KeyUpdateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationKeyDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -3791,6 +3816,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2237
 2238
 2239
 2240
@@ -3871,11 +3897,10 @@ API Path: /v2/formats</p>
 2315
 2316
 2317
-2318
-2319</pre>
+2318</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2238</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2237</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key_update'>key_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3979,7 +4004,7 @@ API Path: /v2/formats</p>
 <p>Delete all keys matching query. Same constraints as list. API Path:
 /v2/projects/:project_id/keys</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -3988,9 +4013,10 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::KeysDeleteParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4004,6 +4030,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2330
 2331
 2332
 2333
@@ -4026,11 +4053,10 @@ API Path: /v2/formats</p>
 2350
 2351
 2352
-2353
-2354</pre>
+2353</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2331</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2330</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_delete'>keys_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4076,7 +4102,7 @@ API Path: /v2/formats</p>
 <p>List all keys for the given project. Alternatively you can POST requests to
 /search. API Path: /v2/projects/:project_id/keys</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4085,10 +4111,11 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::KeysListParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationKey</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4102,6 +4129,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2366
 2367
 2368
 2369
@@ -4124,11 +4152,10 @@ API Path: /v2/formats</p>
 2386
 2387
 2388
-2389
-2390</pre>
+2389</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2367</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2366</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_list'>keys_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4174,7 +4201,7 @@ API Path: /v2/formats</p>
 <p>List all keys for the given project matching query. API Path:
 /v2/projects/:project_id/keys/search</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4183,10 +4210,11 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::KeysSearchParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationKey</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4200,6 +4228,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2402
 2403
 2404
 2405
@@ -4222,11 +4251,10 @@ API Path: /v2/formats</p>
 2422
 2423
 2424
-2425
-2426</pre>
+2425</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2403</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2402</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_search'>keys_search</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/search</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4272,7 +4300,7 @@ API Path: /v2/formats</p>
 <p>Tags all keys matching query. Same constraints as list. API Path:
 /v2/projects/:project_id/keys/tag</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4281,9 +4309,10 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::KeysTagParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4297,6 +4326,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2437
 2438
 2439
 2440
@@ -4319,11 +4349,10 @@ API Path: /v2/formats</p>
 2457
 2458
 2459
-2460
-2461</pre>
+2460</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2438</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2437</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_tag'>keys_tag</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/tag</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4369,7 +4398,7 @@ API Path: /v2/formats</p>
 <p>Removes specified tags from keys matching query. API Path:
 /v2/projects/:project_id/keys/tag</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4378,9 +4407,10 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::KeysUntagParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4394,6 +4424,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2472
 2473
 2474
 2475
@@ -4416,11 +4447,10 @@ API Path: /v2/formats</p>
 2492
 2493
 2494
-2495
-2496</pre>
+2495</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2473</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2472</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_untag'>keys_untag</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/tag</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4465,7 +4495,7 @@ API Path: /v2/formats</p>
     
 <p>Create a new locale. API Path: /v2/projects/:project_id/locales</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4474,10 +4504,11 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::LocaleCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>LocaleDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4491,6 +4522,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2508
 2509
 2510
 2511
@@ -4513,11 +4545,10 @@ API Path: /v2/formats</p>
 2528
 2529
 2530
-2531
-2532</pre>
+2531</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2509</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2508</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_create'>locale_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/locales</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4562,7 +4593,7 @@ API Path: /v2/formats</p>
     
 <p>Delete an existing locale. API Path: /v2/projects/:project_id/locales/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4571,9 +4602,10 @@ API Path: /v2/formats</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4587,6 +4619,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2543
 2544
 2545
 2546
@@ -4598,11 +4631,10 @@ API Path: /v2/formats</p>
 2552
 2553
 2554
-2555
-2556</pre>
+2555</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2544</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2543</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_delete'>locale_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/locales/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -4637,7 +4669,7 @@ API Path: /v2/formats</p>
 <p>Download a locale in a specific file format. API Path:
 /v2/projects/:project_id/locales/:id/download</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4649,9 +4681,10 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::LocaleDownloadParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4665,6 +4698,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2569
 2570
 2571
 2572
@@ -4687,11 +4721,10 @@ API Path: /v2/formats</p>
 2589
 2590
 2591
-2592
-2593</pre>
+2592</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2570</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2569</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_download'>locale_download</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/locales/%s/download</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -4737,7 +4770,7 @@ API Path: /v2/formats</p>
 <p>Get details on a single locale for a given project. API Path:
 /v2/projects/:project_id/locales/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4746,10 +4779,11 @@ API Path: /v2/formats</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>LocaleDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4763,6 +4797,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2605
 2606
 2607
 2608
@@ -4774,11 +4809,10 @@ API Path: /v2/formats</p>
 2614
 2615
 2616
-2617
-2618</pre>
+2617</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2606</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2605</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_show'>locale_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/locales/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -4812,7 +4846,7 @@ API Path: /v2/formats</p>
     
 <p>Update an existing locale. API Path: /v2/projects/:project_id/locales/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4824,10 +4858,11 @@ API Path: /v2/formats</p>
 <p>Parameters of type PhraseApp::RequestParams::LocaleUpdateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>LocaleDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4841,6 +4876,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2632
 2633
 2634
 2635
@@ -4863,11 +4899,10 @@ API Path: /v2/formats</p>
 2652
 2653
 2654
-2655
-2656</pre>
+2655</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2633</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2632</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_update'>locale_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/locales/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -4913,16 +4948,17 @@ API Path: /v2/formats</p>
 <p>List all locales for the given project. API Path:
 /v2/projects/:project_id/locales</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Locale</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -4936,6 +4972,7 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
+2666
 2667
 2668
 2669
@@ -4947,11 +4984,10 @@ API Path: /v2/formats</p>
 2675
 2676
 2677
-2678
-2679</pre>
+2678</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2667</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2666</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locales_list'>locales_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/locales</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4987,7 +5023,7 @@ API Path: /v2/formats</p>
 constraints as for create. API Path:
 /v2/projects/:project_id/orders/:id/confirm</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -4996,10 +5032,11 @@ constraints as for create. API Path:
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationOrder</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5013,6 +5050,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2691
 2692
 2693
 2694
@@ -5024,11 +5062,10 @@ constraints as for create. API Path:
 2700
 2701
 2702
-2703
-2704</pre>
+2703</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2692</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2691</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order_confirm'>order_confirm</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/orders/%s/confirm</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5063,7 +5100,7 @@ constraints as for create. API Path:
 <p>Create a new order. Access token scope must include
 <code>orders.create</code>. API Path: /v2/projects/:project_id/orders</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -5072,10 +5109,11 @@ constraints as for create. API Path:
 <p>Parameters of type PhraseApp::RequestParams::OrderCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationOrder</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5089,6 +5127,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2716
 2717
 2718
 2719
@@ -5111,11 +5150,10 @@ constraints as for create. API Path:
 2736
 2737
 2738
-2739
-2740</pre>
+2739</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2717</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2716</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order_create'>order_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/orders</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -5161,7 +5199,7 @@ constraints as for create. API Path:
 <p>Cancel an existing order. Must not yet be confirmed. API Path:
 /v2/projects/:project_id/orders/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -5170,9 +5208,10 @@ constraints as for create. API Path:
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5186,6 +5225,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2751
 2752
 2753
 2754
@@ -5197,11 +5237,10 @@ constraints as for create. API Path:
 2760
 2761
 2762
-2763
-2764</pre>
+2763</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2752</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2751</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order_delete'>order_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/orders/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5236,7 +5275,7 @@ constraints as for create. API Path:
 <p>Get details on a single order. API Path:
 /v2/projects/:project_id/orders/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -5245,10 +5284,11 @@ constraints as for create. API Path:
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationOrder</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5262,6 +5302,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2776
 2777
 2778
 2779
@@ -5273,11 +5314,10 @@ constraints as for create. API Path:
 2785
 2786
 2787
-2788
-2789</pre>
+2788</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2777</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2776</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order_show'>order_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/orders/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5312,16 +5352,17 @@ constraints as for create. API Path:
 <p>List all orders for the given project. API Path:
 /v2/projects/:project_id/orders</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationOrder</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5335,6 +5376,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2799
 2800
 2801
 2802
@@ -5346,11 +5388,10 @@ constraints as for create. API Path:
 2808
 2809
 2810
-2811
-2812</pre>
+2811</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2800</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2799</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_orders_list'>orders_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/orders</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -5384,16 +5425,17 @@ constraints as for create. API Path:
     
 <p>Create a new project. API Path: /v2/projects</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>params
 <dd>
 <p>Parameters of type PhraseApp::RequestParams::ProjectCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>ProjectDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5407,6 +5449,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2822
 2823
 2824
 2825
@@ -5429,11 +5472,10 @@ constraints as for create. API Path:
 2842
 2843
 2844
-2845
-2846</pre>
+2845</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2823</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2822</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_create'>project_create</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -5478,15 +5520,16 @@ constraints as for create. API Path:
     
 <p>Delete an existing project. API Path: /v2/projects/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>id
 <dd>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5500,6 +5543,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2855
 2856
 2857
 2858
@@ -5511,11 +5555,10 @@ constraints as for create. API Path:
 2864
 2865
 2866
-2867
-2868</pre>
+2867</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2856</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2855</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_delete'>project_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5549,16 +5592,17 @@ constraints as for create. API Path:
     
 <p>Get details on a single project. API Path: /v2/projects/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>id
 <dd>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>ProjectDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5572,6 +5616,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2878
 2879
 2880
 2881
@@ -5583,11 +5628,10 @@ constraints as for create. API Path:
 2887
 2888
 2889
-2890
-2891</pre>
+2890</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2879</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2878</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_show'>project_show</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5621,7 +5665,7 @@ constraints as for create. API Path:
     
 <p>Update an existing project. API Path: /v2/projects/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>id
 <dd>
 <p>id</p>
@@ -5630,10 +5674,11 @@ constraints as for create. API Path:
 <p>Parameters of type PhraseApp::RequestParams::ProjectUpdateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>ProjectDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5647,6 +5692,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2903
 2904
 2905
 2906
@@ -5669,11 +5715,10 @@ constraints as for create. API Path:
 2923
 2924
 2925
-2926
-2927</pre>
+2926</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2904</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2903</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_update'>project_update</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5718,12 +5763,13 @@ constraints as for create. API Path:
     
 <p>List all projects the current user has access to. API Path: /v2/projects</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Project</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5737,6 +5783,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2935
 2936
 2937
 2938
@@ -5748,11 +5795,10 @@ constraints as for create. API Path:
 2944
 2945
 2946
-2947
-2948</pre>
+2947</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2936</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2935</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_projects_list'>projects_list</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -5786,12 +5832,13 @@ constraints as for create. API Path:
     
 <p>Show details for current User. API Path: /v2/user</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>User</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5805,6 +5852,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2956
 2957
 2958
 2959
@@ -5816,11 +5864,10 @@ constraints as for create. API Path:
 2965
 2966
 2967
-2968
-2969</pre>
+2968</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2957</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2956</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_user'>show_user</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/user</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -5854,7 +5901,7 @@ constraints as for create. API Path:
     
 <p>Create a new style guide. API Path: /v2/projects/:project_id/styleguides</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -5863,10 +5910,11 @@ constraints as for create. API Path:
 <p>Parameters of type PhraseApp::RequestParams::StyleguideCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>StyleguideDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5880,6 +5928,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+2981
 2982
 2983
 2984
@@ -5902,11 +5951,10 @@ constraints as for create. API Path:
 3001
 3002
 3003
-3004
-3005</pre>
+3004</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2982</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2981</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguide_create'>styleguide_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/styleguides</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -5952,7 +6000,7 @@ constraints as for create. API Path:
 <p>Delete an existing style guide. API Path:
 /v2/projects/:project_id/styleguides/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -5961,9 +6009,10 @@ constraints as for create. API Path:
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -5977,6 +6026,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+3016
 3017
 3018
 3019
@@ -5988,11 +6038,10 @@ constraints as for create. API Path:
 3025
 3026
 3027
-3028
-3029</pre>
+3028</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3017</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3016</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguide_delete'>styleguide_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/styleguides/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6027,7 +6076,7 @@ constraints as for create. API Path:
 <p>Get details on a single style guide. API Path:
 /v2/projects/:project_id/styleguides/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6036,10 +6085,11 @@ constraints as for create. API Path:
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>StyleguideDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6053,6 +6103,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+3041
 3042
 3043
 3044
@@ -6064,11 +6115,10 @@ constraints as for create. API Path:
 3050
 3051
 3052
-3053
-3054</pre>
+3053</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3042</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3041</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguide_show'>styleguide_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/styleguides/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6103,7 +6153,7 @@ constraints as for create. API Path:
 <p>Update an existing style guide. API Path:
 /v2/projects/:project_id/styleguides/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6115,10 +6165,11 @@ constraints as for create. API Path:
 <p>Parameters of type PhraseApp::RequestParams::StyleguideUpdateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>StyleguideDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6132,6 +6183,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+3068
 3069
 3070
 3071
@@ -6154,11 +6206,10 @@ constraints as for create. API Path:
 3088
 3089
 3090
-3091
-3092</pre>
+3091</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3069</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3068</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguide_update'>styleguide_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/styleguides/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6204,16 +6255,17 @@ constraints as for create. API Path:
 <p>List all styleguides for the given project. API Path:
 /v2/projects/:project_id/styleguides</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Styleguide</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6227,6 +6279,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+3102
 3103
 3104
 3105
@@ -6238,11 +6291,10 @@ constraints as for create. API Path:
 3111
 3112
 3113
-3114
-3115</pre>
+3114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3103</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3102</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguides_list'>styleguides_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/styleguides</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6276,7 +6328,7 @@ constraints as for create. API Path:
     
 <p>Create a new tag. API Path: /v2/projects/:project_id/tags</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6285,10 +6337,11 @@ constraints as for create. API Path:
 <p>Parameters of type PhraseApp::RequestParams::TagCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TagWithStats</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6302,6 +6355,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+3127
 3128
 3129
 3130
@@ -6324,11 +6378,10 @@ constraints as for create. API Path:
 3147
 3148
 3149
-3150
-3151</pre>
+3150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3128</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3127</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tag_create'>tag_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6373,7 +6426,7 @@ constraints as for create. API Path:
     
 <p>Delete an existing tag. API Path: /v2/projects/:project_id/tags/:name</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6382,9 +6435,10 @@ constraints as for create. API Path:
 <p>name</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6398,6 +6452,7 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
+3162
 3163
 3164
 3165
@@ -6409,11 +6464,10 @@ constraints as for create. API Path:
 3171
 3172
 3173
-3174
-3175</pre>
+3174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3163</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3162</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tag_delete'>tag_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/tags/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -6448,7 +6502,7 @@ constraints as for create. API Path:
 <p>Get details and progress information on a single tag for a given project.
 API Path: /v2/projects/:project_id/tags/:name</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6457,10 +6511,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>name</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TagWithStats</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6474,6 +6529,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3187
 3188
 3189
 3190
@@ -6485,11 +6541,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3196
 3197
 3198
-3199
-3200</pre>
+3199</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3188</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3187</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tag_show'>tag_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/tags/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -6524,16 +6579,17 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>List all tags for the given project. API Path:
 /v2/projects/:project_id/tags</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Tag</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6547,6 +6603,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3210
 3211
 3212
 3213
@@ -6558,11 +6615,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3219
 3220
 3221
-3222
-3223</pre>
+3222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3211</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3210</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tags_list'>tags_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6596,7 +6652,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
     
 <p>Create a translation. API Path: /v2/projects/:project_id/translations</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6605,10 +6661,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Parameters of type PhraseApp::RequestParams::TranslationCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6622,6 +6679,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3235
 3236
 3237
 3238
@@ -6644,11 +6702,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3255
 3256
 3257
-3258
-3259</pre>
+3258</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3236</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3235</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translation_create'>translation_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6694,7 +6751,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Get details on a single translation. API Path:
 /v2/projects/:project_id/translations/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6703,10 +6760,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6720,6 +6778,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3271
 3272
 3273
 3274
@@ -6731,11 +6790,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3280
 3281
 3282
-3283
-3284</pre>
+3283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3272</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3271</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translation_show'>translation_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6770,7 +6828,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Update an existing translation. API Path:
 /v2/projects/:project_id/translations/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6782,10 +6840,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Parameters of type PhraseApp::RequestParams::TranslationUpdateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationDetails</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6799,6 +6858,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3298
 3299
 3300
 3301
@@ -6821,11 +6881,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3318
 3319
 3320
-3321
-3322</pre>
+3321</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3299</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3298</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translation_update'>translation_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6871,7 +6930,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>List translations for a specific key. API Path:
 /v2/projects/:project_id/keys/:key_id/translations</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6883,10 +6942,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Parameters of type PhraseApp::RequestParams::TranslationsByKeyParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Translation</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -6900,6 +6960,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3336
 3337
 3338
 3339
@@ -6922,11 +6983,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3356
 3357
 3358
-3359
-3360</pre>
+3359</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3337</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3336</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_by_key'>translations_by_key</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/keys/%s/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='rparen'>)</span>
@@ -6972,7 +7032,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>List translations for a specific locale. API Path:
 /v2/projects/:project_id/locales/:locale_id/translations</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -6984,10 +7044,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Parameters of type PhraseApp::RequestParams::TranslationsByLocaleParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Translation</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7001,6 +7062,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3374
 3375
 3376
 3377
@@ -7023,11 +7085,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3394
 3395
 3396
-3397
-3398</pre>
+3397</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3375</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3374</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_by_locale'>translations_by_locale</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_locale_id'>locale_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/locales/%s/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_locale_id'>locale_id</span><span class='rparen'>)</span>
@@ -7073,7 +7134,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Exclude translations matching query from locale export. API Path:
 /v2/projects/:project_id/translations/exclude</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7082,10 +7143,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Parameters of type PhraseApp::RequestParams::TranslationsExcludeParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>AffectedCount</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7099,6 +7161,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3410
 3411
 3412
 3413
@@ -7121,11 +7184,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3430
 3431
 3432
-3433
-3434</pre>
+3433</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3411</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3410</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_exclude'>translations_exclude</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/exclude</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7171,7 +7233,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Include translations matching query in locale export. API Path:
 /v2/projects/:project_id/translations/include</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7180,10 +7242,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Parameters of type PhraseApp::RequestParams::TranslationsIncludeParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>AffectedCount</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7197,6 +7260,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3446
 3447
 3448
 3449
@@ -7219,11 +7283,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3466
 3467
 3468
-3469
-3470</pre>
+3469</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3447</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3446</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_include'>translations_include</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/include</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7269,7 +7332,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>List translations for the given project. Alternatively, POST request to
 /search API Path: /v2/projects/:project_id/translations</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7278,10 +7341,11 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>Parameters of type PhraseApp::RequestParams::TranslationsListParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Translation</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7295,6 +7359,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
+3482
 3483
 3484
 3485
@@ -7317,11 +7382,10 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3502
 3503
 3504
-3505
-3506</pre>
+3505</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3483</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3482</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_list'>translations_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7368,7 +7432,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 limitations on translations list. API Path:
 /v2/projects/:project_id/translations/search</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7377,10 +7441,11 @@ limitations on translations list. API Path:
 <p>Parameters of type PhraseApp::RequestParams::TranslationsSearchParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>Translation</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7394,6 +7459,7 @@ limitations on translations list. API Path:
       <pre class="lines">
 
 
+3518
 3519
 3520
 3521
@@ -7416,11 +7482,10 @@ limitations on translations list. API Path:
 3538
 3539
 3540
-3541
-3542</pre>
+3541</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3519</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3518</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_search'>translations_search</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/search</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7466,7 +7531,7 @@ limitations on translations list. API Path:
 <p>Mark translations matching query as unverified. API Path:
 /v2/projects/:project_id/translations/unverify</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7475,10 +7540,11 @@ limitations on translations list. API Path:
 <p>Parameters of type PhraseApp::RequestParams::TranslationsUnverifyParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>AffectedCount</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7492,6 +7558,7 @@ limitations on translations list. API Path:
       <pre class="lines">
 
 
+3554
 3555
 3556
 3557
@@ -7514,11 +7581,10 @@ limitations on translations list. API Path:
 3574
 3575
 3576
-3577
-3578</pre>
+3577</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3555</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3554</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_unverify'>translations_unverify</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/unverify</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7564,7 +7630,7 @@ limitations on translations list. API Path:
 <p>Verify translations matching query. API Path:
 /v2/projects/:project_id/translations/verify</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7573,10 +7639,11 @@ limitations on translations list. API Path:
 <p>Parameters of type PhraseApp::RequestParams::TranslationsVerifyParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>AffectedCount</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7590,6 +7657,7 @@ limitations on translations list. API Path:
       <pre class="lines">
 
 
+3590
 3591
 3592
 3593
@@ -7612,11 +7680,10 @@ limitations on translations list. API Path:
 3610
 3611
 3612
-3613
-3614</pre>
+3613</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3591</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3590</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_verify'>translations_verify</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/verify</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7662,7 +7729,7 @@ limitations on translations list. API Path:
 <p>Upload a new language file. Creates necessary resources in your project.
 API Path: /v2/projects/:project_id/uploads</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7671,10 +7738,11 @@ API Path: /v2/projects/:project_id/uploads</p>
 <p>Parameters of type PhraseApp::RequestParams::UploadCreateParams</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>LocaleFileImportWithSummary</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7688,6 +7756,7 @@ API Path: /v2/projects/:project_id/uploads</p>
       <pre class="lines">
 
 
+3626
 3627
 3628
 3629
@@ -7750,11 +7819,10 @@ API Path: /v2/projects/:project_id/uploads</p>
 3686
 3687
 3688
-3689
-3690</pre>
+3689</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3627</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3626</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_upload_create'>upload_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/uploads</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7840,7 +7908,7 @@ API Path: /v2/projects/:project_id/uploads</p>
 <p>View details and summary for a single upload. API Path:
 /v2/projects/:project_id/uploads/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7849,10 +7917,11 @@ API Path: /v2/projects/:project_id/uploads</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>LocaleFileImportWithSummary</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7866,6 +7935,7 @@ API Path: /v2/projects/:project_id/uploads</p>
       <pre class="lines">
 
 
+3702
 3703
 3704
 3705
@@ -7877,11 +7947,10 @@ API Path: /v2/projects/:project_id/uploads</p>
 3711
 3712
 3713
-3714
-3715</pre>
+3714</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3703</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3702</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_upload_show'>upload_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/uploads/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -7916,7 +7985,7 @@ API Path: /v2/projects/:project_id/uploads</p>
 <p>Get details on a single version. API Path:
 /v2/projects/:project_id/translations/:translation_id/versions/:id</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -7928,10 +7997,11 @@ API Path: /v2/projects/:project_id/uploads</p>
 <p>id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationVersionWithUser</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -7945,6 +8015,7 @@ API Path: /v2/projects/:project_id/uploads</p>
       <pre class="lines">
 
 
+3729
 3730
 3731
 3732
@@ -7956,11 +8027,10 @@ API Path: /v2/projects/:project_id/uploads</p>
 3738
 3739
 3740
-3741
-3742</pre>
+3741</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3730</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3729</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_version_show'>version_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_translation_id'>translation_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/%s/versions/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_translation_id'>translation_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -7995,7 +8065,7 @@ API Path: /v2/projects/:project_id/uploads</p>
 <p>List all versions for the given translation. API Path:
 /v2/projects/:project_id/translations/:translation_id/versions</p>
 
-<h2 id="label-Parameters%3A">Parameters:</h2>
+<h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>project_id
 <dd>
 <p>project_id</p>
@@ -8004,10 +8074,11 @@ API Path: /v2/projects/:project_id/uploads</p>
 <p>translation_id</p>
 </dd></dl>
 
-<h2 id="label-Returns%3A">Returns:</h2>
+<h2 id="label-Returns-3A">Returns:</h2>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ResponseObjects</span><span class='op'>::</span><span class='const'>TranslationVersion</span>
-<span class='id identifier rubyid_err'>err</span></code></pre>
+<span class='id identifier rubyid_err'>err</span>
+</code></pre>
 
 
   </div>
@@ -8021,6 +8092,7 @@ API Path: /v2/projects/:project_id/uploads</p>
       <pre class="lines">
 
 
+3754
 3755
 3756
 3757
@@ -8032,11 +8104,10 @@ API Path: /v2/projects/:project_id/uploads</p>
 3763
 3764
 3765
-3766
-3767</pre>
+3766</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3755</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3754</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_versions_list'>versions_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_translation_id'>translation_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/v2/projects/%s/translations/%s/versions</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_translation_id'>translation_id</span><span class='rparen'>)</span>
@@ -8061,9 +8132,9 @@ API Path: /v2/projects/:project_id/uploads</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Jul  7 11:20:36 2015 by
+  Generated on Fri Jul 10 15:58:48 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.1.2).
+  0.8.7.6 (ruby-2.2.1).
 </div>
 
   </body>

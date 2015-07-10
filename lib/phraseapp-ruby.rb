@@ -981,7 +981,6 @@ end
 
 module PhraseApp
   MULTIPART_BOUNDARY = "{PHRASE!!EOF}"
-  URL = "https://api.phraseapp.com"
 
   module ParamsHelpers
     class ParamsValidationError < StandardError; end
@@ -1528,7 +1527,7 @@ end
   #
   # Require the gem
   #   require 'phraseapp-ruby'
-  # Setup Authentication 
+  # Setup Authentication
   #   auth_handler = PhraseApp::Auth::AuthHandler.new({:token => "YOUR_ACCESS_TOKEN"})
   #   PhraseApp::Auth.register_auth_handler(auth_handler)
   # Create a client
@@ -3769,9 +3768,3 @@ end
   end
 
 end
-
-
-
-
-
-
