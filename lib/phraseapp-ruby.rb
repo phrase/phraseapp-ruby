@@ -1026,7 +1026,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Filter the results. Supports text queries for key name with 'name:key_name' and qualifiers like translated/untranslated 'translated:true/false'. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   class KeysDeleteParams < ::OpenStruct
     def locale_id=(val)
       self.locale_id = val
@@ -1051,7 +1051,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a <a href="/guides/working-with-phraseapp/search-terms">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status*</li> <li><code>updated_at{>=|<=}21-02-2013</code> for date range queries</li> </ul> *Also requires <code>locale_id</code> to be specified.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysListParams < ::OpenStruct
@@ -1086,7 +1086,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries for name:key_name and qualifiers translated:true/false as well as date range queries. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysSearchParams < ::OpenStruct
@@ -1119,7 +1119,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Filter the results. Supports text queries for key name with 'name:key_name' and qualifiers like translated/untranslated 'translated:true/false'. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysTagParams < ::OpenStruct
@@ -1150,7 +1150,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Filter the results. Supports text queries for key name with 'name:key_name' and qualifiers like translated/untranslated 'translated:true/false'. Requires an additional <code>locale_id</code> parameter if 'translated:true/false' is used.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysUntagParams < ::OpenStruct
@@ -1188,8 +1188,8 @@ module RequestParams
   #   Indicates whether keys without translations should be included in the output as well.
   # keep_notranslate_tags::
   #   Indicates whether [NOTRANSLATE] tags should be kept.
-  # tag_id::
-  #   Limit result to keys tagged with the given tag (identified by its id).
+  # tag::
+  #   Limit result to keys tagged with the given tag (identified by its name).
   class LocaleDownloadParams < ::OpenStruct
     def convert_emoji=(val)
       if val == "true"
@@ -1229,8 +1229,8 @@ module RequestParams
       end
     end
 
-    def tag_id=(val)
-      self.tag_id = val
+    def tag=(val)
+      self.tag = val
     end
 
     def validate
@@ -1297,7 +1297,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByKeyParams < ::OpenStruct
@@ -1326,7 +1326,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByLocaleParams < ::OpenStruct
@@ -1355,7 +1355,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries with same results as in Translation Center and qualifiers such as unverified:true/false as well as date range queries.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsExcludeParams < ::OpenStruct
@@ -1384,7 +1384,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries with same results as in Translation Center and qualifiers such as unverified:true/false as well as date range queries.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsIncludeParams < ::OpenStruct
@@ -1413,7 +1413,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsListParams < ::OpenStruct
@@ -1442,7 +1442,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsSearchParams < ::OpenStruct
@@ -1471,7 +1471,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries with same results as in Translation Center and qualifiers such as unverified:true/false as well as date range queries.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsUnverifyParams < ::OpenStruct
@@ -1500,7 +1500,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Filter the results. Supports text queries with the same results as in the Translation Center as well as qualifiers like unverified:true/false and date range queries.
+  #   Specify a <a href="/api/v2/examples/#word-matching-examples">search term query</a> including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsVerifyParams < ::OpenStruct

@@ -4,6 +4,7 @@ module PhraseApp
 
   module Auth
 
+    # See PhraseApp::Client for usage example
     class AuthHandler < OpenStruct
       def validate
         if self.username == "" && self.token == ""
@@ -13,6 +14,7 @@ module PhraseApp
         end
       end
 
+      private
       def load_config
         path = self.config
         tmpA = AuthHandler.new
@@ -40,6 +42,10 @@ module PhraseApp
           self.host = tmpA.host
         end
 
+        if tmpA.debug
+          self.debug = tmpA.debug
+        end
+
         return nil
       end
     end
@@ -57,6 +63,14 @@ module PhraseApp
         return authH.host
       else
         return PhraseApp::URL
+      end
+    end
+
+    def self.debug
+      if authH.debug && authH.debug != ""
+        return authH.debug
+      else
+        return false
       end
     end
 

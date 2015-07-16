@@ -87,10 +87,14 @@ module PhraseApp
         path)
 
 
+    if PhraseApp::Auth.debug
+      puts "-------"
+      puts "data:"
+      puts data.inspect
+    end
 
-    puts "data:"
-    puts data.inspect
     req.body = data
+
 
     if ctype != ""
       req["Content-Type"] = ctype
@@ -111,11 +115,21 @@ module PhraseApp
     req["User-Agent"] = API_CLIENT_IDENTIFIER
 
     uri = URI.parse(PhraseApp::Auth.host)
+
+    if PhraseApp::Auth.debug
+      puts "uri:"
+      puts uri.inspect
+    end
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-    if ENV['DEBUG']
-      puts "#{req.method} #{req.path}"
+    if PhraseApp::Auth.debug
+      puts "method:"
+      puts req.method
+      puts "path:"
+      puts req.path
+      puts "body:"
       puts req.body.inspect
       puts "-------"
     end
