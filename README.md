@@ -12,7 +12,7 @@ Install the gem:
 
 or add it to your Gemfile when using bundler:
 
-    gem 'phraseapp-ruby
+    gem 'phraseapp-ruby'
 
 and install it via
 
