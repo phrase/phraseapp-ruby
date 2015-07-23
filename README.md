@@ -26,24 +26,26 @@ and install it via
 
 Setup an [Access Token in your PhraseApp user profile](https://phraseapp.com/settings/oauth_access_tokens) for Authentication.
 
-	# Require the gem
-    require 'phraseapp-ruby'
+```ruby
+# Require the gem
+require 'phraseapp-ruby'
 
-    # Setup authentication with an access token
-    auth_handler = PhraseApp::Auth::AuthHandler.new(token: "YOUR_ACCESS_TOKEN")
-    PhraseApp::Auth.register_auth_handler(auth_handler)
+# Setup authentication with an access token
+auth_handler = PhraseApp::Auth::AuthHandler.new(token: "YOUR_ACCESS_TOKEN")
+PhraseApp::Auth.register_auth_handler(auth_handler)
 
-    # Create a client
-    client = PhraseApp::Client
+# Create a client
+client = PhraseApp::Client
 
-    # List projects page 1 and list 10 projects per_page
-    rsp, err = client.projects_list(1, 10)
-    puts rsp
+# List projects page 1 and list 10 projects per_page
+rsp, err = client.projects_list(1, 10)
+puts rsp
 
-    # Create a new key
-    params = PhraseApp::RequestParams::TranslationKeyParams.new(name: "foo")
-    rsp, err = client.key_create('YOUR_PROJECT_ID', params)
-    puts rsp
+# Create a new key
+params = PhraseApp::RequestParams::TranslationKeyParams.new(name: "foo")
+rsp, err = client.key_create('YOUR_PROJECT_ID', params)
+puts rsp
+```
 
 There are also other ways of authentication, which are described in our [API v2 Documentation](http://docs.phraseapp.com/api/v2/)
 
@@ -52,6 +54,34 @@ There are also other ways of authentication, which are described in our [API v2 
 For a full list of available client actions, see the [phraseapp-ruby Documentation](http://www.rubydoc.info/gems/phraseapp-ruby/PhraseApp/Client)
 
 The actions are generated automatically from our API specification, so once you get the hang of the Ruby specific naming, you should be able to infer names of actions and endpoints through our [API v2 Documentation](http://docs.phraseapp.com/api/v2/)
+
+## OpenSSL
+
+Please note that outdated certificates or old versions of OpenSSL may cause connection issues. We recommend using OpenSSL 1.0.2d or later. If you experience OpenSSL-related errors, try the following. 
+
+Upgrade OpenSSL using Homebrew:
+
+```shell
+$ brew upgrade openssl
+$ brew install openssl
+$ brew install curl-ca-bundle     # optional: installs trusted CA root certs
+```
+
+If you are using RVM, also run:
+
+```shell
+$ rvm osx-ssl-certs status all
+$ rvm osx-ssl-certs update all
+````
+
+As a workaround, you can disable certificate verification in the AuthHandler:
+
+```ruby
+    auth_handler = PhraseApp::Auth::AuthHandler.new({:skip_ssl_verification => true, :token => "YOUR_ACCESS_TOKEN"})
+    PhraseApp::Auth.register_auth_handler(auth_handler)
+```
+
+This is **not recommended** and should only be used as a temporary workaround.
 
 ## Contributing 
 
