@@ -142,6 +142,33 @@ you get the hang of the Ruby specific naming, you should be able to infer
 names of actions and endpoints through our <a
 href="http://docs.phraseapp.com/api/v2/">API v2 Documentation</a></p>
 
+<h2 id="label-OpenSSL">OpenSSL</h2>
+
+<p>Please note that outdated certificates or old versions of OpenSSL may cause
+connection issues. We recommend using OpenSSL 1.0.2d or later. If you
+experience OpenSSL-related errors, try the following.</p>
+
+<p>Upgrade OpenSSL using Homebrew:</p>
+
+<pre class="code ruby"><code class="ruby">$ brew upgrade openssl
+$ brew install openssl
+$ brew install curl-ca-bundle     # optional: installs trusted CA root certs</code></pre>
+
+<p>If you are using RVM, also run:</p>
+
+<pre class="code ruby"><code class="ruby">$ rvm osx-ssl-certs status all
+$ rvm osx-ssl-certs update all
+````
+
+As a workaround, you can disable certificate verification in the AuthHandler:</code></pre>
+
+<p>ruby auth_handler = PhraseApp::Auth::AuthHandler.new(skip_ssl_verification:
+true, token: “YOUR_ACCESS_TOKEN”)
+PhraseApp::Auth.register_auth_handler(auth_handler) “`</p>
+
+<p>This is <strong>not recommended</strong> and should only be used as a
+temporary workaround.</p>
+
 <h2 id="label-Contributing">Contributing</h2>
 
 <p>This library is auto-generated from templates that run against a API
@@ -162,7 +189,7 @@ documentation</a></p>
 </div></div>
 
     <div id="footer">
-  Generated on Thu Jul 23 13:08:40 2015 by
+  Generated on Thu Jul 23 16:30:48 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>

@@ -1551,7 +1551,7 @@ end
     #   PhraseApp::ResponseObjects::AuthorizationWithToken
     #   err
     def self.authorization_create(params)
-      path = sprintf("/v2/authorizations")
+      path = sprintf("/api/v2/authorizations")
       data_hash = {}
       post_body = nil
   
@@ -1584,7 +1584,7 @@ end
     # == Returns:
     #   err
     def self.authorization_delete(id)
-      path = sprintf("/v2/authorizations/%s", id)
+      path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
   
@@ -1607,7 +1607,7 @@ end
     #   PhraseApp::ResponseObjects::Authorization
     #   err
     def self.authorization_show(id)
-      path = sprintf("/v2/authorizations/%s", id)
+      path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
   
@@ -1632,7 +1632,7 @@ end
     #   PhraseApp::ResponseObjects::Authorization
     #   err
     def self.authorization_update(id, params)
-      path = sprintf("/v2/authorizations/%s", id)
+      path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
   
@@ -1664,7 +1664,7 @@ end
     #   PhraseApp::ResponseObjects::Authorization
     #   err
     def self.authorizations_list(page, per_page)
-      path = sprintf("/v2/authorizations")
+      path = sprintf("/api/v2/authorizations")
       data_hash = {}
       post_body = nil
   
@@ -1691,7 +1691,7 @@ end
     #   PhraseApp::ResponseObjects::Comment
     #   err
     def self.comment_create(project_id, key_id, params)
-      path = sprintf("/v2/projects/%s/keys/%s/comments", project_id, key_id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/comments", project_id, key_id)
       data_hash = {}
       post_body = nil
   
@@ -1728,7 +1728,7 @@ end
     # == Returns:
     #   err
     def self.comment_delete(project_id, key_id, id)
-      path = sprintf("/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
@@ -1754,7 +1754,7 @@ end
     # == Returns:
     #   err
     def self.comment_mark_check(project_id, key_id, id)
-      path = sprintf("/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
@@ -1780,7 +1780,7 @@ end
     # == Returns:
     #   err
     def self.comment_mark_read(project_id, key_id, id)
-      path = sprintf("/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
@@ -1806,7 +1806,7 @@ end
     # == Returns:
     #   err
     def self.comment_mark_unread(project_id, key_id, id)
-      path = sprintf("/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
@@ -1833,7 +1833,7 @@ end
     #   PhraseApp::ResponseObjects::Comment
     #   err
     def self.comment_show(project_id, key_id, id)
-      path = sprintf("/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
@@ -1862,7 +1862,7 @@ end
     #   PhraseApp::ResponseObjects::Comment
     #   err
     def self.comment_update(project_id, key_id, id, params)
-      path = sprintf("/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
@@ -1898,7 +1898,7 @@ end
     #   PhraseApp::ResponseObjects::Comment
     #   err
     def self.comments_list(project_id, key_id, page, per_page)
-      path = sprintf("/v2/projects/%s/keys/%s/comments", project_id, key_id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/comments", project_id, key_id)
       data_hash = {}
       post_body = nil
   
@@ -1923,7 +1923,7 @@ end
     #   PhraseApp::ResponseObjects::BlacklistedKey
     #   err
     def self.exclude_rule_create(project_id, params)
-      path = sprintf("/v2/projects/%s/blacklisted_keys", project_id)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys", project_id)
       data_hash = {}
       post_body = nil
   
@@ -1958,7 +1958,7 @@ end
     # == Returns:
     #   err
     def self.exclude_rule_delete(project_id, id)
-      path = sprintf("/v2/projects/%s/blacklisted_keys/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -1983,7 +1983,7 @@ end
     #   PhraseApp::ResponseObjects::BlacklistedKey
     #   err
     def self.exclude_rule_show(project_id, id)
-      path = sprintf("/v2/projects/%s/blacklisted_keys/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2010,7 +2010,7 @@ end
     #   PhraseApp::ResponseObjects::BlacklistedKey
     #   err
     def self.exclude_rule_update(project_id, id, params)
-      path = sprintf("/v2/projects/%s/blacklisted_keys/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2044,7 +2044,7 @@ end
     #   PhraseApp::ResponseObjects::BlacklistedKey
     #   err
     def self.exclude_rules_index(project_id, page, per_page)
-      path = sprintf("/v2/projects/%s/blacklisted_keys", project_id)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2065,7 +2065,7 @@ end
     #   PhraseApp::ResponseObjects::Format
     #   err
     def self.formats_list(page, per_page)
-      path = sprintf("/v2/formats")
+      path = sprintf("/api/v2/formats")
       data_hash = {}
       post_body = nil
   
@@ -2090,7 +2090,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
     #   err
     def self.key_create(project_id, params)
-      path = sprintf("/v2/projects/%s/keys", project_id)
+      path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2183,7 +2183,7 @@ end
     # == Returns:
     #   err
     def self.key_delete(project_id, id)
-      path = sprintf("/v2/projects/%s/keys/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2208,7 +2208,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
     #   err
     def self.key_show(project_id, id)
-      path = sprintf("/v2/projects/%s/keys/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2235,7 +2235,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
     #   err
     def self.key_update(project_id, id, params)
-      path = sprintf("/v2/projects/%s/keys/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2328,7 +2328,7 @@ end
     # == Returns:
     #   err
     def self.keys_delete(project_id, params)
-      path = sprintf("/v2/projects/%s/keys", project_id)
+      path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2364,7 +2364,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationKey
     #   err
     def self.keys_list(project_id, page, per_page, params)
-      path = sprintf("/v2/projects/%s/keys", project_id)
+      path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2400,7 +2400,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationKey
     #   err
     def self.keys_search(project_id, page, per_page, params)
-      path = sprintf("/v2/projects/%s/keys/search", project_id)
+      path = sprintf("/api/v2/projects/%s/keys/search", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2435,7 +2435,7 @@ end
     # == Returns:
     #   err
     def self.keys_tag(project_id, params)
-      path = sprintf("/v2/projects/%s/keys/tag", project_id)
+      path = sprintf("/api/v2/projects/%s/keys/tag", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2470,7 +2470,7 @@ end
     # == Returns:
     #   err
     def self.keys_untag(project_id, params)
-      path = sprintf("/v2/projects/%s/keys/tag", project_id)
+      path = sprintf("/api/v2/projects/%s/keys/tag", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2506,7 +2506,7 @@ end
     #   PhraseApp::ResponseObjects::LocaleDetails
     #   err
     def self.locale_create(project_id, params)
-      path = sprintf("/v2/projects/%s/locales", project_id)
+      path = sprintf("/api/v2/projects/%s/locales", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2541,7 +2541,7 @@ end
     # == Returns:
     #   err
     def self.locale_delete(project_id, id)
-      path = sprintf("/v2/projects/%s/locales/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2567,7 +2567,7 @@ end
     # == Returns:
     #   err
     def self.locale_download(project_id, id, params)
-      path = sprintf("/v2/projects/%s/locales/%s/download", project_id, id)
+      path = sprintf("/api/v2/projects/%s/locales/%s/download", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2603,7 +2603,7 @@ end
     #   PhraseApp::ResponseObjects::LocaleDetails
     #   err
     def self.locale_show(project_id, id)
-      path = sprintf("/v2/projects/%s/locales/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2630,7 +2630,7 @@ end
     #   PhraseApp::ResponseObjects::LocaleDetails
     #   err
     def self.locale_update(project_id, id, params)
-      path = sprintf("/v2/projects/%s/locales/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2664,7 +2664,7 @@ end
     #   PhraseApp::ResponseObjects::Locale
     #   err
     def self.locales_list(project_id, page, per_page)
-      path = sprintf("/v2/projects/%s/locales", project_id)
+      path = sprintf("/api/v2/projects/%s/locales", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2689,7 +2689,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
     def self.order_confirm(project_id, id)
-      path = sprintf("/v2/projects/%s/orders/%s/confirm", project_id, id)
+      path = sprintf("/api/v2/projects/%s/orders/%s/confirm", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2714,7 +2714,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
     def self.order_create(project_id, params)
-      path = sprintf("/v2/projects/%s/orders", project_id)
+      path = sprintf("/api/v2/projects/%s/orders", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2749,7 +2749,7 @@ end
     # == Returns:
     #   err
     def self.order_delete(project_id, id)
-      path = sprintf("/v2/projects/%s/orders/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/orders/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2774,7 +2774,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
     def self.order_show(project_id, id)
-      path = sprintf("/v2/projects/%s/orders/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/orders/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -2797,7 +2797,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
     def self.orders_list(project_id, page, per_page)
-      path = sprintf("/v2/projects/%s/orders", project_id)
+      path = sprintf("/api/v2/projects/%s/orders", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2820,7 +2820,7 @@ end
     #   PhraseApp::ResponseObjects::ProjectDetails
     #   err
     def self.project_create(params)
-      path = sprintf("/v2/projects")
+      path = sprintf("/api/v2/projects")
       data_hash = {}
       post_body = nil
   
@@ -2853,7 +2853,7 @@ end
     # == Returns:
     #   err
     def self.project_delete(id)
-      path = sprintf("/v2/projects/%s", id)
+      path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
   
@@ -2876,7 +2876,7 @@ end
     #   PhraseApp::ResponseObjects::ProjectDetails
     #   err
     def self.project_show(id)
-      path = sprintf("/v2/projects/%s", id)
+      path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
   
@@ -2901,7 +2901,7 @@ end
     #   PhraseApp::ResponseObjects::ProjectDetails
     #   err
     def self.project_update(id, params)
-      path = sprintf("/v2/projects/%s", id)
+      path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
   
@@ -2933,7 +2933,7 @@ end
     #   PhraseApp::ResponseObjects::Project
     #   err
     def self.projects_list(page, per_page)
-      path = sprintf("/v2/projects")
+      path = sprintf("/api/v2/projects")
       data_hash = {}
       post_body = nil
   
@@ -2954,7 +2954,7 @@ end
     #   PhraseApp::ResponseObjects::User
     #   err
     def self.show_user()
-      path = sprintf("/v2/user")
+      path = sprintf("/api/v2/user")
       data_hash = {}
       post_body = nil
   
@@ -2979,7 +2979,7 @@ end
     #   PhraseApp::ResponseObjects::StyleguideDetails
     #   err
     def self.styleguide_create(project_id, params)
-      path = sprintf("/v2/projects/%s/styleguides", project_id)
+      path = sprintf("/api/v2/projects/%s/styleguides", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3014,7 +3014,7 @@ end
     # == Returns:
     #   err
     def self.styleguide_delete(project_id, id)
-      path = sprintf("/v2/projects/%s/styleguides/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3039,7 +3039,7 @@ end
     #   PhraseApp::ResponseObjects::StyleguideDetails
     #   err
     def self.styleguide_show(project_id, id)
-      path = sprintf("/v2/projects/%s/styleguides/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3066,7 +3066,7 @@ end
     #   PhraseApp::ResponseObjects::StyleguideDetails
     #   err
     def self.styleguide_update(project_id, id, params)
-      path = sprintf("/v2/projects/%s/styleguides/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3100,7 +3100,7 @@ end
     #   PhraseApp::ResponseObjects::Styleguide
     #   err
     def self.styleguides_list(project_id, page, per_page)
-      path = sprintf("/v2/projects/%s/styleguides", project_id)
+      path = sprintf("/api/v2/projects/%s/styleguides", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3125,7 +3125,7 @@ end
     #   PhraseApp::ResponseObjects::TagWithStats
     #   err
     def self.tag_create(project_id, params)
-      path = sprintf("/v2/projects/%s/tags", project_id)
+      path = sprintf("/api/v2/projects/%s/tags", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3160,7 +3160,7 @@ end
     # == Returns:
     #   err
     def self.tag_delete(project_id, name)
-      path = sprintf("/v2/projects/%s/tags/%s", project_id, name)
+      path = sprintf("/api/v2/projects/%s/tags/%s", project_id, name)
       data_hash = {}
       post_body = nil
   
@@ -3185,7 +3185,7 @@ end
     #   PhraseApp::ResponseObjects::TagWithStats
     #   err
     def self.tag_show(project_id, name)
-      path = sprintf("/v2/projects/%s/tags/%s", project_id, name)
+      path = sprintf("/api/v2/projects/%s/tags/%s", project_id, name)
       data_hash = {}
       post_body = nil
   
@@ -3208,7 +3208,7 @@ end
     #   PhraseApp::ResponseObjects::Tag
     #   err
     def self.tags_list(project_id, page, per_page)
-      path = sprintf("/v2/projects/%s/tags", project_id)
+      path = sprintf("/api/v2/projects/%s/tags", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3233,7 +3233,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationDetails
     #   err
     def self.translation_create(project_id, params)
-      path = sprintf("/v2/projects/%s/translations", project_id)
+      path = sprintf("/api/v2/projects/%s/translations", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3269,7 +3269,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationDetails
     #   err
     def self.translation_show(project_id, id)
-      path = sprintf("/v2/projects/%s/translations/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/translations/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3296,7 +3296,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationDetails
     #   err
     def self.translation_update(project_id, id, params)
-      path = sprintf("/v2/projects/%s/translations/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/translations/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3334,7 +3334,7 @@ end
     #   PhraseApp::ResponseObjects::Translation
     #   err
     def self.translations_by_key(project_id, key_id, page, per_page, params)
-      path = sprintf("/v2/projects/%s/keys/%s/translations", project_id, key_id)
+      path = sprintf("/api/v2/projects/%s/keys/%s/translations", project_id, key_id)
       data_hash = {}
       post_body = nil
   
@@ -3372,7 +3372,7 @@ end
     #   PhraseApp::ResponseObjects::Translation
     #   err
     def self.translations_by_locale(project_id, locale_id, page, per_page, params)
-      path = sprintf("/v2/projects/%s/locales/%s/translations", project_id, locale_id)
+      path = sprintf("/api/v2/projects/%s/locales/%s/translations", project_id, locale_id)
       data_hash = {}
       post_body = nil
   
@@ -3408,7 +3408,7 @@ end
     #   PhraseApp::ResponseObjects::AffectedCount
     #   err
     def self.translations_exclude(project_id, params)
-      path = sprintf("/v2/projects/%s/translations/exclude", project_id)
+      path = sprintf("/api/v2/projects/%s/translations/exclude", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3444,7 +3444,7 @@ end
     #   PhraseApp::ResponseObjects::AffectedCount
     #   err
     def self.translations_include(project_id, params)
-      path = sprintf("/v2/projects/%s/translations/include", project_id)
+      path = sprintf("/api/v2/projects/%s/translations/include", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3480,7 +3480,7 @@ end
     #   PhraseApp::ResponseObjects::Translation
     #   err
     def self.translations_list(project_id, page, per_page, params)
-      path = sprintf("/v2/projects/%s/translations", project_id)
+      path = sprintf("/api/v2/projects/%s/translations", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3516,7 +3516,7 @@ end
     #   PhraseApp::ResponseObjects::Translation
     #   err
     def self.translations_search(project_id, page, per_page, params)
-      path = sprintf("/v2/projects/%s/translations/search", project_id)
+      path = sprintf("/api/v2/projects/%s/translations/search", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3552,7 +3552,7 @@ end
     #   PhraseApp::ResponseObjects::AffectedCount
     #   err
     def self.translations_unverify(project_id, params)
-      path = sprintf("/v2/projects/%s/translations/unverify", project_id)
+      path = sprintf("/api/v2/projects/%s/translations/unverify", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3588,7 +3588,7 @@ end
     #   PhraseApp::ResponseObjects::AffectedCount
     #   err
     def self.translations_verify(project_id, params)
-      path = sprintf("/v2/projects/%s/translations/verify", project_id)
+      path = sprintf("/api/v2/projects/%s/translations/verify", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3624,7 +3624,7 @@ end
     #   PhraseApp::ResponseObjects::LocaleFileImportWithSummary
     #   err
     def self.upload_create(project_id, params)
-      path = sprintf("/v2/projects/%s/uploads", project_id)
+      path = sprintf("/api/v2/projects/%s/uploads", project_id)
       data_hash = {}
       post_body = nil
   
@@ -3700,7 +3700,7 @@ end
     #   PhraseApp::ResponseObjects::LocaleFileImportWithSummary
     #   err
     def self.upload_show(project_id, id)
-      path = sprintf("/v2/projects/%s/uploads/%s", project_id, id)
+      path = sprintf("/api/v2/projects/%s/uploads/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3727,7 +3727,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationVersionWithUser
     #   err
     def self.version_show(project_id, translation_id, id)
-      path = sprintf("/v2/projects/%s/translations/%s/versions/%s", project_id, translation_id, id)
+      path = sprintf("/api/v2/projects/%s/translations/%s/versions/%s", project_id, translation_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3752,7 +3752,7 @@ end
     #   PhraseApp::ResponseObjects::TranslationVersion
     #   err
     def self.versions_list(project_id, translation_id, page, per_page)
-      path = sprintf("/v2/projects/%s/translations/%s/versions", project_id, translation_id)
+      path = sprintf("/api/v2/projects/%s/translations/%s/versions", project_id, translation_id)
       data_hash = {}
       post_body = nil
   
