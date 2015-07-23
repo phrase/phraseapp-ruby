@@ -77,8 +77,8 @@ $ rvm osx-ssl-certs update all
 As a workaround, you can disable certificate verification in the AuthHandler:
 
 ```ruby
-    auth_handler = PhraseApp::Auth::AuthHandler.new({:skip_ssl_verification => true, :token => "YOUR_ACCESS_TOKEN"})
-    PhraseApp::Auth.register_auth_handler(auth_handler)
+auth_handler = PhraseApp::Auth::AuthHandler.new({:skip_ssl_verification => true, :token => "YOUR_ACCESS_TOKEN"})
+PhraseApp::Auth.register_auth_handler(auth_handler)
 ```
 
 This is **not recommended** and should only be used as a temporary workaround.
