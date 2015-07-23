@@ -122,8 +122,16 @@ module PhraseApp
     end
 
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+
+    if uri.is_a?(URI::HTTPS)
+      http.use_ssl = true
+      if PhraseApp::Auth::skip_ssl_verification
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      else
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+      end
+    end
+
     if PhraseApp::Auth.debug
       puts "method:"
       puts req.method

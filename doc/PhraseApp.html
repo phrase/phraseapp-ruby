@@ -111,7 +111,7 @@
         <dt id="VERSION-constant" class="">VERSION =
           
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1.0.15</span><span class='tstring_end'>&#39;</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1.0.16</span><span class='tstring_end'>&#39;</span></span></pre></dd>
       
         <dt id="MULTIPART_BOUNDARY-constant" class="">MULTIPART_BOUNDARY =
           
@@ -356,14 +356,6 @@
       <pre class="lines">
 
 
-143
-144
-145
-146
-147
-148
-149
-150
 151
 152
 153
@@ -380,10 +372,18 @@
 164
 165
 166
-167</pre>
+167
+168
+169
+170
+171
+172
+173
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 143</span>
+      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_handleResponseStatus'>handleResponseStatus</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_expectedStatus'>expectedStatus</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_resp'>resp</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
@@ -562,7 +562,15 @@
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145
+146
+147
+148
+149</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 109</span>
@@ -583,8 +591,16 @@
   <span class='kw'>end</span>
 
   <span class='id identifier rubyid_http'>http</span> <span class='op'>=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_host'>host</span><span class='comma'>,</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_port'>port</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_use_ssl'>use_ssl</span> <span class='op'>=</span> <span class='kw'>true</span>
-  <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_verify_mode'>verify_mode</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>SSL</span><span class='op'>::</span><span class='const'>VERIFY_PEER</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>URI</span><span class='op'>::</span><span class='const'>HTTPS</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_use_ssl'>use_ssl</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='kw'>if</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='id identifier rubyid_skip_ssl_verification'>skip_ssl_verification</span>
+      <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_verify_mode'>verify_mode</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>SSL</span><span class='op'>::</span><span class='const'>VERIFY_NONE</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_verify_mode'>verify_mode</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>SSL</span><span class='op'>::</span><span class='const'>VERIFY_PEER</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='kw'>if</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span>
     <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>method:</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_req'>req</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span>
@@ -732,7 +748,7 @@
 </div>
 
     <div id="footer">
-  Generated on Thu Jul 16 13:46:19 2015 by
+  Generated on Thu Jul 23 13:08:40 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>

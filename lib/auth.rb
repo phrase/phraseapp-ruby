@@ -42,6 +42,10 @@ module PhraseApp
           self.host = tmpA.host
         end
 
+        if tmpA.skip_ssl_verification
+          self.skip_ssl_verification = tmpA.skip_ssl_verification
+        end
+
         if tmpA.debug
           self.debug = tmpA.debug
         end
@@ -63,6 +67,14 @@ module PhraseApp
         return authH.host
       else
         return PhraseApp::URL
+      end
+    end
+
+    def self.skip_ssl_verification
+      if authH.skip_ssl_verification && authH.skip_ssl_verification
+        return true
+      else
+        return false
       end
     end
 
