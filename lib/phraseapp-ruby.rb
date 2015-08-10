@@ -33,6 +33,14 @@ module ResponseObjects
       end
     end
 
+    class AffectedResources < ::OpenStruct
+      #records_affected, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
     class Authorization < ::OpenStruct
       #created_at, expires_at, hashed_token, id, note, scopes, token_last_eight, updated_at, 
       def initialize(hash)
@@ -450,7 +458,7 @@ module RequestParams
     end
 
     def tags=(val)
-      self.tags = val.split(',')
+      self.tags = val
     end
 
     def unformatted=(val)
@@ -1026,7 +1034,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   class KeysDeleteParams < ::OpenStruct
     def locale_id=(val)
       self.locale_id = val
@@ -1051,7 +1059,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysListParams < ::OpenStruct
@@ -1086,7 +1094,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysSearchParams < ::OpenStruct
@@ -1119,7 +1127,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysTagParams < ::OpenStruct
@@ -1132,11 +1140,11 @@ module RequestParams
     end
 
     def tags=(val)
-      self.tags = val.split(',')
+      self.tags = val
     end
 
     def validate
-      if self.tags == nil
+      if self.tags == nil || self.tags == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_tagParams\" not set")
       end
     end
@@ -1150,7 +1158,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysUntagParams < ::OpenStruct
@@ -1163,11 +1171,11 @@ module RequestParams
     end
 
     def tags=(val)
-      self.tags = val.split(',')
+      self.tags = val
     end
 
     def validate
-      if self.tags == nil
+      if self.tags == nil || self.tags == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_untagParams\" not set")
       end
     end
@@ -1297,7 +1305,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByKeyParams < ::OpenStruct
@@ -1326,7 +1334,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByLocaleParams < ::OpenStruct
@@ -1355,7 +1363,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsExcludeParams < ::OpenStruct
@@ -1384,7 +1392,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsIncludeParams < ::OpenStruct
@@ -1413,7 +1421,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsListParams < ::OpenStruct
@@ -1442,7 +1450,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsSearchParams < ::OpenStruct
@@ -1471,7 +1479,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsUnverifyParams < ::OpenStruct
@@ -1500,7 +1508,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21</code> for date range queries</li> </ul> Find more examples <a href="/api/v2/examples/">here</a>.
+  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsVerifyParams < ::OpenStruct
@@ -1556,7 +1564,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::AuthorizationCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::AuthorizationParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::AuthorizationParams")
         end
       end
@@ -1637,7 +1645,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::AuthorizationUpdateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::AuthorizationParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::AuthorizationParams")
         end
       end
@@ -1696,7 +1704,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::CommentCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::CommentParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentParams")
         end
       end
@@ -1867,7 +1875,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::CommentUpdateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::CommentParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentParams")
         end
       end
@@ -1928,7 +1936,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::ExcludeRuleCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::ExcludeRuleParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ExcludeRuleParams")
         end
       end
@@ -2015,7 +2023,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::ExcludeRuleUpdateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::ExcludeRuleParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ExcludeRuleParams")
         end
       end
@@ -2095,7 +2103,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::KeyCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::TranslationKeyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationKeyParams")
         end
       end
@@ -2240,7 +2248,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::KeyUpdateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::TranslationKeyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationKeyParams")
         end
       end
@@ -2326,6 +2334,7 @@ end
     #   Parameters of type PhraseApp::RequestParams::KeysDeleteParams
     #
     # == Returns:
+    #   PhraseApp::ResponseObjects::AffectedResources
     #   err
     def self.keys_delete(project_id, params)
       path = sprintf("/api/v2/projects/%s/keys", project_id)
@@ -2344,12 +2353,12 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
       
-      return err
+      return PhraseApp::ResponseObjects::AffectedResources.new(JSON.load(rc.body)), err
     end
   
     # List all keys for the given project. Alternatively you can POST requests to /search.
@@ -2433,6 +2442,7 @@ end
     #   Parameters of type PhraseApp::RequestParams::KeysTagParams
     #
     # == Returns:
+    #   PhraseApp::ResponseObjects::AffectedResources
     #   err
     def self.keys_tag(project_id, params)
       path = sprintf("/api/v2/projects/%s/keys/tag", project_id)
@@ -2451,12 +2461,12 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
       
-      return err
+      return PhraseApp::ResponseObjects::AffectedResources.new(JSON.load(rc.body)), err
     end
   
     # Removes specified tags from keys matching query.
@@ -2468,6 +2478,7 @@ end
     #   Parameters of type PhraseApp::RequestParams::KeysUntagParams
     #
     # == Returns:
+    #   PhraseApp::ResponseObjects::AffectedResources
     #   err
     def self.keys_untag(project_id, params)
       path = sprintf("/api/v2/projects/%s/keys/tag", project_id)
@@ -2486,12 +2497,12 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
       
-      return err
+      return PhraseApp::ResponseObjects::AffectedResources.new(JSON.load(rc.body)), err
     end
   
     # Create a new locale.
@@ -2511,7 +2522,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::LocaleCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::LocaleParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleParams")
         end
       end
@@ -2635,7 +2646,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::LocaleUpdateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::LocaleParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleParams")
         end
       end
@@ -2719,7 +2730,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::OrderCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::TranslationOrderParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationOrderParams")
         end
       end
@@ -2825,7 +2836,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::ProjectCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::ProjectParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectParams")
         end
       end
@@ -2906,7 +2917,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::ProjectUpdateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::ProjectParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectParams")
         end
       end
@@ -2984,7 +2995,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::StyleguideCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::StyleguideParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::StyleguideParams")
         end
       end
@@ -3071,7 +3082,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::StyleguideUpdateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::StyleguideParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::StyleguideParams")
         end
       end
@@ -3130,7 +3141,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::TagCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::TagParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TagParams")
         end
       end
@@ -3238,7 +3249,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::TranslationCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::TranslationParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationParams")
         end
       end
@@ -3629,7 +3640,7 @@ end
       post_body = nil
   
       if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::UploadCreateParams)
+        unless params.kind_of?(PhraseApp::RequestParams::LocaleFileImportParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleFileImportParams")
         end
       end

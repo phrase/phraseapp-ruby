@@ -118,9 +118,14 @@ name, description, tags, translations.<br> Also supports the following
 qualifiers in the query:<br> &lt;ul&gt; &lt;li&gt;<code>tags:XYZ</code> for
 tags on the translation&lt;/li&gt;
 &lt;li&gt;<code>unverified:{true|false}</code> for verification
-status&lt;/li&gt; &lt;li&gt;<code>updated_at{&gt;=|&lt;=}2013-02-21</code>
-for date range queries&lt;/li&gt; &lt;/ul&gt; Find more examples &lt;a
-href=“/api/v2/examples/”&gt;here&lt;/a&gt;.</p>
+status&lt;/li&gt;
+&lt;li&gt;<code>updated_at{&gt;=|&lt;=}2013-02-21T00:00:00Z</code> for date
+range queries&lt;/li&gt; &lt;/ul&gt; Please note that the argument is named
+<code>--query</code> when using the &lt;a href=“<a
+href="https://phraseapp.com/cli">phraseapp.com/cli</a>”
+target=“_blank”&gt;PhraseApp Client&lt;/a&gt;. &lt;br /&gt;&lt;br /&gt;
+Find more examples &lt;a
+href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
 </dd><dt>sort
 <dd>
 <p>Sort criteria. Can be one of: key_name, created_at, updated_at.</p>
@@ -260,12 +265,12 @@ href=“/api/v2/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1391
-1392
-1393</pre>
+1399
+1400
+1401</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1391</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1399</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_order='>order=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -290,12 +295,12 @@ href=“/api/v2/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1395
-1396
-1397</pre>
+1403
+1404
+1405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1395</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1403</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_q'>q</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -320,12 +325,12 @@ href=“/api/v2/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1399
-1400
-1401</pre>
+1407
+1408
+1409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1399</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1407</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sort='>sort=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -350,12 +355,12 @@ href=“/api/v2/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1403
-1404
-1405</pre>
+1411
+1412
+1413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1403</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1411</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
@@ -370,7 +375,7 @@ href=“/api/v2/examples/”&gt;here&lt;/a&gt;.</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Jul 23 16:30:49 2015 by
+  Generated on Mon Aug 10 11:56:09 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>
