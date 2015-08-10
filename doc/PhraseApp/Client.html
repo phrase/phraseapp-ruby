@@ -1837,7 +1837,7 @@ limitations on translations list.</p>
 <h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::AuthorizationCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::AuthorizationParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -2081,7 +2081,7 @@ working. API Path: /v2/authorizations/:id</p>
 <p>id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::AuthorizationUpdateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::AuthorizationParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -2252,7 +2252,7 @@ working. API Path: /v2/authorizations/:id</p>
 <p>key_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::CommentCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::CommentParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -2753,7 +2753,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::CommentUpdateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::CommentParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -2929,7 +2929,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>project_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::ExcludeRuleCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::ExcludeRuleParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -3184,7 +3184,7 @@ API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read</p>
 <p>id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::ExcludeRuleUpdateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::ExcludeRuleParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -3426,7 +3426,7 @@ API Path: /v2/formats</p>
 <p>project_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::KeyCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::TranslationKeyParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -3528,7 +3528,8 @@ API Path: /v2/formats</p>
 2178
 2179
 2180
-2181</pre>
+2181
+2182</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2100</span>
@@ -3576,17 +3577,18 @@ API Path: /v2/formats</p>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>plural</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>plural</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_remove_screenshot'>remove_screenshot</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>remove_screenshot</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_remove_screenshot'>remove_screenshot</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>remove_screenshot</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_remove_screenshot'>remove_screenshot</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_screenshot'>screenshot</span> <span class='op'>!=</span> <span class='kw'>nil</span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--</span><span class='embexpr_beg'>#{</span><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>MULTIPART_BOUNDARY</span><span class='embexpr_end'>}</span><span class='tstring_content'>\r\n</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Disposition: form-data; name=\&quot;screenshot\&quot;; filename=\&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_screenshot'>screenshot</span> <span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>\&quot;\r\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='comment'># file
+</span>    <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Disposition: form-data; name=\&quot;screenshot\&quot;; filename=\&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_screenshot'>screenshot</span> <span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>\&quot;\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Type: text/plain\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_screenshot'>screenshot</span><span class='rparen'>)</span>
@@ -3598,11 +3600,11 @@ API Path: /v2/formats</p>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_unformatted'>unformatted</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unformatted</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_unformatted'>unformatted</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unformatted</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_unformatted'>unformatted</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_xml_space_preserve'>xml_space_preserve</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xml_space_preserve</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_xml_space_preserve'>xml_space_preserve</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xml_space_preserve</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_xml_space_preserve'>xml_space_preserve</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   
@@ -3660,7 +3662,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2193
 2194
 2195
 2196
@@ -3672,10 +3673,11 @@ API Path: /v2/formats</p>
 2202
 2203
 2204
-2205</pre>
+2205
+2206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2193</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2194</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key_delete'>key_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3737,7 +3739,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2218
 2219
 2220
 2221
@@ -3749,10 +3750,11 @@ API Path: /v2/formats</p>
 2227
 2228
 2229
-2230</pre>
+2230
+2231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2218</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2219</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key_show'>key_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3795,7 +3797,7 @@ API Path: /v2/formats</p>
 <p>id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::KeyUpdateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::TranslationKeyParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -3816,7 +3818,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2245
 2246
 2247
 2248
@@ -3897,10 +3898,12 @@ API Path: /v2/formats</p>
 2323
 2324
 2325
-2326</pre>
+2326
+2327
+2328</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2245</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2246</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key_update'>key_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3945,17 +3948,18 @@ API Path: /v2/formats</p>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>plural</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>plural</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_remove_screenshot'>remove_screenshot</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>remove_screenshot</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_remove_screenshot'>remove_screenshot</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>remove_screenshot</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_remove_screenshot'>remove_screenshot</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_screenshot'>screenshot</span> <span class='op'>!=</span> <span class='kw'>nil</span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--</span><span class='embexpr_beg'>#{</span><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>MULTIPART_BOUNDARY</span><span class='embexpr_end'>}</span><span class='tstring_content'>\r\n</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Disposition: form-data; name=\&quot;screenshot\&quot;; filename=\&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_screenshot'>screenshot</span> <span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>\&quot;\r\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='comment'># file
+</span>    <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Disposition: form-data; name=\&quot;screenshot\&quot;; filename=\&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_screenshot'>screenshot</span> <span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>\&quot;\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Type: text/plain\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_screenshot'>screenshot</span><span class='rparen'>)</span>
@@ -3967,11 +3971,11 @@ API Path: /v2/formats</p>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_unformatted'>unformatted</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unformatted</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_unformatted'>unformatted</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unformatted</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_unformatted'>unformatted</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_xml_space_preserve'>xml_space_preserve</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xml_space_preserve</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_xml_space_preserve'>xml_space_preserve</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xml_space_preserve</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_xml_space_preserve'>xml_space_preserve</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   
@@ -4031,8 +4035,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2339
-2340
 2341
 2342
 2343
@@ -4054,10 +4056,12 @@ API Path: /v2/formats</p>
 2359
 2360
 2361
-2362</pre>
+2362
+2363
+2364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2339</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2341</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_delete'>keys_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4130,8 +4134,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2375
-2376
 2377
 2378
 2379
@@ -4153,10 +4155,12 @@ API Path: /v2/formats</p>
 2395
 2396
 2397
-2398</pre>
+2398
+2399
+2400</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2375</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2377</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_list'>keys_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4229,8 +4233,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2411
-2412
 2413
 2414
 2415
@@ -4252,10 +4254,12 @@ API Path: /v2/formats</p>
 2431
 2432
 2433
-2434</pre>
+2434
+2435
+2436</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2411</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2413</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_search'>keys_search</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys/search</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4328,8 +4332,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2447
-2448
 2449
 2450
 2451
@@ -4351,10 +4353,12 @@ API Path: /v2/formats</p>
 2467
 2468
 2469
-2470</pre>
+2470
+2471
+2472</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2447</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2449</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_tag'>keys_tag</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys/tag</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4427,8 +4431,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2483
-2484
 2485
 2486
 2487
@@ -4450,10 +4452,12 @@ API Path: /v2/formats</p>
 2503
 2504
 2505
-2506</pre>
+2506
+2507
+2508</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2483</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2485</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys_untag'>keys_untag</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys/tag</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4504,7 +4508,7 @@ API Path: /v2/formats</p>
 <p>project_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::LocaleCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::LocaleParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -4525,8 +4529,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2519
-2520
 2521
 2522
 2523
@@ -4548,10 +4550,12 @@ API Path: /v2/formats</p>
 2539
 2540
 2541
-2542</pre>
+2542
+2543
+2544</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2519</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2521</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_create'>locale_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/locales</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -4622,8 +4626,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2554
-2555
 2556
 2557
 2558
@@ -4634,10 +4636,12 @@ API Path: /v2/formats</p>
 2563
 2564
 2565
-2566</pre>
+2566
+2567
+2568</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2554</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2556</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_delete'>locale_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/locales/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -4701,8 +4705,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2580
-2581
 2582
 2583
 2584
@@ -4724,10 +4726,12 @@ API Path: /v2/formats</p>
 2600
 2601
 2602
-2603</pre>
+2603
+2604
+2605</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2580</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2582</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_download'>locale_download</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/locales/%s/download</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -4800,8 +4804,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2616
-2617
 2618
 2619
 2620
@@ -4812,10 +4814,12 @@ API Path: /v2/formats</p>
 2625
 2626
 2627
-2628</pre>
+2628
+2629
+2630</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2616</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2618</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_show'>locale_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/locales/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -4858,7 +4862,7 @@ API Path: /v2/formats</p>
 <p>id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::LocaleUpdateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::LocaleParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -4879,8 +4883,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2643
-2644
 2645
 2646
 2647
@@ -4902,10 +4904,12 @@ API Path: /v2/formats</p>
 2663
 2664
 2665
-2666</pre>
+2666
+2667
+2668</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2643</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2645</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_update'>locale_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/locales/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -4975,8 +4979,6 @@ API Path: /v2/formats</p>
       <pre class="lines">
 
 
-2677
-2678
 2679
 2680
 2681
@@ -4987,10 +4989,12 @@ API Path: /v2/formats</p>
 2686
 2687
 2688
-2689</pre>
+2689
+2690
+2691</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2677</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2679</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locales_list'>locales_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/locales</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -5053,8 +5057,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2702
-2703
 2704
 2705
 2706
@@ -5065,10 +5067,12 @@ constraints as for create. API Path:
 2711
 2712
 2713
-2714</pre>
+2714
+2715
+2716</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2702</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2704</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order_confirm'>order_confirm</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/orders/%s/confirm</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5109,7 +5113,7 @@ constraints as for create. API Path:
 <p>project_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::OrderCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::TranslationOrderParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -5130,8 +5134,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2727
-2728
 2729
 2730
 2731
@@ -5153,10 +5155,12 @@ constraints as for create. API Path:
 2747
 2748
 2749
-2750</pre>
+2750
+2751
+2752</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2727</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2729</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order_create'>order_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/orders</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -5228,8 +5232,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2762
-2763
 2764
 2765
 2766
@@ -5240,10 +5242,12 @@ constraints as for create. API Path:
 2771
 2772
 2773
-2774</pre>
+2774
+2775
+2776</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2762</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2764</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order_delete'>order_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/orders/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5305,8 +5309,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2787
-2788
 2789
 2790
 2791
@@ -5317,10 +5319,12 @@ constraints as for create. API Path:
 2796
 2797
 2798
-2799</pre>
+2799
+2800
+2801</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2787</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2789</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order_show'>order_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/orders/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5379,8 +5383,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2810
-2811
 2812
 2813
 2814
@@ -5391,10 +5393,12 @@ constraints as for create. API Path:
 2819
 2820
 2821
-2822</pre>
+2822
+2823
+2824</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2810</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2812</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_orders_list'>orders_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/orders</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -5431,7 +5435,7 @@ constraints as for create. API Path:
 <h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::ProjectCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::ProjectParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -5452,8 +5456,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2833
-2834
 2835
 2836
 2837
@@ -5475,10 +5477,12 @@ constraints as for create. API Path:
 2853
 2854
 2855
-2856</pre>
+2856
+2857
+2858</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2833</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2835</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_create'>project_create</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -5546,8 +5550,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2866
-2867
 2868
 2869
 2870
@@ -5558,10 +5560,12 @@ constraints as for create. API Path:
 2875
 2876
 2877
-2878</pre>
+2878
+2879
+2880</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2866</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2868</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_delete'>project_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5619,8 +5623,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2889
-2890
 2891
 2892
 2893
@@ -5631,10 +5633,12 @@ constraints as for create. API Path:
 2898
 2899
 2900
-2901</pre>
+2901
+2902
+2903</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2889</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2891</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_show'>project_show</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5674,7 +5678,7 @@ constraints as for create. API Path:
 <p>id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::ProjectUpdateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::ProjectParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -5695,8 +5699,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2914
-2915
 2916
 2917
 2918
@@ -5718,10 +5720,12 @@ constraints as for create. API Path:
 2934
 2935
 2936
-2937</pre>
+2937
+2938
+2939</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2914</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2916</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_update'>project_update</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -5786,8 +5790,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2946
-2947
 2948
 2949
 2950
@@ -5798,10 +5800,12 @@ constraints as for create. API Path:
 2955
 2956
 2957
-2958</pre>
+2958
+2959
+2960</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2946</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2948</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_projects_list'>projects_list</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -5855,8 +5859,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2967
-2968
 2969
 2970
 2971
@@ -5867,10 +5869,12 @@ constraints as for create. API Path:
 2976
 2977
 2978
-2979</pre>
+2979
+2980
+2981</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2967</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2969</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_user'>show_user</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/user</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -5910,7 +5914,7 @@ constraints as for create. API Path:
 <p>project_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::StyleguideCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::StyleguideParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -5931,8 +5935,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-2992
-2993
 2994
 2995
 2996
@@ -5954,10 +5956,12 @@ constraints as for create. API Path:
 3012
 3013
 3014
-3015</pre>
+3015
+3016
+3017</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2992</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2994</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguide_create'>styleguide_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/styleguides</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6029,8 +6033,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-3027
-3028
 3029
 3030
 3031
@@ -6041,10 +6043,12 @@ constraints as for create. API Path:
 3036
 3037
 3038
-3039</pre>
+3039
+3040
+3041</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3027</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3029</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguide_delete'>styleguide_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/styleguides/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6106,8 +6110,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-3052
-3053
 3054
 3055
 3056
@@ -6118,10 +6120,12 @@ constraints as for create. API Path:
 3061
 3062
 3063
-3064</pre>
+3064
+3065
+3066</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3052</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3054</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguide_show'>styleguide_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/styleguides/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6165,7 +6169,7 @@ constraints as for create. API Path:
 <p>id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::StyleguideUpdateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::StyleguideParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -6186,8 +6190,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-3079
-3080
 3081
 3082
 3083
@@ -6209,10 +6211,12 @@ constraints as for create. API Path:
 3099
 3100
 3101
-3102</pre>
+3102
+3103
+3104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3079</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3081</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguide_update'>styleguide_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/styleguides/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6282,8 +6286,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-3113
-3114
 3115
 3116
 3117
@@ -6294,10 +6296,12 @@ constraints as for create. API Path:
 3122
 3123
 3124
-3125</pre>
+3125
+3126
+3127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3113</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3115</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_styleguides_list'>styleguides_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/styleguides</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6337,7 +6341,7 @@ constraints as for create. API Path:
 <p>project_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::TagCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::TagParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -6358,8 +6362,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-3138
-3139
 3140
 3141
 3142
@@ -6381,10 +6383,12 @@ constraints as for create. API Path:
 3158
 3159
 3160
-3161</pre>
+3161
+3162
+3163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3138</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3140</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tag_create'>tag_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6455,8 +6459,6 @@ constraints as for create. API Path:
       <pre class="lines">
 
 
-3173
-3174
 3175
 3176
 3177
@@ -6467,10 +6469,12 @@ constraints as for create. API Path:
 3182
 3183
 3184
-3185</pre>
+3185
+3186
+3187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3173</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3175</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tag_delete'>tag_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/tags/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -6532,8 +6536,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3198
-3199
 3200
 3201
 3202
@@ -6544,10 +6546,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3207
 3208
 3209
-3210</pre>
+3210
+3211
+3212</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3198</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3200</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tag_show'>tag_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/tags/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -6606,8 +6610,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3221
-3222
 3223
 3224
 3225
@@ -6618,10 +6620,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3230
 3231
 3232
-3233</pre>
+3233
+3234
+3235</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3221</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3223</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tags_list'>tags_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6661,7 +6665,7 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 <p>project_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::TranslationCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::TranslationParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -6682,8 +6686,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3246
-3247
 3248
 3249
 3250
@@ -6705,10 +6707,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3266
 3267
 3268
-3269</pre>
+3269
+3270
+3271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3246</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3248</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translation_create'>translation_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -6781,8 +6785,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3282
-3283
 3284
 3285
 3286
@@ -6793,10 +6795,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3291
 3292
 3293
-3294</pre>
+3294
+3295
+3296</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3282</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3284</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translation_show'>translation_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6861,8 +6865,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3309
-3310
 3311
 3312
 3313
@@ -6884,10 +6886,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3329
 3330
 3331
-3332</pre>
+3332
+3333
+3334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3309</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3311</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translation_update'>translation_update</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -6963,8 +6967,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3347
-3348
 3349
 3350
 3351
@@ -6986,10 +6988,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3367
 3368
 3369
-3370</pre>
+3370
+3371
+3372</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3347</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3349</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_by_key'>translations_by_key</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/keys/%s/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_id'>key_id</span><span class='rparen'>)</span>
@@ -7065,8 +7069,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3385
-3386
 3387
 3388
 3389
@@ -7088,10 +7090,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3405
 3406
 3407
-3408</pre>
+3408
+3409
+3410</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3385</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3387</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_by_locale'>translations_by_locale</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_locale_id'>locale_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/locales/%s/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_locale_id'>locale_id</span><span class='rparen'>)</span>
@@ -7164,8 +7168,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3421
-3422
 3423
 3424
 3425
@@ -7187,10 +7189,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3441
 3442
 3443
-3444</pre>
+3444
+3445
+3446</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3421</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3423</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_exclude'>translations_exclude</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/exclude</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7263,8 +7267,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3457
-3458
 3459
 3460
 3461
@@ -7286,10 +7288,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3477
 3478
 3479
-3480</pre>
+3480
+3481
+3482</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3457</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3459</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_include'>translations_include</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/include</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7362,8 +7366,6 @@ API Path: /v2/projects/:project_id/tags/:name</p>
       <pre class="lines">
 
 
-3493
-3494
 3495
 3496
 3497
@@ -7385,10 +7387,12 @@ API Path: /v2/projects/:project_id/tags/:name</p>
 3513
 3514
 3515
-3516</pre>
+3516
+3517
+3518</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3493</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3495</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_list'>translations_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7462,8 +7466,6 @@ limitations on translations list. API Path:
       <pre class="lines">
 
 
-3529
-3530
 3531
 3532
 3533
@@ -7485,10 +7487,12 @@ limitations on translations list. API Path:
 3549
 3550
 3551
-3552</pre>
+3552
+3553
+3554</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3529</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3531</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_search'>translations_search</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/search</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7561,8 +7565,6 @@ limitations on translations list. API Path:
       <pre class="lines">
 
 
-3565
-3566
 3567
 3568
 3569
@@ -7584,10 +7586,12 @@ limitations on translations list. API Path:
 3585
 3586
 3587
-3588</pre>
+3588
+3589
+3590</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3565</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3567</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_unverify'>translations_unverify</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/unverify</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7660,8 +7664,6 @@ limitations on translations list. API Path:
       <pre class="lines">
 
 
-3601
-3602
 3603
 3604
 3605
@@ -7683,10 +7685,12 @@ limitations on translations list. API Path:
 3621
 3622
 3623
-3624</pre>
+3624
+3625
+3626</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3601</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3603</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_translations_verify'>translations_verify</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/verify</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7738,7 +7742,7 @@ API Path: /v2/projects/:project_id/uploads</p>
 <p>project_id</p>
 </dd><dt>params
 <dd>
-<p>Parameters of type PhraseApp::RequestParams::UploadCreateParams</p>
+<p>Parameters of type PhraseApp::RequestParams::LocaleFileImportParams</p>
 </dd></dl>
 
 <h2 id="label-Returns-3A">Returns:</h2>
@@ -7759,8 +7763,6 @@ API Path: /v2/projects/:project_id/uploads</p>
       <pre class="lines">
 
 
-3637
-3638
 3639
 3640
 3641
@@ -7822,10 +7824,13 @@ API Path: /v2/projects/:project_id/uploads</p>
 3697
 3698
 3699
-3700</pre>
+3700
+3701
+3702
+3703</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3637</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3639</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_upload_create'>upload_create</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/uploads</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
@@ -7838,13 +7843,14 @@ API Path: /v2/projects/:project_id/uploads</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_convert_emoji'>convert_emoji</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>convert_emoji</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_convert_emoji'>convert_emoji</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>convert_emoji</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_convert_emoji'>convert_emoji</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='op'>!=</span> <span class='kw'>nil</span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--</span><span class='embexpr_beg'>#{</span><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>MULTIPART_BOUNDARY</span><span class='embexpr_end'>}</span><span class='tstring_content'>\r\n</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Disposition: form-data; name=\&quot;file\&quot;; filename=\&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>\&quot;\r\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='comment'># file
+</span>    <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Disposition: form-data; name=\&quot;file\&quot;; filename=\&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>\&quot;\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Type: text/plain\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\r\n</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_post_body'>post_body</span> <span class='op'>&lt;&lt;</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span>
@@ -7866,11 +7872,11 @@ API Path: /v2/projects/:project_id/uploads</p>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_skip_unverification'>skip_unverification</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>skip_unverification</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_skip_unverification'>skip_unverification</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>skip_unverification</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_skip_unverification'>skip_unverification</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_skip_upload_tags'>skip_upload_tags</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>skip_upload_tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_skip_upload_tags'>skip_upload_tags</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>skip_upload_tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_skip_upload_tags'>skip_upload_tags</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_tags'>tags</span> <span class='op'>!=</span> <span class='kw'>nil</span>
@@ -7878,7 +7884,7 @@ API Path: /v2/projects/:project_id/uploads</p>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_update_translations'>update_translations</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_translations</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_update_translations'>update_translations</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_data_hash'>data_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_translations</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_update_translations'>update_translations</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   
@@ -7938,9 +7944,6 @@ API Path: /v2/projects/:project_id/uploads</p>
       <pre class="lines">
 
 
-3713
-3714
-3715
 3716
 3717
 3718
@@ -7950,10 +7953,13 @@ API Path: /v2/projects/:project_id/uploads</p>
 3722
 3723
 3724
-3725</pre>
+3725
+3726
+3727
+3728</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3713</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3716</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_upload_show'>upload_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/uploads/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -8018,9 +8024,6 @@ API Path: /v2/projects/:project_id/uploads</p>
       <pre class="lines">
 
 
-3740
-3741
-3742
 3743
 3744
 3745
@@ -8030,10 +8033,13 @@ API Path: /v2/projects/:project_id/uploads</p>
 3749
 3750
 3751
-3752</pre>
+3752
+3753
+3754
+3755</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3740</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3743</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_version_show'>version_show</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_translation_id'>translation_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/%s/versions/%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_translation_id'>translation_id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -8095,9 +8101,6 @@ API Path: /v2/projects/:project_id/uploads</p>
       <pre class="lines">
 
 
-3765
-3766
-3767
 3768
 3769
 3770
@@ -8107,10 +8110,13 @@ API Path: /v2/projects/:project_id/uploads</p>
 3774
 3775
 3776
-3777</pre>
+3777
+3778
+3779
+3780</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3765</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 3768</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_versions_list'>versions_list</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_translation_id'>translation_id</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/projects/%s/translations/%s/versions</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_translation_id'>translation_id</span><span class='rparen'>)</span>
@@ -8135,7 +8141,7 @@ API Path: /v2/projects/:project_id/uploads</p>
 </div>
 
     <div id="footer">
-  Generated on Mon Aug 10 11:56:10 2015 by
+  Generated on Tue Aug 11 00:34:24 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>

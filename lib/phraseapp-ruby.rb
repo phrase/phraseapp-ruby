@@ -434,9 +434,9 @@ module RequestParams
     end
 
     def plural=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.plural = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.plural = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -444,9 +444,9 @@ module RequestParams
     end
 
     def remove_screenshot=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.remove_screenshot = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.remove_screenshot = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -462,9 +462,9 @@ module RequestParams
     end
 
     def unformatted=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.unformatted = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.unformatted = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -472,9 +472,9 @@ module RequestParams
     end
 
     def xml_space_preserve=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.xml_space_preserve = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.xml_space_preserve = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -511,9 +511,9 @@ module RequestParams
     end
 
     def default=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.default = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.default = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -521,9 +521,9 @@ module RequestParams
     end
 
     def main=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.main = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.main = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -535,9 +535,9 @@ module RequestParams
     end
 
     def rtl=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.rtl = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.rtl = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -594,9 +594,9 @@ module RequestParams
     end
 
     def include_untranslated_keys=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.include_untranslated_keys = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.include_untranslated_keys = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -604,9 +604,9 @@ module RequestParams
     end
 
     def include_unverified_translations=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.include_unverified_translations = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.include_unverified_translations = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -622,9 +622,9 @@ module RequestParams
     end
 
     def priority=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.priority = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.priority = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -632,9 +632,9 @@ module RequestParams
     end
 
     def quality=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.quality = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.quality = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -662,9 +662,9 @@ module RequestParams
     end
 
     def unverify_translations_upon_delivery=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.unverify_translations_upon_delivery = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.unverify_translations_upon_delivery = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -701,9 +701,9 @@ module RequestParams
     end
 
     def shares_translation_memory=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.shares_translation_memory = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.shares_translation_memory = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -850,9 +850,9 @@ module RequestParams
     end
 
     def excluded=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.excluded = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.excluded = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -872,9 +872,9 @@ module RequestParams
     end
 
     def unverified=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.unverified = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.unverified = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -917,9 +917,9 @@ module RequestParams
   #   Indicates whether existing translations should be updated with the file content.
   class LocaleFileImportParams < ::OpenStruct
     def convert_emoji=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.convert_emoji = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.convert_emoji = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -943,9 +943,9 @@ module RequestParams
     end
 
     def skip_unverification=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.skip_unverification = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.skip_unverification = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -953,9 +953,9 @@ module RequestParams
     end
 
     def skip_upload_tags=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.skip_upload_tags = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.skip_upload_tags = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -967,9 +967,9 @@ module RequestParams
     end
 
     def update_translations=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.update_translations = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.update_translations = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -1200,9 +1200,9 @@ module RequestParams
   #   Limit result to keys tagged with the given tag (identified by its name).
   class LocaleDownloadParams < ::OpenStruct
     def convert_emoji=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.convert_emoji = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.convert_emoji = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -1218,9 +1218,9 @@ module RequestParams
     end
 
     def include_empty_translations=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.include_empty_translations = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.include_empty_translations = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -1228,9 +1228,9 @@ module RequestParams
     end
 
     def keep_notranslate_tags=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.keep_notranslate_tags = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.keep_notranslate_tags = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -1267,9 +1267,9 @@ module RequestParams
     end
 
     def excluded=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.excluded = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.excluded = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -1281,9 +1281,9 @@ module RequestParams
     end
 
     def unverified=(val)
-      if val == "true"
+      if val.is_a?(TrueClass)
         self.unverified = true
-      elsif val == "false" #ignore
+      elsif val.is_a?(FalseClass) #ignore
         self.unverified = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
@@ -1553,7 +1553,7 @@ end
     # API Path: /v2/authorizations
     # == Parameters:
     # params::
-    #   Parameters of type PhraseApp::RequestParams::AuthorizationCreateParams
+    #   Parameters of type PhraseApp::RequestParams::AuthorizationParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::AuthorizationWithToken
@@ -1634,7 +1634,7 @@ end
     # id::
     #   id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::AuthorizationUpdateParams
+    #   Parameters of type PhraseApp::RequestParams::AuthorizationParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Authorization
@@ -1693,7 +1693,7 @@ end
     # key_id::
     #   key_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::CommentCreateParams
+    #   Parameters of type PhraseApp::RequestParams::CommentParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Comment
@@ -1864,7 +1864,7 @@ end
     # id::
     #   id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::CommentUpdateParams
+    #   Parameters of type PhraseApp::RequestParams::CommentParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Comment
@@ -1925,7 +1925,7 @@ end
     # project_id::
     #   project_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::ExcludeRuleCreateParams
+    #   Parameters of type PhraseApp::RequestParams::ExcludeRuleParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::BlacklistedKey
@@ -2012,7 +2012,7 @@ end
     # id::
     #   id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::ExcludeRuleUpdateParams
+    #   Parameters of type PhraseApp::RequestParams::ExcludeRuleParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::BlacklistedKey
@@ -2092,7 +2092,7 @@ end
     # project_id::
     #   project_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::KeyCreateParams
+    #   Parameters of type PhraseApp::RequestParams::TranslationKeyParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
@@ -2140,11 +2140,11 @@ end
       end
 
       if params.plural != nil
-        data_hash["plural"] = (params.plural == "true")
+        data_hash["plural"] = (params.plural == true)
       end
 
       if params.remove_screenshot != nil
-        data_hash["remove_screenshot"] = (params.remove_screenshot == "true")
+        data_hash["remove_screenshot"] = (params.remove_screenshot == true)
       end
 
       if params.screenshot != nil
@@ -2162,11 +2162,11 @@ end
       end
 
       if params.unformatted != nil
-        data_hash["unformatted"] = (params.unformatted == "true")
+        data_hash["unformatted"] = (params.unformatted == true)
       end
 
       if params.xml_space_preserve != nil
-        data_hash["xml_space_preserve"] = (params.xml_space_preserve == "true")
+        data_hash["xml_space_preserve"] = (params.xml_space_preserve == true)
       end
 
   
@@ -2237,7 +2237,7 @@ end
     # id::
     #   id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::KeyUpdateParams
+    #   Parameters of type PhraseApp::RequestParams::TranslationKeyParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
@@ -2285,11 +2285,11 @@ end
       end
 
       if params.plural != nil
-        data_hash["plural"] = (params.plural == "true")
+        data_hash["plural"] = (params.plural == true)
       end
 
       if params.remove_screenshot != nil
-        data_hash["remove_screenshot"] = (params.remove_screenshot == "true")
+        data_hash["remove_screenshot"] = (params.remove_screenshot == true)
       end
 
       if params.screenshot != nil
@@ -2307,11 +2307,11 @@ end
       end
 
       if params.unformatted != nil
-        data_hash["unformatted"] = (params.unformatted == "true")
+        data_hash["unformatted"] = (params.unformatted == true)
       end
 
       if params.xml_space_preserve != nil
-        data_hash["xml_space_preserve"] = (params.xml_space_preserve == "true")
+        data_hash["xml_space_preserve"] = (params.xml_space_preserve == true)
       end
 
   
@@ -2511,7 +2511,7 @@ end
     # project_id::
     #   project_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::LocaleCreateParams
+    #   Parameters of type PhraseApp::RequestParams::LocaleParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleDetails
@@ -2635,7 +2635,7 @@ end
     # id::
     #   id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::LocaleUpdateParams
+    #   Parameters of type PhraseApp::RequestParams::LocaleParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleDetails
@@ -2719,7 +2719,7 @@ end
     # project_id::
     #   project_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::OrderCreateParams
+    #   Parameters of type PhraseApp::RequestParams::TranslationOrderParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationOrder
@@ -2825,7 +2825,7 @@ end
     # API Path: /v2/projects
     # == Parameters:
     # params::
-    #   Parameters of type PhraseApp::RequestParams::ProjectCreateParams
+    #   Parameters of type PhraseApp::RequestParams::ProjectParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::ProjectDetails
@@ -2906,7 +2906,7 @@ end
     # id::
     #   id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::ProjectUpdateParams
+    #   Parameters of type PhraseApp::RequestParams::ProjectParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::ProjectDetails
@@ -2984,7 +2984,7 @@ end
     # project_id::
     #   project_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::StyleguideCreateParams
+    #   Parameters of type PhraseApp::RequestParams::StyleguideParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::StyleguideDetails
@@ -3071,7 +3071,7 @@ end
     # id::
     #   id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::StyleguideUpdateParams
+    #   Parameters of type PhraseApp::RequestParams::StyleguideParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::StyleguideDetails
@@ -3130,7 +3130,7 @@ end
     # project_id::
     #   project_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::TagCreateParams
+    #   Parameters of type PhraseApp::RequestParams::TagParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TagWithStats
@@ -3238,7 +3238,7 @@ end
     # project_id::
     #   project_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::TranslationCreateParams
+    #   Parameters of type PhraseApp::RequestParams::TranslationParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationDetails
@@ -3629,7 +3629,7 @@ end
     # project_id::
     #   project_id
     # params::
-    #   Parameters of type PhraseApp::RequestParams::UploadCreateParams
+    #   Parameters of type PhraseApp::RequestParams::LocaleFileImportParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleFileImportWithSummary
@@ -3645,7 +3645,7 @@ end
         end
       end
       if params.convert_emoji != nil
-        data_hash["convert_emoji"] = (params.convert_emoji == "true")
+        data_hash["convert_emoji"] = (params.convert_emoji == true)
       end
 
       if params.file != nil
@@ -3673,11 +3673,11 @@ end
       end
 
       if params.skip_unverification != nil
-        data_hash["skip_unverification"] = (params.skip_unverification == "true")
+        data_hash["skip_unverification"] = (params.skip_unverification == true)
       end
 
       if params.skip_upload_tags != nil
-        data_hash["skip_upload_tags"] = (params.skip_upload_tags == "true")
+        data_hash["skip_upload_tags"] = (params.skip_upload_tags == true)
       end
 
       if params.tags != nil
@@ -3685,7 +3685,7 @@ end
       end
 
       if params.update_translations != nil
-        data_hash["update_translations"] = (params.update_translations == "true")
+        data_hash["update_translations"] = (params.update_translations == true)
       end
 
   
