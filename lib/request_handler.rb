@@ -59,14 +59,17 @@ module PhraseApp
   def self.multipart(hash)
     hash.inject("") do |res, (k, v)|
       res << "--#{PhraseApp::MULTIPART_BOUNDARY}\r\n"
-      if v.is_a?(Array)
-        res << "Content-Disposition: form-data; name=\"#{k}[]\"\r\n"
-      else
-        res << "Content-Disposition: form-data; name=\"#{k}\"\r\n"
-      end
+      res << "Content-Disposition: form-data; name=\"#{k}\"\r\n"
       # res << "Content-Type: #{headers["Content-Type"]}\r\n" if headers["Content-Type"]
       res << "\r\n"
-      res << "#{v}\r\n"
+      if v.is_a?(Array)
+        v.each do |vv|
+          res << vv+","
+        end
+        res << "\r\n"
+      else
+        res << "#{v}\r\n"
+      end
       res
     end
   end

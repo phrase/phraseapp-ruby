@@ -395,7 +395,7 @@ module RequestParams
   # screenshot::
   #   Screenshot/image for the key.
   # tags::
-  #   List of tags (identified by their name) to be associated with the key.
+  #   List of tags separated by comma to be associated with the key.
   # unformatted::
   #   Indicates whether the key should be exported as "unformatted". Supported by Android XML and other formats.
   # xml_space_preserve::
@@ -903,8 +903,6 @@ module RequestParams
   #   File to be imported
   # file_format::
   #   File format. Auto-detected when possible and not specified.
-  # format_options::
-  #   Additional options available for specific formats. See our format guide for complete list.
   # locale_id::
   #   Locale of the file's content. Can be the name or public id of the locale. Preferred is the public id.
   # skip_unverification::
@@ -912,7 +910,7 @@ module RequestParams
   # skip_upload_tags::
   #   Indicates whether the upload should not create upload tags.
   # tags::
-  #   Tags to be assigned to the new keys, contained in the upload.
+  #   List of tags separated by comma to be associated with the new keys contained in the upload.
   # update_translations::
   #   Indicates whether existing translations should be updated with the file content.
   class LocaleFileImportParams < ::OpenStruct
@@ -932,10 +930,6 @@ module RequestParams
 
     def file_format=(val)
       self.file_format = val
-    end
-
-    def format_options=(val)
-      self.format_options = JSON.load(val)
     end
 
     def locale_id=(val)
@@ -963,7 +957,7 @@ module RequestParams
     end
 
     def tags=(val)
-      self.tags = val.split(',')
+      self.tags = val
     end
 
     def update_translations=(val)
@@ -1191,7 +1185,7 @@ module RequestParams
   # file_format::
   #   File format name. See the format guide for all supported file formats.
   # format_options::
-  #   Additional options available for specific formats. See our format guide for complete list. [EXAMPLE]
+  #   Additional options available for specific formats. Currently only supports option escape_single_quotes: true/false for properties format.
   # include_empty_translations::
   #   Indicates whether keys without translations should be included in the output as well.
   # keep_notranslate_tags::
@@ -2397,7 +2391,7 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::TranslationKey.new(item) }, err
     end
   
-    # List all keys for the given project matching query.
+    # Search keys for the given project matching query.
     # API Path: /v2/projects/:project_id/keys/search
     # == Parameters:
     # project_id::
@@ -3660,12 +3654,6 @@ end
 
       if params.file_format != nil
         data_hash["file_format"] = params.file_format
-      end
-
-      if params.format_options != nil
-        params.format_options.each do |key, value|
-          data_hash["format_options"][key] = value
-        end
       end
 
       if params.locale_id != nil
