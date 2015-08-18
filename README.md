@@ -57,14 +57,13 @@ The actions are generated automatically from our API specification, so once you 
 
 ## OpenSSL
 
-Please note that outdated certificates or old versions of OpenSSL may cause connection issues. We recommend using OpenSSL 1.0.2d or later. If you experience OpenSSL-related errors, try the following. 
+Please note that outdated certificates or old versions of OpenSSL may cause connection issues, especially on Mac OSX. We recommend using Ruby 2.2.2 with OpenSSL 1.0.2d or later. If you experience OpenSSL-related errors, try the following.
 
 Upgrade OpenSSL using Homebrew:
 
 ```shell
 $ brew upgrade openssl
 $ brew install openssl
-$ brew install curl-ca-bundle     # optional: installs trusted CA root certs
 ```
 
 If you are using RVM, also run:
