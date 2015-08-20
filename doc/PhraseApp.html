@@ -111,7 +111,7 @@
         <dt id="VERSION-constant" class="">VERSION =
           
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1.0.21</span><span class='tstring_end'>&#39;</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1.1.0</span><span class='tstring_end'>&#39;</span></span></pre></dd>
       
         <dt id="MULTIPART_BOUNDARY-constant" class="">MULTIPART_BOUNDARY =
           
@@ -187,6 +187,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#http_send-class_method" title="http_send (class method)">+ (Object) <strong>http_send</strong>(credentials, req, status) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#is_a_date%3F-class_method" title="is_a_date? (class method)">+ (Boolean) <strong>is_a_date?</strong>(str) </a>
     
 
@@ -231,7 +253,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#send-class_method" title="send (class method)">+ (Object) <strong>send</strong>(req, status) </a>
+      <a href="#send_request-class_method" title="send_request (class method)">+ (Object) <strong>send_request</strong>(credentials, method, path, ctype, data, status) </a>
     
 
     
@@ -253,29 +275,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#send_request-class_method" title="send_request (class method)">+ (Object) <strong>send_request</strong>(method, path, ctype, data, status) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#send_request_paginated-class_method" title="send_request_paginated (class method)">+ (Object) <strong>send_request_paginated</strong>(method, path_with_query, ctype, body, status, page, per_page) </a>
+      <a href="#send_request_paginated-class_method" title="send_request_paginated (class method)">+ (Object) <strong>send_request_paginated</strong>(credentials, method, path_with_query, ctype, body, status, page, per_page) </a>
     
 
     
@@ -356,6 +356,7 @@
       <pre class="lines">
 
 
+157
 158
 159
 160
@@ -379,11 +380,10 @@
 178
 179
 180
-181
-182</pre>
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 158</span>
+      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_handleResponseStatus'>handleResponseStatus</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_expectedStatus'>expectedStatus</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_resp'>resp</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
@@ -409,6 +409,110 @@
     <span class='kw'>else</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unexpected status code (</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_resp'>resp</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_content'>) received; expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_expectedStatus'>expectedStatus</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="http_send-class_method">
+  
+    + (<tt>Object</tt>) <strong>http_send</strong>(credentials, req, status) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_http_send'>http_send</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_authenticate'>authenticate</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>!=</span> <span class='kw'>nil</span>
+    <span class='kw'>return</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_req'>req</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User-Agent</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>API_CLIENT_IDENTIFIER</span>
+  <span class='id identifier rubyid_uri'>uri</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_host'>host</span><span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>uri:</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_http'>http</span> <span class='op'>=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_host'>host</span><span class='comma'>,</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_port'>port</span><span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>URI</span><span class='op'>::</span><span class='const'>HTTPS</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_use_ssl'>use_ssl</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_skip_ssl_verification'>skip_ssl_verification</span>
+      <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_verify_mode'>verify_mode</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>SSL</span><span class='op'>::</span><span class='const'>VERIFY_NONE</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_verify_mode'>verify_mode</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>SSL</span><span class='op'>::</span><span class='const'>VERIFY_PEER</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>method:</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_req'>req</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path:</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_req'>req</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>body:</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_req'>req</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-------</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_resp'>resp</span> <span class='op'>=</span> <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='rparen'>)</span>
+
+	<span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_handleResponseStatus'>handleResponseStatus</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -530,115 +634,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="send-class_method">
-  
-    + (<tt>Object</tt>) <strong>send</strong>(req, status) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 116</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_authenticate'>authenticate</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='kw'>return</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span>
-  <span class='kw'>end</span>
-
-  <span class='id identifier rubyid_req'>req</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User-Agent</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>API_CLIENT_IDENTIFIER</span>
-
-  <span class='id identifier rubyid_uri'>uri</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_host'>host</span><span class='rparen'>)</span>
-
-  <span class='kw'>if</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>uri:</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
-  <span class='kw'>end</span>
-
-  <span class='id identifier rubyid_http'>http</span> <span class='op'>=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_host'>host</span><span class='comma'>,</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_port'>port</span><span class='rparen'>)</span>
-
-  <span class='kw'>if</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>URI</span><span class='op'>::</span><span class='const'>HTTPS</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_use_ssl'>use_ssl</span> <span class='op'>=</span> <span class='kw'>true</span>
-    <span class='kw'>if</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='id identifier rubyid_skip_ssl_verification'>skip_ssl_verification</span>
-      <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_verify_mode'>verify_mode</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>SSL</span><span class='op'>::</span><span class='const'>VERIFY_NONE</span>
-    <span class='kw'>else</span>
-      <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_verify_mode'>verify_mode</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>SSL</span><span class='op'>::</span><span class='const'>VERIFY_PEER</span>
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
-
-  <span class='kw'>if</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>method:</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_req'>req</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path:</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_req'>req</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>body:</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_req'>req</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-------</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-  <span class='id identifier rubyid_resp'>resp</span> <span class='op'>=</span> <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='rparen'>)</span>
-
-	<span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_handleResponseStatus'>handleResponseStatus</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
-
-  <span class='kw'>return</span> <span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
   <h3 class="signature " id="send_request-class_method">
   
-    + (<tt>Object</tt>) <strong>send_request</strong>(method, path, ctype, data, status) 
+    + (<tt>Object</tt>) <strong>send_request</strong>(credentials, method, path, ctype, data, status) 
   
 
   
@@ -679,14 +677,14 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 90</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send_request'>send_request</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_ctype'>ctype</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send_request'>send_request</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_ctype'>ctype</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTPGenericRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span>
       <span class='const'>Module</span><span class='period'>.</span><span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Net::HTTP::</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_capitalize'>capitalize</span><span class='embexpr_end'>}</span><span class='tstring_content'>::REQUEST_HAS_BODY</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
       <span class='const'>Module</span><span class='period'>.</span><span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Net::HTTP::</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_capitalize'>capitalize</span><span class='embexpr_end'>}</span><span class='tstring_content'>::RESPONSE_HAS_BODY</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
       <span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
 
 
-  <span class='kw'>if</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span>
     <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-------</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>data:</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
@@ -699,7 +697,7 @@
     <span class='id identifier rubyid_req'>req</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Content-Type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_ctype'>ctype</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_http_send'>http_send</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
 
 
   <span class='kw'>return</span> <span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span>
@@ -712,7 +710,7 @@
       <div class="method_details ">
   <h3 class="signature " id="send_request_paginated-class_method">
   
-    + (<tt>Object</tt>) <strong>send_request_paginated</strong>(method, path_with_query, ctype, body, status, page, per_page) 
+    + (<tt>Object</tt>) <strong>send_request_paginated</strong>(credentials, method, path_with_query, ctype, body, status, page, per_page) 
   
 
   
@@ -740,7 +738,7 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 77</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send_request_paginated'>send_request_paginated</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_path_with_query'>path_with_query</span><span class='comma'>,</span> <span class='id identifier rubyid_ctype'>ctype</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send_request_paginated'>send_request_paginated</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_path_with_query'>path_with_query</span><span class='comma'>,</span> <span class='id identifier rubyid_ctype'>ctype</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_uri'>uri</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_path_with_query'>path_with_query</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='kw'>then</span> <span class='const'>CGI</span><span class='op'>::</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='rparen'>)</span> <span class='kw'>else</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='kw'>end</span>
@@ -750,7 +748,7 @@
   <span class='id identifier rubyid_query_str'>query_str</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_query_str'>query_str</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>?</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
-  <span class='kw'>return</span> <span class='id identifier rubyid_send_request'>send_request</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_ctype'>ctype</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_send_request'>send_request</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_ctype'>ctype</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -762,7 +760,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Aug 12 15:40:13 2015 by
+  Generated on Thu Aug 20 17:12:32 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>

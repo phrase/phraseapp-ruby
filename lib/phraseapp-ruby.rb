@@ -73,14 +73,6 @@ module ResponseObjects
       end
     end
 
-    class ExcludeRule < ::OpenStruct
-      #created_at, id, name, updated_at, 
-      def initialize(hash)
-        super(hash)
-        PhraseApp.handle_times(self)
-      end
-    end
-
     class Format < ::OpenStruct
       #api_name, default_encoding, default_file, description, exportable, extension, importable, name, 
       def initialize(hash)
@@ -194,7 +186,7 @@ module ResponseObjects
     end
 
     class StyleguidePreview < ::OpenStruct
-      #id, public_url, 
+      #id, title, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -282,7 +274,7 @@ module ResponseObjects
     end
 
     class User < ::OpenStruct
-      #company, created_at, email, id, name, position, updated_at, username, 
+      #created_at, email, id, name, position, updated_at, username, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -332,6 +324,25 @@ end
 
 
 module RequestParams
+  # BlacklistedKeyParams
+  # == Parameters:
+  # name::
+  #   Blacklisted key name
+  class BlacklistedKeyParams < ::OpenStruct
+    def name=(val)
+      self.name = val
+    end
+
+    def validate
+      if self.name == nil || self.name == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"BlacklistedKeyParams\" not set")
+      end
+    end
+  end
+end
+
+
+module RequestParams
   # CommentParams
   # == Parameters:
   # message::
@@ -344,25 +355,6 @@ module RequestParams
     def validate
       if self.message == nil || self.message == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"message\" of \"CommentParams\" not set")
-      end
-    end
-  end
-end
-
-
-module RequestParams
-  # ExcludeRuleParams
-  # == Parameters:
-  # name::
-  #   Blacklisted key name
-  class ExcludeRuleParams < ::OpenStruct
-    def name=(val)
-      self.name = val
-    end
-
-    def validate
-      if self.name == nil || self.name == "" 
-        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"ExcludeRuleParams\" not set")
       end
     end
   end
@@ -583,7 +575,7 @@ module RequestParams
   # tag::
   #   Tag you want to order translations for.
   # target_locale_ids::
-  #   Target locales you want the source content translate to. Can be the name or public id of the target locales. Preferred is the public id.
+  #   List of target locales you want the source content translate to. Can be the name or public id of the target locales. Preferred is the public id.
   # translation_type::
   #   Name of the quality level, availability depends on the LSP. Can be one of:  standard, pro (for orders processed by Gengo) and one of regular, premium, enterprise (for orders processed by TextMaster)
   # unverify_translations_upon_delivery::
@@ -691,11 +683,17 @@ end
 module RequestParams
   # ProjectParams
   # == Parameters:
+  # main_format::
+  #   Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="/guides/formats/">Format Guide</a> or our <a href="https://api.phraseapp.com/api/v2/formats">Formats API Endpoint</a>.
   # name::
   #   Name of the project
   # shares_translation_memory::
   #   Indicates whether the project should share the account's translation memory
   class ProjectParams < ::OpenStruct
+    def main_format=(val)
+      self.main_format = val
+    end
+
     def name=(val)
       self.name = val
     end
@@ -1028,7 +1026,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   class KeysDeleteParams < ::OpenStruct
     def locale_id=(val)
       self.locale_id = val
@@ -1053,7 +1051,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysListParams < ::OpenStruct
@@ -1088,7 +1086,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysSearchParams < ::OpenStruct
@@ -1121,7 +1119,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysTagParams < ::OpenStruct
@@ -1152,7 +1150,7 @@ module RequestParams
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>name:key_name</code> for text queries on key names</li> <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysUntagParams < ::OpenStruct
@@ -1182,6 +1180,8 @@ module RequestParams
   # == Parameters:
   # convert_emoji::
   #   Indicates whether Emoji symbols should be converted to actual Emojis.
+  # encoding::
+  #   Specify an encoding for the locale file. See the format guide for a list of supported encodings for each format.
   # file_format::
   #   File format name. See the format guide for all supported file formats.
   # format_options::
@@ -1190,6 +1190,8 @@ module RequestParams
   #   Indicates whether keys without translations should be included in the output as well.
   # keep_notranslate_tags::
   #   Indicates whether [NOTRANSLATE] tags should be kept.
+  # skip_unverified_translations::
+  #   Indicates whether the locale file should skip all unverified translations.
   # tag::
   #   Limit result to keys tagged with the given tag (identified by its name).
   class LocaleDownloadParams < ::OpenStruct
@@ -1201,6 +1203,10 @@ module RequestParams
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
+    end
+
+    def encoding=(val)
+      self.encoding = val
     end
 
     def file_format=(val)
@@ -1226,6 +1232,16 @@ module RequestParams
         self.keep_notranslate_tags = true
       elsif val.is_a?(FalseClass) #ignore
         self.keep_notranslate_tags = b
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def skip_unverified_translations=(val)
+      if val.is_a?(TrueClass)
+        self.skip_unverified_translations = true
+      elsif val.is_a?(FalseClass) #ignore
+        self.skip_unverified_translations = b
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -1299,7 +1315,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByKeyParams < ::OpenStruct
@@ -1328,7 +1344,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByLocaleParams < ::OpenStruct
@@ -1357,7 +1373,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsExcludeParams < ::OpenStruct
@@ -1386,7 +1402,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsIncludeParams < ::OpenStruct
@@ -1415,7 +1431,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsListParams < ::OpenStruct
@@ -1444,7 +1460,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsSearchParams < ::OpenStruct
@@ -1473,7 +1489,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsUnverifyParams < ::OpenStruct
@@ -1502,7 +1518,7 @@ module RequestParams
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
-  #   Specify a search term query including wildcard or exact matching. It will search the key metadata for matching results. Searched fields include key name, description, tags, translations.<br><br> Also supports the following qualifiers in the query:<br> <ul> <li><code>tags:XYZ</code> for tags on the translation</li> <li><code>unverified:{true|false}</code> for verification status</li> <li><code>updated_at{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li> </ul> Please note that the argument is named <code>--query</code> when using the <a href="https://phraseapp.com/cli" target="_blank">PhraseApp Client</a>. <br /><br /> Find more examples <a href="/api/v2/general/examples/">here</a>.
+  #   q_description_placeholder
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsVerifyParams < ::OpenStruct
@@ -1530,10 +1546,9 @@ end
   # Require the gem
   #   require 'phraseapp-ruby'
   # Setup Authentication
-  #   auth_handler = PhraseApp::Auth::AuthHandler.new({:token => "YOUR_ACCESS_TOKEN"})
-  #   PhraseApp::Auth.register_auth_handler(auth_handler)
+  #   credentials = PhraseApp::Auth::Credentials.new({:token => "YOUR_ACCESS_TOKEN"})
   # Create a client
-  #   client = PhraseApp::Client
+  #   client = PhraseApp::Client.new(credentials)
   # List Projects
   #   rsp, err = client.projects_list(1, 10)
   #   puts rsp
@@ -1542,6 +1557,10 @@ end
   #   rsp, err = client.key_create('YOUR_PROJECT_ID', params)
   #   puts rsp
   class Client
+    def initialize(credentials)
+      @credentials = credentials
+    end
+
   
     # Create a new authorization.
     # API Path: /v2/authorizations
@@ -1552,7 +1571,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::AuthorizationWithToken
     #   err
-    def self.authorization_create(params)
+    def authorization_create(params)
       path = sprintf("/api/v2/authorizations")
       data_hash = {}
       post_body = nil
@@ -1569,7 +1588,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -1585,13 +1604,13 @@ end
     #
     # == Returns:
     #   err
-    def self.authorization_delete(id)
+    def authorization_delete(id)
       path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -1608,13 +1627,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Authorization
     #   err
-    def self.authorization_show(id)
+    def authorization_show(id)
       path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -1633,7 +1652,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Authorization
     #   err
-    def self.authorization_update(id, params)
+    def authorization_update(id, params)
       path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
@@ -1650,7 +1669,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -1665,18 +1684,164 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Authorization
     #   err
-    def self.authorizations_list(page, per_page)
+    def authorizations_list(page, per_page)
       path = sprintf("/api/v2/authorizations")
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
       
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Authorization.new(item) }, err
+    end
+  
+    # Create a new rule for blacklisting keys.
+    # API Path: /v2/projects/:project_id/blacklisted_keys
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::BlacklistedKeyParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::BlacklistedKey
+    #   err
+    def blacklisted_key_create(project_id, params)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::BlacklistedKeyParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BlacklistedKeyParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing rule for blacklisting keys.
+    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def blacklisted_key_delete(project_id, id)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single rule for blacklisting keys for a given project.
+    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::BlacklistedKey
+    #   err
+    def blacklisted_key_show(project_id, id)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing rule for blacklisting keys.
+    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::BlacklistedKeyParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::BlacklistedKey
+    #   err
+    def blacklisted_key_update(project_id, id, params)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::BlacklistedKeyParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BlacklistedKeyParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
+    end
+  
+    # List all rules for blacklisting keys for the given project.
+    # API Path: /v2/projects/:project_id/blacklisted_keys
+    # == Parameters:
+    # project_id::
+    #   project_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::BlacklistedKey
+    #   err
+    def blacklisted_keys_list(project_id, page, per_page)
+      path = sprintf("/api/v2/projects/%s/blacklisted_keys", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::BlacklistedKey.new(item) }, err
     end
   
     # Create a new comment for a key.
@@ -1692,7 +1857,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Comment
     #   err
-    def self.comment_create(project_id, key_id, params)
+    def comment_create(project_id, key_id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments", project_id, key_id)
       data_hash = {}
       post_body = nil
@@ -1709,7 +1874,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -1729,13 +1894,13 @@ end
     #
     # == Returns:
     #   err
-    def self.comment_delete(project_id, key_id, id)
+    def comment_delete(project_id, key_id, id)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -1755,13 +1920,13 @@ end
     #
     # == Returns:
     #   err
-    def self.comment_mark_check(project_id, key_id, id)
+    def comment_mark_check(project_id, key_id, id)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -1781,13 +1946,13 @@ end
     #
     # == Returns:
     #   err
-    def self.comment_mark_read(project_id, key_id, id)
+    def comment_mark_read(project_id, key_id, id)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -1807,13 +1972,13 @@ end
     #
     # == Returns:
     #   err
-    def self.comment_mark_unread(project_id, key_id, id)
+    def comment_mark_unread(project_id, key_id, id)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -1834,13 +1999,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Comment
     #   err
-    def self.comment_show(project_id, key_id, id)
+    def comment_show(project_id, key_id, id)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -1863,7 +2028,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Comment
     #   err
-    def self.comment_update(project_id, key_id, id, params)
+    def comment_update(project_id, key_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
@@ -1880,7 +2045,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -1899,164 +2064,18 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Comment
     #   err
-    def self.comments_list(project_id, key_id, page, per_page)
+    def comments_list(project_id, key_id, page, per_page)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments", project_id, key_id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
       
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Comment.new(item) }, err
-    end
-  
-    # Create a new blacklisted key.
-    # API Path: /v2/projects/:project_id/blacklisted_keys
-    # == Parameters:
-    # project_id::
-    #   project_id
-    # params::
-    #   Parameters of type PhraseApp::RequestParams::ExcludeRuleParams
-    #
-    # == Returns:
-    #   PhraseApp::ResponseObjects::BlacklistedKey
-    #   err
-    def self.exclude_rule_create(project_id, params)
-      path = sprintf("/api/v2/projects/%s/blacklisted_keys", project_id)
-      data_hash = {}
-      post_body = nil
-  
-      if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::ExcludeRuleParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ExcludeRuleParams")
-        end
-      end
-  
-      data_hash = params.to_h
-      err = params.validate
-      if err != nil
-        return nil, err
-      end
-      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
-      if err != nil
-        return nil, err
-      end
-      
-      return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
-    end
-  
-    # Delete an existing blacklisted key.
-    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
-    # == Parameters:
-    # project_id::
-    #   project_id
-    # id::
-    #   id
-    #
-    # == Returns:
-    #   err
-    def self.exclude_rule_delete(project_id, id)
-      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
-      data_hash = {}
-      post_body = nil
-  
-      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
-      if err != nil
-        return nil, err
-      end
-      
-      return err
-    end
-  
-    # Get details on a single blacklisted key for a given project.
-    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
-    # == Parameters:
-    # project_id::
-    #   project_id
-    # id::
-    #   id
-    #
-    # == Returns:
-    #   PhraseApp::ResponseObjects::BlacklistedKey
-    #   err
-    def self.exclude_rule_show(project_id, id)
-      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
-      data_hash = {}
-      post_body = nil
-  
-      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
-      if err != nil
-        return nil, err
-      end
-      
-      return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
-    end
-  
-    # Update an existing blacklisted key.
-    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
-    # == Parameters:
-    # project_id::
-    #   project_id
-    # id::
-    #   id
-    # params::
-    #   Parameters of type PhraseApp::RequestParams::ExcludeRuleParams
-    #
-    # == Returns:
-    #   PhraseApp::ResponseObjects::BlacklistedKey
-    #   err
-    def self.exclude_rule_update(project_id, id, params)
-      path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
-      data_hash = {}
-      post_body = nil
-  
-      if params.present?
-        unless params.kind_of?(PhraseApp::RequestParams::ExcludeRuleParams)
-          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ExcludeRuleParams")
-        end
-      end
-  
-      data_hash = params.to_h
-      err = params.validate
-      if err != nil
-        return nil, err
-      end
-      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
-      if err != nil
-        return nil, err
-      end
-      
-      return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
-    end
-  
-    # List all blacklisted keys for the given project.
-    # API Path: /v2/projects/:project_id/blacklisted_keys
-    # == Parameters:
-    # project_id::
-    #   project_id
-    #
-    # == Returns:
-    #   PhraseApp::ResponseObjects::BlacklistedKey
-    #   err
-    def self.exclude_rules_index(project_id, page, per_page)
-      path = sprintf("/api/v2/projects/%s/blacklisted_keys", project_id)
-      data_hash = {}
-      post_body = nil
-  
-      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
-      if err != nil
-        return nil, err
-      end
-      
-      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::BlacklistedKey.new(item) }, err
     end
   
     # Get a handy list of all localization file formats supported in PhraseApp.
@@ -2066,13 +2085,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Format
     #   err
-    def self.formats_list(page, per_page)
+    def formats_list(page, per_page)
       path = sprintf("/api/v2/formats")
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -2091,7 +2110,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
     #   err
-    def self.key_create(project_id, params)
+    def key_create(project_id, params)
       path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
@@ -2166,7 +2185,7 @@ end
   
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -2184,13 +2203,13 @@ end
     #
     # == Returns:
     #   err
-    def self.key_delete(project_id, id)
+    def key_delete(project_id, id)
       path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -2209,13 +2228,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
     #   err
-    def self.key_show(project_id, id)
+    def key_show(project_id, id)
       path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2236,7 +2255,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
     #   err
-    def self.key_update(project_id, id, params)
+    def key_update(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
@@ -2311,7 +2330,7 @@ end
   
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2330,7 +2349,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::AffectedResources
     #   err
-    def self.keys_delete(project_id, params)
+    def keys_delete(project_id, params)
       path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
@@ -2347,7 +2366,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2366,7 +2385,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationKey
     #   err
-    def self.keys_list(project_id, page, per_page, params)
+    def keys_list(project_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
@@ -2383,7 +2402,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -2402,7 +2421,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationKey
     #   err
-    def self.keys_search(project_id, page, per_page, params)
+    def keys_search(project_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/keys/search", project_id)
       data_hash = {}
       post_body = nil
@@ -2419,7 +2438,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("POST", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -2438,7 +2457,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::AffectedResources
     #   err
-    def self.keys_tag(project_id, params)
+    def keys_tag(project_id, params)
       path = sprintf("/api/v2/projects/%s/keys/tag", project_id)
       data_hash = {}
       post_body = nil
@@ -2455,7 +2474,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2464,7 +2483,7 @@ end
     end
   
     # Removes specified tags from keys matching query.
-    # API Path: /v2/projects/:project_id/keys/tag
+    # API Path: /v2/projects/:project_id/keys/untag
     # == Parameters:
     # project_id::
     #   project_id
@@ -2474,8 +2493,8 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::AffectedResources
     #   err
-    def self.keys_untag(project_id, params)
-      path = sprintf("/api/v2/projects/%s/keys/tag", project_id)
+    def keys_untag(project_id, params)
+      path = sprintf("/api/v2/projects/%s/keys/untag", project_id)
       data_hash = {}
       post_body = nil
   
@@ -2491,7 +2510,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2510,7 +2529,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleDetails
     #   err
-    def self.locale_create(project_id, params)
+    def locale_create(project_id, params)
       path = sprintf("/api/v2/projects/%s/locales", project_id)
       data_hash = {}
       post_body = nil
@@ -2527,7 +2546,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -2545,13 +2564,13 @@ end
     #
     # == Returns:
     #   err
-    def self.locale_delete(project_id, id)
+    def locale_delete(project_id, id)
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -2571,7 +2590,7 @@ end
     #
     # == Returns:
     #   err
-    def self.locale_download(project_id, id, params)
+    def locale_download(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/locales/%s/download", project_id, id)
       data_hash = {}
       post_body = nil
@@ -2588,7 +2607,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2607,13 +2626,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleDetails
     #   err
-    def self.locale_show(project_id, id)
+    def locale_show(project_id, id)
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2634,7 +2653,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleDetails
     #   err
-    def self.locale_update(project_id, id, params)
+    def locale_update(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
@@ -2651,7 +2670,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2668,13 +2687,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Locale
     #   err
-    def self.locales_list(project_id, page, per_page)
+    def locales_list(project_id, page, per_page)
       path = sprintf("/api/v2/projects/%s/locales", project_id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -2693,13 +2712,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
-    def self.order_confirm(project_id, id)
+    def order_confirm(project_id, id)
       path = sprintf("/api/v2/projects/%s/orders/%s/confirm", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2718,7 +2737,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
-    def self.order_create(project_id, params)
+    def order_create(project_id, params)
       path = sprintf("/api/v2/projects/%s/orders", project_id)
       data_hash = {}
       post_body = nil
@@ -2735,7 +2754,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -2753,13 +2772,13 @@ end
     #
     # == Returns:
     #   err
-    def self.order_delete(project_id, id)
+    def order_delete(project_id, id)
       path = sprintf("/api/v2/projects/%s/orders/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -2778,13 +2797,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
-    def self.order_show(project_id, id)
+    def order_show(project_id, id)
       path = sprintf("/api/v2/projects/%s/orders/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2801,13 +2820,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
-    def self.orders_list(project_id, page, per_page)
+    def orders_list(project_id, page, per_page)
       path = sprintf("/api/v2/projects/%s/orders", project_id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -2824,7 +2843,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::ProjectDetails
     #   err
-    def self.project_create(params)
+    def project_create(params)
       path = sprintf("/api/v2/projects")
       data_hash = {}
       post_body = nil
@@ -2841,7 +2860,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -2857,13 +2876,13 @@ end
     #
     # == Returns:
     #   err
-    def self.project_delete(id)
+    def project_delete(id)
       path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -2880,13 +2899,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::ProjectDetails
     #   err
-    def self.project_show(id)
+    def project_show(id)
       path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2905,7 +2924,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::ProjectDetails
     #   err
-    def self.project_update(id, params)
+    def project_update(id, params)
       path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
@@ -2922,7 +2941,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2937,13 +2956,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Project
     #   err
-    def self.projects_list(page, per_page)
+    def projects_list(page, per_page)
       path = sprintf("/api/v2/projects")
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -2958,13 +2977,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::User
     #   err
-    def self.show_user()
+    def show_user()
       path = sprintf("/api/v2/user")
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -2983,7 +3002,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::StyleguideDetails
     #   err
-    def self.styleguide_create(project_id, params)
+    def styleguide_create(project_id, params)
       path = sprintf("/api/v2/projects/%s/styleguides", project_id)
       data_hash = {}
       post_body = nil
@@ -3000,7 +3019,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -3018,13 +3037,13 @@ end
     #
     # == Returns:
     #   err
-    def self.styleguide_delete(project_id, id)
+    def styleguide_delete(project_id, id)
       path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -3043,13 +3062,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::StyleguideDetails
     #   err
-    def self.styleguide_show(project_id, id)
+    def styleguide_show(project_id, id)
       path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3070,7 +3089,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::StyleguideDetails
     #   err
-    def self.styleguide_update(project_id, id, params)
+    def styleguide_update(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
@@ -3087,7 +3106,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3104,13 +3123,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Styleguide
     #   err
-    def self.styleguides_list(project_id, page, per_page)
+    def styleguides_list(project_id, page, per_page)
       path = sprintf("/api/v2/projects/%s/styleguides", project_id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -3129,7 +3148,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TagWithStats
     #   err
-    def self.tag_create(project_id, params)
+    def tag_create(project_id, params)
       path = sprintf("/api/v2/projects/%s/tags", project_id)
       data_hash = {}
       post_body = nil
@@ -3146,7 +3165,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -3164,13 +3183,13 @@ end
     #
     # == Returns:
     #   err
-    def self.tag_delete(project_id, name)
+    def tag_delete(project_id, name)
       path = sprintf("/api/v2/projects/%s/tags/%s", project_id, name)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
@@ -3189,13 +3208,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TagWithStats
     #   err
-    def self.tag_show(project_id, name)
+    def tag_show(project_id, name)
       path = sprintf("/api/v2/projects/%s/tags/%s", project_id, name)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3212,13 +3231,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Tag
     #   err
-    def self.tags_list(project_id, page, per_page)
+    def tags_list(project_id, page, per_page)
       path = sprintf("/api/v2/projects/%s/tags", project_id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -3237,7 +3256,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationDetails
     #   err
-    def self.translation_create(project_id, params)
+    def translation_create(project_id, params)
       path = sprintf("/api/v2/projects/%s/translations", project_id)
       data_hash = {}
       post_body = nil
@@ -3254,7 +3273,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -3273,13 +3292,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationDetails
     #   err
-    def self.translation_show(project_id, id)
+    def translation_show(project_id, id)
       path = sprintf("/api/v2/projects/%s/translations/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3300,7 +3319,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationDetails
     #   err
-    def self.translation_update(project_id, id, params)
+    def translation_update(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/translations/%s", project_id, id)
       data_hash = {}
       post_body = nil
@@ -3317,7 +3336,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3338,7 +3357,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Translation
     #   err
-    def self.translations_by_key(project_id, key_id, page, per_page, params)
+    def translations_by_key(project_id, key_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/translations", project_id, key_id)
       data_hash = {}
       post_body = nil
@@ -3355,7 +3374,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -3376,7 +3395,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Translation
     #   err
-    def self.translations_by_locale(project_id, locale_id, page, per_page, params)
+    def translations_by_locale(project_id, locale_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/locales/%s/translations", project_id, locale_id)
       data_hash = {}
       post_body = nil
@@ -3393,7 +3412,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -3412,7 +3431,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::AffectedCount
     #   err
-    def self.translations_exclude(project_id, params)
+    def translations_exclude(project_id, params)
       path = sprintf("/api/v2/projects/%s/translations/exclude", project_id)
       data_hash = {}
       post_body = nil
@@ -3429,7 +3448,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3448,7 +3467,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::AffectedCount
     #   err
-    def self.translations_include(project_id, params)
+    def translations_include(project_id, params)
       path = sprintf("/api/v2/projects/%s/translations/include", project_id)
       data_hash = {}
       post_body = nil
@@ -3465,7 +3484,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3484,7 +3503,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Translation
     #   err
-    def self.translations_list(project_id, page, per_page, params)
+    def translations_list(project_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/translations", project_id)
       data_hash = {}
       post_body = nil
@@ -3501,7 +3520,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -3520,7 +3539,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::Translation
     #   err
-    def self.translations_search(project_id, page, per_page, params)
+    def translations_search(project_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/translations/search", project_id)
       data_hash = {}
       post_body = nil
@@ -3537,7 +3556,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("POST", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
@@ -3556,7 +3575,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::AffectedCount
     #   err
-    def self.translations_unverify(project_id, params)
+    def translations_unverify(project_id, params)
       path = sprintf("/api/v2/projects/%s/translations/unverify", project_id)
       data_hash = {}
       post_body = nil
@@ -3573,7 +3592,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3592,7 +3611,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::AffectedCount
     #   err
-    def self.translations_verify(project_id, params)
+    def translations_verify(project_id, params)
       path = sprintf("/api/v2/projects/%s/translations/verify", project_id)
       data_hash = {}
       post_body = nil
@@ -3609,7 +3628,7 @@ end
         return nil, err
       end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3628,7 +3647,7 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleFileImportWithSummary
     #   err
-    def self.upload_create(project_id, params)
+    def upload_create(project_id, params)
       path = sprintf("/api/v2/projects/%s/uploads", project_id)
       data_hash = {}
       post_body = nil
@@ -3679,7 +3698,7 @@ end
   
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("POST", path, reqHelper.ctype, reqHelper.body, 201)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
@@ -3698,18 +3717,41 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleFileImportWithSummary
     #   err
-    def self.upload_show(project_id, id)
+    def upload_show(project_id, id)
       path = sprintf("/api/v2/projects/%s/uploads/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
       
       return PhraseApp::ResponseObjects::LocaleFileImportWithSummary.new(JSON.load(rc.body)), err
+    end
+  
+    # List all uploads for the given project.
+    # API Path: /v2/projects/:project_id/uploads
+    # == Parameters:
+    # project_id::
+    #   project_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::LocaleFileImportWithSummary
+    #   err
+    def uploads_list(project_id, page, per_page)
+      path = sprintf("/api/v2/projects/%s/uploads", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::LocaleFileImportWithSummary.new(item) }, err
     end
   
     # Get details on a single version.
@@ -3725,13 +3767,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationVersionWithUser
     #   err
-    def self.version_show(project_id, translation_id, id)
+    def version_show(project_id, translation_id, id)
       path = sprintf("/api/v2/projects/%s/translations/%s/versions/%s", project_id, translation_id, id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request("GET", path, reqHelper.ctype, reqHelper.body, 200)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
@@ -3750,13 +3792,13 @@ end
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationVersion
     #   err
-    def self.versions_list(project_id, translation_id, page, per_page)
+    def versions_list(project_id, translation_id, page, per_page)
       path = sprintf("/api/v2/projects/%s/translations/%s/versions", project_id, translation_id)
       data_hash = {}
       post_body = nil
   
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
-      rc, err = PhraseApp.send_request_paginated("GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end

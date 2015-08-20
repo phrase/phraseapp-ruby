@@ -113,21 +113,7 @@
 untranslated or translated keys.</p>
 </dd><dt>q
 <dd>
-<p>Specify a search term query including wildcard or exact matching. It will
-search the key metadata for matching results. Searched fields include key
-name, description, tags, translations.<br> Also supports the following
-qualifiers in the query:<br> &lt;ul&gt;
-&lt;li&gt;<code>name:key_name</code> for text queries on key
-names&lt;/li&gt; &lt;li&gt;<code>translated:{true|false}</code> for
-translation status (also requires <code>locale_id</code> to be
-specified)&lt;/li&gt;
-&lt;li&gt;<code>updated_at{&gt;=|&lt;=}2013-02-21T00:00:00Z</code> for date
-range queries&lt;/li&gt; &lt;/ul&gt; Please note that the argument is named
-<code>--query</code> when using the &lt;a href=“<a
-href="https://phraseapp.com/cli">phraseapp.com/cli</a>”
-target=“_blank”&gt;PhraseApp Client&lt;/a&gt;. &lt;br /&gt;&lt;br /&gt;
-Find more examples &lt;a
-href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
+<p>q_description_placeholder</p>
 </dd></dl>
 
 
@@ -242,12 +228,12 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1033
-1034
-1035</pre>
+1031
+1032
+1033</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1033</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1031</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_id'>locale_id</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -272,12 +258,12 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1037
-1038
-1039</pre>
+1035
+1036
+1037</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1037</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1035</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_q'>q</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -302,12 +288,12 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1041
-1042
-1043</pre>
+1039
+1040
+1041</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1041</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1039</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
@@ -322,7 +308,7 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
 </div>
 
     <div id="footer">
-  Generated on Wed Aug 12 15:40:14 2015 by
+  Generated on Thu Aug 20 17:12:33 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>

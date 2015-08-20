@@ -145,14 +145,14 @@ href="http://docs.phraseapp.com/api/v2/">API v2 Documentation</a></p>
 <h2 id="label-OpenSSL">OpenSSL</h2>
 
 <p>Please note that outdated certificates or old versions of OpenSSL may cause
-connection issues. We recommend using OpenSSL 1.0.2d or later. If you
-experience OpenSSL-related errors, try the following.</p>
+connection issues, especially on Mac OSX. We recommend using Ruby 2.2.2
+with OpenSSL 1.0.2d or later. If you experience OpenSSL-related errors, try
+the following.</p>
 
 <p>Upgrade OpenSSL using Homebrew:</p>
 
 <pre class="code ruby"><code class="ruby">$ brew upgrade openssl
-$ brew install openssl
-$ brew install curl-ca-bundle     # optional: installs trusted CA root certs</code></pre>
+$ brew install openssl</code></pre>
 
 <p>If you are using RVM, also run:</p>
 
@@ -189,7 +189,7 @@ documentation</a></p>
 </div></div>
 
     <div id="footer">
-  Generated on Wed Aug 12 15:40:12 2015 by
+  Generated on Thu Aug 20 17:12:32 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>

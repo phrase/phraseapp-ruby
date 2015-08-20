@@ -112,20 +112,7 @@
 <p>Order direction. Can be one of: asc, desc.</p>
 </dd><dt>q
 <dd>
-<p>Specify a search term query including wildcard or exact matching. It will
-search the key metadata for matching results. Searched fields include key
-name, description, tags, translations.<br> Also supports the following
-qualifiers in the query:<br> &lt;ul&gt; &lt;li&gt;<code>tags:XYZ</code> for
-tags on the translation&lt;/li&gt;
-&lt;li&gt;<code>unverified:{true|false}</code> for verification
-status&lt;/li&gt;
-&lt;li&gt;<code>updated_at{&gt;=|&lt;=}2013-02-21T00:00:00Z</code> for date
-range queries&lt;/li&gt; &lt;/ul&gt; Please note that the argument is named
-<code>--query</code> when using the &lt;a href=“<a
-href="https://phraseapp.com/cli">phraseapp.com/cli</a>”
-target=“_blank”&gt;PhraseApp Client&lt;/a&gt;. &lt;br /&gt;&lt;br /&gt;
-Find more examples &lt;a
-href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
+<p>q_description_placeholder</p>
 </dd><dt>sort
 <dd>
 <p>Sort criteria. Can be one of: key_name, created_at, updated_at.</p>
@@ -265,12 +252,12 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1451
-1452
-1453</pre>
+1467
+1468
+1469</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1451</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1467</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_order='>order=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -295,12 +282,12 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1455
-1456
-1457</pre>
+1471
+1472
+1473</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1455</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1471</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_q'>q</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -325,12 +312,12 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1459
-1460
-1461</pre>
+1475
+1476
+1477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1459</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1475</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sort='>sort=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -355,12 +342,12 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1463
-1464
-1465</pre>
+1479
+1480
+1481</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1463</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1479</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
@@ -375,7 +362,7 @@ href=“/api/v2/general/examples/”&gt;here&lt;/a&gt;.</p>
 </div>
 
     <div id="footer">
-  Generated on Wed Aug 12 15:40:14 2015 by
+  Generated on Thu Aug 20 17:12:33 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>

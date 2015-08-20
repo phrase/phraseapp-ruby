@@ -74,7 +74,7 @@ module PhraseApp
     end
   end
 
-  def self.send_request_paginated(method, path_with_query, ctype, body, status, page, per_page)
+  def self.send_request_paginated(credentials, method, path_with_query, ctype, body, status, page, per_page)
     uri = URI.parse(path_with_query)
 
     hash = if uri.query then CGI::parse(uri.query) else {} end
@@ -84,17 +84,17 @@ module PhraseApp
     query_str = URI.encode_www_form(hash)
     path = [uri.path, query_str].compact.join('?')
 
-    return send_request(method, path, ctype, body, status)
+    return send_request(credentials, method, path, ctype, body, status)
   end
 
-  def self.send_request(method, path, ctype, data, status)
+  def self.send_request(credentials, method, path, ctype, data, status)
     req = Net::HTTPGenericRequest.new(method,
         Module.const_get("Net::HTTP::#{method.capitalize}::REQUEST_HAS_BODY"),
         Module.const_get("Net::HTTP::#{method.capitalize}::RESPONSE_HAS_BODY"),
         path)
 
 
-    if PhraseApp::Auth.debug
+    if credentials.debug
       puts "-------"
       puts "data:"
       puts data.inspect
@@ -107,23 +107,22 @@ module PhraseApp
       req["Content-Type"] = ctype
     end
 
-    resp, err = send(req, status)
+    resp, err = http_send(credentials, req, status)
 
 
     return resp, err
   end
 
-  def self.send(req, status)
-    err = PhraseApp::Auth.authenticate(req)
+  def self.http_send(credentials, req, status)
+    err = credentials.authenticate(req)
     if err != nil
       return nil, err
     end
 
     req["User-Agent"] = API_CLIENT_IDENTIFIER
+    uri = URI.parse(credentials.host)
 
-    uri = URI.parse(PhraseApp::Auth.host)
-
-    if PhraseApp::Auth.debug
+    if credentials.debug
       puts "uri:"
       puts uri.inspect
     end
@@ -132,14 +131,14 @@ module PhraseApp
 
     if uri.is_a?(URI::HTTPS)
       http.use_ssl = true
-      if PhraseApp::Auth::skip_ssl_verification
+      if credentials.skip_ssl_verification
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       else
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
       end
     end
 
-    if PhraseApp::Auth.debug
+    if credentials.debug
       puts "method:"
       puts req.method
       puts "path:"
