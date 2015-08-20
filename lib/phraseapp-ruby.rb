@@ -1545,9 +1545,9 @@ end
   #
   # Require the gem
   #   require 'phraseapp-ruby'
-  # Setup Authentication
-  #   credentials = PhraseApp::Auth::Credentials.new({:token => "YOUR_ACCESS_TOKEN"})
-  # Create a client
+  # Setup Credentials for Authentication
+  #   credentials = PhraseApp::Auth::Credentials.new(token: "YOUR_ACCESS_TOKEN")
+  # Create a client 
   #   client = PhraseApp::Client.new(credentials)
   # List Projects
   #   rsp, err = client.projects_list(1, 10)
