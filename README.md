@@ -30,12 +30,9 @@ Setup an [Access Token in your PhraseApp user profile](https://phraseapp.com/set
 # Require the gem
 require 'phraseapp-ruby'
 
-# Setup authentication with an access token
-auth_handler = PhraseApp::Auth::AuthHandler.new(token: "YOUR_ACCESS_TOKEN")
-PhraseApp::Auth.register_auth_handler(auth_handler)
-
-# Create a client
-client = PhraseApp::Client
+# Setup Authentication Credentials and Client
+credentials = PhraseApp::Auth::Credentials.new(token: "YOUR_ACCESS_TOKEN"})
+client = PhraseApp::Client.new(credentials)
 
 # List projects page 1 and list 10 projects per_page
 rsp, err = client.projects_list(1, 10)
