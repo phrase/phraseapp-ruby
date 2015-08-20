@@ -31,7 +31,7 @@ Setup an [Access Token in your PhraseApp user profile](https://phraseapp.com/set
 require 'phraseapp-ruby'
 
 # Setup Authentication Credentials and Client
-credentials = PhraseApp::Auth::Credentials.new(token: "YOUR_ACCESS_TOKEN"})
+credentials = PhraseApp::Auth::Credentials.new(token: "YOUR_ACCESS_TOKEN")
 client = PhraseApp::Client.new(credentials)
 
 # List projects page 1 and list 10 projects per_page
