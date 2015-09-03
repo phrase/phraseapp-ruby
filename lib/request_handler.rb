@@ -89,8 +89,8 @@ module PhraseApp
 
   def self.send_request(credentials, method, path, ctype, data, status)
     req = Net::HTTPGenericRequest.new(method,
-        Module.const_get("Net::HTTP::#{method.capitalize}::REQUEST_HAS_BODY"),
-        Module.const_get("Net::HTTP::#{method.capitalize}::RESPONSE_HAS_BODY"),
+        Net::HTTP.const_get(method.capitalize).const_get(:REQUEST_HAS_BODY),
+        Net::HTTP.const_get(method.capitalize).const_get(:RESPONSE_HAS_BODY),
         path)
 
 

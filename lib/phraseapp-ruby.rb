@@ -896,7 +896,7 @@ module RequestParams
   # LocaleFileImportParams
   # == Parameters:
   # convert_emoji::
-  #   Indicates whether the file contains Emoji symbols that should be converted.
+  #   Indicates whether the file contains Emoji symbols that should be converted. <a href="/guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
   # file::
   #   File to be imported
   # file_format::
@@ -1179,13 +1179,13 @@ module RequestParams
   # LocaleDownloadParams
   # == Parameters:
   # convert_emoji::
-  #   Indicates whether Emoji symbols should be converted to actual Emojis.
+  #   Indicates whether Emoji symbols should be converted to actual Emojis. <a href="/guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
   # encoding::
-  #   Specify an encoding for the locale file. See the format guide for a list of supported encodings for each format.
+  #   Specify an encoding for the locale file. See the <a href="/guides/formats">format guide</a> for a list of supported encodings for each format.
   # file_format::
   #   File format name. See the format guide for all supported file formats.
   # format_options::
-  #   Additional options available for specific formats. Currently only supports option escape_single_quotes: true/false for properties format.
+  #   Additional formatting and render options. See the <a href="/guides/formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>
   # include_empty_translations::
   #   Indicates whether keys without translations should be included in the output as well.
   # keep_notranslate_tags::
