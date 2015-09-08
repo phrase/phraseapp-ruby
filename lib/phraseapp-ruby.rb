@@ -319,6 +319,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"note\" of \"AuthorizationParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -338,6 +343,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"BlacklistedKeyParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -357,6 +367,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"message\" of \"CommentParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -478,6 +493,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"TranslationKeyParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -547,6 +567,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"LocaleParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -676,6 +701,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"translation_type\" of \"TranslationOrderParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -713,6 +743,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"ProjectParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -804,6 +839,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"title\" of \"StyleguideParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -823,6 +863,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"TagParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -888,6 +933,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"locale_id\" of \"TranslationParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -973,6 +1023,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"file\" of \"LocaleFileImportParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1039,6 +1094,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1074,6 +1134,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1109,6 +1174,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1140,6 +1210,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_tagParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1171,6 +1246,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_untagParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1256,6 +1336,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"file_format\" of \"locale_downloadParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1305,6 +1390,11 @@ module RequestParams
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"content\" of \"translation_updateParams\" not set")
       end
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1334,6 +1424,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1363,6 +1458,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1392,6 +1492,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1421,6 +1526,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1450,6 +1560,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1479,6 +1594,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1508,6 +1628,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1537,6 +1662,11 @@ module RequestParams
     def validate
       
     end
+
+    def to_h
+      @table.dup
+    end
+
   end
 end
 
@@ -1547,7 +1677,7 @@ end
   #   require 'phraseapp-ruby'
   # Setup Credentials for Authentication
   #   credentials = PhraseApp::Auth::Credentials.new(token: "YOUR_ACCESS_TOKEN")
-  # Create a client 
+  # Create a client
   #   client = PhraseApp::Client.new(credentials)
   # List Projects
   #   rsp, err = client.projects_list(1, 10)

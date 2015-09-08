@@ -109,7 +109,9 @@
 <h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>convert_emoji
 <dd>
-<p>Indicates whether the file contains Emoji symbols that should be converted.</p>
+<p>Indicates whether the file contains Emoji symbols that should be converted.
+&lt;a href=“/guides/working-with-phraseapp/emoji-support/”&gt;Working with
+Emojis&lt;/a&gt;.</p>
 </dd><dt>file
 <dd>
 <p>File to be imported</p>
@@ -314,6 +316,28 @@ content.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#to_h-instance_method" title="#to_h (instance method)">- (Object) <strong>to_h</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#update_translations%3D-instance_method" title="#update_translations= (instance method)">- (Object) <strong>update_translations=</strong>(val) </a>
     
 
@@ -380,18 +404,18 @@ content.</p>
       <pre class="lines">
 
 
-915
-916
-917
-918
-919
-920
-921
-922
-923</pre>
+965
+966
+967
+968
+969
+970
+971
+972
+973</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 915</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 965</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_convert_emoji='>convert_emoji=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -422,12 +446,12 @@ content.</p>
       <pre class="lines">
 
 
-925
-926
-927</pre>
+975
+976
+977</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 925</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 975</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_file='>file=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -452,12 +476,12 @@ content.</p>
       <pre class="lines">
 
 
-929
-930
-931</pre>
+979
+980
+981</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 929</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 979</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_file_format='>file_format=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file_format'>file_format</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -482,12 +506,12 @@ content.</p>
       <pre class="lines">
 
 
-933
-934
-935</pre>
+983
+984
+985</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 933</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 983</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_id'>locale_id</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -512,18 +536,18 @@ content.</p>
       <pre class="lines">
 
 
-937
-938
-939
-940
-941
-942
-943
-944
-945</pre>
+987
+988
+989
+990
+991
+992
+993
+994
+995</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 937</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 987</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_skip_unverification='>skip_unverification=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -554,18 +578,18 @@ content.</p>
       <pre class="lines">
 
 
-947
-948
-949
-950
-951
-952
-953
-954
-955</pre>
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 947</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 997</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_skip_upload_tags='>skip_upload_tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -596,15 +620,45 @@ content.</p>
       <pre class="lines">
 
 
-957
-958
-959</pre>
+1007
+1008
+1009</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 957</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1007</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tags='>tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tags'>tags</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_h-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_h</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1027
+1028
+1029</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1027</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='ivar'>@table</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -626,18 +680,18 @@ content.</p>
       <pre class="lines">
 
 
-961
-962
-963
-964
-965
-966
-967
-968
-969</pre>
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 961</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1011</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_translations='>update_translations=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -668,14 +722,14 @@ content.</p>
       <pre class="lines">
 
 
-971
-972
-973
-974
-975</pre>
+1021
+1022
+1023
+1024
+1025</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 971</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1021</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='op'>==</span> <span class='kw'>nil</span>
@@ -692,7 +746,7 @@ content.</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Aug 20 17:20:59 2015 by
+  Generated on Tue Sep  8 18:43:18 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.1).
 </div>
