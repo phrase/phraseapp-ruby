@@ -1,4 +1,4 @@
-require 'version'
+require 'phraseapp-ruby/version'
 
 module PhraseApp
 
