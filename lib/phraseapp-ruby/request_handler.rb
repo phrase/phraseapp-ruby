@@ -1,8 +1,6 @@
-require 'phraseapp-ruby/version'
-
 module PhraseApp
 
-  API_CLIENT_IDENTIFIER = "PhraseApp Ruby " + VERSION
+  API_CLIENT_IDENTIFIER = "PhraseApp Ruby #{VERSION}"
 
   module RequestErrors
     class ErrorResponse
