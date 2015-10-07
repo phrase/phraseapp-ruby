@@ -5,8 +5,9 @@ require 'uri'
 require 'cgi'
 require 'json'
 require 'date'
-require File.expand_path('../auth', __FILE__)
-require File.expand_path('../request_handler', __FILE__)
+require 'phraseapp-ruby/auth'
+require 'phraseapp-ruby/request_handler'
+require 'phraseapp-ruby/version'
 
 module PhraseApp
   def self.handle_times(obj)
@@ -14,7 +15,7 @@ module PhraseApp
       if is_a_date?(v)
         obj.send(:"#{k}=", DateTime.parse(v))
       end
-    end    
+    end
   end
 
   def self.is_a_date?(str)
@@ -26,7 +27,7 @@ module PhraseApp
 
 module ResponseObjects
     class AffectedCount < ::OpenStruct
-      #records_affected, 
+      #records_affected,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -34,7 +35,7 @@ module ResponseObjects
     end
 
     class AffectedResources < ::OpenStruct
-      #records_affected, 
+      #records_affected,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -42,7 +43,7 @@ module ResponseObjects
     end
 
     class Authorization < ::OpenStruct
-      #created_at, expires_at, hashed_token, id, note, scopes, token_last_eight, updated_at, 
+      #created_at, expires_at, hashed_token, id, note, scopes, token_last_eight, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -50,7 +51,7 @@ module ResponseObjects
     end
 
     class AuthorizationWithToken < Authorization
-      #token, 
+      #token,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -58,7 +59,7 @@ module ResponseObjects
     end
 
     class BlacklistedKey < ::OpenStruct
-      #created_at, id, name, updated_at, 
+      #created_at, id, name, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -66,7 +67,7 @@ module ResponseObjects
     end
 
     class Comment < ::OpenStruct
-      #created_at, id, message, updated_at, user, 
+      #created_at, id, message, updated_at, user,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -74,7 +75,7 @@ module ResponseObjects
     end
 
     class Format < ::OpenStruct
-      #api_name, default_encoding, default_file, description, exportable, extension, importable, name, 
+      #api_name, default_encoding, default_file, description, exportable, extension, importable, name,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -82,7 +83,7 @@ module ResponseObjects
     end
 
     class KeyPreview < ::OpenStruct
-      #id, name, plural, 
+      #id, name, plural,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -90,7 +91,7 @@ module ResponseObjects
     end
 
     class Locale < ::OpenStruct
-      #code, created_at, default, id, main, name, plural_forms, rtl, source_locale, updated_at, 
+      #code, created_at, default, id, main, name, plural_forms, rtl, source_locale, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -98,7 +99,7 @@ module ResponseObjects
     end
 
     class LocaleDetails < Locale
-      #statistics, 
+      #statistics,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -106,7 +107,7 @@ module ResponseObjects
     end
 
     class LocaleFileImport < ::OpenStruct
-      #created_at, file_format, id, state, updated_at, 
+      #created_at, file_format, id, state, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -114,7 +115,7 @@ module ResponseObjects
     end
 
     class LocaleFileImportWithSummary < LocaleFileImport
-      #summary, 
+      #summary,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -122,7 +123,7 @@ module ResponseObjects
     end
 
     class LocalePreview < ::OpenStruct
-      #code, id, name, 
+      #code, id, name,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -130,7 +131,7 @@ module ResponseObjects
     end
 
     class LocaleStatistics < ::OpenStruct
-      #keys_total_count, keys_untranslated_count, missing_words_count, translations_completed_count, translations_unverified_count, unverified_words_count, words_total_count, 
+      #keys_total_count, keys_untranslated_count, missing_words_count, translations_completed_count, translations_unverified_count, unverified_words_count, words_total_count,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -138,7 +139,7 @@ module ResponseObjects
     end
 
     class Project < ::OpenStruct
-      #created_at, id, main_format, name, updated_at, 
+      #created_at, id, main_format, name, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -146,7 +147,7 @@ module ResponseObjects
     end
 
     class ProjectDetails < Project
-      #shares_translation_memory, 
+      #shares_translation_memory,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -154,7 +155,7 @@ module ResponseObjects
     end
 
     class StatisticsListItem < ::OpenStruct
-      #locale, statistics, 
+      #locale, statistics,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -162,7 +163,7 @@ module ResponseObjects
     end
 
     class StatisticsType < ::OpenStruct
-      #keys_total_count, keys_untranslated_count, translations_completed_count, translations_unverified_count, 
+      #keys_total_count, keys_untranslated_count, translations_completed_count, translations_unverified_count,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -170,7 +171,7 @@ module ResponseObjects
     end
 
     class Styleguide < ::OpenStruct
-      #created_at, id, title, updated_at, 
+      #created_at, id, title, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -178,7 +179,7 @@ module ResponseObjects
     end
 
     class StyleguideDetails < Styleguide
-      #audience, business, company_branding, formatting, glossary_terms, grammar_consistency, grammatical_person, literal_translation, overall_tone, public_url, samples, target_audience, vocabulary_type, 
+      #audience, business, company_branding, formatting, glossary_terms, grammar_consistency, grammatical_person, literal_translation, overall_tone, public_url, samples, target_audience, vocabulary_type,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -186,7 +187,7 @@ module ResponseObjects
     end
 
     class StyleguidePreview < ::OpenStruct
-      #id, title, 
+      #id, title,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -194,7 +195,7 @@ module ResponseObjects
     end
 
     class SummaryType < ::OpenStruct
-      #locales_created, tags_created, translation_keys_created, translations_created, translations_updated, 
+      #locales_created, tags_created, translation_keys_created, translations_created, translations_updated,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -202,7 +203,7 @@ module ResponseObjects
     end
 
     class Tag < ::OpenStruct
-      #created_at, keys_count, name, updated_at, 
+      #created_at, keys_count, name, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -210,7 +211,7 @@ module ResponseObjects
     end
 
     class TagWithStats < Tag
-      #statistics, 
+      #statistics,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -218,7 +219,7 @@ module ResponseObjects
     end
 
     class Translation < ::OpenStruct
-      #content, created_at, excluded, id, key, locale, placeholders, plural_suffix, unverified, updated_at, 
+      #content, created_at, excluded, id, key, locale, placeholders, plural_suffix, unverified, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -226,7 +227,7 @@ module ResponseObjects
     end
 
     class TranslationDetails < Translation
-      #user, word_count, 
+      #user, word_count,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -234,7 +235,7 @@ module ResponseObjects
     end
 
     class TranslationKey < ::OpenStruct
-      #created_at, data_type, description, id, name, name_hash, plural, tags, updated_at, 
+      #created_at, data_type, description, id, name, name_hash, plural, tags, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -242,7 +243,7 @@ module ResponseObjects
     end
 
     class TranslationKeyDetails < TranslationKey
-      #comments_count, format_value_type, max_characters_allowed, name_plural, original_file, screenshot_url, unformatted, xml_space_preserve, 
+      #comments_count, format_value_type, max_characters_allowed, name_plural, original_file, screenshot_url, unformatted, xml_space_preserve,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -250,7 +251,7 @@ module ResponseObjects
     end
 
     class TranslationOrder < ::OpenStruct
-      #amount_in_cents, created_at, currency, id, lsp, message, priority, progress_percent, quality, source_locale, state, styleguide, tag, target_locales, translation_type, unverify_translations_upon_delivery, updated_at, 
+      #amount_in_cents, created_at, currency, id, lsp, message, priority, progress_percent, quality, source_locale, state, styleguide, tag, target_locales, translation_type, unverify_translations_upon_delivery, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -258,7 +259,7 @@ module ResponseObjects
     end
 
     class TranslationVersion < ::OpenStruct
-      #changed_at, content, created_at, id, key, locale, plural_suffix, updated_at, 
+      #changed_at, content, created_at, id, key, locale, plural_suffix, updated_at,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -266,7 +267,7 @@ module ResponseObjects
     end
 
     class TranslationVersionWithUser < TranslationVersion
-      #user, 
+      #user,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -274,7 +275,7 @@ module ResponseObjects
     end
 
     class User < ::OpenStruct
-      #created_at, email, id, name, position, updated_at, username, 
+      #created_at, email, id, name, position, updated_at, username,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -282,14 +283,14 @@ module ResponseObjects
     end
 
     class UserPreview < ::OpenStruct
-      #id, name, username, 
+      #id, name, username,
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
       end
     end
 
-  
+
 end
 
 module RequestParams
@@ -315,7 +316,7 @@ module RequestParams
     end
 
     def validate
-      if self.note == nil || self.note == "" 
+      if self.note == nil || self.note == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"note\" of \"AuthorizationParams\" not set")
       end
     end
@@ -339,7 +340,7 @@ module RequestParams
     end
 
     def validate
-      if self.name == nil || self.name == "" 
+      if self.name == nil || self.name == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"BlacklistedKeyParams\" not set")
       end
     end
@@ -363,7 +364,7 @@ module RequestParams
     end
 
     def validate
-      if self.message == nil || self.message == "" 
+      if self.message == nil || self.message == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"message\" of \"CommentParams\" not set")
       end
     end
@@ -489,7 +490,7 @@ module RequestParams
     end
 
     def validate
-      if self.name == nil || self.name == "" 
+      if self.name == nil || self.name == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"TranslationKeyParams\" not set")
       end
     end
@@ -561,9 +562,9 @@ module RequestParams
     end
 
     def validate
-      if self.code == nil || self.code == "" 
+      if self.code == nil || self.code == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"code\" of \"LocaleParams\" not set")
-      endif self.name == nil || self.name == "" 
+      endif self.name == nil || self.name == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"LocaleParams\" not set")
       end
     end
@@ -689,15 +690,15 @@ module RequestParams
     end
 
     def validate
-      if self.category == nil || self.category == "" 
+      if self.category == nil || self.category == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"category\" of \"TranslationOrderParams\" not set")
-      endif self.lsp == nil || self.lsp == "" 
+      endif self.lsp == nil || self.lsp == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"lsp\" of \"TranslationOrderParams\" not set")
       endif self.source_locale_id == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"source_locale_id\" of \"TranslationOrderParams\" not set")
       endif self.target_locale_ids == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"target_locale_ids\" of \"TranslationOrderParams\" not set")
-      endif self.translation_type == nil || self.translation_type == "" 
+      endif self.translation_type == nil || self.translation_type == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"translation_type\" of \"TranslationOrderParams\" not set")
       end
     end
@@ -739,7 +740,7 @@ module RequestParams
     end
 
     def validate
-      if self.name == nil || self.name == "" 
+      if self.name == nil || self.name == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"ProjectParams\" not set")
       end
     end
@@ -835,7 +836,7 @@ module RequestParams
     end
 
     def validate
-      if self.title == nil || self.title == "" 
+      if self.title == nil || self.title == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"title\" of \"StyleguideParams\" not set")
       end
     end
@@ -859,7 +860,7 @@ module RequestParams
     end
 
     def validate
-      if self.name == nil || self.name == "" 
+      if self.name == nil || self.name == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"TagParams\" not set")
       end
     end
@@ -925,7 +926,7 @@ module RequestParams
     end
 
     def validate
-      if self.content == nil || self.content == "" 
+      if self.content == nil || self.content == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"content\" of \"TranslationParams\" not set")
       endif self.key_id == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"key_id\" of \"TranslationParams\" not set")
@@ -1073,7 +1074,7 @@ module PhraseApp
   end
 
 
-    
+
 
 module RequestParams
   # KeysDeleteParams
@@ -1092,7 +1093,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1132,7 +1133,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1172,7 +1173,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1206,7 +1207,7 @@ module RequestParams
     end
 
     def validate
-      if self.tags == nil || self.tags == "" 
+      if self.tags == nil || self.tags == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_tagParams\" not set")
       end
     end
@@ -1242,7 +1243,7 @@ module RequestParams
     end
 
     def validate
-      if self.tags == nil || self.tags == "" 
+      if self.tags == nil || self.tags == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_untagParams\" not set")
       end
     end
@@ -1332,7 +1333,7 @@ module RequestParams
     end
 
     def validate
-      if self.file_format == nil || self.file_format == "" 
+      if self.file_format == nil || self.file_format == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"file_format\" of \"locale_downloadParams\" not set")
       end
     end
@@ -1386,7 +1387,7 @@ module RequestParams
     end
 
     def validate
-      if self.content == nil || self.content == "" 
+      if self.content == nil || self.content == ""
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"content\" of \"translation_updateParams\" not set")
       end
     end
@@ -1422,7 +1423,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1456,7 +1457,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1490,7 +1491,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1524,7 +1525,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1558,7 +1559,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1592,7 +1593,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1626,7 +1627,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1660,7 +1661,7 @@ module RequestParams
     end
 
     def validate
-      
+
     end
 
     def to_h
@@ -1691,7 +1692,7 @@ end
       @credentials = credentials
     end
 
-  
+
     # Create a new authorization.
     # API Path: /v2/authorizations
     # == Parameters:
@@ -1705,13 +1706,13 @@ end
       path = sprintf("/api/v2/authorizations")
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::AuthorizationParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::AuthorizationParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -1722,10 +1723,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::AuthorizationWithToken.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete an existing authorization. API calls using that token will stop working.
     # API Path: /v2/authorizations/:id
     # == Parameters:
@@ -1738,16 +1739,16 @@ end
       path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Get details on a single authorization.
     # API Path: /v2/authorizations/:id
     # == Parameters:
@@ -1761,16 +1762,16 @@ end
       path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::Authorization.new(JSON.load(rc.body)), err
     end
-  
+
     # Update an existing authorization.
     # API Path: /v2/authorizations/:id
     # == Parameters:
@@ -1786,13 +1787,13 @@ end
       path = sprintf("/api/v2/authorizations/%s", id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::AuthorizationParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::AuthorizationParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -1803,10 +1804,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::Authorization.new(JSON.load(rc.body)), err
     end
-  
+
     # List all your authorizations.
     # API Path: /v2/authorizations
     # == Parameters:
@@ -1818,16 +1819,16 @@ end
       path = sprintf("/api/v2/authorizations")
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Authorization.new(item) }, err
     end
-  
+
     # Create a new rule for blacklisting keys.
     # API Path: /v2/projects/:project_id/blacklisted_keys
     # == Parameters:
@@ -1843,13 +1844,13 @@ end
       path = sprintf("/api/v2/projects/%s/blacklisted_keys", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::BlacklistedKeyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BlacklistedKeyParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -1860,10 +1861,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete an existing rule for blacklisting keys.
     # API Path: /v2/projects/:project_id/blacklisted_keys/:id
     # == Parameters:
@@ -1878,16 +1879,16 @@ end
       path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Get details on a single rule for blacklisting keys for a given project.
     # API Path: /v2/projects/:project_id/blacklisted_keys/:id
     # == Parameters:
@@ -1903,16 +1904,16 @@ end
       path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
     end
-  
+
     # Update an existing rule for blacklisting keys.
     # API Path: /v2/projects/:project_id/blacklisted_keys/:id
     # == Parameters:
@@ -1930,13 +1931,13 @@ end
       path = sprintf("/api/v2/projects/%s/blacklisted_keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::BlacklistedKeyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BlacklistedKeyParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -1947,10 +1948,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::BlacklistedKey.new(JSON.load(rc.body)), err
     end
-  
+
     # List all rules for blacklisting keys for the given project.
     # API Path: /v2/projects/:project_id/blacklisted_keys
     # == Parameters:
@@ -1964,16 +1965,16 @@ end
       path = sprintf("/api/v2/projects/%s/blacklisted_keys", project_id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::BlacklistedKey.new(item) }, err
     end
-  
+
     # Create a new comment for a key.
     # API Path: /v2/projects/:project_id/keys/:key_id/comments
     # == Parameters:
@@ -1991,13 +1992,13 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/comments", project_id, key_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::CommentParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2008,10 +2009,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::Comment.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete an existing comment.
     # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id
     # == Parameters:
@@ -2028,16 +2029,16 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Check if comment was marked as read. Returns 204 if read, 404 if unread.
     # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
     # == Parameters:
@@ -2054,16 +2055,16 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Mark a comment as read.
     # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
     # == Parameters:
@@ -2080,16 +2081,16 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Mark a comment as unread.
     # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
     # == Parameters:
@@ -2106,16 +2107,16 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Get details on a single comment.
     # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id
     # == Parameters:
@@ -2133,16 +2134,16 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::Comment.new(JSON.load(rc.body)), err
     end
-  
+
     # Update an existing comment.
     # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id
     # == Parameters:
@@ -2162,13 +2163,13 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::CommentParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2179,10 +2180,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::Comment.new(JSON.load(rc.body)), err
     end
-  
+
     # List all comments for a key.
     # API Path: /v2/projects/:project_id/keys/:key_id/comments
     # == Parameters:
@@ -2198,16 +2199,16 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/comments", project_id, key_id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Comment.new(item) }, err
     end
-  
+
     # Get a handy list of all localization file formats supported in PhraseApp.
     # API Path: /v2/formats
     # == Parameters:
@@ -2219,16 +2220,16 @@ end
       path = sprintf("/api/v2/formats")
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Format.new(item) }, err
     end
-  
+
     # Create a new key.
     # API Path: /v2/projects/:project_id/keys
     # == Parameters:
@@ -2244,7 +2245,7 @@ end
       path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationKeyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationKeyParams")
@@ -2312,17 +2313,17 @@ end
         data_hash["xml_space_preserve"] = (params.xml_space_preserve == true)
       end
 
-  
-  
+
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationKeyDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete an existing key.
     # API Path: /v2/projects/:project_id/keys/:id
     # == Parameters:
@@ -2337,16 +2338,16 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Get details on a single key for a given project.
     # API Path: /v2/projects/:project_id/keys/:id
     # == Parameters:
@@ -2362,16 +2363,16 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationKeyDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Update an existing key.
     # API Path: /v2/projects/:project_id/keys/:id
     # == Parameters:
@@ -2389,7 +2390,7 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationKeyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationKeyParams")
@@ -2457,17 +2458,17 @@ end
         data_hash["xml_space_preserve"] = (params.xml_space_preserve == true)
       end
 
-  
-  
+
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationKeyDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete all keys matching query. Same constraints as list.
     # API Path: /v2/projects/:project_id/keys
     # == Parameters:
@@ -2483,13 +2484,13 @@ end
       path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::KeysDeleteParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeysDeleteParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2500,10 +2501,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::AffectedResources.new(JSON.load(rc.body)), err
     end
-  
+
     # List all keys for the given project. Alternatively you can POST requests to /search.
     # API Path: /v2/projects/:project_id/keys
     # == Parameters:
@@ -2519,13 +2520,13 @@ end
       path = sprintf("/api/v2/projects/%s/keys", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::KeysListParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeysListParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2536,10 +2537,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::TranslationKey.new(item) }, err
     end
-  
+
     # Search keys for the given project matching query.
     # API Path: /v2/projects/:project_id/keys/search
     # == Parameters:
@@ -2555,13 +2556,13 @@ end
       path = sprintf("/api/v2/projects/%s/keys/search", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::KeysSearchParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeysSearchParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2572,10 +2573,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::TranslationKey.new(item) }, err
     end
-  
+
     # Tags all keys matching query. Same constraints as list.
     # API Path: /v2/projects/:project_id/keys/tag
     # == Parameters:
@@ -2591,13 +2592,13 @@ end
       path = sprintf("/api/v2/projects/%s/keys/tag", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::KeysTagParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeysTagParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2608,10 +2609,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::AffectedResources.new(JSON.load(rc.body)), err
     end
-  
+
     # Removes specified tags from keys matching query.
     # API Path: /v2/projects/:project_id/keys/untag
     # == Parameters:
@@ -2627,13 +2628,13 @@ end
       path = sprintf("/api/v2/projects/%s/keys/untag", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::KeysUntagParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeysUntagParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2644,10 +2645,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::AffectedResources.new(JSON.load(rc.body)), err
     end
-  
+
     # Create a new locale.
     # API Path: /v2/projects/:project_id/locales
     # == Parameters:
@@ -2663,13 +2664,13 @@ end
       path = sprintf("/api/v2/projects/%s/locales", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::LocaleParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2680,10 +2681,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::LocaleDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete an existing locale.
     # API Path: /v2/projects/:project_id/locales/:id
     # == Parameters:
@@ -2698,16 +2699,16 @@ end
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Download a locale in a specific file format.
     # API Path: /v2/projects/:project_id/locales/:id/download
     # == Parameters:
@@ -2724,13 +2725,13 @@ end
       path = sprintf("/api/v2/projects/%s/locales/%s/download", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::LocaleDownloadParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleDownloadParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2744,7 +2745,7 @@ end
       return rc.body
       return err
     end
-  
+
     # Get details on a single locale for a given project.
     # API Path: /v2/projects/:project_id/locales/:id
     # == Parameters:
@@ -2760,16 +2761,16 @@ end
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::LocaleDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Update an existing locale.
     # API Path: /v2/projects/:project_id/locales/:id
     # == Parameters:
@@ -2787,13 +2788,13 @@ end
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::LocaleParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2804,10 +2805,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::LocaleDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # List all locales for the given project.
     # API Path: /v2/projects/:project_id/locales
     # == Parameters:
@@ -2821,16 +2822,16 @@ end
       path = sprintf("/api/v2/projects/%s/locales", project_id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Locale.new(item) }, err
     end
-  
+
     # Confirm an existing order and send it to the provider for translation. Same constraints as for create.
     # API Path: /v2/projects/:project_id/orders/:id/confirm
     # == Parameters:
@@ -2846,16 +2847,16 @@ end
       path = sprintf("/api/v2/projects/%s/orders/%s/confirm", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationOrder.new(JSON.load(rc.body)), err
     end
-  
+
     # Create a new order. Access token scope must include <code>orders.create</code>.
     # API Path: /v2/projects/:project_id/orders
     # == Parameters:
@@ -2871,13 +2872,13 @@ end
       path = sprintf("/api/v2/projects/%s/orders", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationOrderParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationOrderParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2888,10 +2889,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationOrder.new(JSON.load(rc.body)), err
     end
-  
+
     # Cancel an existing order. Must not yet be confirmed.
     # API Path: /v2/projects/:project_id/orders/:id
     # == Parameters:
@@ -2906,16 +2907,16 @@ end
       path = sprintf("/api/v2/projects/%s/orders/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Get details on a single order.
     # API Path: /v2/projects/:project_id/orders/:id
     # == Parameters:
@@ -2931,16 +2932,16 @@ end
       path = sprintf("/api/v2/projects/%s/orders/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationOrder.new(JSON.load(rc.body)), err
     end
-  
+
     # List all orders for the given project.
     # API Path: /v2/projects/:project_id/orders
     # == Parameters:
@@ -2954,16 +2955,16 @@ end
       path = sprintf("/api/v2/projects/%s/orders", project_id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::TranslationOrder.new(item) }, err
     end
-  
+
     # Create a new project.
     # API Path: /v2/projects
     # == Parameters:
@@ -2977,13 +2978,13 @@ end
       path = sprintf("/api/v2/projects")
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::ProjectParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -2994,10 +2995,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::ProjectDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete an existing project.
     # API Path: /v2/projects/:id
     # == Parameters:
@@ -3010,16 +3011,16 @@ end
       path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Get details on a single project.
     # API Path: /v2/projects/:id
     # == Parameters:
@@ -3033,16 +3034,16 @@ end
       path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::ProjectDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Update an existing project.
     # API Path: /v2/projects/:id
     # == Parameters:
@@ -3058,13 +3059,13 @@ end
       path = sprintf("/api/v2/projects/%s", id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::ProjectParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3075,10 +3076,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::ProjectDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # List all projects the current user has access to.
     # API Path: /v2/projects
     # == Parameters:
@@ -3090,16 +3091,16 @@ end
       path = sprintf("/api/v2/projects")
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Project.new(item) }, err
     end
-  
+
     # Show details for current User.
     # API Path: /v2/user
     # == Parameters:
@@ -3111,16 +3112,16 @@ end
       path = sprintf("/api/v2/user")
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::User.new(JSON.load(rc.body)), err
     end
-  
+
     # Create a new style guide.
     # API Path: /v2/projects/:project_id/styleguides
     # == Parameters:
@@ -3136,13 +3137,13 @@ end
       path = sprintf("/api/v2/projects/%s/styleguides", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::StyleguideParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::StyleguideParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3153,10 +3154,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::StyleguideDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete an existing style guide.
     # API Path: /v2/projects/:project_id/styleguides/:id
     # == Parameters:
@@ -3171,16 +3172,16 @@ end
       path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Get details on a single style guide.
     # API Path: /v2/projects/:project_id/styleguides/:id
     # == Parameters:
@@ -3196,16 +3197,16 @@ end
       path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::StyleguideDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Update an existing style guide.
     # API Path: /v2/projects/:project_id/styleguides/:id
     # == Parameters:
@@ -3223,13 +3224,13 @@ end
       path = sprintf("/api/v2/projects/%s/styleguides/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::StyleguideParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::StyleguideParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3240,10 +3241,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::StyleguideDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # List all styleguides for the given project.
     # API Path: /v2/projects/:project_id/styleguides
     # == Parameters:
@@ -3257,16 +3258,16 @@ end
       path = sprintf("/api/v2/projects/%s/styleguides", project_id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Styleguide.new(item) }, err
     end
-  
+
     # Create a new tag.
     # API Path: /v2/projects/:project_id/tags
     # == Parameters:
@@ -3282,13 +3283,13 @@ end
       path = sprintf("/api/v2/projects/%s/tags", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TagParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TagParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3299,10 +3300,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TagWithStats.new(JSON.load(rc.body)), err
     end
-  
+
     # Delete an existing tag.
     # API Path: /v2/projects/:project_id/tags/:name
     # == Parameters:
@@ -3317,16 +3318,16 @@ end
       path = sprintf("/api/v2/projects/%s/tags/%s", project_id, name)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
         return nil, err
       end
-      
+
       return err
     end
-  
+
     # Get details and progress information on a single tag for a given project.
     # API Path: /v2/projects/:project_id/tags/:name
     # == Parameters:
@@ -3342,16 +3343,16 @@ end
       path = sprintf("/api/v2/projects/%s/tags/%s", project_id, name)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TagWithStats.new(JSON.load(rc.body)), err
     end
-  
+
     # List all tags for the given project.
     # API Path: /v2/projects/:project_id/tags
     # == Parameters:
@@ -3365,16 +3366,16 @@ end
       path = sprintf("/api/v2/projects/%s/tags", project_id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Tag.new(item) }, err
     end
-  
+
     # Create a translation.
     # API Path: /v2/projects/:project_id/translations
     # == Parameters:
@@ -3390,13 +3391,13 @@ end
       path = sprintf("/api/v2/projects/%s/translations", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3407,10 +3408,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Get details on a single translation.
     # API Path: /v2/projects/:project_id/translations/:id
     # == Parameters:
@@ -3426,16 +3427,16 @@ end
       path = sprintf("/api/v2/projects/%s/translations/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # Update an existing translation.
     # API Path: /v2/projects/:project_id/translations/:id
     # == Parameters:
@@ -3453,13 +3454,13 @@ end
       path = sprintf("/api/v2/projects/%s/translations/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationUpdateParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationUpdateParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3470,10 +3471,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationDetails.new(JSON.load(rc.body)), err
     end
-  
+
     # List translations for a specific key.
     # API Path: /v2/projects/:project_id/keys/:key_id/translations
     # == Parameters:
@@ -3491,13 +3492,13 @@ end
       path = sprintf("/api/v2/projects/%s/keys/%s/translations", project_id, key_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationsByKeyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationsByKeyParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3508,10 +3509,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Translation.new(item) }, err
     end
-  
+
     # List translations for a specific locale.
     # API Path: /v2/projects/:project_id/locales/:locale_id/translations
     # == Parameters:
@@ -3529,13 +3530,13 @@ end
       path = sprintf("/api/v2/projects/%s/locales/%s/translations", project_id, locale_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationsByLocaleParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationsByLocaleParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3546,10 +3547,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Translation.new(item) }, err
     end
-  
+
     # Exclude translations matching query from locale export.
     # API Path: /v2/projects/:project_id/translations/exclude
     # == Parameters:
@@ -3565,13 +3566,13 @@ end
       path = sprintf("/api/v2/projects/%s/translations/exclude", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationsExcludeParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationsExcludeParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3582,10 +3583,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::AffectedCount.new(JSON.load(rc.body)), err
     end
-  
+
     # Include translations matching query in locale export.
     # API Path: /v2/projects/:project_id/translations/include
     # == Parameters:
@@ -3601,13 +3602,13 @@ end
       path = sprintf("/api/v2/projects/%s/translations/include", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationsIncludeParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationsIncludeParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3618,10 +3619,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::AffectedCount.new(JSON.load(rc.body)), err
     end
-  
+
     # List translations for the given project. Alternatively, POST request to /search
     # API Path: /v2/projects/:project_id/translations
     # == Parameters:
@@ -3637,13 +3638,13 @@ end
       path = sprintf("/api/v2/projects/%s/translations", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationsListParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationsListParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3654,10 +3655,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Translation.new(item) }, err
     end
-  
+
     # List translations for the given project if you exceed GET request limitations on translations list.
     # API Path: /v2/projects/:project_id/translations/search
     # == Parameters:
@@ -3673,13 +3674,13 @@ end
       path = sprintf("/api/v2/projects/%s/translations/search", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationsSearchParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationsSearchParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3690,10 +3691,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Translation.new(item) }, err
     end
-  
+
     # Mark translations matching query as unverified.
     # API Path: /v2/projects/:project_id/translations/unverify
     # == Parameters:
@@ -3709,13 +3710,13 @@ end
       path = sprintf("/api/v2/projects/%s/translations/unverify", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationsUnverifyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationsUnverifyParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3726,10 +3727,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::AffectedCount.new(JSON.load(rc.body)), err
     end
-  
+
     # Verify translations matching query.
     # API Path: /v2/projects/:project_id/translations/verify
     # == Parameters:
@@ -3745,13 +3746,13 @@ end
       path = sprintf("/api/v2/projects/%s/translations/verify", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::TranslationsVerifyParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationsVerifyParams")
         end
       end
-  
+
       data_hash = params.to_h
       err = params.validate
       if err != nil
@@ -3762,10 +3763,10 @@ end
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::AffectedCount.new(JSON.load(rc.body)), err
     end
-  
+
     # Upload a new language file. Creates necessary resources in your project.
     # API Path: /v2/projects/:project_id/uploads
     # == Parameters:
@@ -3781,7 +3782,7 @@ end
       path = sprintf("/api/v2/projects/%s/uploads", project_id)
       data_hash = {}
       post_body = nil
-  
+
       if params.present?
         unless params.kind_of?(PhraseApp::RequestParams::LocaleFileImportParams)
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleFileImportParams")
@@ -3825,17 +3826,17 @@ end
         data_hash["update_translations"] = (params.update_translations == true)
       end
 
-  
-  
+
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::LocaleFileImportWithSummary.new(JSON.load(rc.body)), err
     end
-  
+
     # View details and summary for a single upload.
     # API Path: /v2/projects/:project_id/uploads/:id
     # == Parameters:
@@ -3851,16 +3852,16 @@ end
       path = sprintf("/api/v2/projects/%s/uploads/%s", project_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::LocaleFileImportWithSummary.new(JSON.load(rc.body)), err
     end
-  
+
     # List all uploads for the given project.
     # API Path: /v2/projects/:project_id/uploads
     # == Parameters:
@@ -3874,16 +3875,16 @@ end
       path = sprintf("/api/v2/projects/%s/uploads", project_id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::LocaleFileImportWithSummary.new(item) }, err
     end
-  
+
     # Get details on a single version.
     # API Path: /v2/projects/:project_id/translations/:translation_id/versions/:id
     # == Parameters:
@@ -3901,16 +3902,16 @@ end
       path = sprintf("/api/v2/projects/%s/translations/%s/versions/%s", project_id, translation_id, id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
         return nil, err
       end
-      
+
       return PhraseApp::ResponseObjects::TranslationVersionWithUser.new(JSON.load(rc.body)), err
     end
-  
+
     # List all versions for the given translation.
     # API Path: /v2/projects/:project_id/translations/:translation_id/versions
     # == Parameters:
@@ -3926,16 +3927,16 @@ end
       path = sprintf("/api/v2/projects/%s/translations/%s/versions", project_id, translation_id)
       data_hash = {}
       post_body = nil
-  
+
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
         return nil, err
       end
-      
+
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::TranslationVersion.new(item) }, err
     end
-  
+
   end
 
 end
