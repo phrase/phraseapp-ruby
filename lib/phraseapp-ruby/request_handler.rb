@@ -1,3 +1,5 @@
+require 'phraseapp-ruby/version'
+
 module PhraseApp
 
   API_CLIENT_IDENTIFIER = "PhraseApp Ruby #{VERSION}"

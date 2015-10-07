@@ -94,7 +94,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/request_handler.rb</dd>
+    <dd class="r2 last">lib/phraseapp-ruby/request_handler.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -290,7 +290,7 @@
 51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='rparen'>)</span>
   	  <span class='id identifier rubyid_re'>re</span> <span class='op'>=</span> <span class='const'>RateLimitingError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='rparen'>)</span>
@@ -343,7 +343,7 @@
 44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_limit'>limit</span>
   <span class='ivar'>@limit</span>
@@ -386,7 +386,7 @@
 44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remaining'>remaining</span>
   <span class='ivar'>@remaining</span>
@@ -429,7 +429,7 @@
 44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
   <span class='ivar'>@reset</span>
@@ -466,7 +466,7 @@
 55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/request_handler.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
  <span class='id identifier rubyid_sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Rate limit exceeded: from %d requests %d are remaning (reset in %d seconds)</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_limit'>limit</span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_remaining'>remaining</span><span class='comma'>,</span> <span class='id identifier rubyid_int64'>int64</span><span class='lparen'>(</span><span class='id identifier rubyid_rle'>rle</span><span class='period'>.</span><span class='const'>Reset</span><span class='period'>.</span><span class='const'>Sub</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='const'>Now</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>Seconds</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -481,9 +481,9 @@
 </div>
 
     <div id="footer">
-  Generated on Tue Sep  8 18:43:20 2015 by
+  Generated on Wed Oct  7 14:25:59 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.1).
+  0.8.7.6 (ruby-2.2.3).
 </div>
 
   </body>

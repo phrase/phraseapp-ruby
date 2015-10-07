@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
-  Class: PhraseApp::RequestParams::LocaleDownloadParams
+  Class: PhraseApp::RequestParams::UploadParams
   
     &mdash; Documentation by YARD 0.8.7.6
   
@@ -17,7 +17,7 @@
 <script type="text/javascript" charset="utf-8">
   hasFrames = window.top.frames.main ? true : false;
   relpath = '../../';
-  framesUrl = "../../frames.html#!PhraseApp/RequestParams/LocaleDownloadParams.html";
+  framesUrl = "../../frames.html#!PhraseApp/RequestParams/UploadParams.html";
 </script>
 
 
@@ -31,10 +31,10 @@
     <div id="header">
       <div id="menu">
   
-    <a href="../../_index.html">Index (L)</a> &raquo;
+    <a href="../../_index.html">Index (U)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../RequestParams.html" title="PhraseApp::RequestParams (module)">RequestParams</a></span></span>
      &raquo; 
-    <span class="title">LocaleDownloadParams</span>
+    <span class="title">UploadParams</span>
   
 
   <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
@@ -63,7 +63,7 @@
 
     <iframe id="search_frame"></iframe>
 
-    <div id="content"><h1>Class: PhraseApp::RequestParams::LocaleDownloadParams
+    <div id="content"><h1>Class: PhraseApp::RequestParams::UploadParams
   
   
   
@@ -80,7 +80,7 @@
           
             <li class="next">OpenStruct</li>
           
-            <li class="next">PhraseApp::RequestParams::LocaleDownloadParams</li>
+            <li class="next">PhraseApp::RequestParams::UploadParams</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -104,41 +104,38 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>LocaleDownloadParams</p>
+<p>UploadParams</p>
 
 <h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>convert_emoji
 <dd>
-<p>Indicates whether Emoji symbols should be converted to actual Emojis. &lt;a
-href=“/guides/working-with-phraseapp/emoji-support/”&gt;Working with
+<p>Indicates whether the file contains Emoji symbols that should be converted.
+&lt;a href=“/guides/working-with-phraseapp/emoji-support/”&gt;Working with
 Emojis&lt;/a&gt;.</p>
-</dd><dt>encoding
+</dd><dt>file
 <dd>
-<p>Specify an encoding for the locale file. See the &lt;a
-href=“/guides/formats”&gt;format guide&lt;/a&gt; for a list of supported
-encodings for each format.</p>
+<p>File to be imported</p>
 </dd><dt>file_format
 <dd>
-<p>File format name. See the format guide for all supported file formats.</p>
-</dd><dt>format_options
+<p>File format. Auto-detected when possible and not specified.</p>
+</dd><dt>locale_id
 <dd>
-<p>Additional formatting and render options. See the &lt;a
-href=“/guides/formats”&gt;format guide&lt;/a&gt; for a list of options
-available for each format. Specify format options like this:
-<code>...&amp;format_options[foo]=bar</code></p>
-</dd><dt>include_empty_translations
+<p>Locale of the file&#39;s content. Can be the name or public id of the
+locale. Preferred is the public id.</p>
+</dd><dt>skip_unverification
 <dd>
-<p>Indicates whether keys without translations should be included in the
-output as well.</p>
-</dd><dt>keep_notranslate_tags
+<p>Indicates whether the upload should unverify updated translations.</p>
+</dd><dt>skip_upload_tags
 <dd>
-<p>Indicates whether [NOTRANSLATE] tags should be kept.</p>
-</dd><dt>skip_unverified_translations
+<p>Indicates whether the upload should not create upload tags.</p>
+</dd><dt>tags
 <dd>
-<p>Indicates whether the locale file should skip all unverified translations.</p>
-</dd><dt>tag
+<p>List of tags separated by comma to be associated with the new keys
+contained in the upload.</p>
+</dd><dt>update_translations
 <dd>
-<p>Limit result to keys tagged with the given tag (identified by its name).</p>
+<p>Indicates whether existing translations should be updated with the file
+content.</p>
 </dd></dl>
 
 
@@ -187,7 +184,7 @@ output as well.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#encoding%3D-instance_method" title="#encoding= (instance method)">- (Object) <strong>encoding=</strong>(val) </a>
+      <a href="#file%3D-instance_method" title="#file= (instance method)">- (Object) <strong>file=</strong>(val) </a>
     
 
     
@@ -231,7 +228,7 @@ output as well.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#format_options%3D-instance_method" title="#format_options= (instance method)">- (Object) <strong>format_options=</strong>(val) </a>
+      <a href="#locale_id%3D-instance_method" title="#locale_id= (instance method)">- (Object) <strong>locale_id=</strong>(val) </a>
     
 
     
@@ -253,7 +250,7 @@ output as well.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#include_empty_translations%3D-instance_method" title="#include_empty_translations= (instance method)">- (Object) <strong>include_empty_translations=</strong>(val) </a>
+      <a href="#skip_unverification%3D-instance_method" title="#skip_unverification= (instance method)">- (Object) <strong>skip_unverification=</strong>(val) </a>
     
 
     
@@ -275,7 +272,7 @@ output as well.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#keep_notranslate_tags%3D-instance_method" title="#keep_notranslate_tags= (instance method)">- (Object) <strong>keep_notranslate_tags=</strong>(val) </a>
+      <a href="#skip_upload_tags%3D-instance_method" title="#skip_upload_tags= (instance method)">- (Object) <strong>skip_upload_tags=</strong>(val) </a>
     
 
     
@@ -297,29 +294,7 @@ output as well.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#skip_unverified_translations%3D-instance_method" title="#skip_unverified_translations= (instance method)">- (Object) <strong>skip_unverified_translations=</strong>(val) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#tag%3D-instance_method" title="#tag= (instance method)">- (Object) <strong>tag=</strong>(val) </a>
+      <a href="#tags%3D-instance_method" title="#tags= (instance method)">- (Object) <strong>tags=</strong>(val) </a>
     
 
     
@@ -342,6 +317,28 @@ output as well.</p>
   <span class="summary_signature">
     
       <a href="#to_h-instance_method" title="#to_h (instance method)">- (Object) <strong>to_h</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_translations%3D-instance_method" title="#update_translations= (instance method)">- (Object) <strong>update_translations=</strong>(val) </a>
     
 
     
@@ -407,18 +404,18 @@ output as well.</p>
       <pre class="lines">
 
 
-1330
-1331
-1332
-1333
-1334
-1335
-1336
-1337
-1338</pre>
+967
+968
+969
+970
+971
+972
+973
+974
+975</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1330</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 967</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_convert_emoji='>convert_emoji=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -435,9 +432,9 @@ output as well.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="encoding=-instance_method">
+  <h3 class="signature " id="file=-instance_method">
   
-    - (<tt>Object</tt>) <strong>encoding=</strong>(val) 
+    - (<tt>Object</tt>) <strong>file=</strong>(val) 
   
 
   
@@ -449,15 +446,15 @@ output as well.</p>
       <pre class="lines">
 
 
-1340
-1341
-1342</pre>
+977
+978
+979</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1340</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 977</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_encoding='>encoding=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_encoding'>encoding</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_file='>file=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -479,12 +476,12 @@ output as well.</p>
       <pre class="lines">
 
 
-1344
-1345
-1346</pre>
+981
+982
+983</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1344</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 981</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_file_format='>file_format=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file_format'>file_format</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -495,9 +492,9 @@ output as well.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="format_options=-instance_method">
+  <h3 class="signature " id="locale_id=-instance_method">
   
-    - (<tt>Object</tt>) <strong>format_options=</strong>(val) 
+    - (<tt>Object</tt>) <strong>locale_id=</strong>(val) 
   
 
   
@@ -509,15 +506,15 @@ output as well.</p>
       <pre class="lines">
 
 
-1348
-1349
-1350</pre>
+985
+986
+987</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1348</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 985</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_format_options='>format_options=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_format_options'>format_options</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_id'>locale_id</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -525,9 +522,9 @@ output as well.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="include_empty_translations=-instance_method">
+  <h3 class="signature " id="skip_unverification=-instance_method">
   
-    - (<tt>Object</tt>) <strong>include_empty_translations=</strong>(val) 
+    - (<tt>Object</tt>) <strong>skip_unverification=</strong>(val) 
   
 
   
@@ -539,24 +536,24 @@ output as well.</p>
       <pre class="lines">
 
 
-1352
-1353
-1354
-1355
-1356
-1357
-1358
-1359
-1360</pre>
+989
+990
+991
+992
+993
+994
+995
+996
+997</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1352</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 989</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_include_empty_translations='>include_empty_translations=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_skip_unverification='>skip_unverification=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_include_empty_translations'>include_empty_translations</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_skip_unverification'>skip_unverification</span> <span class='op'>=</span> <span class='kw'>true</span>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>FalseClass</span><span class='rparen'>)</span> <span class='comment'>#ignore
-</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_include_empty_translations'>include_empty_translations</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
+</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_skip_unverification'>skip_unverification</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
   <span class='kw'>else</span>
     <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
@@ -567,9 +564,9 @@ output as well.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="keep_notranslate_tags=-instance_method">
+  <h3 class="signature " id="skip_upload_tags=-instance_method">
   
-    - (<tt>Object</tt>) <strong>keep_notranslate_tags=</strong>(val) 
+    - (<tt>Object</tt>) <strong>skip_upload_tags=</strong>(val) 
   
 
   
@@ -581,24 +578,24 @@ output as well.</p>
       <pre class="lines">
 
 
-1362
-1363
-1364
-1365
-1366
-1367
-1368
-1369
-1370</pre>
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1362</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 999</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_keep_notranslate_tags='>keep_notranslate_tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_skip_upload_tags='>skip_upload_tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keep_notranslate_tags'>keep_notranslate_tags</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_skip_upload_tags'>skip_upload_tags</span> <span class='op'>=</span> <span class='kw'>true</span>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>FalseClass</span><span class='rparen'>)</span> <span class='comment'>#ignore
-</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keep_notranslate_tags'>keep_notranslate_tags</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
+</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_skip_upload_tags'>skip_upload_tags</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
   <span class='kw'>else</span>
     <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
@@ -609,51 +606,9 @@ output as well.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="skip_unverified_translations=-instance_method">
+  <h3 class="signature " id="tags=-instance_method">
   
-    - (<tt>Object</tt>) <strong>skip_unverified_translations=</strong>(val) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-1372
-1373
-1374
-1375
-1376
-1377
-1378
-1379
-1380</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1372</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_skip_unverified_translations='>skip_unverified_translations=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_skip_unverified_translations'>skip_unverified_translations</span> <span class='op'>=</span> <span class='kw'>true</span>
-  <span class='kw'>elsif</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>FalseClass</span><span class='rparen'>)</span> <span class='comment'>#ignore
-</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_skip_unverified_translations'>skip_unverified_translations</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
-  <span class='kw'>else</span>
-    <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="tag=-instance_method">
-  
-    - (<tt>Object</tt>) <strong>tag=</strong>(val) 
+    - (<tt>Object</tt>) <strong>tags=</strong>(val) 
   
 
   
@@ -665,15 +620,15 @@ output as well.</p>
       <pre class="lines">
 
 
-1382
-1383
-1384</pre>
+1009
+1010
+1011</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1382</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1009</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_tag='>tag=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tag'>tag</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_tags='>tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tags'>tags</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -695,15 +650,57 @@ output as well.</p>
       <pre class="lines">
 
 
-1392
-1393
-1394</pre>
+1029
+1030
+1031</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1392</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1029</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
   <span class='ivar'>@table</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_translations=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_translations=</strong>(val) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1013</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_translations='>update_translations=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_update_translations'>update_translations</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>FalseClass</span><span class='rparen'>)</span> <span class='comment'>#ignore
+</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_update_translations'>update_translations</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
+  <span class='kw'>else</span>
+    <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -725,18 +722,18 @@ output as well.</p>
       <pre class="lines">
 
 
-1386
-1387
-1388
-1389
-1390</pre>
+1023
+1024
+1025
+1026
+1027</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1386</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1023</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
-  <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file_format'>file_format</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file_format'>file_format</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;file_format\&quot; of \&quot;locale_downloadParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='op'>==</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;file\&quot; of \&quot;UploadParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
