@@ -54,30 +54,11 @@ The actions are generated automatically from our API specification, so once you 
 
 ## OpenSSL
 
-Please note that outdated certificates or old versions of OpenSSL may cause connection issues, especially on Mac OSX. We recommend using Ruby 2.2.2 with OpenSSL 1.0.2d or later. If you experience OpenSSL-related errors, try the following.
+Please note that OpenSSL may cause issues, especially on MacOS X. The following error patterns might be seen:
 
-Upgrade OpenSSL using Homebrew:
+* `certificate verification failed`: On MacOS X this might be caused by [rvm](http://rvm.io) binary releases trying to fiddle with root certificates. Using `rvm install ruby-2.2.3 --disable-binary` fixes the issue. If you already had installed the rvm binaries it might be necessary to reinstall openssl and removing artifacts (like `/etc/openssl` and `/usr/local/etc/openssl`).
+* `handshake failure`: This is most probably related to an outdated version of OpenSSL that tries to initiate a connection using SSLv2/v3 which is not supported by our servers. Updating OpenSSL to version 1.0.2d or later should be sufficient.
 
-```shell
-$ brew upgrade openssl
-$ brew install openssl
-```
-
-If you are using RVM, also run:
-
-```shell
-$ rvm osx-ssl-certs status all
-$ rvm osx-ssl-certs update all
-````
-
-As a workaround, you can disable certificate verification in the Credentials:
-
-```ruby
-credentials = PhraseApp::Auth::Credentials.new(token: "YOUR_ACCESS_TOKEN", skip_ssl_verification: true)
-client = PhraseApp::Client.new(credentials)
-```
-
-This is **not recommended** and should only be used as a temporary workaround.
 
 ## Contributing 
 
