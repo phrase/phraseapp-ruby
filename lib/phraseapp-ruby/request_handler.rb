@@ -170,7 +170,7 @@ module PhraseApp
 		    end
     		return e
       when 429
-		    e, err = PhraseApp::RequestErrors::RateLimitError.new(resp)
+		    e, err = PhraseApp::RequestErrors::RateLimitingError.new(resp)
         if err != nil
     			return err
         end
