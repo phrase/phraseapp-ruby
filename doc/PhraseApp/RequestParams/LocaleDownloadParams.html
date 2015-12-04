@@ -110,20 +110,25 @@
 <dl class="rdoc-list note-list"><dt>convert_emoji
 <dd>
 <p>Indicates whether Emoji symbols should be converted to actual Emojis. &lt;a
-href=“/guides/working-with-phraseapp/emoji-support/”&gt;Working with
+href=“guides/working-with-phraseapp/emoji-support/”&gt;Working with
 Emojis&lt;/a&gt;.</p>
 </dd><dt>encoding
 <dd>
 <p>Specify an encoding for the locale file. See the &lt;a
-href=“/guides/formats”&gt;format guide&lt;/a&gt; for a list of supported
+href=“guides/formats”&gt;format guide&lt;/a&gt; for a list of supported
 encodings for each format.</p>
+</dd><dt>fallback_locale_id
+<dd>
+<p>If a key has no translation in the locale being downloaded the translation
+in the fallback locale will be used. Provide the public ID of the locale
+that should be used as the fallback.</p>
 </dd><dt>file_format
 <dd>
 <p>File format name. See the format guide for all supported file formats.</p>
 </dd><dt>format_options
 <dd>
 <p>Additional formatting and render options. See the &lt;a
-href=“/guides/formats”&gt;format guide&lt;/a&gt; for a list of options
+href=“guides/formats”&gt;format guide&lt;/a&gt; for a list of options
 available for each format. Specify format options like this:
 <code>...&amp;format_options[foo]=bar</code></p>
 </dd><dt>include_empty_translations
@@ -188,6 +193,28 @@ output as well.</p>
   <span class="summary_signature">
     
       <a href="#encoding%3D-instance_method" title="#encoding= (instance method)">- (Object) <strong>encoding=</strong>(val) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fallback_locale_id%3D-instance_method" title="#fallback_locale_id= (instance method)">- (Object) <strong>fallback_locale_id=</strong>(val) </a>
     
 
     
@@ -407,18 +434,18 @@ output as well.</p>
       <pre class="lines">
 
 
-1330
-1331
 1332
 1333
 1334
 1335
 1336
 1337
-1338</pre>
+1338
+1339
+1340</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1330</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1332</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_convert_emoji='>convert_emoji=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -449,15 +476,45 @@ output as well.</p>
       <pre class="lines">
 
 
-1340
-1341
-1342</pre>
+1342
+1343
+1344</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1340</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encoding='>encoding=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_encoding'>encoding</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fallback_locale_id=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>fallback_locale_id=</strong>(val) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1346
+1347
+1348</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1346</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_fallback_locale_id='>fallback_locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_fallback_locale_id'>fallback_locale_id</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -479,12 +536,12 @@ output as well.</p>
       <pre class="lines">
 
 
-1344
-1345
-1346</pre>
+1350
+1351
+1352</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1344</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1350</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_file_format='>file_format=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file_format'>file_format</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -509,12 +566,12 @@ output as well.</p>
       <pre class="lines">
 
 
-1348
-1349
-1350</pre>
+1354
+1355
+1356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1348</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1354</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_format_options='>format_options=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_format_options'>format_options</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -539,18 +596,18 @@ output as well.</p>
       <pre class="lines">
 
 
-1352
-1353
-1354
-1355
-1356
-1357
 1358
 1359
-1360</pre>
+1360
+1361
+1362
+1363
+1364
+1365
+1366</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1352</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1358</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_include_empty_translations='>include_empty_translations=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -581,18 +638,18 @@ output as well.</p>
       <pre class="lines">
 
 
-1362
-1363
-1364
-1365
-1366
-1367
 1368
 1369
-1370</pre>
+1370
+1371
+1372
+1373
+1374
+1375
+1376</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1362</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1368</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_keep_notranslate_tags='>keep_notranslate_tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -623,18 +680,18 @@ output as well.</p>
       <pre class="lines">
 
 
-1372
-1373
-1374
-1375
-1376
-1377
 1378
 1379
-1380</pre>
+1380
+1381
+1382
+1383
+1384
+1385
+1386</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1372</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1378</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_skip_unverified_translations='>skip_unverified_translations=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -665,12 +722,12 @@ output as well.</p>
       <pre class="lines">
 
 
-1382
-1383
-1384</pre>
+1388
+1389
+1390</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1382</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1388</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tag='>tag=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tag'>tag</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -695,12 +752,12 @@ output as well.</p>
       <pre class="lines">
 
 
-1392
-1393
-1394</pre>
+1398
+1399
+1400</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1392</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1398</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
   <span class='ivar'>@table</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
@@ -725,14 +782,14 @@ output as well.</p>
       <pre class="lines">
 
 
-1386
-1387
-1388
-1389
-1390</pre>
+1392
+1393
+1394
+1395
+1396</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1386</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1392</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file_format'>file_format</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_file_format'>file_format</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
@@ -749,9 +806,9 @@ output as well.</p>
 </div>
 
     <div id="footer">
-  Generated on Wed Oct  7 14:25:58 2015 by
+  Generated on Fri Dec  4 13:52:14 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.2.1).
 </div>
 
   </body>

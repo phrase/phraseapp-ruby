@@ -116,7 +116,7 @@
         <dt id="VERSION-constant" class="">VERSION =
           
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1.2.1</span><span class='tstring_end'>&#39;</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1.2.2</span><span class='tstring_end'>&#39;</span></span></pre></dd>
       
         <dt id="API_CLIENT_IDENTIFIER-constant" class="">API_CLIENT_IDENTIFIER =
           
@@ -356,6 +356,8 @@
       <pre class="lines">
 
 
+155
+156
 157
 158
 159
@@ -378,12 +380,10 @@
 176
 177
 178
-179
-180
-181</pre>
+179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_handleResponseStatus'>handleResponseStatus</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='comma'>,</span> <span class='id identifier rubyid_expectedStatus'>expectedStatus</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_resp'>resp</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
@@ -401,7 +401,7 @@
     <span class='kw'>end</span>
   		<span class='kw'>return</span> <span class='id identifier rubyid_e'>e</span>
     <span class='kw'>when</span> <span class='int'>429</span>
-    <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>RequestErrors</span><span class='op'>::</span><span class='const'>RateLimitError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>RequestErrors</span><span class='op'>::</span><span class='const'>RateLimitingError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='rparen'>)</span>
       <span class='kw'>if</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>!=</span> <span class='kw'>nil</span>
   			<span class='kw'>return</span> <span class='id identifier rubyid_err'>err</span>
       <span class='kw'>end</span>
@@ -430,6 +430,8 @@
       <pre class="lines">
 
 
+114
+115
 116
 117
 118
@@ -467,12 +469,10 @@
 150
 151
 152
-153
-154
-155</pre>
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_http_send'>http_send</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_authenticate'>authenticate</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='rparen'>)</span>
@@ -590,6 +590,8 @@
       <pre class="lines">
 
 
+57
+58
 59
 60
 61
@@ -604,12 +606,10 @@
 70
 71
 72
-73
-74
-75</pre>
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_multipart'>multipart</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_res'>res</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span><span class='op'>|</span>
@@ -648,6 +648,8 @@
       <pre class="lines">
 
 
+88
+89
 90
 91
 92
@@ -670,12 +672,10 @@
 109
 110
 111
-112
-113
-114</pre>
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send_request'>send_request</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_ctype'>ctype</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTPGenericRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span>
@@ -722,6 +722,8 @@
       <pre class="lines">
 
 
+75
+76
 77
 78
 79
@@ -731,12 +733,10 @@
 83
 84
 85
-86
-87
-88</pre>
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby/request_handler.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send_request_paginated'>send_request_paginated</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_path_with_query'>path_with_query</span><span class='comma'>,</span> <span class='id identifier rubyid_ctype'>ctype</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_uri'>uri</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_path_with_query'>path_with_query</span><span class='rparen'>)</span>
@@ -760,9 +760,9 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Oct  7 14:25:57 2015 by
+  Generated on Fri Dec  4 13:52:12 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.2.1).
 </div>
 
   </body>
