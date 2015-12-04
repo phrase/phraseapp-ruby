@@ -42,11 +42,9 @@ module PhraseApp
       attr_accessor :limit, :remaining, :reset
 
       def initialize(resp)
-  	  re = RateLimitingError.new(resp)
-        puts resp.body.inspect
-        re.limit = resp["X-Rate-Limit-Limit"].to_i
-  	    re.remaining = resp["X-Rate-Limit-Remaining"].to_i
-        re.reset = Time.at(resp["X-Rate-Limit-Reset"].to_i)
+        self.limit = resp["X-Rate-Limit-Limit"].to_i
+  	    self.remaining = resp["X-Rate-Limit-Remaining"].to_i
+        self.reset = Time.at(resp["X-Rate-Limit-Reset"].to_i)
       	return re, nil
       end
 
@@ -170,7 +168,7 @@ module PhraseApp
 		    end
     		return e
       when 429
-		    e, err = PhraseApp::RequestErrors::RateLimitError.new(resp)
+		    e, err = PhraseApp::RequestErrors::RateLimitingError.new(resp)
         if err != nil
     			return err
         end

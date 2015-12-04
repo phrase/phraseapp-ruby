@@ -716,7 +716,7 @@ module RequestParams
   # ProjectParams
   # == Parameters:
   # main_format::
-  #   Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="/guides/formats/">Format Guide</a> or our <a href="https://api.phraseapp.com/api/v2/formats">Formats API Endpoint</a>.
+  #   Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="guides/formats/">Format Guide</a> or our <a href="https://api.phraseapp.com/api/v2/formats">Formats API Endpoint</a>.
   # name::
   #   Name of the project
   # shares_translation_memory::
@@ -948,7 +948,7 @@ module RequestParams
   # UploadParams
   # == Parameters:
   # convert_emoji::
-  #   Indicates whether the file contains Emoji symbols that should be converted. <a href="/guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
+  #   Indicates whether the file contains Emoji symbols that should be converted. <a href="guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
   # file::
   #   File to be imported
   # file_format::
@@ -1311,13 +1311,15 @@ module RequestParams
   # LocaleDownloadParams
   # == Parameters:
   # convert_emoji::
-  #   Indicates whether Emoji symbols should be converted to actual Emojis. <a href="/guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
+  #   Indicates whether Emoji symbols should be converted to actual Emojis. <a href="guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
   # encoding::
-  #   Specify an encoding for the locale file. See the <a href="/guides/formats">format guide</a> for a list of supported encodings for each format.
+  #   Specify an encoding for the locale file. See the <a href="guides/formats">format guide</a> for a list of supported encodings for each format.
+  # fallback_locale_id::
+  #   If a key has no translation in the locale being downloaded the translation in the fallback locale will be used. Provide the public ID of the locale that should be used as the fallback.
   # file_format::
   #   File format name. See the format guide for all supported file formats.
   # format_options::
-  #   Additional formatting and render options. See the <a href="/guides/formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>
+  #   Additional formatting and render options. See the <a href="guides/formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>
   # include_empty_translations::
   #   Indicates whether keys without translations should be included in the output as well.
   # keep_notranslate_tags::
@@ -1339,6 +1341,10 @@ module RequestParams
 
     def encoding=(val)
       self.encoding = val
+    end
+
+    def fallback_locale_id=(val)
+      self.fallback_locale_id = val
     end
 
     def file_format=(val)
