@@ -951,6 +951,8 @@ module RequestParams
   #   Indicates whether the file contains Emoji symbols that should be converted. <a href="guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
   # file::
   #   File to be imported
+  # file_encoding::
+  #   Enforced a specific encoding on the file contents. Valid options are "UTF-8", "UTF-16" and "ISO-8859-1".
   # file_format::
   #   File format. Auto-detected when possible and not specified.
   # locale_id::
@@ -976,6 +978,10 @@ module RequestParams
 
     def file=(val)
       self.file = val
+    end
+
+    def file_encoding=(val)
+      self.file_encoding = val
     end
 
     def file_format=(val)
@@ -1315,7 +1321,7 @@ module RequestParams
   # encoding::
   #   Specify an encoding for the locale file. See the <a href="guides/formats">format guide</a> for a list of supported encodings for each format.
   # fallback_locale_id::
-  #   If a key has no translation in the locale being downloaded the translation in the fallback locale will be used. Provide the public ID of the locale that should be used as the fallback.
+  #   If a key has no translation in the locale being downloaded the translation in the fallback locale will be used. Provide the public ID of the locale that should be used as the fallback. Requires include_empty_translations to be set to <code>true</code>.
   # file_format::
   #   File format name. See the format guide for all supported file formats.
   # format_options::
@@ -3857,6 +3863,10 @@ end
         post_body << "\r\n"
         post_body << File.read(params.file)
         post_body << "\r\n"
+      end
+
+      if params.file_encoding != nil
+        data_hash["file_encoding"] = params.file_encoding
       end
 
       if params.file_format != nil
