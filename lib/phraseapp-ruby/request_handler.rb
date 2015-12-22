@@ -6,9 +6,11 @@ module PhraseApp
 
   module RequestErrors
     class ErrorResponse
-      attr_accessor :message
+      attr_reader :message
 
       def initialize(http_response)
+        hash = JSON.load(http_response.body)
+        self.message = hash['message']
       end
 
       def error
@@ -17,21 +19,24 @@ module PhraseApp
     end
 
     class ValidationErrorResponse
-    	attr_accessor :error_response
-      attr_accessor :errors
+      attr_reader :message
+      attr_reader :errors
 
       def initialize(http_response)
         hash = JSON.load(http_response.body)
-        puts hash.inspect
-      end
-
-      def errors
-        self.error + "\n" + self.errors.join("\n")
+        self.message = hash['message']
+        self.errors = hash['errors'].map { |error| ValidationErrorMessage.new(error) }
       end
     end
 
     class ValidationErrorMessage
-    	attr_accessor :resource, :field, :message
+      attr_reader :resource, :field, :message
+
+      def initialize(error)
+        self.resource = error["resource"]
+        self.field = error["field"]
+        self.message = error["message"]
+      end
 
       def to_s
   	    return sprintf("\t[%s:%s] %s", self.resource, self.field, self.message)
@@ -39,13 +44,12 @@ module PhraseApp
     end
 
     class RateLimitingError
-      attr_accessor :limit, :remaining, :reset
+      attr_reader :limit, :remaining, :reset
 
       def initialize(resp)
         self.limit = resp["X-Rate-Limit-Limit"].to_i
   	    self.remaining = resp["X-Rate-Limit-Remaining"].to_i
         self.reset = Time.at(resp["X-Rate-Limit-Reset"].to_i)
-      	return re, nil
       end
 
       def to_s
@@ -157,22 +161,13 @@ module PhraseApp
       when expectedStatus
 	    	return
       when 400
-    		e = PhraseApp::RequestErrors::ErrorResponse.new(resp)
-		    return e
+        return PhraseApp::RequestErrors::ErrorResponse.new(resp)
       when 404
     		return raise("not found")
       when 422
-    		e = PhraseApp::RequestErrors::ValidationErrorResponse.new(resp)
-		    if e != nil
-    			return e
-		    end
-    		return e
+        return PhraseApp::RequestErrors::ValidationErrorResponse.new(resp)
       when 429
-		    e, err = PhraseApp::RequestErrors::RateLimitingError.new(resp)
-        if err != nil
-    			return err
-        end
-    		return e
+        return PhraseApp::RequestErrors::RateLimitingError.new(resp)
       else
 		    return raise("unexpected status code (#{resp.code}) received; expected #{expectedStatus}")
     end
