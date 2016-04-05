@@ -10,12 +10,10 @@ module PhraseApp
 
       def initialize(http_response)
         hash = JSON.load(http_response.body)
-        self.message = hash['message']
+        @message = hash['message']
       end
 
-      def error
-        self.message
-      end
+      alias_method :error, :message
     end
 
     class ValidationErrorResponse
@@ -24,8 +22,8 @@ module PhraseApp
 
       def initialize(http_response)
         hash = JSON.load(http_response.body)
-        self.message = hash['message']
-        self.errors = hash['errors'].map { |error| ValidationErrorMessage.new(error) }
+        @message = hash['message']
+        @errors = hash['errors'].map { |error| ValidationErrorMessage.new(error) }
       end
     end
 
@@ -33,13 +31,13 @@ module PhraseApp
       attr_reader :resource, :field, :message
 
       def initialize(error)
-        self.resource = error["resource"]
-        self.field = error["field"]
-        self.message = error["message"]
+        @resource = error["resource"]
+        @field = error["field"]
+        @message = error["message"]
       end
 
       def to_s
-  	    return sprintf("\t[%s:%s] %s", self.resource, self.field, self.message)
+        sprintf("\t[%s:%s] %s", self.resource, self.field, self.message)
       end
     end
 
@@ -47,13 +45,13 @@ module PhraseApp
       attr_reader :limit, :remaining, :reset
 
       def initialize(resp)
-        self.limit = resp["X-Rate-Limit-Limit"].to_i
-  	    self.remaining = resp["X-Rate-Limit-Remaining"].to_i
-        self.reset = Time.at(resp["X-Rate-Limit-Reset"].to_i)
+        @limit = resp["X-Rate-Limit-Limit"].to_i
+        @remaining = resp["X-Rate-Limit-Remaining"].to_i
+        @reset = Time.at(resp["X-Rate-Limit-Reset"].to_i)
       end
 
       def to_s
-  	    sprintf("Rate limit exceeded: from %d requests %d are remaning (reset in %d seconds)", self.limit, self.remaining, int64(rle.Reset.Sub(time.Now()).Seconds()))
+        sprintf("Rate limit exceeded: from %d requests %d are remaning (reset in %d seconds)", self.limit, self.remaining, int64(rle.Reset.Sub(time.Now()).Seconds()))
       end
     end
   end
@@ -64,15 +62,8 @@ module PhraseApp
       res << "Content-Disposition: form-data; name=\"#{k}\"\r\n"
       # res << "Content-Type: #{headers["Content-Type"]}\r\n" if headers["Content-Type"]
       res << "\r\n"
-      if v.is_a?(Array)
-        v.each do |vv|
-          res << vv+","
-        end
-        res << "\r\n"
-      else
-        res << "#{v}\r\n"
-      end
-      res
+      res << Array(v).join(',')
+      res << "\r\n"
     end
   end
 
@@ -151,7 +142,7 @@ module PhraseApp
     end
     resp = http.request(req)
 
-  	err = handleResponseStatus(resp, status)
+    err = handleResponseStatus(resp, status)
 
     return resp, err
   end
@@ -159,17 +150,17 @@ module PhraseApp
   def self.handleResponseStatus(resp, expectedStatus)
     case resp.code.to_i
       when expectedStatus
-	    	return
+        return
       when 400
         return PhraseApp::RequestErrors::ErrorResponse.new(resp)
       when 404
-    		return raise("not found")
+        return raise("not found")
       when 422
         return PhraseApp::RequestErrors::ValidationErrorResponse.new(resp)
       when 429
         return PhraseApp::RequestErrors::RateLimitingError.new(resp)
       else
-		    return raise("unexpected status code (#{resp.code}) received; expected #{expectedStatus}")
+        return raise("unexpected status code (#{resp.code}) received; expected #{expectedStatus}")
     end
   end
 end
