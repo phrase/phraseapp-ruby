@@ -15,22 +15,15 @@ module PhraseApp
         @host
       end
 
-      def validate
+      def validate!
         if self.username.to_s == "" && self.token.to_s == ""
-          return raise("either username or token must be given")
-        else
-          return nil
+          raise ValidationError.new("either username or token must be given")
         end
       end
 
       def authenticate(req)
-        if err = load_config
-          return err
-        end
-
-        if err = validate
-          return err
-        end
+        load_config
+        validate!
 
         if self.token && self.token != ""
           req["Authorization"] = "token #{self.token}"
@@ -41,13 +34,11 @@ module PhraseApp
             raise "Multi-Factor Token required in config but not provided." unless self.tfa_token
             req["X-PhraseApp-OTP"] = auth.tfa_token
           end
-        else
-          raise "No authentication present"
         end
 
         return nil
-
       end
+
     private
       def load_config
         path = config
@@ -81,9 +72,10 @@ module PhraseApp
         if configCredentials.debug
           self.debug = configCredentials.debug
         end
-
-        return nil
       end
     end
   end
+end
+
+class ValidationError < StandardError
 end
