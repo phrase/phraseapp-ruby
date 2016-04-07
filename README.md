@@ -59,6 +59,16 @@ Please note that OpenSSL may cause issues, especially on MacOS X. The following 
 * `certificate verification failed`: On MacOS X this might be caused by [rvm](http://rvm.io) binary releases trying to fiddle with root certificates. Using `rvm install ruby-2.2.3 --disable-binary` fixes the issue. If you already had installed the rvm binaries it might be necessary to reinstall openssl and removing artifacts (like `/etc/openssl` and `/usr/local/etc/openssl`).
 * `handshake failure`: This is most probably related to an outdated version of OpenSSL that tries to initiate a connection using SSLv2/v3 which is not supported by our servers. Updating OpenSSL to version 1.0.2d or later should be sufficient.
 
+## Tests
+
+To run the test first install the dependencies
+
+    $ bundle install
+
+and run the tests by 
+
+    $ rake test
+
 
 ## Contributing 
 
