@@ -27,34 +27,31 @@ describe PhraseApp do
     assert_equal ["read", "write"], params.scopes
   end
 
-  it "to_h" do
-    params = PhraseApp::RequestParams::TranslationKeyParams.new
-    assert_raises(PhraseApp::ParamsHelpers::ParamsValidationError) { params.validate }
-    params.data_type = "string"
-    params.max_characters_allowed = "1"
-    expected = {
-      data_type: "string", 
-      description: nil, 
-      localized_format_key: nil, 
-      localized_format_string: nil, 
-      max_characters_allowed: 1, 
-      name: nil, 
-      name_plural: nil, 
-      original_file: nil, 
-      plural: nil, 
-      remove_screenshot: nil, 
-      screenshot: nil, 
-      tags: nil, 
-      unformatted: nil, 
-      xml_space_preserve: nil
-    }
-    assert_equal expected, params.to_h
-  end
-
   it "ResponseObjects::Account can be initialized" do
     date = DateTime.new(2000,1,1)
     h = {created_at: date.to_s}
     response = PhraseApp::ResponseObjects::Account.new(h)
     assert_equal date, response.created_at
+  end
+
+  it "#to_h" do
+    params = PhraseApp::RequestParams::TranslationKeyParams.new
+    assert_raises(PhraseApp::ParamsHelpers::ParamsValidationError) { params.validate }
+    params.data_type = "string"
+    params.max_characters_allowed = "1"
+    expected = {
+      data_type: "string",
+      max_characters_allowed: 1
+    }
+    assert_equal expected, params.to_h
+  end
+
+  it "#validate" do
+    params = PhraseApp::RequestParams::LocaleParams.new
+    assert_raises(PhraseApp::ParamsHelpers::ParamsValidationError) { params.validate }
+    params.name = "English"
+    assert_raises(PhraseApp::ParamsHelpers::ParamsValidationError) { params.validate }
+    params.code = "en"
+    assert_equal nil, params.validate
   end
 end
