@@ -1,6 +1,6 @@
 
 # revision_docs:d104be46bd36f220e2df166ba7d3adb7ee9b1005
-# revision_generator:HEAD/2016-04-20T162751/sacry1
+# revision_generator:HEAD/2016-04-20T163945/sacry1
 
 require 'ostruct'
 require 'net/https'
@@ -343,10 +343,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -369,10 +365,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -393,10 +385,6 @@ module RequestParams
       if message == nil || message == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"message\" of \"CommentParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -523,10 +511,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -598,10 +582,6 @@ module RequestParams
       if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"LocaleParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -740,10 +720,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -788,10 +764,6 @@ module RequestParams
       if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"ProjectParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -888,10 +860,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -912,10 +880,6 @@ module RequestParams
       if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"TagParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -986,10 +950,6 @@ module RequestParams
       if locale_id == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"locale_id\" of \"TranslationParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1092,10 +1052,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1143,10 +1099,6 @@ module RequestParams
       if events == nil || events == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"events\" of \"WebhookParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1217,10 +1169,6 @@ module RequestParams
       
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1256,10 +1204,6 @@ module RequestParams
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1299,10 +1243,6 @@ module RequestParams
       
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1337,10 +1277,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1373,10 +1309,6 @@ module RequestParams
       if tags == nil || tags == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_untagParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1473,10 +1405,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1529,10 +1457,6 @@ module RequestParams
       end
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1562,10 +1486,6 @@ module RequestParams
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1599,10 +1519,6 @@ module RequestParams
       
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1632,10 +1548,6 @@ module RequestParams
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1669,10 +1581,6 @@ module RequestParams
       
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1702,10 +1610,6 @@ module RequestParams
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1739,10 +1643,6 @@ module RequestParams
       
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1774,10 +1674,6 @@ module RequestParams
       
     end
 
-    def to_h
-      @table.dup
-    end
-
   end
 end
 
@@ -1807,10 +1703,6 @@ module RequestParams
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
