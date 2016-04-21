@@ -12,5 +12,5 @@ Gem::Specification.new do |gem|
   gem.summary       = "Interact with the PhraseApp API"
   gem.homepage      = "https://github.com/phrase/phraseapp-ruby"
   gem.files         = `git ls-files ./lib`.split($/)
-  gem.license       = "BSD"
+  gem.license       = "MIT"
 end
