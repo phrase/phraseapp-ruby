@@ -1,4 +1,7 @@
 
+# revision_docs:d104be46bd36f220e2df166ba7d3adb7ee9b1005
+# revision_generator:HEAD/2016-04-20T163945/sacry1
+
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -26,6 +29,22 @@ module PhraseApp
 
 
 module ResponseObjects
+    class Account < ::OpenStruct
+      #created_at, id, name, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class AccountPreview < ::OpenStruct
+      #created_at, id, name, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
     class AffectedCount < ::OpenStruct
       #records_affected, 
       def initialize(hash)
@@ -75,7 +94,7 @@ module ResponseObjects
     end
 
     class Format < ::OpenStruct
-      #api_name, default_encoding, default_file, description, exportable, extension, importable, name, 
+      #api_name, default_encoding, default_file, description, exportable, extension, importable, includes_locale_information, name, renders_default_locale, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -123,7 +142,7 @@ module ResponseObjects
     end
 
     class Project < ::OpenStruct
-      #created_at, id, main_format, name, updated_at, 
+      #account, created_at, id, main_format, name, updated_at, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -304,26 +323,24 @@ module RequestParams
   # scopes::
   #   A list of scopes that the access can be used for.
   class AuthorizationParams < ::OpenStruct
+
     def expires_at=(val)
-      self.expires_at = Time.parse(val)
+      super(DateTime.parse(val))
     end
 
     def note=(val)
-      self.note = val
+      super(val)
     end
 
     def scopes=(val)
-      self.scopes = val.split(',')
+      super(val.split(','))
     end
 
     def validate
-      if self.note == nil || self.note == "" 
+      
+      if note == nil || note == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"note\" of \"AuthorizationParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -336,18 +353,16 @@ module RequestParams
   # name::
   #   Blacklisted key name
   class BlacklistedKeyParams < ::OpenStruct
+
     def name=(val)
-      self.name = val
+      super(val)
     end
 
     def validate
-      if self.name == nil || self.name == "" 
+      
+      if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"BlacklistedKeyParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -360,18 +375,16 @@ module RequestParams
   # message::
   #   Comment message
   class CommentParams < ::OpenStruct
+
     def message=(val)
-      self.message = val
+      super(val)
     end
 
     def validate
-      if self.message == nil || self.message == "" 
+      
+      if message == nil || message == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"message\" of \"CommentParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -410,43 +423,44 @@ module RequestParams
   # xml_space_preserve::
   #   Indicates whether the key should be exported with "xml:space=preserve". Supported by several XML-based formats.
   class TranslationKeyParams < ::OpenStruct
+
     def data_type=(val)
-      self.data_type = val
+      super(val)
     end
 
     def description=(val)
-      self.description = val
+      super(val)
     end
 
     def localized_format_key=(val)
-      self.localized_format_key = val
+      super(val)
     end
 
     def localized_format_string=(val)
-      self.localized_format_string = val
+      super(val)
     end
 
     def max_characters_allowed=(val)
-      self.max_characters_allowed = i.to_u
+      super(val.to_i)
     end
 
     def name=(val)
-      self.name = val
+      super(val)
     end
 
     def name_plural=(val)
-      self.name_plural = val
+      super(val)
     end
 
     def original_file=(val)
-      self.original_file = val
+      super(val)
     end
 
     def plural=(val)
       if val.is_a?(TrueClass)
-        self.plural = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.plural = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -454,27 +468,27 @@ module RequestParams
 
     def remove_screenshot=(val)
       if val.is_a?(TrueClass)
-        self.remove_screenshot = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.remove_screenshot = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def screenshot=(val)
-      self.screenshot = val
+      super(val)
     end
 
     def tags=(val)
-      self.tags = val
+      super(val)
     end
 
     def unformatted=(val)
       if val.is_a?(TrueClass)
-        self.unformatted = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.unformatted = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -482,22 +496,19 @@ module RequestParams
 
     def xml_space_preserve=(val)
       if val.is_a?(TrueClass)
-        self.xml_space_preserve = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.xml_space_preserve = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def validate
-      if self.name == nil || self.name == "" 
+      
+      if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"TranslationKeyParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -520,15 +531,16 @@ module RequestParams
   # source_locale_id::
   #   Source locale. Can be the name or public id of the locale. Preferred is the public id.
   class LocaleParams < ::OpenStruct
+
     def code=(val)
-      self.code = val
+      super(val)
     end
 
     def default=(val)
       if val.is_a?(TrueClass)
-        self.default = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.default = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -536,42 +548,40 @@ module RequestParams
 
     def main=(val)
       if val.is_a?(TrueClass)
-        self.main = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.main = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def name=(val)
-      self.name = val
+      super(val)
     end
 
     def rtl=(val)
       if val.is_a?(TrueClass)
-        self.rtl = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.rtl = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def source_locale_id=(val)
-      self.source_locale_id = val
+      super(val)
     end
 
     def validate
-      if self.code == nil || self.code == "" 
+      
+      if code == nil || code == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"code\" of \"LocaleParams\" not set")
-      endif self.name == nil || self.name == "" 
+      end
+      if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"LocaleParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -608,15 +618,16 @@ module RequestParams
   # unverify_translations_upon_delivery::
   #   Unverify translations upon delivery.
   class TranslationOrderParams < ::OpenStruct
+
     def category=(val)
-      self.category = val
+      super(val)
     end
 
     def include_untranslated_keys=(val)
       if val.is_a?(TrueClass)
-        self.include_untranslated_keys = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.include_untranslated_keys = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -624,27 +635,27 @@ module RequestParams
 
     def include_unverified_translations=(val)
       if val.is_a?(TrueClass)
-        self.include_unverified_translations = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.include_unverified_translations = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def lsp=(val)
-      self.lsp = val
+      super(val)
     end
 
     def message=(val)
-      self.message = val
+      super(val)
     end
 
     def priority=(val)
       if val.is_a?(TrueClass)
-        self.priority = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.priority = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -652,60 +663,61 @@ module RequestParams
 
     def quality=(val)
       if val.is_a?(TrueClass)
-        self.quality = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.quality = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def source_locale_id=(val)
-      self.source_locale_id = val
+      super(val)
     end
 
     def styleguide_id=(val)
-      self.styleguide_id = val
+      super(val)
     end
 
     def tag=(val)
-      self.tag = val
+      super(val)
     end
 
     def target_locale_ids=(val)
-      self.target_locale_ids = val.split(',')
+      super(val.split(','))
     end
 
     def translation_type=(val)
-      self.translation_type = val
+      super(val)
     end
 
     def unverify_translations_upon_delivery=(val)
       if val.is_a?(TrueClass)
-        self.unverify_translations_upon_delivery = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.unverify_translations_upon_delivery = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def validate
-      if self.category == nil || self.category == "" 
+      
+      if category == nil || category == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"category\" of \"TranslationOrderParams\" not set")
-      endif self.lsp == nil || self.lsp == "" 
+      end
+      if lsp == nil || lsp == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"lsp\" of \"TranslationOrderParams\" not set")
-      endif self.source_locale_id == nil
+      end
+      if source_locale_id == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"source_locale_id\" of \"TranslationOrderParams\" not set")
-      endif self.target_locale_ids == nil
+      end
+      if target_locale_ids == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"target_locale_ids\" of \"TranslationOrderParams\" not set")
-      endif self.translation_type == nil || self.translation_type == "" 
+      end
+      if translation_type == nil || translation_type == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"translation_type\" of \"TranslationOrderParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -715,6 +727,8 @@ end
 module RequestParams
   # ProjectParams
   # == Parameters:
+  # account_id::
+  #   Account ID to specify the actual account the project should be created in. Required if the requesting user is a member of multiple accounts.
   # main_format::
   #   Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="guides/formats/">Format Guide</a> or our <a href="https://api.phraseapp.com/api/v2/formats">Formats API Endpoint</a>.
   # name::
@@ -722,32 +736,34 @@ module RequestParams
   # shares_translation_memory::
   #   Indicates whether the project should share the account's translation memory
   class ProjectParams < ::OpenStruct
+
+    def account_id=(val)
+      super(val)
+    end
+
     def main_format=(val)
-      self.main_format = val
+      super(val)
     end
 
     def name=(val)
-      self.name = val
+      super(val)
     end
 
     def shares_translation_memory=(val)
       if val.is_a?(TrueClass)
-        self.shares_translation_memory = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.shares_translation_memory = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def validate
-      if self.name == nil || self.name == "" 
+      
+      if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"ProjectParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -784,66 +800,64 @@ module RequestParams
   # vocabulary_type::
   #   Can be one of: not_specified, popular, technical, fictional.
   class StyleguideParams < ::OpenStruct
+
     def audience=(val)
-      self.audience = val
+      super(val)
     end
 
     def business=(val)
-      self.business = val
+      super(val)
     end
 
     def company_branding=(val)
-      self.company_branding = val
+      super(val)
     end
 
     def formatting=(val)
-      self.formatting = val
+      super(val)
     end
 
     def glossary_terms=(val)
-      self.glossary_terms = val
+      super(val)
     end
 
     def grammar_consistency=(val)
-      self.grammar_consistency = val
+      super(val)
     end
 
     def grammatical_person=(val)
-      self.grammatical_person = val
+      super(val)
     end
 
     def literal_translation=(val)
-      self.literal_translation = val
+      super(val)
     end
 
     def overall_tone=(val)
-      self.overall_tone = val
+      super(val)
     end
 
     def samples=(val)
-      self.samples = val
+      super(val)
     end
 
     def target_audience=(val)
-      self.target_audience = val
+      super(val)
     end
 
     def title=(val)
-      self.title = val
+      super(val)
     end
 
     def vocabulary_type=(val)
-      self.vocabulary_type = val
+      super(val)
     end
 
     def validate
-      if self.title == nil || self.title == "" 
+      
+      if title == nil || title == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"title\" of \"StyleguideParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -856,18 +870,16 @@ module RequestParams
   # name::
   #   Name of the tag
   class TagParams < ::OpenStruct
+
     def name=(val)
-      self.name = val
+      super(val)
     end
 
     def validate
-      if self.name == nil || self.name == "" 
+      
+      if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"TagParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -890,54 +902,54 @@ module RequestParams
   # unverified::
   #   Indicates whether translation is unverified.
   class TranslationParams < ::OpenStruct
+
     def content=(val)
-      self.content = val
+      super(val)
     end
 
     def excluded=(val)
       if val.is_a?(TrueClass)
-        self.excluded = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.excluded = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def key_id=(val)
-      self.key_id = val
+      super(val)
     end
 
     def locale_id=(val)
-      self.locale_id = val
+      super(val)
     end
 
     def plural_suffix=(val)
-      self.plural_suffix = val
+      super(val)
     end
 
     def unverified=(val)
       if val.is_a?(TrueClass)
-        self.unverified = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.unverified = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def validate
-      if self.content == nil || self.content == "" 
+      
+      if content == nil || content == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"content\" of \"TranslationParams\" not set")
-      endif self.key_id == nil
+      end
+      if key_id == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"key_id\" of \"TranslationParams\" not set")
-      endif self.locale_id == nil
+      end
+      if locale_id == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"locale_id\" of \"TranslationParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -952,9 +964,11 @@ module RequestParams
   # file::
   #   File to be imported
   # file_encoding::
-  #   Enforced a specific encoding on the file contents. Valid options are "UTF-8", "UTF-16" and "ISO-8859-1".
+  #   Enforces a specific encoding on the file contents. Valid options are "UTF-8", "UTF-16" and "ISO-8859-1".
   # file_format::
   #   File format. Auto-detected when possible and not specified.
+  # format_options::
+  #   Additional options available for specific formats. See our format guide for complete list.
   # locale_id::
   #   Locale of the file's content. Can be the name or public id of the locale. Preferred is the public id.
   # skip_unverification::
@@ -966,37 +980,42 @@ module RequestParams
   # update_translations::
   #   Indicates whether existing translations should be updated with the file content.
   class UploadParams < ::OpenStruct
+
     def convert_emoji=(val)
       if val.is_a?(TrueClass)
-        self.convert_emoji = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.convert_emoji = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def file=(val)
-      self.file = val
+      super(val)
     end
 
     def file_encoding=(val)
-      self.file_encoding = val
+      super(val)
     end
 
     def file_format=(val)
-      self.file_format = val
+      super(val)
+    end
+
+    def format_options=(val)
+      super(JSON.load(val))
     end
 
     def locale_id=(val)
-      self.locale_id = val
+      super(val)
     end
 
     def skip_unverification=(val)
       if val.is_a?(TrueClass)
-        self.skip_unverification = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.skip_unverification = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -1004,36 +1023,33 @@ module RequestParams
 
     def skip_upload_tags=(val)
       if val.is_a?(TrueClass)
-        self.skip_upload_tags = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.skip_upload_tags = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def tags=(val)
-      self.tags = val
+      super(val)
     end
 
     def update_translations=(val)
       if val.is_a?(TrueClass)
-        self.update_translations = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.update_translations = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def validate
-      if self.file == nil
+      
+      if file == nil
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"file\" of \"UploadParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1052,38 +1068,37 @@ module RequestParams
   # events::
   #   List of event names to trigger the webhook (separated by comma)
   class WebhookParams < ::OpenStruct
+
     def active=(val)
       if val.is_a?(TrueClass)
-        self.active = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.active = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def callback_url=(val)
-      self.callback_url = val
+      super(val)
     end
 
     def description=(val)
-      self.description = val
+      super(val)
     end
 
     def events=(val)
-      self.events = val
+      super(val)
     end
 
     def validate
-      if self.callback_url == nil || self.callback_url == "" 
+      
+      if callback_url == nil || callback_url == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"callback_url\" of \"WebhookParams\" not set")
-      endif self.events == nil || self.events == "" 
+      end
+      if events == nil || events == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"events\" of \"WebhookParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1131,7 +1146,7 @@ module PhraseApp
   end
 
 
-    
+  
 
 module RequestParams
   # KeysDeleteParams
@@ -1141,20 +1156,17 @@ module RequestParams
   # q::
   #   q_description_placeholder
   class KeysDeleteParams < ::OpenStruct
+
     def locale_id=(val)
-      self.locale_id = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1173,28 +1185,25 @@ module RequestParams
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysListParams < ::OpenStruct
+
     def locale_id=(val)
-      self.locale_id = val
+      super(val)
     end
 
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1213,28 +1222,25 @@ module RequestParams
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysSearchParams < ::OpenStruct
+
     def locale_id=(val)
-      self.locale_id = val
+      super(val)
     end
 
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1251,26 +1257,24 @@ module RequestParams
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysTagParams < ::OpenStruct
+
     def locale_id=(val)
-      self.locale_id = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def tags=(val)
-      self.tags = val
+      super(val)
     end
 
     def validate
-      if self.tags == nil || self.tags == "" 
+      
+      if tags == nil || tags == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_tagParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1287,26 +1291,24 @@ module RequestParams
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysUntagParams < ::OpenStruct
+
     def locale_id=(val)
-      self.locale_id = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def tags=(val)
-      self.tags = val
+      super(val)
     end
 
     def validate
-      if self.tags == nil || self.tags == "" 
+      
+      if tags == nil || tags == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_untagParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1319,7 +1321,7 @@ module RequestParams
   # convert_emoji::
   #   Indicates whether Emoji symbols should be converted to actual Emojis. <a href="guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
   # encoding::
-  #   Specify an encoding for the locale file. See the <a href="guides/formats">format guide</a> for a list of supported encodings for each format.
+  #   Enforces a specific encoding on the file contents. Valid options are "UTF-8", "UTF-16" and "ISO-8859-1".
   # fallback_locale_id::
   #   If a key has no translation in the locale being downloaded the translation in the fallback locale will be used. Provide the public ID of the locale that should be used as the fallback. Requires include_empty_translations to be set to <code>true</code>.
   # file_format::
@@ -1335,37 +1337,38 @@ module RequestParams
   # tag::
   #   Limit result to keys tagged with the given tag (identified by its name).
   class LocaleDownloadParams < ::OpenStruct
+
     def convert_emoji=(val)
       if val.is_a?(TrueClass)
-        self.convert_emoji = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.convert_emoji = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def encoding=(val)
-      self.encoding = val
+      super(val)
     end
 
     def fallback_locale_id=(val)
-      self.fallback_locale_id = val
+      super(val)
     end
 
     def file_format=(val)
-      self.file_format = val
+      super(val)
     end
 
     def format_options=(val)
-      self.format_options = JSON.load(val)
+      super(JSON.load(val))
     end
 
     def include_empty_translations=(val)
       if val.is_a?(TrueClass)
-        self.include_empty_translations = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.include_empty_translations = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -1373,9 +1376,9 @@ module RequestParams
 
     def keep_notranslate_tags=(val)
       if val.is_a?(TrueClass)
-        self.keep_notranslate_tags = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.keep_notranslate_tags = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
@@ -1383,26 +1386,23 @@ module RequestParams
 
     def skip_unverified_translations=(val)
       if val.is_a?(TrueClass)
-        self.skip_unverified_translations = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.skip_unverified_translations = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def tag=(val)
-      self.tag = val
+      super(val)
     end
 
     def validate
-      if self.file_format == nil || self.file_format == "" 
+      
+      if file_format == nil || file_format == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"file_format\" of \"locale_downloadParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1421,42 +1421,40 @@ module RequestParams
   # unverified::
   #   Indicates whether translation is unverified.
   class TranslationUpdateParams < ::OpenStruct
+
     def content=(val)
-      self.content = val
+      super(val)
     end
 
     def excluded=(val)
       if val.is_a?(TrueClass)
-        self.excluded = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.excluded = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def plural_suffix=(val)
-      self.plural_suffix = val
+      super(val)
     end
 
     def unverified=(val)
       if val.is_a?(TrueClass)
-        self.unverified = true
-      elsif val.is_a?(FalseClass) #ignore
-        self.unverified = b
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
       else
         PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
       end
     end
 
     def validate
-      if self.content == nil || self.content == "" 
+      
+      if content == nil || content == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"content\" of \"translation_updateParams\" not set")
       end
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1473,24 +1471,21 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByKeyParams < ::OpenStruct
+
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1507,24 +1502,21 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByLocaleParams < ::OpenStruct
+
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1541,24 +1533,21 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsExcludeParams < ::OpenStruct
+
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1575,24 +1564,21 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsIncludeParams < ::OpenStruct
+
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1609,24 +1595,21 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsListParams < ::OpenStruct
+
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1643,24 +1626,21 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsSearchParams < ::OpenStruct
+
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1677,24 +1657,21 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsUnverifyParams < ::OpenStruct
+
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -1711,24 +1688,21 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsVerifyParams < ::OpenStruct
+
     def order=(val)
-      self.order = val
+      super(val)
     end
 
     def q=(val)
-      self.q = val
+      super(val)
     end
 
     def sort=(val)
-      self.sort = val
+      super(val)
     end
 
     def validate
       
-    end
-
-    def to_h
-      @table.dup
     end
 
   end
@@ -2532,7 +2506,7 @@ end
       return PhraseApp::ResponseObjects::TranslationKeyDetails.new(JSON.load(rc.body)), err
     end
   
-    # Delete all keys matching query. Same constraints as list.
+    # Delete all keys matching query. Same constraints as list. Please limit the number of affected keys to about 1,000 as you might experience timeouts otherwise.
     # API Path: /v2/projects/:project_id/keys
     # == Parameters:
     # project_id::
@@ -3871,6 +3845,12 @@ end
 
       if params.file_format != nil
         data_hash["file_format"] = params.file_format
+      end
+
+      if params.format_options != nil
+        params.format_options.each do |key, value|
+          data_hash["format_options"][key] = value
+        end
       end
 
       if params.locale_id != nil
