@@ -69,7 +69,7 @@
 
 <p>phraseapp-ruby is not a replacement for the <strong>phrase gem</strong>, it is a pure API client for programmaticly using our features inside your own applications and does not support the push or pull commands for locale files. However, it does support uploading and downloading of single locale files through the according API endpoints.</p>
 
-<p>If you&#39;re looking for a CLI sync command for PhraseApp, please user our official <a href="http://docs.phraseapp.com/guides/working-with-phraseapp/command-line-client">PhraseApp client</a>. The <strong>phrase gem</strong> is deprecated and will be discontinued at the end of 2015.</p>
+<p>If you're looking for a CLI sync command for PhraseApp, please user our official <a href="http://docs.phraseapp.com/guides/working-with-phraseapp/command-line-client">PhraseApp client</a>. The <strong>phrase gem</strong> is deprecated and will be discontinued at the end of 2015.</p>
 
 <h2>Installation</h2>
 
@@ -92,22 +92,28 @@
 
 <p>Setup an <a href="https://phraseapp.com/settings/oauth_access_tokens">Access Token in your PhraseApp user profile</a> for Authentication.</p>
 
-<pre class="code ruby"><code class="ruby"><span class='comment'># Require the gem
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>phraseapp-ruby</span><span class='tstring_end'>&#39;</span></span>
+<p>```ruby</p>
 
-<span class='comment'># Setup Authentication Credentials and Client
-</span><span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>token:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>YOUR_ACCESS_TOKEN</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-<span class='id identifier rubyid_client'>client</span> <span class='op'>=</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span>
+<h1>Require the gem</h1>
 
-<span class='comment'># List projects page 1 and list 10 projects per_page
-</span><span class='id identifier rubyid_rsp'>rsp</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_projects_list'>projects_list</span><span class='lparen'>(</span><span class='int'>1</span><span class='comma'>,</span> <span class='int'>10</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_rsp'>rsp</span>
+<p>require 'phraseapp-ruby'</p>
 
-<span class='comment'># Create a new key
-</span><span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>RequestParams</span><span class='op'>::</span><span class='const'>TranslationKeyParams</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-<span class='id identifier rubyid_rsp'>rsp</span><span class='comma'>,</span> <span class='id identifier rubyid_err'>err</span> <span class='op'>=</span> <span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_key_create'>key_create</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YOUR_PROJECT_ID</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_rsp'>rsp</span>
-</code></pre>
+<h1>Setup Authentication Credentials and Client</h1>
+
+<p>credentials = PhraseApp::Auth::Credentials.new(token: "YOUR_ACCESS_TOKEN")
+client = PhraseApp::Client.new(credentials)</p>
+
+<h1>List projects page 1 and list 10 projects per_page</h1>
+
+<p>rsp, err = client.projects_list(1, 10)
+puts rsp</p>
+
+<h1>Create a new key</h1>
+
+<p>params = PhraseApp::RequestParams::TranslationKeyParams.new(name: "foo")
+rsp, err = client.key_create('YOUR_PROJECT_ID', params)
+puts rsp
+```</p>
 
 <p>There are also other ways of authentication, which are described in our <a href="http://docs.phraseapp.com/api/v2/">API v2 Documentation</a></p>
 
@@ -126,6 +132,19 @@
 <li><code>handshake failure</code>: This is most probably related to an outdated version of OpenSSL that tries to initiate a connection using SSLv2/v3 which is not supported by our servers. Updating OpenSSL to version 1.0.2d or later should be sufficient.</li>
 </ul>
 
+
+<h2>Tests</h2>
+
+<p>To run the test first install the dependencies</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle install
+</code></pre>
+
+<p>and run the tests by</p>
+
+<pre class="code ruby"><code class="ruby">$ rake test
+</code></pre>
+
 <h2>Contributing</h2>
 
 <p>This library is auto-generated from templates that run against a API specification file. Therefore we can not accept any pull requests in this repository. Please use the <a href="https://github.com/phrase/phraseapp-ruby/issues">GitHub Issue Tracker</a> to report bugs.</p>
@@ -137,12 +156,13 @@
 <li><a href="https://phraseapp.com">PhraseApp</a></li>
 <li><a href="http://docs.phraseapp.com/api/v2/">PhraseApp API documentation</a></li>
 </ul>
+
 </div></div>
 
     <div id="footer">
-  Generated on Tue Dec 22 17:27:29 2015 by
+  Generated on Thu Apr 21 13:54:51 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.0).
 </div>
 
   </body>

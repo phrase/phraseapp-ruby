@@ -210,28 +210,6 @@ keys</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_h-instance_method" title="#to_h (instance method)">- (Object) <strong>to_h</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#validate-instance_method" title="#validate (instance method)">- (Object) <strong>validate</strong> </a>
     
 
@@ -276,15 +254,15 @@ keys</p>
       <pre class="lines">
 
 
-1254
-1255
-1256</pre>
+1261
+1262
+1263</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1254</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1261</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_id'>locale_id</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -306,15 +284,15 @@ keys</p>
       <pre class="lines">
 
 
-1258
-1259
-1260</pre>
+1265
+1266
+1267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1258</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1265</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_q'>q</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -336,45 +314,15 @@ keys</p>
       <pre class="lines">
 
 
-1262
-1263
-1264</pre>
+1269
+1270
+1271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1262</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1269</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tags='>tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tags'>tags</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="to_h-instance_method">
-  
-    - (<tt>Object</tt>) <strong>to_h</strong> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-1272
-1273
-1274</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1272</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
-  <span class='ivar'>@table</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -396,17 +344,19 @@ keys</p>
       <pre class="lines">
 
 
-1266
-1267
-1268
-1269
-1270</pre>
+1273
+1274
+1275
+1276
+1277
+1278</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1266</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1273</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
-  <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tags'>tags</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tags'>tags</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
+  
+  <span class='kw'>if</span> <span class='id identifier rubyid_tags'>tags</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='id identifier rubyid_tags'>tags</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;tags\&quot; of \&quot;keys_tagParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -420,9 +370,9 @@ keys</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 22 17:27:31 2015 by
+  Generated on Thu Apr 21 13:54:52 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.0).
 </div>
 
   </body>

@@ -234,28 +234,6 @@ untranslated or translated keys.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_h-instance_method" title="#to_h (instance method)">- (Object) <strong>to_h</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#validate-instance_method" title="#validate (instance method)">- (Object) <strong>validate</strong> </a>
     
 
@@ -300,15 +278,15 @@ untranslated or translated keys.</p>
       <pre class="lines">
 
 
-1216
-1217
-1218</pre>
+1226
+1227
+1228</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1216</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1226</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_locale_id'>locale_id</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -330,15 +308,15 @@ untranslated or translated keys.</p>
       <pre class="lines">
 
 
-1220
-1221
-1222</pre>
+1230
+1231
+1232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1220</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1230</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_order='>order=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -360,15 +338,15 @@ untranslated or translated keys.</p>
       <pre class="lines">
 
 
-1224
-1225
-1226</pre>
+1234
+1235
+1236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1224</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1234</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_q'>q</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -390,45 +368,15 @@ untranslated or translated keys.</p>
       <pre class="lines">
 
 
-1228
-1229
-1230</pre>
+1238
+1239
+1240</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1228</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1238</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sort='>sort=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="to_h-instance_method">
-  
-    - (<tt>Object</tt>) <strong>to_h</strong> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-1236
-1237
-1238</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1236</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
-  <span class='ivar'>@table</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -450,12 +398,12 @@ untranslated or translated keys.</p>
       <pre class="lines">
 
 
-1232
-1233
-1234</pre>
+1242
+1243
+1244</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1232</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1242</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
@@ -470,9 +418,9 @@ untranslated or translated keys.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 22 17:27:31 2015 by
+  Generated on Thu Apr 21 13:54:52 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.0).
 </div>
 
   </body>
