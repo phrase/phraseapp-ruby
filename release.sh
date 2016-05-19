@@ -4,16 +4,16 @@ set -e
 # Usage
 # PUBLISH_GEM=true RELEASE_VERSION=1.2.7 ./release.sh
 
-PHRASEAPP_RUBY_REPO=git@github.com:phrase/phraseapp-ruby.git
-PHRASEAPP_RUBY_TMP=$(mktemp -d /tmp/phraseapp-ruby-lib-XXXX)
+PHRASE_RUBY_REPO=git@github.com:phrase/phraseapp-ruby.git
+PHRASE_RUBY_TMP=$(mktemp -d /tmp/phraseapp-ruby-lib-XXXX)
 
+trap "rm -Rf $PHRASE_RUBY_TMP" EXIT
 
-function cleanup {
-  rm -Rf $PHRASEAPP_RUBY_TMP
-}
+if [[ -z "$PHRASE_RUBY_TMP" ]]; then echo "unable to create tmp dir"; exit 1; fi
+
 
 function write_version {
-cat <<EOF > lib/phraseapp-ruby/version.rb
+cat > lib/phraseapp-ruby/version.rb <<EOF
 module PhraseApp
   VERSION = '${1}'
 end
@@ -32,17 +32,20 @@ function push_to_git {
 }
 
 
-trap "cleanup" EXIT
+git clone $PHRASE_RUBY_REPO $PHRASE_RUBY_TMP
 
-git clone $PHRASEAPP_RUBY_REPO $PHRASEAPP_RUBY_TMP
+pushd $PHRASE_RUBY_TMP > /dev/null
 
-pushd $PHRASEAPP_RUBY_TMP > /dev/null
-
-# test -e fails
+# tese fails
 rake test
 
-current_version=$(cat lib/phraseapp-ruby/version.rb | grep VERSION | cut -d "=" -f 2 | xargs | tr -d '\r')
-RELEASE_VERSION=${RELEASE_VERSION:-$current_version}
+if [[ -z "$RELEASE_VERSION" ]]; then
+  current_version=$(cat lib/phraseapp-ruby/version.rb | grep VERSION | cut -d "=" -f 2 | xargs | tr -d '\r')
+  if [[ -z  ${current_version// /}  ]]; then
+    echo "unable to get version from lib/phraseapp-ruby/version.rb"; exit 1;
+  fi
+  RELEASE_VERSION=$current_version
+fi
 
 # bump version in lib/phraseapp-ruby/version.rb
 write_version $RELEASE_VERSION
