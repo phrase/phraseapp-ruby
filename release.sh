@@ -7,9 +7,9 @@ set -e
 PHRASE_RUBY_REPO=git@github.com:phrase/phraseapp-ruby.git
 PHRASE_RUBY_TMP=$(mktemp -d /tmp/phraseapp-ruby-lib-XXXX)
 
-trap "rm -Rf $PHRASE_RUBY_TMP" EXIT
-
 if [[ -z "$PHRASE_RUBY_TMP" ]]; then echo "unable to create tmp dir"; exit 1; fi
+  
+trap "rm -Rf $PHRASE_RUBY_TMP" EXIT
 
 
 function write_version {
