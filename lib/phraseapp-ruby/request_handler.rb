@@ -37,7 +37,7 @@ module PhraseApp
       end
 
       def to_s
-        sprintf("\t[%s:%s] %s", self.resource, self.field, self.message)
+        sprintf("\t[%s:%s] %s", resource, field, message)
       end
     end
 
@@ -51,7 +51,7 @@ module PhraseApp
       end
 
       def to_s
-        sprintf("Rate limit exceeded: from %d requests %d are remaning (reset in %d seconds)", self.limit, self.remaining, int64(rle.Reset.Sub(time.Now()).Seconds()))
+        sprintf("Rate limit exceeded: from %d requests %d are remaining (reset in %d seconds)", limit, remaining, reset)
       end
     end
   end

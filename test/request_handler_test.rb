@@ -15,6 +15,39 @@ describe PhraseApp do
   end
 end
 
+describe PhraseApp::RequestErrors do
+  let(:error) { 
+    {
+      "resource" => "Locale",
+      "field" => "locale_id",
+      "message" => "locale id is not set"
+    } 
+  }
+
+  let(:validation_error) { 
+    PhraseApp::RequestErrors::ValidationErrorMessage.new(error)
+  }
+
+  it "#to_s" do
+    assert_equal "\t[Locale:locale_id] locale id is not set", validation_error.to_s
+  end
+
+  let(:response) { 
+    {
+      "X-Rate-Limit-Limit" => "200",
+      "X-Rate-Limit-Remaining" => "0",
+      "X-Rate-Limit-Reset" => "200"
+    } 
+  }
+
+  let(:rate_limit_error) { 
+    PhraseApp::RequestErrors::RateLimitingError.new(response)
+  }
+
+  it "#to_s" do
+    assert_equal "Rate limit exceeded: from 200 requests 0 are remaining (reset in 200 seconds)", rate_limit_error.to_s
+  end
+end
 
 describe PhraseApp::RequestErrors::ErrorResponse do
   let(:http_response) { MockResponse.new }
