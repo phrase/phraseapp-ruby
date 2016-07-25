@@ -24,7 +24,7 @@ and install it via
 
 ## Usage
 
-Setup an [Access Token in your PhraseApp user profile](https://phraseapp.com/settings/oauth_access_tokens) for Authentication.
+For usage examples please refer to our [Wiki](https://github.com/phrase/phraseapp-ruby/wiki/Usage-Example) for this. Here is a basic setup with an [Access Token](https://phraseapp.com/settings/oauth_access_tokens) that you can find in your PhraseApp user profile for Authentication.
 
 ```ruby
 # Require the gem
