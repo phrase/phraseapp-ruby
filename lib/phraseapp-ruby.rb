@@ -1,7 +1,6 @@
 
-# revision_docs:d104be46bd36f220e2df166ba7d3adb7ee9b1005
-# revision_generator:HEAD/2016-04-20T163945/sacry1
-
+# revision_docs:4fc36062055363b8fc3e56e08ff53a29eed057ad
+# revision_generator:8509abb5f6ffe365e0c33db40f00f3db0a450671
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -30,15 +29,7 @@ module PhraseApp
 
 module ResponseObjects
     class Account < ::OpenStruct
-      #created_at, id, name, updated_at, 
-      def initialize(hash)
-        super(hash)
-        PhraseApp.handle_times(self)
-      end
-    end
-
-    class AccountPreview < ::OpenStruct
-      #created_at, id, name, updated_at, 
+      #company, created_at, id, name, updated_at, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -101,6 +92,14 @@ module ResponseObjects
       end
     end
 
+    class Invitation < ::OpenStruct
+      #accepted_at, created_at, email, id, locales, projects, role, state, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
     class KeyPreview < ::OpenStruct
       #id, name, plural, 
       def initialize(hash)
@@ -141,6 +140,14 @@ module ResponseObjects
       end
     end
 
+    class Member < ::OpenStruct
+      #email, id, projects, role, username, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
     class Project < ::OpenStruct
       #account, created_at, id, main_format, name, updated_at, 
       def initialize(hash)
@@ -151,6 +158,22 @@ module ResponseObjects
 
     class ProjectDetails < Project
       #shares_translation_memory, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class ProjectShort < ::OpenStruct
+      #created_at, id, main_format, name, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class ProjectLocales < ProjectShort
+      #locales, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -530,6 +553,10 @@ module RequestParams
   #   Indicates whether locale is a RTL (Right-to-Left) locale.
   # source_locale_id::
   #   Source locale. Can be the name or public id of the locale. Preferred is the public id.
+  # unverify_new_translations::
+  #   Indicates that new translations for this locale should be marked as unverified.
+  # unverify_updated_translations::
+  #   Indicates that updated translations for this locale should be marked as unverified.
   class LocaleParams < ::OpenStruct
 
     def code=(val)
@@ -572,6 +599,26 @@ module RequestParams
 
     def source_locale_id=(val)
       super(val)
+    end
+
+    def unverify_new_translations=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def unverify_updated_translations=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
     end
 
     def validate
@@ -1149,6 +1196,83 @@ module PhraseApp
   
 
 module RequestParams
+  # InvitationCreateParams
+  # == Parameters:
+  # email::
+  #   The email of the invited user. The <code>email</code> can not be updated once created. Create a new invitation for each unique email.
+  # locale_ids::
+  #   List of locale ids the invited user has access to.
+  # project_ids::
+  #   List of project ids the invited user has access to.
+  # role::
+  #   Invitiation role, can be any of Manager, Developer, Translator.
+  class InvitationCreateParams < ::OpenStruct
+
+    def email=(val)
+      super(val)
+    end
+
+    def locale_ids=(val)
+      super(val)
+    end
+
+    def project_ids=(val)
+      super(val)
+    end
+
+    def role=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if email == nil || email == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"email\" of \"invitation_createParams\" not set")
+      end
+      if role == nil || role == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"role\" of \"invitation_createParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # InvitationUpdateParams
+  # == Parameters:
+  # locale_ids::
+  #   List of locale ids the invited user has access to
+  # project_ids::
+  #   List of project ids the invited user has access to
+  # role::
+  #   Invitiation role, can be any of Manager, Developer, Translator
+  class InvitationUpdateParams < ::OpenStruct
+
+    def locale_ids=(val)
+      super(val)
+    end
+
+    def project_ids=(val)
+      super(val)
+    end
+
+    def role=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if role == nil || role == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"role\" of \"invitation_updateParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
   # KeysDeleteParams
   # == Parameters:
   # locale_id::
@@ -1402,6 +1526,40 @@ module RequestParams
       
       if file_format == nil || file_format == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"file_format\" of \"locale_downloadParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # MemberUpdateParams
+  # == Parameters:
+  # locale_ids::
+  #   List of locale ids the user has access to.
+  # project_ids::
+  #   List of project ids the user has access to. 
+  # role::
+  #   Member role, can be any of of Manager, Developer, Translator
+  class MemberUpdateParams < ::OpenStruct
+
+    def locale_ids=(val)
+      super(val)
+    end
+
+    def project_ids=(val)
+      super(val)
+    end
+
+    def role=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if role == nil || role == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"role\" of \"member_updateParams\" not set")
       end
     end
 
@@ -1729,6 +1887,50 @@ end
       @credentials = credentials
     end
 
+  
+    # Get details on a single account.
+    # API Path: /v2/accounts/:id
+    # == Parameters:
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Account
+    #   err
+    def account_show(id)
+      path = sprintf("/api/v2/accounts/%s", id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Account.new(JSON.load(rc.body)), err
+    end
+  
+    # List all accounts the current user has access to.
+    # API Path: /v2/accounts
+    # == Parameters:
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Account
+    #   err
+    def accounts_list(page, per_page)
+      path = sprintf("/api/v2/accounts")
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Account.new(item) }, err
+    end
   
     # Create a new authorization.
     # API Path: /v2/authorizations
@@ -2265,6 +2467,177 @@ end
       end
       
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Format.new(item) }, err
+    end
+  
+    # Invite a person to an account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them.
+    # API Path: /v2/accounts/:account_id/invitations
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::InvitationCreateParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Invitation
+    #   err
+    def invitation_create(account_id, params)
+      path = sprintf("/api/v2/accounts/%s/invitations", account_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::InvitationCreateParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::InvitationCreateParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Invitation.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing invitation (must not be accepted yet).
+    # API Path: /v2/accounts/:account_id/invitations/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def invitation_delete(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/invitations/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Resend the invitation email (must not be accepted yet).
+    # API Path: /v2/accounts/:account_id/invitations/:id/resend
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Invitation
+    #   err
+    def invitation_resend(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/invitations/%s/resend", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Invitation.new(JSON.load(rc.body)), err
+    end
+  
+    # Get details on a single invitation.
+    # API Path: /v2/accounts/:account_id/invitations/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Invitation
+    #   err
+    def invitation_show(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/invitations/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Invitation.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing invitation (must not be accepted yet). The <code>email</code> cannot be updated. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them.
+    # API Path: /v2/accounts/:account_id/invitations/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::InvitationUpdateParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Invitation
+    #   err
+    def invitation_update(account_id, id, params)
+      path = sprintf("/api/v2/accounts/%s/invitations/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::InvitationUpdateParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::InvitationUpdateParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Invitation.new(JSON.load(rc.body)), err
+    end
+  
+    # List invitations for an account. It will also list the accessible resources like projects and locales the invited user has access to. In case nothing is shown the default access from the role is used.
+    # API Path: /v2/accounts/:account_id/invitations
+    # == Parameters:
+    # account_id::
+    #   account_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Invitation
+    #   err
+    def invitations_list(account_id, page, per_page)
+      path = sprintf("/api/v2/accounts/%s/invitations", account_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Invitation.new(item) }, err
     end
   
     # Create a new key.
@@ -2867,6 +3240,116 @@ end
       end
       
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Locale.new(item) }, err
+    end
+  
+    # Remove a user from the account. The user will be removed from the account but not deleted from PhraseApp.
+    # API Path: /v2/accounts/:account_id/members/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def member_delete(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/members/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single user in the account.
+    # API Path: /v2/accounts/:account_id/members/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Member
+    #   err
+    def member_show(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/members/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Member.new(JSON.load(rc.body)), err
+    end
+  
+    # Update user permissions in the account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them.
+    # API Path: /v2/accounts/:account_id/members/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::MemberUpdateParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Member
+    #   err
+    def member_update(account_id, id, params)
+      path = sprintf("/api/v2/accounts/%s/members/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::MemberUpdateParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::MemberUpdateParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Member.new(JSON.load(rc.body)), err
+    end
+  
+    # Get all users active in the account. It also lists resources like projects and locales the member has access to. In case nothing is shown the default access from the role is used.
+    # API Path: /v2/accounts/:account_id/members
+    # == Parameters:
+    # account_id::
+    #   account_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Member
+    #   err
+    def members_list(account_id, page, per_page)
+      path = sprintf("/api/v2/accounts/%s/members", account_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Member.new(item) }, err
     end
   
     # Confirm an existing order and send it to the provider for translation. Same constraints as for create.
