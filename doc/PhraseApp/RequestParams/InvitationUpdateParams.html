@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: PhraseApp::RequestParams::KeysDeleteParams
+  Class: PhraseApp::RequestParams::InvitationUpdateParams
   
     &mdash; Documentation by YARD 0.9.5
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "PhraseApp::RequestParams::KeysDeleteParams";
+  pathId = "PhraseApp::RequestParams::InvitationUpdateParams";
   relpath = '../../';
 </script>
 
@@ -36,10 +36,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../../_index.html">Index (K)</a> &raquo;
+    <a href="../../_index.html">Index (I)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../RequestParams.html" title="PhraseApp::RequestParams (module)">RequestParams</a></span></span>
      &raquo; 
-    <span class="title">KeysDeleteParams</span>
+    <span class="title">InvitationUpdateParams</span>
   
 </div>
 
@@ -61,7 +61,7 @@
 
       <iframe id="search_frame" src="../../class_list.html"></iframe>
 
-      <div id="content"><h1>Class: PhraseApp::RequestParams::KeysDeleteParams
+      <div id="content"><h1>Class: PhraseApp::RequestParams::InvitationUpdateParams
   
   
   
@@ -78,7 +78,7 @@
           
             <li class="next">OpenStruct</li>
           
-            <li class="next">PhraseApp::RequestParams::KeysDeleteParams</li>
+            <li class="next">PhraseApp::RequestParams::InvitationUpdateParams</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -106,16 +106,18 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>KeysDeleteParams</p>
+<p>InvitationUpdateParams</p>
 
 <h2 id="label-Parameters-3A">Parameters:</h2>
-<dl class="rdoc-list note-list"><dt>locale_id
+<dl class="rdoc-list note-list"><dt>locale_ids
 <dd>
-<p>Locale used to determine the translation state of a key when filtering for
-untranslated or translated keys.</p>
-</dd><dt>q
+<p>List of locale ids the invited user has access to</p>
+</dd><dt>project_ids
 <dd>
-<p>q_description_placeholder</p>
+<p>List of project ids the invited user has access to</p>
+</dd><dt>role
+<dd>
+<p>Invitiation role, can be any of Manager, Developer, Translator</p>
 </dd></dl>
 
 
@@ -142,7 +144,7 @@ untranslated or translated keys.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#locale_id%3D-instance_method" title="#locale_id= (instance method)">#<strong>locale_id=</strong>(val)  &#x21d2; Object </a>
+      <a href="#locale_ids%3D-instance_method" title="#locale_ids= (instance method)">#<strong>locale_ids=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -164,7 +166,29 @@ untranslated or translated keys.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#q%3D-instance_method" title="#q= (instance method)">#<strong>q=</strong>(val)  &#x21d2; Object </a>
+      <a href="#project_ids%3D-instance_method" title="#project_ids= (instance method)">#<strong>project_ids=</strong>(val)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#role%3D-instance_method" title="#role= (instance method)">#<strong>role=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -216,9 +240,9 @@ untranslated or translated keys.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="locale_id=-instance_method">
+  <h3 class="signature first" id="locale_ids=-instance_method">
   
-    #<strong>locale_id=</strong>(val)  &#x21d2; <tt>Object</tt> 
+    #<strong>locale_ids=</strong>(val)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -230,14 +254,14 @@ untranslated or translated keys.</p>
       <pre class="lines">
 
 
-1284
-1285
-1286</pre>
+1252
+1253
+1254</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1284</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1252</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_locale_ids='>locale_ids=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -246,9 +270,9 @@ untranslated or translated keys.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="q=-instance_method">
+  <h3 class="signature " id="project_ids=-instance_method">
   
-    #<strong>q=</strong>(val)  &#x21d2; <tt>Object</tt> 
+    #<strong>project_ids=</strong>(val)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -260,14 +284,44 @@ untranslated or translated keys.</p>
       <pre class="lines">
 
 
-1288
-1289
-1290</pre>
+1256
+1257
+1258</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1288</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1256</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_project_ids='>project_ids=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="role=-instance_method">
+  
+    #<strong>role=</strong>(val)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1260
+1261
+1262</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1260</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_role='>role=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -290,15 +344,21 @@ untranslated or translated keys.</p>
       <pre class="lines">
 
 
-1292
-1293
-1294</pre>
+1264
+1265
+1266
+1267
+1268
+1269</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1292</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1264</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
+  <span class='kw'>if</span> <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;role\&quot; of \&quot;invitation_updateParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
