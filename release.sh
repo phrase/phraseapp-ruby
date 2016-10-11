@@ -2,65 +2,47 @@
 set -e
 
 # Usage
-# PUBLISH_GEM=true RELEASE_VERSION=1.2.7 ./release.sh
+# PUBLISH_GEM=true GENERATE_LIB=true RELEASE_VERSION=1.3.1 ./release.sh
+
+if [[ -z "$RELEASE_VERSION" ]]; then echo "forgot to set a release version e.g. RELEASE_VERSION=x.y.z - latest version: lib/phraseapp-ruby/version.rb"; exit 1; fi
 
 PHRASE_RUBY_REPO=git@github.com:phrase/phraseapp-ruby.git
 PHRASE_RUBY_TMP=$(mktemp -d /tmp/phraseapp-ruby-lib-XXXX)
 
 if [[ -z "$PHRASE_RUBY_TMP" ]]; then echo "unable to create tmp dir"; exit 1; fi
-  
+
 trap "rm -Rf $PHRASE_RUBY_TMP" EXIT
 
 
-function write_version {
-cat > lib/phraseapp-ruby/version.rb <<EOF
-module PhraseApp
-  VERSION = '${1}'
-end
-EOF
-}
-
-function push_to_git {
-  current_branch=$(git symbolic-ref --short HEAD)
-  if [[ "$current_branch" != "$1" ]]; then
-    git checkout -b $1
-  fi
-
-  git add .
-  git commit -m "version bump: $1"
-  git push origin $1
-}
-
-
+# Release
 git clone $PHRASE_RUBY_REPO $PHRASE_RUBY_TMP
 
 pushd $PHRASE_RUBY_TMP > /dev/null
 
-# tese fails
-rake test
+git checkout -b $RELEASE_VERSION
 
-if [[ -z "$RELEASE_VERSION" ]]; then
-  current_version=$(cat lib/phraseapp-ruby/version.rb | grep VERSION | cut -d "=" -f 2 | xargs | tr -d '\r')
-  if [[ -z  ${current_version// /}  ]]; then
-    echo "unable to get version from lib/phraseapp-ruby/version.rb"; exit 1;
-  fi
-  RELEASE_VERSION=$current_version
+# only generates if pa-client-gen installed and explicitly set
+if [[ "$GENERATE_LIB" == "true" ]]; then
+  pa-client-gen generate ruby lib
 fi
 
 # bump version in lib/phraseapp-ruby/version.rb
-write_version $RELEASE_VERSION
+cat > lib/phraseapp-ruby/version.rb <<EOF
+module PhraseApp
+  VERSION = '${RELEASE_VERSION}'
+end
+EOF
 
-# generate documentation with yard
+rake test
+
 yard doc
 
 # push version bump and documentation to orign/$RELEASE_VERSION
-push_to_git $RELEASE_VERSION
+git add . && git commit -m "version bump: $RELEASE_VERSION" && git push origin $RELEASE_VERSION
 
-# build Gem
-gem build phraseapp-ruby.gemspec
-
-# Publish gem on Ruby Gems
+# only publish gem if explicitly set
 if [[ "$PUBLISH_GEM" == "true" ]]; then
+  gem build phraseapp-ruby.gemspec
   gem push phraseapp-ruby-$RELEASE_VERSION.gem
 fi
 
