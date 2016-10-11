@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: PhraseApp::RequestParams::TranslationsByLocaleParams
+  Class: PhraseApp::RequestParams::GlossaryParams
   
     &mdash; Documentation by YARD 0.9.5
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "PhraseApp::RequestParams::TranslationsByLocaleParams";
+  pathId = "PhraseApp::RequestParams::GlossaryParams";
   relpath = '../../';
 </script>
 
@@ -36,10 +36,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../../_index.html">Index (T)</a> &raquo;
+    <a href="../../_index.html">Index (G)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../RequestParams.html" title="PhraseApp::RequestParams (module)">RequestParams</a></span></span>
      &raquo; 
-    <span class="title">TranslationsByLocaleParams</span>
+    <span class="title">GlossaryParams</span>
   
 </div>
 
@@ -61,7 +61,7 @@
 
       <iframe id="search_frame" src="../../class_list.html"></iframe>
 
-      <div id="content"><h1>Class: PhraseApp::RequestParams::TranslationsByLocaleParams
+      <div id="content"><h1>Class: PhraseApp::RequestParams::GlossaryParams
   
   
   
@@ -78,7 +78,7 @@
           
             <li class="next">OpenStruct</li>
           
-            <li class="next">PhraseApp::RequestParams::TranslationsByLocaleParams</li>
+            <li class="next">PhraseApp::RequestParams::GlossaryParams</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -106,18 +106,15 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>TranslationsByLocaleParams</p>
+<p>GlossaryParams</p>
 
 <h2 id="label-Parameters-3A">Parameters:</h2>
-<dl class="rdoc-list note-list"><dt>order
+<dl class="rdoc-list note-list"><dt>name
 <dd>
-<p>Order direction. Can be one of: asc, desc.</p>
-</dd><dt>q
+<p>Name of the glossary</p>
+</dd><dt>project_ids
 <dd>
-<p>q_description_placeholder</p>
-</dd><dt>sort
-<dd>
-<p>Sort criteria. Can be one of: key_name, created_at, updated_at.</p>
+<p>List of project ids the glossary should be assigned to.</p>
 </dd></dl>
 
 
@@ -144,7 +141,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#order%3D-instance_method" title="#order= (instance method)">#<strong>order=</strong>(val)  &#x21d2; Object </a>
+      <a href="#name%3D-instance_method" title="#name= (instance method)">#<strong>name=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -166,29 +163,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#q%3D-instance_method" title="#q= (instance method)">#<strong>q=</strong>(val)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#sort%3D-instance_method" title="#sort= (instance method)">#<strong>sort=</strong>(val)  &#x21d2; Object </a>
+      <a href="#project_ids%3D-instance_method" title="#project_ids= (instance method)">#<strong>project_ids=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -240,9 +215,9 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="order=-instance_method">
+  <h3 class="signature first" id="name=-instance_method">
   
-    #<strong>order=</strong>(val)  &#x21d2; <tt>Object</tt> 
+    #<strong>name=</strong>(val)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -254,14 +229,14 @@
       <pre class="lines">
 
 
-1796
-1797
-1798</pre>
+450
+451
+452</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1796</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 450</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_order='>order=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_name='>name=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -270,39 +245,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="q=-instance_method">
+  <h3 class="signature " id="project_ids=-instance_method">
   
-    #<strong>q=</strong>(val)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-1800
-1801
-1802</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1800</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="sort=-instance_method">
-  
-    #<strong>sort=</strong>(val)  &#x21d2; <tt>Object</tt> 
+    #<strong>project_ids=</strong>(val)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -314,14 +259,14 @@
       <pre class="lines">
 
 
-1804
-1805
-1806</pre>
+454
+455
+456</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1804</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 454</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_sort='>sort=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_project_ids='>project_ids=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -344,15 +289,21 @@
       <pre class="lines">
 
 
-1808
-1809
-1810</pre>
+458
+459
+460
+461
+462
+463</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1808</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 458</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
+  <span class='kw'>if</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;name\&quot; of \&quot;GlossaryParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -364,7 +315,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Oct 11 12:56:01 2016 by
+  Generated on Tue Oct 11 12:56:00 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>
