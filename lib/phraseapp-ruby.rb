@@ -1,5 +1,5 @@
 
-# revision_docs:4fc36062055363b8fc3e56e08ff53a29eed057ad
+# revision_docs:e5ee68f42b4e4c5990df830df68cd6b57800aa30
 # revision_generator:8509abb5f6ffe365e0c33db40f00f3db0a450671
 require 'ostruct'
 require 'net/https'
@@ -86,6 +86,30 @@ module ResponseObjects
 
     class Format < ::OpenStruct
       #api_name, default_encoding, default_file, description, exportable, extension, importable, includes_locale_information, name, renders_default_locale, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class Glossary < ::OpenStruct
+      #created_at, id, name, projects, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class GlossaryTerm < ::OpenStruct
+      #case_sensitive, created_at, description, id, term, translatable, translations, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class GlossaryTermTranslation < ::OpenStruct
+      #content, created_at, id, locale_code, updated_at, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -407,6 +431,114 @@ module RequestParams
       
       if message == nil || message == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"message\" of \"CommentParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # GlossaryParams
+  # == Parameters:
+  # name::
+  #   Name of the glossary
+  # project_ids::
+  #   List of project ids the glossary should be assigned to.
+  class GlossaryParams < ::OpenStruct
+
+    def name=(val)
+      super(val)
+    end
+
+    def project_ids=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if name == nil || name == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"GlossaryParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # GlossaryTermTranslationParams
+  # == Parameters:
+  # content::
+  #   The content of the translation
+  # locale_code::
+  #   Identifies the language for this translation
+  class GlossaryTermTranslationParams < ::OpenStruct
+
+    def content=(val)
+      super(val)
+    end
+
+    def locale_code=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if locale_code == nil || locale_code == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"locale_code\" of \"GlossaryTermTranslationParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # GlossaryTermParams
+  # == Parameters:
+  # case_sensitive::
+  #   Indicates whether the term is case sensitive
+  # description::
+  #   Description of term
+  # term::
+  #   Glossary term
+  # translatable::
+  #   Indicates whether the term should be used for all languages or can be translated
+  class GlossaryTermParams < ::OpenStruct
+
+    def case_sensitive=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def description=(val)
+      super(val)
+    end
+
+    def term=(val)
+      super(val)
+    end
+
+    def translatable=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def validate
+      
+      if term == nil || term == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"term\" of \"GlossaryTermParams\" not set")
       end
     end
 
@@ -2469,7 +2601,419 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Format.new(item) }, err
     end
   
-    # Invite a person to an account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them.
+    # List all glossaries the current user has access to.
+    # API Path: /v2/accounts/:account_id/glossaries
+    # == Parameters:
+    # account_id::
+    #   account_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Glossary
+    #   err
+    def glossaries_list(account_id, page, per_page)
+      path = sprintf("/api/v2/accounts/%s/glossaries", account_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Glossary.new(item) }, err
+    end
+  
+    # Create a new glossary.
+    # API Path: /v2/accounts/:account_id/glossaries
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::GlossaryParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Glossary
+    #   err
+    def glossary_create(account_id, params)
+      path = sprintf("/api/v2/accounts/%s/glossaries", account_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::GlossaryParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::GlossaryParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Glossary.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing glossary.
+    # API Path: /v2/accounts/:account_id/glossaries/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def glossary_delete(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single glossary.
+    # API Path: /v2/accounts/:account_id/glossaries/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Glossary
+    #   err
+    def glossary_show(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Glossary.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing glossary.
+    # API Path: /v2/accounts/:account_id/glossaries/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::GlossaryParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Glossary
+    #   err
+    def glossary_update(account_id, id, params)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::GlossaryParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::GlossaryParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Glossary.new(JSON.load(rc.body)), err
+    end
+  
+    # Create a new glossary term.
+    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # glossary_id::
+    #   glossary_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::GlossaryTermParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::GlossaryTerm
+    #   err
+    def glossary_term_create(account_id, glossary_id, params)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s/terms", account_id, glossary_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::GlossaryTermParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::GlossaryTermParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::GlossaryTerm.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing glossary term.
+    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # glossary_id::
+    #   glossary_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def glossary_term_delete(account_id, glossary_id, id)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s/terms/%s", account_id, glossary_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single glossary term.
+    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # glossary_id::
+    #   glossary_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::GlossaryTerm
+    #   err
+    def glossary_term_show(account_id, glossary_id, id)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s/terms/%s", account_id, glossary_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::GlossaryTerm.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing glossary term.
+    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # glossary_id::
+    #   glossary_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::GlossaryTermParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::GlossaryTerm
+    #   err
+    def glossary_term_update(account_id, glossary_id, id, params)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s/terms/%s", account_id, glossary_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::GlossaryTermParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::GlossaryTermParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::GlossaryTerm.new(JSON.load(rc.body)), err
+    end
+  
+    # Create a new glossary term translation.
+    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # glossary_id::
+    #   glossary_id
+    # term_id::
+    #   term_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::GlossaryTermTranslationParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::GlossaryTermTranslation
+    #   err
+    def glossary_term_translation_create(account_id, glossary_id, term_id, params)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s/terms/%s/translations", account_id, glossary_id, term_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::GlossaryTermTranslationParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::GlossaryTermTranslationParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::GlossaryTermTranslation.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing glossary term translation.
+    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # glossary_id::
+    #   glossary_id
+    # term_id::
+    #   term_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def glossary_term_translation_delete(account_id, glossary_id, term_id, id)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s/terms/%s/translations/%s", account_id, glossary_id, term_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Update an existing glossary term translation.
+    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # glossary_id::
+    #   glossary_id
+    # term_id::
+    #   term_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::GlossaryTermTranslationParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::GlossaryTermTranslation
+    #   err
+    def glossary_term_translation_update(account_id, glossary_id, term_id, id, params)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s/terms/%s/translations/%s", account_id, glossary_id, term_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::GlossaryTermTranslationParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::GlossaryTermTranslationParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::GlossaryTermTranslation.new(JSON.load(rc.body)), err
+    end
+  
+    # List all glossary terms the current user has access to.
+    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # glossary_id::
+    #   glossary_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::GlossaryTerm
+    #   err
+    def glossary_terms_list(account_id, glossary_id, page, per_page)
+      path = sprintf("/api/v2/accounts/%s/glossaries/%s/terms", account_id, glossary_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::GlossaryTerm.new(item) }, err
+    end
+  
+    # Invite a person to an account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them. Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/invitations
     # == Parameters:
     # account_id::
@@ -2505,7 +3049,7 @@ end
       return PhraseApp::ResponseObjects::Invitation.new(JSON.load(rc.body)), err
     end
   
-    # Delete an existing invitation (must not be accepted yet).
+    # Delete an existing invitation (must not be accepted yet). Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/invitations/:id
     # == Parameters:
     # account_id::
@@ -2529,7 +3073,7 @@ end
       return err
     end
   
-    # Resend the invitation email (must not be accepted yet).
+    # Resend the invitation email (must not be accepted yet). Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/invitations/:id/resend
     # == Parameters:
     # account_id::
@@ -2554,7 +3098,7 @@ end
       return PhraseApp::ResponseObjects::Invitation.new(JSON.load(rc.body)), err
     end
   
-    # Get details on a single invitation.
+    # Get details on a single invitation. Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/invitations/:id
     # == Parameters:
     # account_id::
@@ -2579,7 +3123,7 @@ end
       return PhraseApp::ResponseObjects::Invitation.new(JSON.load(rc.body)), err
     end
   
-    # Update an existing invitation (must not be accepted yet). The <code>email</code> cannot be updated. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them.
+    # Update an existing invitation (must not be accepted yet). The <code>email</code> cannot be updated. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them. Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/invitations/:id
     # == Parameters:
     # account_id::
@@ -2617,7 +3161,7 @@ end
       return PhraseApp::ResponseObjects::Invitation.new(JSON.load(rc.body)), err
     end
   
-    # List invitations for an account. It will also list the accessible resources like projects and locales the invited user has access to. In case nothing is shown the default access from the role is used.
+    # List invitations for an account. It will also list the accessible resources like projects and locales the invited user has access to. In case nothing is shown the default access from the role is used. Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/invitations
     # == Parameters:
     # account_id::
@@ -3242,7 +3786,7 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Locale.new(item) }, err
     end
   
-    # Remove a user from the account. The user will be removed from the account but not deleted from PhraseApp.
+    # Remove a user from the account. The user will be removed from the account but not deleted from PhraseApp. Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/members/:id
     # == Parameters:
     # account_id::
@@ -3266,7 +3810,7 @@ end
       return err
     end
   
-    # Get details on a single user in the account.
+    # Get details on a single user in the account. Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/members/:id
     # == Parameters:
     # account_id::
@@ -3291,7 +3835,7 @@ end
       return PhraseApp::ResponseObjects::Member.new(JSON.load(rc.body)), err
     end
   
-    # Update user permissions in the account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them.
+    # Update user permissions in the account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them. Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/members/:id
     # == Parameters:
     # account_id::
@@ -3329,7 +3873,7 @@ end
       return PhraseApp::ResponseObjects::Member.new(JSON.load(rc.body)), err
     end
   
-    # Get all users active in the account. It also lists resources like projects and locales the member has access to. In case nothing is shown the default access from the role is used.
+    # Get all users active in the account. It also lists resources like projects and locales the member has access to. In case nothing is shown the default access from the role is used. Access token scope must include <code>team.manage</code>.
     # API Path: /v2/accounts/:account_id/members
     # == Parameters:
     # account_id::
