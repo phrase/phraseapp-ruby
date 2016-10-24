@@ -5,7 +5,7 @@ module PhraseApp
   API_CLIENT_IDENTIFIER = "PhraseApp Ruby #{VERSION}"
 
   module RequestErrors
-    class ErrorResponse
+    class ErrorResponse < StandardError
       attr_reader :message
 
       def initialize(http_response)
@@ -16,7 +16,7 @@ module PhraseApp
       alias_method :error, :message
     end
 
-    class ValidationErrorResponse
+    class ValidationErrorResponse < StandardError
       attr_reader :message
       attr_reader :errors
 
@@ -27,7 +27,7 @@ module PhraseApp
       end
     end
 
-    class ValidationErrorMessage
+    class ValidationErrorMessage < StandardError
       attr_reader :resource, :field, :message
 
       def initialize(error)
@@ -41,7 +41,7 @@ module PhraseApp
       end
     end
 
-    class RateLimitingError
+    class RateLimitingError < StandardError
       attr_reader :limit, :remaining, :reset
 
       def initialize(resp)

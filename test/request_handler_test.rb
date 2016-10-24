@@ -15,6 +15,7 @@ describe PhraseApp do
   end
 end
 
+
 describe PhraseApp::RequestErrors do
   let(:error) { 
     {
@@ -25,11 +26,25 @@ describe PhraseApp::RequestErrors do
   }
 
   let(:validation_error) { 
+    PhraseApp::RequestErrors::ValidationErrorResponse.new(MockResponse.new)
+  }
+
+  it "ValidationErrorResponse is a StandardError" do
+    assert_kind_of StandardError, validation_error
+    -> { raise validation_error }.must_raise StandardError
+  end
+
+  let(:validation_error_message) { 
     PhraseApp::RequestErrors::ValidationErrorMessage.new(error)
   }
 
+  it "ValidationErrorMessage is a StandardError" do
+    assert_kind_of StandardError, validation_error_message
+    -> { raise validation_error_message }.must_raise StandardError
+  end
+
   it "#to_s" do
-    assert_equal "\t[Locale:locale_id] locale id is not set", validation_error.to_s
+    assert_equal "\t[Locale:locale_id] locale id is not set", validation_error_message.to_s
   end
 
   let(:response) { 
@@ -44,6 +59,11 @@ describe PhraseApp::RequestErrors do
     PhraseApp::RequestErrors::RateLimitingError.new(response)
   }
 
+  it "RateLimitingError is a StandardError" do
+    assert_kind_of StandardError, rate_limit_error
+    -> { raise rate_limit_error }.must_raise StandardError
+  end
+
   it "#to_s" do
     assert_equal "Rate limit exceeded: from 200 requests 0 are remaining (reset in 200 seconds)", rate_limit_error.to_s
   end
@@ -57,6 +77,11 @@ describe PhraseApp::RequestErrors::ErrorResponse do
       http_response
     )
   }
+
+  it "ErrorResponse is a StandardError" do
+    assert_kind_of StandardError, error_response
+    -> { raise error_response }.must_raise StandardError
+  end
 
   it "error" do
     assert_equal "My Error", error_response.error

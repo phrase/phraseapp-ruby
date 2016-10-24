@@ -1,6 +1,6 @@
 
-# revision_docs:e5ee68f42b4e4c5990df830df68cd6b57800aa30
-# revision_generator:8509abb5f6ffe365e0c33db40f00f3db0a450671
+# revision_docs:22719e50d32eec5ea61ce7b1233b3c8931e93334
+# revision_generator:HEAD/2016-10-24T105550/sacry1
 require 'ostruct'
 require 'net/https'
 require 'uri'
