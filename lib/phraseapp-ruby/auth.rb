@@ -3,6 +3,8 @@ module PhraseApp
   URL = "https://api.phraseapp.com"
 
   module Auth
+    class ValidationError < StandardError
+    end
 
     # See PhraseApp::Client for usage example
     class Credentials < OpenStruct
@@ -17,7 +19,7 @@ module PhraseApp
 
       def validate!
         if self.username.to_s == "" && self.token.to_s == ""
-          raise ValidationError.new("either username or token must be given")
+          raise PhraseApp::Auth::ValidationError.new("either username or token must be given")
         end
       end
 
@@ -75,7 +77,4 @@ module PhraseApp
       end
     end
   end
-end
-
-class ValidationError < StandardError
 end

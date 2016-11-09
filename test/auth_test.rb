@@ -40,11 +40,11 @@ describe PhraseApp::Auth::Credentials do
       token: "",
       username: ""
     )
-    assert_raises(ValidationError) { invalid_credentials.validate! }
+    assert_raises(PhraseApp::Auth::ValidationError) { invalid_credentials.validate! }
   end
 
   it "if not username or token given authenticate should raise" do
     nil_credentials = PhraseApp::Auth::Credentials.new
-    assert_raises(ValidationError) { nil_credentials.authenticate(nil) }
+    assert_raises(PhraseApp::Auth::ValidationError) { nil_credentials.authenticate(nil) }
   end
 end
