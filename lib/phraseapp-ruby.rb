@@ -1,6 +1,7 @@
 
-# revision_docs:22719e50d32eec5ea61ce7b1233b3c8931e93334
-# revision_generator:HEAD/2016-10-24T105550/sacry1
+
+# revision_docs:72ae3531d8460b33c6cb4a87636e7fcc66e37447
+# revision_generator:ceb47e5be23d139da3a18a815c6da3ac70d0b412
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -1156,6 +1157,8 @@ module RequestParams
   #   Indicates whether the upload should not create upload tags.
   # tags::
   #   List of tags separated by comma to be associated with the new keys contained in the upload.
+  # update_descriptions::
+  #   Existing key descriptions will be updated with the file content. Empty descriptions overwrite existing descriptions.
   # update_translations::
   #   Indicates whether existing translations should be updated with the file content.
   class UploadParams < ::OpenStruct
@@ -1212,6 +1215,16 @@ module RequestParams
 
     def tags=(val)
       super(val)
+    end
+
+    def update_descriptions=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
     end
 
     def update_translations=(val)
@@ -4894,6 +4907,10 @@ end
 
       if params.tags != nil
         data_hash["tags"] = params.tags
+      end
+
+      if params.update_descriptions != nil
+        data_hash["update_descriptions"] = (params.update_descriptions == true)
       end
 
       if params.update_translations != nil
