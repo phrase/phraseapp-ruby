@@ -1,3 +1,3 @@
 module PhraseApp
-  VERSION = '1.3.3'
+  VERSION = '1.5.0'
 end

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: PhraseApp::RequestParams::KeysTagParams
+  Class: PhraseApp::RequestParams::JobLocaleParams
   
     &mdash; Documentation by YARD 0.9.9
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "PhraseApp::RequestParams::KeysTagParams";
+  pathId = "PhraseApp::RequestParams::JobLocaleParams";
   relpath = '../../';
 </script>
 
@@ -36,10 +36,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../../_index.html">Index (K)</a> &raquo;
+    <a href="../../_index.html">Index (J)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../RequestParams.html" title="PhraseApp::RequestParams (module)">RequestParams</a></span></span>
      &raquo; 
-    <span class="title">KeysTagParams</span>
+    <span class="title">JobLocaleParams</span>
   
 </div>
 
@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Class: PhraseApp::RequestParams::KeysTagParams
+      <div id="content"><h1>Class: PhraseApp::RequestParams::JobLocaleParams
   
   
   
@@ -76,7 +76,7 @@
           
             <li class="next">OpenStruct</li>
           
-            <li class="next">PhraseApp::RequestParams::KeysTagParams</li>
+            <li class="next">PhraseApp::RequestParams::JobLocaleParams</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -104,20 +104,15 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>KeysTagParams</p>
+<p>JobLocaleParams</p>
 
 <h2 id="label-Parameters-3A">Parameters:</h2>
 <dl class="rdoc-list note-list"><dt>locale_id
 <dd>
-<p>Locale used to determine the translation state of a key when filtering for
-untranslated or translated keys.</p>
-</dd><dt>q
+<p>locale id</p>
+</dd><dt>user_ids
 <dd>
-<p>q_description_placeholder</p>
-</dd><dt>tags
-<dd>
-<p>Tag or comma-separated list of tags to add to the matching collection of
-keys</p>
+<p>Array of ids assigned to the JobLocale</p>
 </dd></dl>
 
 
@@ -166,29 +161,7 @@ keys</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#q=-instance_method" title="#q= (instance method)">#<strong>q=</strong>(val)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#tags=-instance_method" title="#tags= (instance method)">#<strong>tags=</strong>(val)  &#x21d2; Object </a>
+      <a href="#user_ids=-instance_method" title="#user_ids= (instance method)">#<strong>user_ids=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -254,12 +227,12 @@ keys</p>
       <pre class="lines">
 
 
-1760
-1761
-1762</pre>
+591
+592
+593</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1760</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 591</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -270,39 +243,9 @@ keys</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="q=-instance_method">
+  <h3 class="signature " id="user_ids=-instance_method">
   
-    #<strong>q=</strong>(val)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-1764
-1765
-1766</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1764</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="tags=-instance_method">
-  
-    #<strong>tags=</strong>(val)  &#x21d2; <tt>Object</tt> 
+    #<strong>user_ids=</strong>(val)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -314,15 +257,15 @@ keys</p>
       <pre class="lines">
 
 
-1768
-1769
-1770</pre>
+595
+596
+597</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1768</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 595</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_tags='>tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_user_ids='>user_ids=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>,</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -344,20 +287,20 @@ keys</p>
       <pre class="lines">
 
 
-1772
-1773
-1774
-1775
-1776
-1777</pre>
+599
+600
+601
+602
+603
+604</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1772</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 599</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
-  <span class='kw'>if</span> <span class='id identifier rubyid_tags'>tags</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='id identifier rubyid_tags'>tags</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;tags\&quot; of \&quot;keys_tagParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_locale_id'>locale_id</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='id identifier rubyid_locale_id'>locale_id</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;locale_id\&quot; of \&quot;JobLocaleParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -370,7 +313,7 @@ keys</p>
 </div>
 
       <div id="footer">
-  Generated on Tue Sep 19 10:57:47 2017 by
+  Generated on Tue Sep 19 10:57:46 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.9 (ruby-2.4.1).
 </div>
