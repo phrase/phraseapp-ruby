@@ -1,7 +1,7 @@
 
 
-# revision_docs:72ae3531d8460b33c6cb4a87636e7fcc66e37447
-# revision_generator:ceb47e5be23d139da3a18a815c6da3ac70d0b412
+# revision_docs:03e0d595d106c8f672cb3ff9871d15eb7ab13905
+# revision_generator:HEAD/2017-09-19T104754/stefan
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -119,6 +119,38 @@ module ResponseObjects
 
     class Invitation < ::OpenStruct
       #accepted_at, created_at, email, id, locales, projects, role, state, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class Job < ::OpenStruct
+      #briefing, created_at, due_date, id, name, state, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class JobDetails < Job
+      #job_tag_name, keys, locales, owner, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class JobLocale < ::OpenStruct
+      #id, job, locale, users, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class JobPreview < ::OpenStruct
+      #id, name, state, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -548,6 +580,86 @@ end
 
 
 module RequestParams
+  # JobLocaleParams
+  # == Parameters:
+  # locale_id::
+  #   locale id
+  # user_ids::
+  #   Array of ids assigned to the JobLocale
+  class JobLocaleParams < ::OpenStruct
+
+    def locale_id=(val)
+      super(val)
+    end
+
+    def user_ids=(val)
+      super(val.split(','))
+    end
+
+    def validate
+      
+      if locale_id == nil || locale_id == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"locale_id\" of \"JobLocaleParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobParams
+  # == Parameters:
+  # briefing::
+  #   Briefing for the translators
+  # due_date::
+  #   Date the job should be finished
+  # name::
+  #   Job name
+  # tags::
+  #   tags of keys that should be included within the job
+  # translation_key_ids::
+  #   ids of keys that should be included within the job
+  class JobParams < ::OpenStruct
+
+    def briefing=(val)
+      super(val)
+    end
+
+    def due_date=(val)
+      super(DateTime.parse(val))
+    end
+
+    def name=(val)
+      super(val)
+    end
+
+    def tags=(val)
+      super(val.split(','))
+    end
+
+    def translation_key_ids=(val)
+      super(val.split(','))
+    end
+
+    def validate
+      
+      if name == nil || name == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"JobParams\" not set")
+      end
+      if tags == nil
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"JobParams\" not set")
+      end
+      if translation_key_ids == nil
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"translation_key_ids\" of \"JobParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
   # TranslationKeyParams
   # == Parameters:
   # data_type::
@@ -679,7 +791,7 @@ module RequestParams
   # default::
   #   Indicates whether locale is the default locale. If set to true, the previous default locale the project is no longer the default locale.
   # main::
-  #   Indicates whether locale is a main locale.
+  #   Indicates whether locale is a main locale. Main locales are part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Verification System</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
   # name::
   #   Locale name
   # rtl::
@@ -687,9 +799,9 @@ module RequestParams
   # source_locale_id::
   #   Source locale. Can be the name or public id of the locale. Preferred is the public id.
   # unverify_new_translations::
-  #   Indicates that new translations for this locale should be marked as unverified.
+  #   Indicates that new translations for this locale should be marked as unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
   # unverify_updated_translations::
-  #   Indicates that updated translations for this locale should be marked as unverified.
+  #   Indicates that updated translations for this locale should be marked as unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
   class LocaleParams < ::OpenStruct
 
     def code=(val)
@@ -1078,9 +1190,9 @@ module RequestParams
   # locale_id::
   #   Locale. Can be the name or public id of the locale. Preferred is the public id.
   # plural_suffix::
-  #   Plural suffix. Can be one of: zero, one, two, few, many, other.
+  #   Plural suffix. Can be one of: zero, one, two, few, many, other. Must be specified if the key associated to the translation is pluralized.
   # unverified::
-  #   Indicates whether translation is unverified.
+  #   Indicates whether translation is unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
   class TranslationParams < ::OpenStruct
 
     def content=(val)
@@ -1418,6 +1530,124 @@ end
 
 
 module RequestParams
+  # JobKeysCreateParams
+  # == Parameters:
+  # translation_key_ids::
+  #   ids of keys that should added to the job
+  class JobKeysCreateParams < ::OpenStruct
+
+    def translation_key_ids=(val)
+      super(val.split(','))
+    end
+
+    def validate
+      
+      if translation_key_ids == nil
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"translation_key_ids\" of \"job_keys_createParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobKeysDeleteParams
+  # == Parameters:
+  # translation_key_ids::
+  #   ids of keys that should added to the job
+  class JobKeysDeleteParams < ::OpenStruct
+
+    def translation_key_ids=(val)
+      super(val.split(','))
+    end
+
+    def validate
+      
+      if translation_key_ids == nil
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"translation_key_ids\" of \"job_keys_deleteParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobUpdateParams
+  # == Parameters:
+  # briefing::
+  #   Briefing for the translators
+  # due_date::
+  #   Date the job should be finished
+  # name::
+  #   Job name
+  class JobUpdateParams < ::OpenStruct
+
+    def briefing=(val)
+      super(val)
+    end
+
+    def due_date=(val)
+      super(DateTime.parse(val))
+    end
+
+    def name=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if name == nil || name == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"job_updateParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobsListParams
+  # == Parameters:
+  # assigned_to::
+  #   filter by user assigned to job
+  # owned_by::
+  #   filter by user owning job
+  # state::
+  #   filter by state of job Valid states are <code>draft</code>, <code>in_progress</code>, <code>completed</code>
+  class JobsListParams < ::OpenStruct
+
+    def assigned_to=(val)
+      super(val)
+    end
+
+    def owned_by=(val)
+      super(val)
+    end
+
+    def state=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if assigned_to == nil || assigned_to == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"assigned_to\" of \"jobs_listParams\" not set")
+      end
+      if owned_by == nil || owned_by == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"owned_by\" of \"jobs_listParams\" not set")
+      end
+      if state == nil || state == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"state\" of \"jobs_listParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
   # KeysDeleteParams
   # == Parameters:
   # locale_id::
@@ -1720,9 +1950,9 @@ module RequestParams
   # excluded::
   #   Indicates whether translation is excluded.
   # plural_suffix::
-  #   Plural suffix. Can be one of: zero, one, two, few, many, other.
+  #   Plural suffix. Can be one of: zero, one, two, few, many, other. Must be specified if the key associated to the translation is pluralized.
   # unverified::
-  #   Indicates whether translation is unverified.
+  #   Indicates whether translation is unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
   class TranslationUpdateParams < ::OpenStruct
 
     def content=(val)
@@ -3195,6 +3425,471 @@ end
       end
       
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Invitation.new(item) }, err
+    end
+  
+    # Mark a job as completed.
+    # API Path: /v2/projects/:project_id/jobs/:id/complete
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobDetails
+    #   err
+    def job_complete(project_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/complete", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobDetails.new(JSON.load(rc.body)), err
+    end
+  
+    # Create a new job.
+    # API Path: /v2/projects/:project_id/jobs
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobDetails
+    #   err
+    def job_create(project_id, params)
+      path = sprintf("/api/v2/projects/%s/jobs", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobDetails.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing job.
+    # API Path: /v2/projects/:project_id/jobs/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def job_delete(project_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Add multiple keys to a existing job.
+    # API Path: /v2/projects/:project_id/jobs/:id/keys
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobKeysCreateParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobDetails
+    #   err
+    def job_keys_create(project_id, id, params)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/keys", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobKeysCreateParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobKeysCreateParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobDetails.new(JSON.load(rc.body)), err
+    end
+  
+    # Remove multiple keys from existing job.
+    # API Path: /v2/projects/:project_id/jobs/:id/keys
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobKeysDeleteParams
+    #
+    # == Returns:
+    #   err
+    def job_keys_delete(project_id, id, params)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/keys", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobKeysDeleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobKeysDeleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single job for a given project.
+    # API Path: /v2/projects/:project_id/jobs/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobDetails
+    #   err
+    def job_show(project_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobDetails.new(JSON.load(rc.body)), err
+    end
+  
+    # Starts an existing job in state draft.
+    # API Path: /v2/projects/:project_id/jobs/:id/start
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobDetails
+    #   err
+    def job_start(project_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/start", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobDetails.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing job.
+    # API Path: /v2/projects/:project_id/jobs/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobUpdateParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobDetails
+    #   err
+    def job_update(project_id, id, params)
+      path = sprintf("/api/v2/projects/%s/jobs/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobUpdateParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobUpdateParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobDetails.new(JSON.load(rc.body)), err
+    end
+  
+    # Mark a JobLocale as completed.
+    # API Path: /v2/projects/:project_id/jobs/:id/complete
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobLocale
+    #   err
+    def job_locale_complete(project_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/complete", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing JobLocale.
+    # API Path: /v2/projects/:project_id/jobs/:job_id/locale/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # job_id::
+    #   job_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def job_locale_delete(project_id, job_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/locale/%s", project_id, job_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get a single JobLocale for a given job.
+    # API Path: /v2/projects/:project_id/jobs/:job_id/locale/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # job_id::
+    #   job_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobLocale
+    #   err
+    def job_locale_show(project_id, job_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/locale/%s", project_id, job_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing job.
+    # API Path: /v2/projects/:project_id/jobs/:job_id/locales/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # job_id::
+    #   job_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobLocaleParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobLocale
+    #   err
+    def job_locale_update(project_id, job_id, id, params)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/locales/%s", project_id, job_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobLocaleParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobLocaleParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
+    end
+  
+    # Create a new JobLocale.
+    # API Path: /v2/projects/:project_id/jobs/:job_id/locales
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # job_id::
+    #   job_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobLocaleParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobLocale
+    #   err
+    def job_locales_create(project_id, job_id, params)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/locales", project_id, job_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobLocaleParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobLocaleParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
+    end
+  
+    # List all JobLocales for a given job.
+    # API Path: /v2/projects/:project_id/jobs/:job_id/locales
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # job_id::
+    #   job_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobLocale
+    #   err
+    def job_locales_list(project_id, job_id, page, per_page)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/locales", project_id, job_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::JobLocale.new(item) }, err
+    end
+  
+    # List all jobs for the given project.
+    # API Path: /v2/projects/:project_id/jobs
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobsListParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Job
+    #   err
+    def jobs_list(project_id, page, per_page, params)
+      path = sprintf("/api/v2/projects/%s/jobs", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobsListParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobsListParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Job.new(item) }, err
     end
   
     # Create a new key.
@@ -4772,7 +5467,7 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Translation.new(item) }, err
     end
   
-    # Mark translations matching query as unverified.
+    # <div class='alert alert-info'>Only available in the <a href='https://phraseapp.com/pricing' target='_blank'>Control Package</a>.</div>Mark translations matching query as unverified.
     # API Path: /v2/projects/:project_id/translations/unverify
     # == Parameters:
     # project_id::
@@ -4808,7 +5503,7 @@ end
       return PhraseApp::ResponseObjects::AffectedCount.new(JSON.load(rc.body)), err
     end
   
-    # Verify translations matching query.
+    # <div class='alert alert-info'>Only available in the <a href='https://phraseapp.com/pricing' target='_blank'>Control Package</a>.</div>Verify translations matching query.
     # API Path: /v2/projects/:project_id/translations/verify
     # == Parameters:
     # project_id::
