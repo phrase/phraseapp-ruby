@@ -1,7 +1,7 @@
 
 
-# revision_docs:03e0d595d106c8f672cb3ff9871d15eb7ab13905
-# revision_generator:HEAD/2017-09-19T104754/stefan
+# revision_docs:3b286cc04ceb2623aa3ab353520a23e1e72d83c3
+# revision_generator:e51df86b2d0cf519540791cefb4f6d24751d38b0
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -1263,6 +1263,8 @@ module RequestParams
   #   Additional options available for specific formats. See our format guide for complete list.
   # locale_id::
   #   Locale of the file's content. Can be the name or public id of the locale. Preferred is the public id.
+  # locale_mapping::
+  #   Optional, format specific mapping between locale names and the columns the translations to those locales are contained in.
   # skip_unverification::
   #   Indicates whether the upload should unverify updated translations.
   # skip_upload_tags::
@@ -1303,6 +1305,10 @@ module RequestParams
 
     def locale_id=(val)
       super(val)
+    end
+
+    def locale_mapping=(val)
+      super(JSON.load(val))
     end
 
     def skip_unverification=(val)
@@ -5590,6 +5596,12 @@ end
 
       if params.locale_id != nil
         data_hash["locale_id"] = params.locale_id
+      end
+
+      if params.locale_mapping != nil
+        params.locale_mapping.each do |key, value|
+          data_hash["locale_mapping"][key] = value
+        end
       end
 
       if params.skip_unverification != nil
