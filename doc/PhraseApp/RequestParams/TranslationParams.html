@@ -6,7 +6,7 @@
 <title>
   Class: PhraseApp::RequestParams::TranslationParams
   
-    &mdash; Documentation by YARD 0.9.5
+    &mdash; Documentation by YARD 0.9.9
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: PhraseApp::RequestParams::TranslationParams
   
@@ -124,10 +122,16 @@
 id.</p>
 </dd><dt>plural_suffix
 <dd>
-<p>Plural suffix. Can be one of: zero, one, two, few, many, other.</p>
+<p>Plural suffix. Can be one of: zero, one, two, few, many, other. Must be
+specified if the key associated to the translation is pluralized.</p>
 </dd><dt>unverified
 <dd>
-<p>Indicates whether translation is unverified.</p>
+<p>Indicates whether translation is unverified. Part of the &lt;a href=“<a
+href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading">phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading</a>”
+target=“_blank”&gt;Advanced Workflows&lt;/a&gt; feature and only available
+in &lt;a href=“<a
+href="https://phraseapp.com/pricing">phraseapp.com/pricing</a>”
+target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
 </dd></dl>
 
 
@@ -154,7 +158,7 @@ id.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#content%3D-instance_method" title="#content= (instance method)">#<strong>content=</strong>(val)  &#x21d2; Object </a>
+      <a href="#content=-instance_method" title="#content= (instance method)">#<strong>content=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -176,7 +180,7 @@ id.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#excluded%3D-instance_method" title="#excluded= (instance method)">#<strong>excluded=</strong>(val)  &#x21d2; Object </a>
+      <a href="#excluded=-instance_method" title="#excluded= (instance method)">#<strong>excluded=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -198,7 +202,7 @@ id.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#key_id%3D-instance_method" title="#key_id= (instance method)">#<strong>key_id=</strong>(val)  &#x21d2; Object </a>
+      <a href="#key_id=-instance_method" title="#key_id= (instance method)">#<strong>key_id=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -220,7 +224,7 @@ id.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#locale_id%3D-instance_method" title="#locale_id= (instance method)">#<strong>locale_id=</strong>(val)  &#x21d2; Object </a>
+      <a href="#locale_id=-instance_method" title="#locale_id= (instance method)">#<strong>locale_id=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -242,7 +246,7 @@ id.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#plural_suffix%3D-instance_method" title="#plural_suffix= (instance method)">#<strong>plural_suffix=</strong>(val)  &#x21d2; Object </a>
+      <a href="#plural_suffix=-instance_method" title="#plural_suffix= (instance method)">#<strong>plural_suffix=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -264,7 +268,7 @@ id.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#unverified%3D-instance_method" title="#unverified= (instance method)">#<strong>unverified=</strong>(val)  &#x21d2; Object </a>
+      <a href="#unverified=-instance_method" title="#unverified= (instance method)">#<strong>unverified=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -330,12 +334,12 @@ id.</p>
       <pre class="lines">
 
 
-1086
-1087
-1088</pre>
+1198
+1199
+1200</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1086</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1198</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_content='>content=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -360,18 +364,18 @@ id.</p>
       <pre class="lines">
 
 
-1090
-1091
-1092
-1093
-1094
-1095
-1096
-1097
-1098</pre>
+1202
+1203
+1204
+1205
+1206
+1207
+1208
+1209
+1210</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1090</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1202</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_excluded='>excluded=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -379,7 +383,7 @@ id.</p>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>FalseClass</span><span class='rparen'>)</span>
     <span class='kw'>return</span>
   <span class='kw'>else</span>
-    <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -402,12 +406,12 @@ id.</p>
       <pre class="lines">
 
 
-1100
-1101
-1102</pre>
+1212
+1213
+1214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1100</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1212</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_key_id='>key_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -432,12 +436,12 @@ id.</p>
       <pre class="lines">
 
 
-1104
-1105
-1106</pre>
+1216
+1217
+1218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1104</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1216</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -462,12 +466,12 @@ id.</p>
       <pre class="lines">
 
 
-1108
-1109
-1110</pre>
+1220
+1221
+1222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1108</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1220</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_plural_suffix='>plural_suffix=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -492,18 +496,18 @@ id.</p>
       <pre class="lines">
 
 
-1112
-1113
-1114
-1115
-1116
-1117
-1118
-1119
-1120</pre>
+1224
+1225
+1226
+1227
+1228
+1229
+1230
+1231
+1232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1112</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1224</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unverified='>unverified=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -511,7 +515,7 @@ id.</p>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>FalseClass</span><span class='rparen'>)</span>
     <span class='kw'>return</span>
   <span class='kw'>else</span>
-    <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -534,32 +538,32 @@ id.</p>
       <pre class="lines">
 
 
-1122
-1123
-1124
-1125
-1126
-1127
-1128
-1129
-1130
-1131
-1132
-1133</pre>
+1234
+1235
+1236
+1237
+1238
+1239
+1240
+1241
+1242
+1243
+1244
+1245</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1122</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1234</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
   <span class='kw'>if</span> <span class='id identifier rubyid_content'>content</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='id identifier rubyid_content'>content</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;content\&quot; of \&quot;TranslationParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;content\&quot; of \&quot;TranslationParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_key_id'>key_id</span> <span class='op'>==</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;key_id\&quot; of \&quot;TranslationParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;key_id\&quot; of \&quot;TranslationParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_locale_id'>locale_id</span> <span class='op'>==</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;locale_id\&quot; of \&quot;TranslationParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;locale_id\&quot; of \&quot;TranslationParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -572,9 +576,9 @@ id.</p>
 </div>
 
       <div id="footer">
-  Generated on Wed Nov 16 17:51:17 2016 by
+  Generated by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.3.1).
+  0.9.9 (ruby-2.3.3).
 </div>
 
     </div>

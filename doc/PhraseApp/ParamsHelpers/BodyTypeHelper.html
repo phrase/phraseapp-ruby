@@ -6,7 +6,7 @@
 <title>
   Class: PhraseApp::ParamsHelpers::BodyTypeHelper
   
-    &mdash; Documentation by YARD 0.9.5
+    &mdash; Documentation by YARD 0.9.9
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: PhraseApp::ParamsHelpers::BodyTypeHelper
   
@@ -218,13 +216,13 @@
       <pre class="lines">
 
 
-1311
-1312
-1313
-1314</pre>
+1429
+1430
+1431
+1432</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1311</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1429</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_data_hash'>data_hash</span><span class='comma'>,</span> <span class='id identifier rubyid_post_body'>post_body</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@data_hash</span> <span class='op'>=</span> <span class='id identifier rubyid_data_hash'>data_hash</span>
@@ -257,24 +255,24 @@
       <pre class="lines">
 
 
-1316
-1317
-1318
-1319
-1320
-1321
-1322
-1323
-1324
-1325</pre>
+1434
+1435
+1436
+1437
+1438
+1439
+1440
+1441
+1442
+1443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1316</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1434</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_body'>body</span>
   <span class='kw'>if</span> <span class='ivar'>@post_body</span> <span class='op'>!=</span> <span class='kw'>nil</span>
     <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='ivar'>@post_body</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='op'>+</span><span class='const'>PhraseApp</span><span class='period'>.</span><span class='id identifier rubyid_multipart'>multipart</span><span class='lparen'>(</span><span class='ivar'>@data_hash</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_body'>body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--</span><span class='embexpr_beg'>#{</span><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>MULTIPART_BOUNDARY</span><span class='embexpr_end'>}</span><span class='tstring_content'>--\r\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_body'>body</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../PhraseApp.html#MULTIPART_BOUNDARY-constant" title="PhraseApp::MULTIPART_BOUNDARY (constant)">MULTIPART_BOUNDARY</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>--\r\n</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>elsif</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='ivar'>@data_hash</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@data_hash</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@data_hash</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
     <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span><span class='lparen'>(</span><span class='ivar'>@data_hash</span><span class='rparen'>)</span>
   <span class='kw'>else</span>
@@ -301,22 +299,22 @@
       <pre class="lines">
 
 
-1327
-1328
-1329
-1330
-1331
-1332
-1333
-1334
-1335</pre>
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1327</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1445</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ctype'>ctype</span>
   <span class='kw'>if</span> <span class='ivar'>@post_body</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-    <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>multipart/form-data; boundary=</span><span class='embexpr_beg'>#{</span><span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>MULTIPART_BOUNDARY</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>multipart/form-data; boundary=</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../PhraseApp.html#MULTIPART_BOUNDARY-constant" title="PhraseApp::MULTIPART_BOUNDARY (constant)">MULTIPART_BOUNDARY</a></span></span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>elsif</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='ivar'>@data_hash</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@data_hash</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@data_hash</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
     <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application/json</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>else</span>
@@ -333,9 +331,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Nov 16 17:51:17 2016 by
+  Generated by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.3.1).
+  0.9.9 (ruby-2.3.3).
 </div>
 
     </div>

@@ -6,7 +6,7 @@
 <title>
   Class: PhraseApp::RequestParams::KeysTagParams
   
-    &mdash; Documentation by YARD 0.9.5
+    &mdash; Documentation by YARD 0.9.9
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: PhraseApp::RequestParams::KeysTagParams
   
@@ -146,7 +144,7 @@ keys</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#locale_id%3D-instance_method" title="#locale_id= (instance method)">#<strong>locale_id=</strong>(val)  &#x21d2; Object </a>
+      <a href="#locale_id=-instance_method" title="#locale_id= (instance method)">#<strong>locale_id=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -168,7 +166,7 @@ keys</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#q%3D-instance_method" title="#q= (instance method)">#<strong>q=</strong>(val)  &#x21d2; Object </a>
+      <a href="#q=-instance_method" title="#q= (instance method)">#<strong>q=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -190,7 +188,7 @@ keys</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#tags%3D-instance_method" title="#tags= (instance method)">#<strong>tags=</strong>(val)  &#x21d2; Object </a>
+      <a href="#tags=-instance_method" title="#tags= (instance method)">#<strong>tags=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -256,12 +254,12 @@ keys</p>
       <pre class="lines">
 
 
-1530
-1531
-1532</pre>
+1766
+1767
+1768</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1530</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1766</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -286,12 +284,12 @@ keys</p>
       <pre class="lines">
 
 
-1534
-1535
-1536</pre>
+1770
+1771
+1772</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1534</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1770</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_q='>q=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -316,12 +314,12 @@ keys</p>
       <pre class="lines">
 
 
-1538
-1539
-1540</pre>
+1774
+1775
+1776</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1538</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1774</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tags='>tags=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -346,20 +344,20 @@ keys</p>
       <pre class="lines">
 
 
-1542
-1543
-1544
-1545
-1546
-1547</pre>
+1778
+1779
+1780
+1781
+1782
+1783</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1542</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1778</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
   <span class='kw'>if</span> <span class='id identifier rubyid_tags'>tags</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='op'>||</span> <span class='id identifier rubyid_tags'>tags</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> 
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PhraseApp</span><span class='op'>::</span><span class='const'>ParamsHelpers</span><span class='op'>::</span><span class='const'>ParamsValidationError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;tags\&quot; of \&quot;keys_tagParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Required parameter \&quot;tags\&quot; of \&quot;keys_tagParams\&quot; not set</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -372,9 +370,9 @@ keys</p>
 </div>
 
       <div id="footer">
-  Generated on Wed Nov 16 17:51:17 2016 by
+  Generated by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.3.1).
+  0.9.9 (ruby-2.3.3).
 </div>
 
     </div>
