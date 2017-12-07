@@ -1,7 +1,7 @@
 
 
-# revision_docs:3b286cc04ceb2623aa3ab353520a23e1e72d83c3
-# revision_generator:e51df86b2d0cf519540791cefb4f6d24751d38b0
+# revision_docs:
+# revision_generator:
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -4439,6 +4439,44 @@ end
       return PhraseApp::ResponseObjects::LocaleDetails.new(JSON.load(rc.body)), err
     end
   
+    # Unverify all translations in a locale.
+    # API Path: /v2/projects/:project_id/locales/:locale_id/translations/unverify
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # locale_id::
+    #   locale_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::LocaleParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::LocaleDetails
+    #   err
+    def locale_unverify(project_id, locale_id, params)
+      path = sprintf("/api/v2/projects/%s/locales/%s/translations/unverify", project_id, locale_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::LocaleParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::LocaleDetails.new(JSON.load(rc.body)), err
+    end
+  
     # Update an existing locale.
     # API Path: /v2/projects/:project_id/locales/:id
     # == Parameters:
@@ -4454,6 +4492,44 @@ end
     #   err
     def locale_update(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::LocaleParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::LocaleDetails.new(JSON.load(rc.body)), err
+    end
+  
+    # Verify all translations in a locale.
+    # API Path: /v2/projects/:project_id/locales/:locale_id/translations/verify
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # locale_id::
+    #   locale_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::LocaleParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::LocaleDetails
+    #   err
+    def locale_verify(project_id, locale_id, params)
+      path = sprintf("/api/v2/projects/%s/locales/%s/translations/verify", project_id, locale_id)
       data_hash = {}
       post_body = nil
   
