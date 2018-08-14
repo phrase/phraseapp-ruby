@@ -1,7 +1,7 @@
 
 
-# revision_docs:3b286cc04ceb2623aa3ab353520a23e1e72d83c3
-# revision_generator:e51df86b2d0cf519540791cefb4f6d24751d38b0
+# revision_docs:af8c8e121b03fbb27f30326738fd1c3ac086b0a2
+# revision_generator:HEAD/2018-08-10T154308/soenke
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -31,6 +31,14 @@ module PhraseApp
 module ResponseObjects
     class Account < ::OpenStruct
       #company, created_at, id, name, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class AccountDetails < Account
+      #slug, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -69,8 +77,32 @@ module ResponseObjects
       end
     end
 
+    class BitbucketSync < ::OpenStruct
+      #id, last_export_to_bitbucket_at, last_import_from_bitbucket_at, phraseapp_projects, repository_name, valid_phraseapp_yaml, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class BitbucketSyncExportResponse < ::OpenStruct
+      #status_path, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
     class BlacklistedKey < ::OpenStruct
       #created_at, id, name, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class Branch < ::OpenStruct
+      #created_at, created_by, merged_at, merged_by, name, state, updated_at, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -206,7 +238,7 @@ module ResponseObjects
     end
 
     class Project < ::OpenStruct
-      #account, created_at, id, main_format, name, updated_at, 
+      #account, created_at, id, main_format, name, project_image_url, updated_at, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -214,7 +246,7 @@ module ResponseObjects
     end
 
     class ProjectDetails < Project
-      #shares_translation_memory, 
+      #shares_translation_memory, slug, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -326,7 +358,7 @@ module ResponseObjects
     end
 
     class TranslationKeyDetails < TranslationKey
-      #comments_count, format_value_type, max_characters_allowed, name_plural, original_file, screenshot_url, unformatted, xml_space_preserve, 
+      #comments_count, creator, format_value_type, max_characters_allowed, name_plural, original_file, screenshot_url, unformatted, xml_space_preserve, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -428,6 +460,25 @@ end
 
 
 module RequestParams
+  # BitbucketSyncParams
+  # == Parameters:
+  # account_id::
+  #   Account ID to specify the actual account the project should be created in. Required if the requesting user is a member of multiple accounts.
+  class BitbucketSyncParams < ::OpenStruct
+
+    def account_id=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
   # BlacklistedKeyParams
   # == Parameters:
   # name::
@@ -442,6 +493,28 @@ module RequestParams
       
       if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"BlacklistedKeyParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # BranchParams
+  # == Parameters:
+  # name::
+  #   Name of the branch
+  class BranchParams < ::OpenStruct
+
+    def name=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if name == nil || name == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"BranchParams\" not set")
       end
     end
 
@@ -585,7 +658,7 @@ module RequestParams
   # locale_id::
   #   locale id
   # user_ids::
-  #   Array of ids assigned to the JobLocale
+  #   Array of user ids to be assigned to the job locale
   class JobLocaleParams < ::OpenStruct
 
     def locale_id=(val)
@@ -786,6 +859,10 @@ end
 module RequestParams
   # LocaleParams
   # == Parameters:
+  # autotranslate::
+  #   If set, translations for this locale will be fetched automatically, right after creation.
+  # branch::
+  #   specify the branch to use
   # code::
   #   Locale ISO code
   # default::
@@ -803,6 +880,20 @@ module RequestParams
   # unverify_updated_translations::
   #   Indicates that updated translations for this locale should be marked as unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
   class LocaleParams < ::OpenStruct
+
+    def autotranslate=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def branch=(val)
+      super(val)
+    end
 
     def code=(val)
       super(val)
@@ -884,7 +975,7 @@ module RequestParams
   # TranslationOrderParams
   # == Parameters:
   # category::
-  #   Category to use (required for orders processed by TextMaster). <a href="#categories">Category List</a>
+  #   Category to use (required for orders processed by TextMaster).
   # include_untranslated_keys::
   #   Order translations for keys with untranslated content in the selected target locales.
   # include_unverified_translations::
@@ -1022,9 +1113,13 @@ module RequestParams
   # account_id::
   #   Account ID to specify the actual account the project should be created in. Required if the requesting user is a member of multiple accounts.
   # main_format::
-  #   Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="guides/formats/">Format Guide</a> or our <a href="https://api.phraseapp.com/api/v2/formats">Formats API Endpoint</a>.
+  #   Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="http://phraseapp.com/docs/guides/formats/">Format Guide</a> or our <a href="#formats">Formats API Endpoint</a>.
   # name::
   #   Name of the project
+  # project_image::
+  #   Image to identify the project
+  # remove_project_image::
+  #   Indicates whether the project image should be deleted.
   # shares_translation_memory::
   #   Indicates whether the project should share the account's translation memory
   class ProjectParams < ::OpenStruct
@@ -1039,6 +1134,20 @@ module RequestParams
 
     def name=(val)
       super(val)
+    end
+
+    def project_image=(val)
+      super(val)
+    end
+
+    def remove_project_image=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
     end
 
     def shares_translation_memory=(val)
@@ -1251,8 +1360,12 @@ end
 module RequestParams
   # UploadParams
   # == Parameters:
+  # autotranslate::
+  #   If set, translations for the uploaded language will be fetched automatically.
+  # branch::
+  #   specify the branch to use
   # convert_emoji::
-  #   Indicates whether the file contains Emoji symbols that should be converted. <a href="guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
+  #   Indicates whether the file contains Emoji symbols that should be converted. <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
   # file::
   #   File to be imported
   # file_encoding::
@@ -1276,6 +1389,20 @@ module RequestParams
   # update_translations::
   #   Indicates whether existing translations should be updated with the file content.
   class UploadParams < ::OpenStruct
+
+    def autotranslate=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def branch=(val)
+      super(val)
+    end
 
     def convert_emoji=(val)
       if val.is_a?(TrueClass)
@@ -1457,6 +1584,25 @@ module PhraseApp
 
 
   
+
+module RequestParams
+  # BranchMergeParams
+  # == Parameters:
+  # strategy::
+  #   strategy used for merge blocking, use_master or use_branch
+  class BranchMergeParams < ::OpenStruct
+
+    def strategy=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
 
 module RequestParams
   # InvitationCreateParams
@@ -1794,7 +1940,7 @@ module RequestParams
   # q::
   #   q_description_placeholder
   # tags::
-  #   Tag or comma-separated list of tags to add to the matching collection of keys
+  #   Tag or comma-separated list of tags to remove from the matching collection of keys
   class KeysUntagParams < ::OpenStruct
 
     def locale_id=(val)
@@ -1823,8 +1969,10 @@ end
 module RequestParams
   # LocaleDownloadParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # convert_emoji::
-  #   Indicates whether Emoji symbols should be converted to actual Emojis. <a href="guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
+  #   Indicates whether Emoji symbols should be converted to actual Emojis. <a href="http://phraseapp.com/docs/guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
   # encoding::
   #   Enforces a specific encoding on the file contents. Valid options are "UTF-8", "UTF-16" and "ISO-8859-1".
   # fallback_locale_id::
@@ -1832,7 +1980,7 @@ module RequestParams
   # file_format::
   #   File format name. See the format guide for all supported file formats.
   # format_options::
-  #   Additional formatting and render options. See the <a href="guides/formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>
+  #   Additional formatting and render options. See the <a href="http://phraseapp.com/docs/guides/formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>
   # include_empty_translations::
   #   Indicates whether keys without translations should be included in the output as well.
   # keep_notranslate_tags::
@@ -1842,6 +1990,10 @@ module RequestParams
   # tag::
   #   Limit result to keys tagged with the given tag (identified by its name).
   class LocaleDownloadParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def convert_emoji=(val)
       if val.is_a?(TrueClass)
@@ -1908,6 +2060,44 @@ module RequestParams
       if file_format == nil || file_format == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"file_format\" of \"locale_downloadParams\" not set")
       end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # LocaleShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class LocaleShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # LocalesListParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class LocalesListParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
     end
 
   end
@@ -2248,6 +2438,25 @@ module RequestParams
 end
 
 
+module RequestParams
+  # UploadShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class UploadShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
   # Usage example:
   #
   # Require the gem
@@ -2270,13 +2479,13 @@ end
 
   
     # Get details on a single account.
-    # API Path: /v2/accounts/:id
+    # API Path: /api/v2/accounts/:id
     # == Parameters:
     # id::
     #   id
     #
     # == Returns:
-    #   PhraseApp::ResponseObjects::Account
+    #   PhraseApp::ResponseObjects::AccountDetails
     #   err
     def account_show(id)
       path = sprintf("/api/v2/accounts/%s", id)
@@ -2289,11 +2498,11 @@ end
         return nil, err
       end
       
-      return PhraseApp::ResponseObjects::Account.new(JSON.load(rc.body)), err
+      return PhraseApp::ResponseObjects::AccountDetails.new(JSON.load(rc.body)), err
     end
   
     # List all accounts the current user has access to.
-    # API Path: /v2/accounts
+    # API Path: /api/v2/accounts
     # == Parameters:
     #
     # == Returns:
@@ -2314,7 +2523,7 @@ end
     end
   
     # Create a new authorization.
-    # API Path: /v2/authorizations
+    # API Path: /api/v2/authorizations
     # == Parameters:
     # params::
     #   Parameters of type PhraseApp::RequestParams::AuthorizationParams
@@ -2348,7 +2557,7 @@ end
     end
   
     # Delete an existing authorization. API calls using that token will stop working.
-    # API Path: /v2/authorizations/:id
+    # API Path: /api/v2/authorizations/:id
     # == Parameters:
     # id::
     #   id
@@ -2370,7 +2579,7 @@ end
     end
   
     # Get details on a single authorization.
-    # API Path: /v2/authorizations/:id
+    # API Path: /api/v2/authorizations/:id
     # == Parameters:
     # id::
     #   id
@@ -2393,7 +2602,7 @@ end
     end
   
     # Update an existing authorization.
-    # API Path: /v2/authorizations/:id
+    # API Path: /api/v2/authorizations/:id
     # == Parameters:
     # id::
     #   id
@@ -2429,7 +2638,7 @@ end
     end
   
     # List all your authorizations.
-    # API Path: /v2/authorizations
+    # API Path: /api/v2/authorizations
     # == Parameters:
     #
     # == Returns:
@@ -2449,8 +2658,113 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Authorization.new(item) }, err
     end
   
+    # Export translations from PhraseApp to Bitbucket according to the .phraseapp.yml file within the Bitbucket Repository.
+    # API Path: /api/v2/bitbucket_syncs/:id/export
+    # == Parameters:
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::BitbucketSyncParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::BitbucketSyncExportResponse
+    #   err
+    def bitbucket_sync_export(id, params)
+      path = sprintf("/api/v2/bitbucket_syncs/%s/export", id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::BitbucketSyncParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BitbucketSyncParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::BitbucketSyncExportResponse.new(JSON.load(rc.body)), err
+    end
+  
+    # Import translations from Bitbucket to PhraseApp according to the .phraseapp.yml file within the Bitbucket repository.
+    # API Path: /api/v2/bitbucket_syncs/:id/import
+    # == Parameters:
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::BitbucketSyncParams
+    #
+    # == Returns:
+    #   err
+    def bitbucket_sync_import(id, params)
+      path = sprintf("/api/v2/bitbucket_syncs/%s/import", id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::BitbucketSyncParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BitbucketSyncParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # List all Bitbucket repositories for which synchronisation with PhraseApp is activated.
+    # API Path: /api/v2/bitbucket_syncs
+    # == Parameters:
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::BitbucketSyncParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::BitbucketSync
+    #   err
+    def bitbucket_syncs_list(page, per_page, params)
+      path = sprintf("/api/v2/bitbucket_syncs")
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::BitbucketSyncParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BitbucketSyncParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::BitbucketSync.new(item) }, err
+    end
+  
     # Create a new rule for blacklisting keys.
-    # API Path: /v2/projects/:project_id/blacklisted_keys
+    # API Path: /api/v2/projects/:project_id/blacklisted_keys
     # == Parameters:
     # project_id::
     #   project_id
@@ -2486,7 +2800,7 @@ end
     end
   
     # Delete an existing rule for blacklisting keys.
-    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
+    # API Path: /api/v2/projects/:project_id/blacklisted_keys/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -2510,7 +2824,7 @@ end
     end
   
     # Get details on a single rule for blacklisting keys for a given project.
-    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
+    # API Path: /api/v2/projects/:project_id/blacklisted_keys/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -2535,7 +2849,7 @@ end
     end
   
     # Update an existing rule for blacklisting keys.
-    # API Path: /v2/projects/:project_id/blacklisted_keys/:id
+    # API Path: /api/v2/projects/:project_id/blacklisted_keys/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -2573,7 +2887,7 @@ end
     end
   
     # List all rules for blacklisting keys for the given project.
-    # API Path: /v2/projects/:project_id/blacklisted_keys
+    # API Path: /api/v2/projects/:project_id/blacklisted_keys
     # == Parameters:
     # project_id::
     #   project_id
@@ -2595,8 +2909,191 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::BlacklistedKey.new(item) }, err
     end
   
+    # Create a new branch.
+    # API Path: /api/v2/projects/:project_id/branches
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::BranchParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Branch
+    #   err
+    def branch_create(project_id, params)
+      path = sprintf("/api/v2/projects/%s/branches", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::BranchParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BranchParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Branch.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing branch.
+    # API Path: /api/v2/projects/:project_id/branches/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def branch_delete(project_id, id)
+      path = sprintf("/api/v2/projects/%s/branches/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Merge an existing branch.
+    # API Path: /api/v2/projects/:project_id/branches/:id/merge
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::BranchMergeParams
+    #
+    # == Returns:
+    #   err
+    def branch_merge(project_id, id, params)
+      path = sprintf("/api/v2/projects/%s/branches/%s/merge", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::BranchMergeParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BranchMergeParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single branch for a given project.
+    # API Path: /api/v2/projects/:project_id/branches/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Branch
+    #   err
+    def branch_show(project_id, id)
+      path = sprintf("/api/v2/projects/%s/branches/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Branch.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing branch.
+    # API Path: /api/v2/projects/:project_id/branches/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::BranchParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Branch
+    #   err
+    def branch_update(project_id, id, params)
+      path = sprintf("/api/v2/projects/%s/branches/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::BranchParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::BranchParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Branch.new(JSON.load(rc.body)), err
+    end
+  
+    # List all branches the of the current project.
+    # API Path: /api/v2/projects/:project_id/branches
+    # == Parameters:
+    # project_id::
+    #   project_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Branch
+    #   err
+    def branches_list(project_id, page, per_page)
+      path = sprintf("/api/v2/projects/%s/branches", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Branch.new(item) }, err
+    end
+  
     # Create a new comment for a key.
-    # API Path: /v2/projects/:project_id/keys/:key_id/comments
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/comments
     # == Parameters:
     # project_id::
     #   project_id
@@ -2634,7 +3131,7 @@ end
     end
   
     # Delete an existing comment.
-    # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/comments/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -2660,7 +3157,7 @@ end
     end
   
     # Check if comment was marked as read. Returns 204 if read, 404 if unread.
-    # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/comments/:id/read
     # == Parameters:
     # project_id::
     #   project_id
@@ -2686,7 +3183,7 @@ end
     end
   
     # Mark a comment as read.
-    # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/comments/:id/read
     # == Parameters:
     # project_id::
     #   project_id
@@ -2712,7 +3209,7 @@ end
     end
   
     # Mark a comment as unread.
-    # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/comments/:id/read
     # == Parameters:
     # project_id::
     #   project_id
@@ -2738,7 +3235,7 @@ end
     end
   
     # Get details on a single comment.
-    # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/comments/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -2765,7 +3262,7 @@ end
     end
   
     # Update an existing comment.
-    # API Path: /v2/projects/:project_id/keys/:key_id/comments/:id
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/comments/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -2805,7 +3302,7 @@ end
     end
   
     # List all comments for a key.
-    # API Path: /v2/projects/:project_id/keys/:key_id/comments
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/comments
     # == Parameters:
     # project_id::
     #   project_id
@@ -2830,7 +3327,7 @@ end
     end
   
     # Get a handy list of all localization file formats supported in PhraseApp.
-    # API Path: /v2/formats
+    # API Path: /api/v2/formats
     # == Parameters:
     #
     # == Returns:
@@ -2851,7 +3348,7 @@ end
     end
   
     # List all glossaries the current user has access to.
-    # API Path: /v2/accounts/:account_id/glossaries
+    # API Path: /api/v2/accounts/:account_id/glossaries
     # == Parameters:
     # account_id::
     #   account_id
@@ -2874,7 +3371,7 @@ end
     end
   
     # Create a new glossary.
-    # API Path: /v2/accounts/:account_id/glossaries
+    # API Path: /api/v2/accounts/:account_id/glossaries
     # == Parameters:
     # account_id::
     #   account_id
@@ -2910,7 +3407,7 @@ end
     end
   
     # Delete an existing glossary.
-    # API Path: /v2/accounts/:account_id/glossaries/:id
+    # API Path: /api/v2/accounts/:account_id/glossaries/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -2934,7 +3431,7 @@ end
     end
   
     # Get details on a single glossary.
-    # API Path: /v2/accounts/:account_id/glossaries/:id
+    # API Path: /api/v2/accounts/:account_id/glossaries/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -2959,7 +3456,7 @@ end
     end
   
     # Update an existing glossary.
-    # API Path: /v2/accounts/:account_id/glossaries/:id
+    # API Path: /api/v2/accounts/:account_id/glossaries/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -2997,7 +3494,7 @@ end
     end
   
     # Create a new glossary term.
-    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms
+    # API Path: /api/v2/accounts/:account_id/glossaries/:glossary_id/terms
     # == Parameters:
     # account_id::
     #   account_id
@@ -3035,7 +3532,7 @@ end
     end
   
     # Delete an existing glossary term.
-    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    # API Path: /api/v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -3061,7 +3558,7 @@ end
     end
   
     # Get details on a single glossary term.
-    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    # API Path: /api/v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -3088,7 +3585,7 @@ end
     end
   
     # Update an existing glossary term.
-    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    # API Path: /api/v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -3128,7 +3625,7 @@ end
     end
   
     # Create a new glossary term translation.
-    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations
+    # API Path: /api/v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations
     # == Parameters:
     # account_id::
     #   account_id
@@ -3168,7 +3665,7 @@ end
     end
   
     # Delete an existing glossary term translation.
-    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations/:id
+    # API Path: /api/v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -3196,7 +3693,7 @@ end
     end
   
     # Update an existing glossary term translation.
-    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations/:id
+    # API Path: /api/v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -3238,7 +3735,7 @@ end
     end
   
     # List all glossary terms the current user has access to.
-    # API Path: /v2/accounts/:account_id/glossaries/:glossary_id/terms
+    # API Path: /api/v2/accounts/:account_id/glossaries/:glossary_id/terms
     # == Parameters:
     # account_id::
     #   account_id
@@ -3263,7 +3760,7 @@ end
     end
   
     # Invite a person to an account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them. Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/invitations
+    # API Path: /api/v2/accounts/:account_id/invitations
     # == Parameters:
     # account_id::
     #   account_id
@@ -3299,7 +3796,7 @@ end
     end
   
     # Delete an existing invitation (must not be accepted yet). Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/invitations/:id
+    # API Path: /api/v2/accounts/:account_id/invitations/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -3323,7 +3820,7 @@ end
     end
   
     # Resend the invitation email (must not be accepted yet). Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/invitations/:id/resend
+    # API Path: /api/v2/accounts/:account_id/invitations/:id/resend
     # == Parameters:
     # account_id::
     #   account_id
@@ -3348,7 +3845,7 @@ end
     end
   
     # Get details on a single invitation. Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/invitations/:id
+    # API Path: /api/v2/accounts/:account_id/invitations/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -3373,7 +3870,7 @@ end
     end
   
     # Update an existing invitation (must not be accepted yet). The <code>email</code> cannot be updated. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them. Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/invitations/:id
+    # API Path: /api/v2/accounts/:account_id/invitations/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -3411,7 +3908,7 @@ end
     end
   
     # List invitations for an account. It will also list the accessible resources like projects and locales the invited user has access to. In case nothing is shown the default access from the role is used. Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/invitations
+    # API Path: /api/v2/accounts/:account_id/invitations
     # == Parameters:
     # account_id::
     #   account_id
@@ -3434,7 +3931,7 @@ end
     end
   
     # Mark a job as completed.
-    # API Path: /v2/projects/:project_id/jobs/:id/complete
+    # API Path: /api/v2/projects/:project_id/jobs/:id/complete
     # == Parameters:
     # project_id::
     #   project_id
@@ -3459,7 +3956,7 @@ end
     end
   
     # Create a new job.
-    # API Path: /v2/projects/:project_id/jobs
+    # API Path: /api/v2/projects/:project_id/jobs
     # == Parameters:
     # project_id::
     #   project_id
@@ -3495,7 +3992,7 @@ end
     end
   
     # Delete an existing job.
-    # API Path: /v2/projects/:project_id/jobs/:id
+    # API Path: /api/v2/projects/:project_id/jobs/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -3519,7 +4016,7 @@ end
     end
   
     # Add multiple keys to a existing job.
-    # API Path: /v2/projects/:project_id/jobs/:id/keys
+    # API Path: /api/v2/projects/:project_id/jobs/:id/keys
     # == Parameters:
     # project_id::
     #   project_id
@@ -3557,7 +4054,7 @@ end
     end
   
     # Remove multiple keys from existing job.
-    # API Path: /v2/projects/:project_id/jobs/:id/keys
+    # API Path: /api/v2/projects/:project_id/jobs/:id/keys
     # == Parameters:
     # project_id::
     #   project_id
@@ -3593,8 +4090,33 @@ end
       return err
     end
   
+    # Mark a job as uncompleted.
+    # API Path: /api/v2/projects/:project_id/jobs/:id/reopen
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobDetails
+    #   err
+    def job_reopen(project_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/reopen", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobDetails.new(JSON.load(rc.body)), err
+    end
+  
     # Get details on a single job for a given project.
-    # API Path: /v2/projects/:project_id/jobs/:id
+    # API Path: /api/v2/projects/:project_id/jobs/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -3619,7 +4141,7 @@ end
     end
   
     # Starts an existing job in state draft.
-    # API Path: /v2/projects/:project_id/jobs/:id/start
+    # API Path: /api/v2/projects/:project_id/jobs/:id/start
     # == Parameters:
     # project_id::
     #   project_id
@@ -3644,7 +4166,7 @@ end
     end
   
     # Update an existing job.
-    # API Path: /v2/projects/:project_id/jobs/:id
+    # API Path: /api/v2/projects/:project_id/jobs/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -3681,19 +4203,21 @@ end
       return PhraseApp::ResponseObjects::JobDetails.new(JSON.load(rc.body)), err
     end
   
-    # Mark a JobLocale as completed.
-    # API Path: /v2/projects/:project_id/jobs/:id/complete
+    # Mark a job locale as completed.
+    # API Path: /api/v2/projects/:project_id/jobs/:job_id/locales/:id/complete
     # == Parameters:
     # project_id::
     #   project_id
+    # job_id::
+    #   job_id
     # id::
     #   id
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobLocale
     #   err
-    def job_locale_complete(project_id, id)
-      path = sprintf("/api/v2/projects/%s/jobs/%s/complete", project_id, id)
+    def job_locale_complete(project_id, job_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/locales/%s/complete", project_id, job_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3706,8 +4230,8 @@ end
       return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
     end
   
-    # Delete an existing JobLocale.
-    # API Path: /v2/projects/:project_id/jobs/:job_id/locale/:id
+    # Delete an existing job locale.
+    # API Path: /api/v2/projects/:project_id/jobs/:job_id/locales/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -3719,7 +4243,7 @@ end
     # == Returns:
     #   err
     def job_locale_delete(project_id, job_id, id)
-      path = sprintf("/api/v2/projects/%s/jobs/%s/locale/%s", project_id, job_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/locales/%s", project_id, job_id, id)
       data_hash = {}
       post_body = nil
   
@@ -3732,8 +4256,35 @@ end
       return err
     end
   
-    # Get a single JobLocale for a given job.
-    # API Path: /v2/projects/:project_id/jobs/:job_id/locale/:id
+    # Mark a job locale as uncompleted.
+    # API Path: /api/v2/projects/:project_id/jobs/:job_id/locales/:id/reopen
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # job_id::
+    #   job_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::JobLocale
+    #   err
+    def job_locale_reopen(project_id, job_id, id)
+      path = sprintf("/api/v2/projects/%s/jobs/%s/locales/%s/reopen", project_id, job_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
+    end
+  
+    # Get a single job locale for a given job.
+    # API Path: /api/v2/projects/:project_id/jobs/:job_id/locale/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -3759,8 +4310,8 @@ end
       return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
     end
   
-    # Update an existing job.
-    # API Path: /v2/projects/:project_id/jobs/:job_id/locales/:id
+    # Update an existing job locale.
+    # API Path: /api/v2/projects/:project_id/jobs/:job_id/locales/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -3799,8 +4350,8 @@ end
       return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
     end
   
-    # Create a new JobLocale.
-    # API Path: /v2/projects/:project_id/jobs/:job_id/locales
+    # Create a new job locale.
+    # API Path: /api/v2/projects/:project_id/jobs/:job_id/locales
     # == Parameters:
     # project_id::
     #   project_id
@@ -3837,8 +4388,8 @@ end
       return PhraseApp::ResponseObjects::JobLocale.new(JSON.load(rc.body)), err
     end
   
-    # List all JobLocales for a given job.
-    # API Path: /v2/projects/:project_id/jobs/:job_id/locales
+    # List all job locales for a given job.
+    # API Path: /api/v2/projects/:project_id/jobs/:job_id/locales
     # == Parameters:
     # project_id::
     #   project_id
@@ -3863,7 +4414,7 @@ end
     end
   
     # List all jobs for the given project.
-    # API Path: /v2/projects/:project_id/jobs
+    # API Path: /api/v2/projects/:project_id/jobs
     # == Parameters:
     # project_id::
     #   project_id
@@ -3899,7 +4450,7 @@ end
     end
   
     # Create a new key.
-    # API Path: /v2/projects/:project_id/keys
+    # API Path: /api/v2/projects/:project_id/keys
     # == Parameters:
     # project_id::
     #   project_id
@@ -3993,7 +4544,7 @@ end
     end
   
     # Delete an existing key.
-    # API Path: /v2/projects/:project_id/keys/:id
+    # API Path: /api/v2/projects/:project_id/keys/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4017,7 +4568,7 @@ end
     end
   
     # Get details on a single key for a given project.
-    # API Path: /v2/projects/:project_id/keys/:id
+    # API Path: /api/v2/projects/:project_id/keys/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4042,7 +4593,7 @@ end
     end
   
     # Update an existing key.
-    # API Path: /v2/projects/:project_id/keys/:id
+    # API Path: /api/v2/projects/:project_id/keys/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4138,7 +4689,7 @@ end
     end
   
     # Delete all keys matching query. Same constraints as list. Please limit the number of affected keys to about 1,000 as you might experience timeouts otherwise.
-    # API Path: /v2/projects/:project_id/keys
+    # API Path: /api/v2/projects/:project_id/keys
     # == Parameters:
     # project_id::
     #   project_id
@@ -4174,7 +4725,7 @@ end
     end
   
     # List all keys for the given project. Alternatively you can POST requests to /search.
-    # API Path: /v2/projects/:project_id/keys
+    # API Path: /api/v2/projects/:project_id/keys
     # == Parameters:
     # project_id::
     #   project_id
@@ -4210,7 +4761,7 @@ end
     end
   
     # Search keys for the given project matching query.
-    # API Path: /v2/projects/:project_id/keys/search
+    # API Path: /api/v2/projects/:project_id/keys/search
     # == Parameters:
     # project_id::
     #   project_id
@@ -4246,7 +4797,7 @@ end
     end
   
     # Tags all keys matching query. Same constraints as list.
-    # API Path: /v2/projects/:project_id/keys/tag
+    # API Path: /api/v2/projects/:project_id/keys/tag
     # == Parameters:
     # project_id::
     #   project_id
@@ -4282,7 +4833,7 @@ end
     end
   
     # Removes specified tags from keys matching query.
-    # API Path: /v2/projects/:project_id/keys/untag
+    # API Path: /api/v2/projects/:project_id/keys/untag
     # == Parameters:
     # project_id::
     #   project_id
@@ -4318,7 +4869,7 @@ end
     end
   
     # Create a new locale.
-    # API Path: /v2/projects/:project_id/locales
+    # API Path: /api/v2/projects/:project_id/locales
     # == Parameters:
     # project_id::
     #   project_id
@@ -4354,7 +4905,7 @@ end
     end
   
     # Delete an existing locale.
-    # API Path: /v2/projects/:project_id/locales/:id
+    # API Path: /api/v2/projects/:project_id/locales/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4378,7 +4929,7 @@ end
     end
   
     # Download a locale in a specific file format.
-    # API Path: /v2/projects/:project_id/locales/:id/download
+    # API Path: /api/v2/projects/:project_id/locales/:id/download
     # == Parameters:
     # project_id::
     #   project_id
@@ -4415,21 +4966,34 @@ end
     end
   
     # Get details on a single locale for a given project.
-    # API Path: /v2/projects/:project_id/locales/:id
+    # API Path: /api/v2/projects/:project_id/locales/:id
     # == Parameters:
     # project_id::
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::LocaleShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::LocaleDetails
     #   err
-    def locale_show(project_id, id)
+    def locale_show(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::LocaleShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4440,7 +5004,7 @@ end
     end
   
     # Update an existing locale.
-    # API Path: /v2/projects/:project_id/locales/:id
+    # API Path: /api/v2/projects/:project_id/locales/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4478,19 +5042,32 @@ end
     end
   
     # List all locales for the given project.
-    # API Path: /v2/projects/:project_id/locales
+    # API Path: /api/v2/projects/:project_id/locales
     # == Parameters:
     # project_id::
     #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::LocalesListParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Locale
     #   err
-    def locales_list(project_id, page, per_page)
+    def locales_list(project_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/locales", project_id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::LocalesListParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocalesListParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
@@ -4501,7 +5078,7 @@ end
     end
   
     # Remove a user from the account. The user will be removed from the account but not deleted from PhraseApp. Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/members/:id
+    # API Path: /api/v2/accounts/:account_id/members/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -4525,7 +5102,7 @@ end
     end
   
     # Get details on a single user in the account. Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/members/:id
+    # API Path: /api/v2/accounts/:account_id/members/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -4550,7 +5127,7 @@ end
     end
   
     # Update user permissions in the account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them. Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/members/:id
+    # API Path: /api/v2/accounts/:account_id/members/:id
     # == Parameters:
     # account_id::
     #   account_id
@@ -4588,7 +5165,7 @@ end
     end
   
     # Get all users active in the account. It also lists resources like projects and locales the member has access to. In case nothing is shown the default access from the role is used. Access token scope must include <code>team.manage</code>.
-    # API Path: /v2/accounts/:account_id/members
+    # API Path: /api/v2/accounts/:account_id/members
     # == Parameters:
     # account_id::
     #   account_id
@@ -4611,7 +5188,7 @@ end
     end
   
     # Confirm an existing order and send it to the provider for translation. Same constraints as for create.
-    # API Path: /v2/projects/:project_id/orders/:id/confirm
+    # API Path: /api/v2/projects/:project_id/orders/:id/confirm
     # == Parameters:
     # project_id::
     #   project_id
@@ -4636,7 +5213,7 @@ end
     end
   
     # Create a new order. Access token scope must include <code>orders.create</code>.
-    # API Path: /v2/projects/:project_id/orders
+    # API Path: /api/v2/projects/:project_id/orders
     # == Parameters:
     # project_id::
     #   project_id
@@ -4672,7 +5249,7 @@ end
     end
   
     # Cancel an existing order. Must not yet be confirmed.
-    # API Path: /v2/projects/:project_id/orders/:id
+    # API Path: /api/v2/projects/:project_id/orders/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4696,7 +5273,7 @@ end
     end
   
     # Get details on a single order.
-    # API Path: /v2/projects/:project_id/orders/:id
+    # API Path: /api/v2/projects/:project_id/orders/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4721,7 +5298,7 @@ end
     end
   
     # List all orders for the given project.
-    # API Path: /v2/projects/:project_id/orders
+    # API Path: /api/v2/projects/:project_id/orders
     # == Parameters:
     # project_id::
     #   project_id
@@ -4744,7 +5321,7 @@ end
     end
   
     # Create a new project.
-    # API Path: /v2/projects
+    # API Path: /api/v2/projects
     # == Parameters:
     # params::
     #   Parameters of type PhraseApp::RequestParams::ProjectParams
@@ -4762,12 +5339,38 @@ end
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectParams")
         end
       end
-  
-      data_hash = params.to_h
-      err = params.validate
-      if err != nil
-        return nil, err
+      if params.account_id != nil
+        data_hash["account_id"] = params.account_id
       end
+
+      if params.main_format != nil
+        data_hash["main_format"] = params.main_format
+      end
+
+      if params.name != nil
+        data_hash["name"] = params.name
+      end
+
+      if params.project_image != nil
+        post_body = []
+        post_body << "--#{PhraseApp::MULTIPART_BOUNDARY}\r\n"
+        post_body << "Content-Disposition: form-data; name=\"project_image\"; filename=\"#{File.basename(params.project_image )}\"\r\n"
+        post_body << "Content-Type: text/plain\r\n"
+        post_body << "\r\n"
+        post_body << File.read(params.project_image)
+        post_body << "\r\n"
+      end
+
+      if params.remove_project_image != nil
+        data_hash["remove_project_image"] = (params.remove_project_image == true)
+      end
+
+      if params.shares_translation_memory != nil
+        data_hash["shares_translation_memory"] = (params.shares_translation_memory == true)
+      end
+
+  
+  
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
       if err != nil
@@ -4778,7 +5381,7 @@ end
     end
   
     # Delete an existing project.
-    # API Path: /v2/projects/:id
+    # API Path: /api/v2/projects/:id
     # == Parameters:
     # id::
     #   id
@@ -4800,7 +5403,7 @@ end
     end
   
     # Get details on a single project.
-    # API Path: /v2/projects/:id
+    # API Path: /api/v2/projects/:id
     # == Parameters:
     # id::
     #   id
@@ -4823,7 +5426,7 @@ end
     end
   
     # Update an existing project.
-    # API Path: /v2/projects/:id
+    # API Path: /api/v2/projects/:id
     # == Parameters:
     # id::
     #   id
@@ -4843,12 +5446,38 @@ end
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ProjectParams")
         end
       end
-  
-      data_hash = params.to_h
-      err = params.validate
-      if err != nil
-        return nil, err
+      if params.account_id != nil
+        data_hash["account_id"] = params.account_id
       end
+
+      if params.main_format != nil
+        data_hash["main_format"] = params.main_format
+      end
+
+      if params.name != nil
+        data_hash["name"] = params.name
+      end
+
+      if params.project_image != nil
+        post_body = []
+        post_body << "--#{PhraseApp::MULTIPART_BOUNDARY}\r\n"
+        post_body << "Content-Disposition: form-data; name=\"project_image\"; filename=\"#{File.basename(params.project_image )}\"\r\n"
+        post_body << "Content-Type: text/plain\r\n"
+        post_body << "\r\n"
+        post_body << File.read(params.project_image)
+        post_body << "\r\n"
+      end
+
+      if params.remove_project_image != nil
+        data_hash["remove_project_image"] = (params.remove_project_image == true)
+      end
+
+      if params.shares_translation_memory != nil
+        data_hash["shares_translation_memory"] = (params.shares_translation_memory == true)
+      end
+
+  
+  
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4859,7 +5488,7 @@ end
     end
   
     # List all projects the current user has access to.
-    # API Path: /v2/projects
+    # API Path: /api/v2/projects
     # == Parameters:
     #
     # == Returns:
@@ -4880,7 +5509,7 @@ end
     end
   
     # Show details for current User.
-    # API Path: /v2/user
+    # API Path: /api/v2/user
     # == Parameters:
     #
     # == Returns:
@@ -4901,7 +5530,7 @@ end
     end
   
     # Create a new style guide.
-    # API Path: /v2/projects/:project_id/styleguides
+    # API Path: /api/v2/projects/:project_id/styleguides
     # == Parameters:
     # project_id::
     #   project_id
@@ -4937,7 +5566,7 @@ end
     end
   
     # Delete an existing style guide.
-    # API Path: /v2/projects/:project_id/styleguides/:id
+    # API Path: /api/v2/projects/:project_id/styleguides/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4961,7 +5590,7 @@ end
     end
   
     # Get details on a single style guide.
-    # API Path: /v2/projects/:project_id/styleguides/:id
+    # API Path: /api/v2/projects/:project_id/styleguides/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -4986,7 +5615,7 @@ end
     end
   
     # Update an existing style guide.
-    # API Path: /v2/projects/:project_id/styleguides/:id
+    # API Path: /api/v2/projects/:project_id/styleguides/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -5024,7 +5653,7 @@ end
     end
   
     # List all styleguides for the given project.
-    # API Path: /v2/projects/:project_id/styleguides
+    # API Path: /api/v2/projects/:project_id/styleguides
     # == Parameters:
     # project_id::
     #   project_id
@@ -5047,7 +5676,7 @@ end
     end
   
     # Create a new tag.
-    # API Path: /v2/projects/:project_id/tags
+    # API Path: /api/v2/projects/:project_id/tags
     # == Parameters:
     # project_id::
     #   project_id
@@ -5083,7 +5712,7 @@ end
     end
   
     # Delete an existing tag.
-    # API Path: /v2/projects/:project_id/tags/:name
+    # API Path: /api/v2/projects/:project_id/tags/:name
     # == Parameters:
     # project_id::
     #   project_id
@@ -5107,7 +5736,7 @@ end
     end
   
     # Get details and progress information on a single tag for a given project.
-    # API Path: /v2/projects/:project_id/tags/:name
+    # API Path: /api/v2/projects/:project_id/tags/:name
     # == Parameters:
     # project_id::
     #   project_id
@@ -5132,7 +5761,7 @@ end
     end
   
     # List all tags for the given project.
-    # API Path: /v2/projects/:project_id/tags
+    # API Path: /api/v2/projects/:project_id/tags
     # == Parameters:
     # project_id::
     #   project_id
@@ -5155,7 +5784,7 @@ end
     end
   
     # Create a translation.
-    # API Path: /v2/projects/:project_id/translations
+    # API Path: /api/v2/projects/:project_id/translations
     # == Parameters:
     # project_id::
     #   project_id
@@ -5191,7 +5820,7 @@ end
     end
   
     # Get details on a single translation.
-    # API Path: /v2/projects/:project_id/translations/:id
+    # API Path: /api/v2/projects/:project_id/translations/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -5216,7 +5845,7 @@ end
     end
   
     # Update an existing translation.
-    # API Path: /v2/projects/:project_id/translations/:id
+    # API Path: /api/v2/projects/:project_id/translations/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -5254,7 +5883,7 @@ end
     end
   
     # List translations for a specific key.
-    # API Path: /v2/projects/:project_id/keys/:key_id/translations
+    # API Path: /api/v2/projects/:project_id/keys/:key_id/translations
     # == Parameters:
     # project_id::
     #   project_id
@@ -5292,7 +5921,7 @@ end
     end
   
     # List translations for a specific locale. If you want to download all translations for one locale we recommend to use the <code>locales#download</code> endpoint.
-    # API Path: /v2/projects/:project_id/locales/:locale_id/translations
+    # API Path: /api/v2/projects/:project_id/locales/:locale_id/translations
     # == Parameters:
     # project_id::
     #   project_id
@@ -5330,7 +5959,7 @@ end
     end
   
     # Exclude translations matching query from locale export.
-    # API Path: /v2/projects/:project_id/translations/exclude
+    # API Path: /api/v2/projects/:project_id/translations/exclude
     # == Parameters:
     # project_id::
     #   project_id
@@ -5366,7 +5995,7 @@ end
     end
   
     # Include translations matching query in locale export.
-    # API Path: /v2/projects/:project_id/translations/include
+    # API Path: /api/v2/projects/:project_id/translations/include
     # == Parameters:
     # project_id::
     #   project_id
@@ -5402,7 +6031,7 @@ end
     end
   
     # List translations for the given project. If you want to download all translations for one locale we recommend to use the <code>locales#download</code> endpoint.
-    # API Path: /v2/projects/:project_id/translations
+    # API Path: /api/v2/projects/:project_id/translations
     # == Parameters:
     # project_id::
     #   project_id
@@ -5438,7 +6067,7 @@ end
     end
   
     # List translations for the given project if you exceed GET request limitations on translations list. If you want to download all translations for one locale we recommend to use the <code>locales#download</code> endpoint.
-    # API Path: /v2/projects/:project_id/translations/search
+    # API Path: /api/v2/projects/:project_id/translations/search
     # == Parameters:
     # project_id::
     #   project_id
@@ -5474,7 +6103,7 @@ end
     end
   
     # <div class='alert alert-info'>Only available in the <a href='https://phraseapp.com/pricing' target='_blank'>Control Package</a>.</div>Mark translations matching query as unverified.
-    # API Path: /v2/projects/:project_id/translations/unverify
+    # API Path: /api/v2/projects/:project_id/translations/unverify
     # == Parameters:
     # project_id::
     #   project_id
@@ -5510,7 +6139,7 @@ end
     end
   
     # <div class='alert alert-info'>Only available in the <a href='https://phraseapp.com/pricing' target='_blank'>Control Package</a>.</div>Verify translations matching query.
-    # API Path: /v2/projects/:project_id/translations/verify
+    # API Path: /api/v2/projects/:project_id/translations/verify
     # == Parameters:
     # project_id::
     #   project_id
@@ -5546,7 +6175,7 @@ end
     end
   
     # Upload a new language file. Creates necessary resources in your project.
-    # API Path: /v2/projects/:project_id/uploads
+    # API Path: /api/v2/projects/:project_id/uploads
     # == Parameters:
     # project_id::
     #   project_id
@@ -5566,6 +6195,14 @@ end
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::UploadParams")
         end
       end
+      if params.autotranslate != nil
+        data_hash["autotranslate"] = (params.autotranslate == true)
+      end
+
+      if params.branch != nil
+        data_hash["branch"] = params.branch
+      end
+
       if params.convert_emoji != nil
         data_hash["convert_emoji"] = (params.convert_emoji == true)
       end
@@ -5636,21 +6273,34 @@ end
     end
   
     # View details and summary for a single upload.
-    # API Path: /v2/projects/:project_id/uploads/:id
+    # API Path: /api/v2/projects/:project_id/uploads/:id
     # == Parameters:
     # project_id::
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::UploadShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Upload
     #   err
-    def upload_show(project_id, id)
+    def upload_show(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/uploads/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::UploadShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::UploadShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -5661,7 +6311,7 @@ end
     end
   
     # List all uploads for the given project.
-    # API Path: /v2/projects/:project_id/uploads
+    # API Path: /api/v2/projects/:project_id/uploads
     # == Parameters:
     # project_id::
     #   project_id
@@ -5684,7 +6334,7 @@ end
     end
   
     # Get details on a single version.
-    # API Path: /v2/projects/:project_id/translations/:translation_id/versions/:id
+    # API Path: /api/v2/projects/:project_id/translations/:translation_id/versions/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -5711,7 +6361,7 @@ end
     end
   
     # List all versions for the given translation.
-    # API Path: /v2/projects/:project_id/translations/:translation_id/versions
+    # API Path: /api/v2/projects/:project_id/translations/:translation_id/versions
     # == Parameters:
     # project_id::
     #   project_id
@@ -5736,7 +6386,7 @@ end
     end
   
     # Create a new webhook.
-    # API Path: /v2/projects/:project_id/webhooks
+    # API Path: /api/v2/projects/:project_id/webhooks
     # == Parameters:
     # project_id::
     #   project_id
@@ -5772,7 +6422,7 @@ end
     end
   
     # Delete an existing webhook.
-    # API Path: /v2/projects/:project_id/webhooks/:id
+    # API Path: /api/v2/projects/:project_id/webhooks/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -5796,7 +6446,7 @@ end
     end
   
     # Get details on a single webhook.
-    # API Path: /v2/projects/:project_id/webhooks/:id
+    # API Path: /api/v2/projects/:project_id/webhooks/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -5821,7 +6471,7 @@ end
     end
   
     # Perform a test request for a webhook.
-    # API Path: /v2/projects/:project_id/webhooks/:id/test
+    # API Path: /api/v2/projects/:project_id/webhooks/:id/test
     # == Parameters:
     # project_id::
     #   project_id
@@ -5845,7 +6495,7 @@ end
     end
   
     # Update an existing webhook.
-    # API Path: /v2/projects/:project_id/webhooks/:id
+    # API Path: /api/v2/projects/:project_id/webhooks/:id
     # == Parameters:
     # project_id::
     #   project_id
@@ -5883,7 +6533,7 @@ end
     end
   
     # List all webhooks for the given project.
-    # API Path: /v2/projects/:project_id/webhooks
+    # API Path: /api/v2/projects/:project_id/webhooks
     # == Parameters:
     # project_id::
     #   project_id
