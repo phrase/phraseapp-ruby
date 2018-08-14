@@ -6,7 +6,7 @@
 <title>
   Class: PhraseApp::RequestParams::ProjectParams
   
-    &mdash; Documentation by YARD 0.9.9
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -115,13 +115,19 @@ Required if the requesting user is a member of multiple accounts.</p>
 <dd>
 <p>Main file format specified by its API Extension name. Used for locale
 downloads if no format is specified. For API Extension names of available
-file formats see &lt;a href=“guides/formats/”&gt;Format Guide&lt;/a&gt; or
-our &lt;a href=“<a
-href="https://api.phraseapp.com/api/v2/formats">Formats”>api.phraseapp.com/api/v2/formats“>Formats</a>
-API Endpoint&lt;/a&gt;.</p>
+file formats see &lt;a href=“<a
+href="http://phraseapp.com/docs/guides/formats/">Format”>phraseapp.com/docs/guides/formats/“>Format</a>
+Guide&lt;/a&gt; or our &lt;a href=”#formats“&gt;Formats API
+Endpoint&lt;/a&gt;.</p>
 </dd><dt>name
 <dd>
 <p>Name of the project</p>
+</dd><dt>project_image
+<dd>
+<p>Image to identify the project</p>
+</dd><dt>remove_project_image
+<dd>
+<p>Indicates whether the project image should be deleted.</p>
 </dd><dt>shares_translation_memory
 <dd>
 <p>Indicates whether the project should share the account&#39;s translation
@@ -218,6 +224,50 @@ memory</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#project_image=-instance_method" title="#project_image= (instance method)">#<strong>project_image=</strong>(val)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_project_image=-instance_method" title="#remove_project_image= (instance method)">#<strong>remove_project_image=</strong>(val)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#shares_translation_memory=-instance_method" title="#shares_translation_memory= (instance method)">#<strong>shares_translation_memory=</strong>(val)  &#x21d2; Object </a>
     
 
@@ -284,12 +334,12 @@ memory</p>
       <pre class="lines">
 
 
-1032
-1033
-1034</pre>
+1127
+1128
+1129</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1032</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_account_id='>account_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -314,12 +364,12 @@ memory</p>
       <pre class="lines">
 
 
-1036
-1037
-1038</pre>
+1131
+1132
+1133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1036</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1131</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_main_format='>main_format=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -344,15 +394,87 @@ memory</p>
       <pre class="lines">
 
 
-1040
-1041
-1042</pre>
+1135
+1136
+1137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1040</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1135</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name='>name=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_image=-instance_method">
+  
+    #<strong>project_image=</strong>(val)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1139
+1140
+1141</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1139</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_image='>project_image=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_project_image=-instance_method">
+  
+    #<strong>remove_project_image=</strong>(val)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1143
+1144
+1145
+1146
+1147
+1148
+1149
+1150
+1151</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1143</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_remove_project_image='>remove_project_image=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
+    <span class='kw'>super</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>FalseClass</span><span class='rparen'>)</span>
+    <span class='kw'>return</span>
+  <span class='kw'>else</span>
+    <span class='const'><span class='object_link'><a href="../../PhraseApp.html" title="PhraseApp (module)">PhraseApp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers.html" title="PhraseApp::ParamsHelpers (module)">ParamsHelpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ParamsHelpers/ParamsValidationError.html" title="PhraseApp::ParamsHelpers::ParamsValidationError (class)">ParamsValidationError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid value </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -374,18 +496,18 @@ memory</p>
       <pre class="lines">
 
 
-1044
-1045
-1046
-1047
-1048
-1049
-1050
-1051
-1052</pre>
+1153
+1154
+1155
+1156
+1157
+1158
+1159
+1160
+1161</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1044</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1153</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_shares_translation_memory='>shares_translation_memory=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -416,15 +538,15 @@ memory</p>
       <pre class="lines">
 
 
-1054
-1055
-1056
-1057
-1058
-1059</pre>
+1163
+1164
+1165
+1166
+1167
+1168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1054</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1163</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
@@ -442,9 +564,9 @@ memory</p>
 </div>
 
       <div id="footer">
-  Generated by
+  Generated on Tue Aug 14 13:58:35 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.9 (ruby-2.3.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>
