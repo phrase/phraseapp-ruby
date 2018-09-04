@@ -1,7 +1,7 @@
 
 
-# revision_docs:af8c8e121b03fbb27f30326738fd1c3ac086b0a2
-# revision_generator:HEAD/2018-08-10T154308/soenke
+# revision_docs:a8c95b4c514a6d9bb2e4001492204945431a2b0d
+# revision_generator:HEAD/2018-09-04T150608/soenke
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -1983,12 +1983,18 @@ module RequestParams
   #   Additional formatting and render options. See the <a href="http://phraseapp.com/docs/guides/formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>
   # include_empty_translations::
   #   Indicates whether keys without translations should be included in the output as well.
+  # include_translated_keys::
+  #   Include translated keys in the locale file. Use in combination with include_empty_translations to obtain only untranslated keys.
+  # include_unverified_translations::
+  #   if set to false unverified translations are excluded
   # keep_notranslate_tags::
   #   Indicates whether [NOTRANSLATE] tags should be kept.
   # skip_unverified_translations::
-  #   Indicates whether the locale file should skip all unverified translations.
+  #   Indicates whether the locale file should skip all unverified translations. This parameter is depricated can be replaced with innclude_unverified_translations.
   # tag::
-  #   Limit result to keys tagged with the given tag (identified by its name).
+  #   This parameter is deprecated. Please use the "tags" parameter instead
+  # tags::
+  #   Limit results to keys tagged with a list of comma separated tag names.
   class LocaleDownloadParams < ::OpenStruct
 
     def branch=(val)
@@ -2031,6 +2037,26 @@ module RequestParams
       end
     end
 
+    def include_translated_keys=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def include_unverified_translations=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
     def keep_notranslate_tags=(val)
       if val.is_a?(TrueClass)
         super(true)
@@ -2052,6 +2078,10 @@ module RequestParams
     end
 
     def tag=(val)
+      super(val)
+    end
+
+    def tags=(val)
       super(val)
     end
 
