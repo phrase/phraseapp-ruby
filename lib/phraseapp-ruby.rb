@@ -1,7 +1,7 @@
 
 
-# revision_docs:a8c95b4c514a6d9bb2e4001492204945431a2b0d
-# revision_generator:HEAD/2018-09-04T150608/soenke
+# revision_docs:732b1e2d93a671158c2ef8536bb39c7b76f73b66
+# revision_generator:HEAD/2018-09-18T135234/kirchner
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -150,7 +150,7 @@ module ResponseObjects
     end
 
     class Invitation < ::OpenStruct
-      #accepted_at, created_at, email, id, locales, projects, role, state, updated_at, 
+      #accepted_at, created_at, email, id, locales, permissions, projects, role, state, updated_at, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -525,9 +525,15 @@ end
 module RequestParams
   # CommentParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # message::
   #   Comment message
   class CommentParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def message=(val)
       super(val)
@@ -655,11 +661,17 @@ end
 module RequestParams
   # JobLocaleParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # locale_id::
   #   locale id
   # user_ids::
   #   Array of user ids to be assigned to the job locale
   class JobLocaleParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def locale_id=(val)
       super(val)
@@ -683,6 +695,8 @@ end
 module RequestParams
   # JobParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # briefing::
   #   Briefing for the translators
   # due_date::
@@ -694,6 +708,10 @@ module RequestParams
   # translation_key_ids::
   #   ids of keys that should be included within the job
   class JobParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def briefing=(val)
       super(val)
@@ -735,6 +753,8 @@ end
 module RequestParams
   # TranslationKeyParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # data_type::
   #   Type of the key. Can be one of the following: string, number, boolean, number, array.
   # description::
@@ -764,6 +784,10 @@ module RequestParams
   # xml_space_preserve::
   #   Indicates whether the key should be exported with "xml:space=preserve". Supported by several XML-based formats.
   class TranslationKeyParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def data_type=(val)
       super(val)
@@ -974,6 +998,8 @@ end
 module RequestParams
   # TranslationOrderParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # category::
   #   Category to use (required for orders processed by TextMaster).
   # include_untranslated_keys::
@@ -1001,6 +1027,10 @@ module RequestParams
   # unverify_translations_upon_delivery::
   #   Unverify translations upon delivery.
   class TranslationOrderParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def category=(val)
       super(val)
@@ -1268,9 +1298,15 @@ end
 module RequestParams
   # TagParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # name::
   #   Name of the tag
   class TagParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def name=(val)
       super(val)
@@ -1290,6 +1326,8 @@ end
 module RequestParams
   # TranslationParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # content::
   #   Translation content
   # excluded::
@@ -1303,6 +1341,10 @@ module RequestParams
   # unverified::
   #   Indicates whether translation is unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
   class TranslationParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def content=(val)
       super(val)
@@ -1605,12 +1647,128 @@ end
 
 
 module RequestParams
+  # CommentDeleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class CommentDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # CommentMarkCheckParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class CommentMarkCheckParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # CommentMarkReadParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class CommentMarkReadParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # CommentMarkUnreadParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class CommentMarkUnreadParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # CommentShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class CommentShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # CommentsListParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class CommentsListParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
   # InvitationCreateParams
   # == Parameters:
   # email::
   #   The email of the invited user. The <code>email</code> can not be updated once created. Create a new invitation for each unique email.
   # locale_ids::
   #   List of locale ids the invited user has access to.
+  # permissions::
+  #   Additional permissions depending on invitation role.
   # project_ids::
   #   List of project ids the invited user has access to.
   # role::
@@ -1623,6 +1781,10 @@ module RequestParams
 
     def locale_ids=(val)
       super(val)
+    end
+
+    def permissions=(val)
+      super(JSON.load(val))
     end
 
     def project_ids=(val)
@@ -1652,6 +1814,8 @@ module RequestParams
   # == Parameters:
   # locale_ids::
   #   List of locale ids the invited user has access to
+  # permissions::
+  #   Additional permissions depending on invitation role.
   # project_ids::
   #   List of project ids the invited user has access to
   # role::
@@ -1660,6 +1824,10 @@ module RequestParams
 
     def locale_ids=(val)
       super(val)
+    end
+
+    def permissions=(val)
+      super(JSON.load(val))
     end
 
     def project_ids=(val)
@@ -1682,11 +1850,55 @@ end
 
 
 module RequestParams
+  # JobCompleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobCompleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobDeleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
   # JobKeysCreateParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # translation_key_ids::
   #   ids of keys that should added to the job
   class JobKeysCreateParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def translation_key_ids=(val)
       super(val.split(','))
@@ -1706,9 +1918,15 @@ end
 module RequestParams
   # JobKeysDeleteParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # translation_key_ids::
   #   ids of keys that should added to the job
   class JobKeysDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def translation_key_ids=(val)
       super(val.split(','))
@@ -1726,8 +1944,67 @@ end
 
 
 module RequestParams
+  # JobReopenParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobReopenParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobStartParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobStartParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
   # JobUpdateParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # briefing::
   #   Briefing for the translators
   # due_date::
@@ -1735,6 +2012,10 @@ module RequestParams
   # name::
   #   Job name
   class JobUpdateParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def briefing=(val)
       super(val)
@@ -1760,10 +2041,107 @@ end
 
 
 module RequestParams
+  # JobLocaleCompleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobLocaleCompleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobLocaleDeleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobLocaleDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobLocaleReopenParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobLocaleReopenParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobLocaleShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobLocaleShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # JobLocalesListParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class JobLocalesListParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
   # JobsListParams
   # == Parameters:
   # assigned_to::
   #   filter by user assigned to job
+  # branch::
+  #   specify the branch to use
   # owned_by::
   #   filter by user owning job
   # state::
@@ -1771,6 +2149,10 @@ module RequestParams
   class JobsListParams < ::OpenStruct
 
     def assigned_to=(val)
+      super(val)
+    end
+
+    def branch=(val)
       super(val)
     end
 
@@ -1800,13 +2182,57 @@ end
 
 
 module RequestParams
+  # KeyDeleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class KeyDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # KeyShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class KeyShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
   # KeysDeleteParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
   #   q_description_placeholder
   class KeysDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def locale_id=(val)
       super(val)
@@ -1827,6 +2253,8 @@ end
 module RequestParams
   # KeysListParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # order::
@@ -1836,6 +2264,10 @@ module RequestParams
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysListParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def locale_id=(val)
       super(val)
@@ -1864,6 +2296,8 @@ end
 module RequestParams
   # KeysSearchParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # order::
@@ -1873,6 +2307,10 @@ module RequestParams
   # sort::
   #   Sort by field. Can be one of: name, created_at, updated_at.
   class KeysSearchParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def locale_id=(val)
       super(val)
@@ -1901,6 +2339,8 @@ end
 module RequestParams
   # KeysTagParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
@@ -1908,6 +2348,10 @@ module RequestParams
   # tags::
   #   Tag or comma-separated list of tags to add to the matching collection of keys
   class KeysTagParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def locale_id=(val)
       super(val)
@@ -1935,6 +2379,8 @@ end
 module RequestParams
   # KeysUntagParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # locale_id::
   #   Locale used to determine the translation state of a key when filtering for untranslated or translated keys.
   # q::
@@ -1942,6 +2388,10 @@ module RequestParams
   # tags::
   #   Tag or comma-separated list of tags to remove from the matching collection of keys
   class KeysUntagParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def locale_id=(val)
       super(val)
@@ -1960,6 +2410,25 @@ module RequestParams
       if tags == nil || tags == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"tags\" of \"keys_untagParams\" not set")
       end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # LocaleDeleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class LocaleDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
     end
 
   end
@@ -2139,6 +2608,8 @@ module RequestParams
   # == Parameters:
   # locale_ids::
   #   List of locale ids the user has access to.
+  # permissions::
+  #   Additional permissions depending on member role.
   # project_ids::
   #   List of project ids the user has access to. 
   # role::
@@ -2147,6 +2618,10 @@ module RequestParams
 
     def locale_ids=(val)
       super(val)
+    end
+
+    def permissions=(val)
+      super(JSON.load(val))
     end
 
     def project_ids=(val)
@@ -2169,8 +2644,162 @@ end
 
 
 module RequestParams
+  # OrderConfirmParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class OrderConfirmParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # OrderDeleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class OrderDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # OrderShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class OrderShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # OrdersListParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class OrdersListParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # TagDeleteParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class TagDeleteParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # TagShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class TagShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # TagsListParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class TagsListParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # TranslationShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class TranslationShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
   # TranslationUpdateParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # content::
   #   Translation content
   # excluded::
@@ -2180,6 +2809,10 @@ module RequestParams
   # unverified::
   #   Indicates whether translation is unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
   class TranslationUpdateParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def content=(val)
       super(val)
@@ -2223,6 +2856,8 @@ end
 module RequestParams
   # TranslationsByKeyParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
@@ -2230,6 +2865,10 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByKeyParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def order=(val)
       super(val)
@@ -2254,6 +2893,8 @@ end
 module RequestParams
   # TranslationsByLocaleParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
@@ -2261,6 +2902,10 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsByLocaleParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def order=(val)
       super(val)
@@ -2285,6 +2930,8 @@ end
 module RequestParams
   # TranslationsExcludeParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
@@ -2292,6 +2939,10 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsExcludeParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def order=(val)
       super(val)
@@ -2316,6 +2967,8 @@ end
 module RequestParams
   # TranslationsIncludeParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
@@ -2323,6 +2976,10 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsIncludeParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def order=(val)
       super(val)
@@ -2347,6 +3004,8 @@ end
 module RequestParams
   # TranslationsListParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
@@ -2354,6 +3013,10 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsListParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def order=(val)
       super(val)
@@ -2378,6 +3041,8 @@ end
 module RequestParams
   # TranslationsSearchParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
@@ -2385,6 +3050,10 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsSearchParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def order=(val)
       super(val)
@@ -2409,6 +3078,8 @@ end
 module RequestParams
   # TranslationsUnverifyParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
@@ -2416,6 +3087,10 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsUnverifyParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def order=(val)
       super(val)
@@ -2440,6 +3115,8 @@ end
 module RequestParams
   # TranslationsVerifyParams
   # == Parameters:
+  # branch::
+  #   specify the branch to use
   # order::
   #   Order direction. Can be one of: asc, desc.
   # q::
@@ -2447,6 +3124,10 @@ module RequestParams
   # sort::
   #   Sort criteria. Can be one of: key_name, created_at, updated_at.
   class TranslationsVerifyParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
 
     def order=(val)
       super(val)
@@ -2474,6 +3155,63 @@ module RequestParams
   # branch::
   #   specify the branch to use
   class UploadShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # UploadsListParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class UploadsListParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # VersionShowParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class VersionShowParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def validate
+      
+    end
+
+  end
+end
+
+
+module RequestParams
+  # VersionsListParams
+  # == Parameters:
+  # branch::
+  #   specify the branch to use
+  class VersionsListParams < ::OpenStruct
 
     def branch=(val)
       super(val)
@@ -3169,14 +3907,27 @@ end
     #   key_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::CommentDeleteParams
     #
     # == Returns:
     #   err
-    def comment_delete(project_id, key_id, id)
+    def comment_delete(project_id, key_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::CommentDeleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentDeleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -3195,14 +3946,27 @@ end
     #   key_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::CommentMarkCheckParams
     #
     # == Returns:
     #   err
-    def comment_mark_check(project_id, key_id, id)
+    def comment_mark_check(project_id, key_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::CommentMarkCheckParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentMarkCheckParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -3221,14 +3985,27 @@ end
     #   key_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::CommentMarkReadParams
     #
     # == Returns:
     #   err
-    def comment_mark_read(project_id, key_id, id)
+    def comment_mark_read(project_id, key_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::CommentMarkReadParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentMarkReadParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -3247,14 +4024,27 @@ end
     #   key_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::CommentMarkUnreadParams
     #
     # == Returns:
     #   err
-    def comment_mark_unread(project_id, key_id, id)
+    def comment_mark_unread(project_id, key_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s/read", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::CommentMarkUnreadParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentMarkUnreadParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -3273,15 +4063,28 @@ end
     #   key_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::CommentShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Comment
     #   err
-    def comment_show(project_id, key_id, id)
+    def comment_show(project_id, key_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments/%s", project_id, key_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::CommentShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -3338,15 +4141,28 @@ end
     #   project_id
     # key_id::
     #   key_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::CommentsListParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Comment
     #   err
-    def comments_list(project_id, key_id, page, per_page)
+    def comments_list(project_id, key_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/keys/%s/comments", project_id, key_id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::CommentsListParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::CommentsListParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
@@ -3967,15 +4783,28 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobCompleteParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobDetails
     #   err
-    def job_complete(project_id, id)
+    def job_complete(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s/complete", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobCompleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobCompleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4028,14 +4857,27 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobDeleteParams
     #
     # == Returns:
     #   err
-    def job_delete(project_id, id)
+    def job_delete(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobDeleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobDeleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -4127,15 +4969,28 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobReopenParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobDetails
     #   err
-    def job_reopen(project_id, id)
+    def job_reopen(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s/reopen", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobReopenParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobReopenParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4152,15 +5007,28 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobDetails
     #   err
-    def job_show(project_id, id)
+    def job_show(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4177,15 +5045,28 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobStartParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobDetails
     #   err
-    def job_start(project_id, id)
+    def job_start(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s/start", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobStartParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobStartParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4242,15 +5123,28 @@ end
     #   job_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobLocaleCompleteParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobLocale
     #   err
-    def job_locale_complete(project_id, job_id, id)
+    def job_locale_complete(project_id, job_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s/locales/%s/complete", project_id, job_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobLocaleCompleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobLocaleCompleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4269,14 +5163,27 @@ end
     #   job_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobLocaleDeleteParams
     #
     # == Returns:
     #   err
-    def job_locale_delete(project_id, job_id, id)
+    def job_locale_delete(project_id, job_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s/locales/%s", project_id, job_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobLocaleDeleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobLocaleDeleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -4295,15 +5202,28 @@ end
     #   job_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobLocaleReopenParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobLocale
     #   err
-    def job_locale_reopen(project_id, job_id, id)
+    def job_locale_reopen(project_id, job_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s/locales/%s/reopen", project_id, job_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobLocaleReopenParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobLocaleReopenParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4322,15 +5242,28 @@ end
     #   job_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobLocaleShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobLocale
     #   err
-    def job_locale_show(project_id, job_id, id)
+    def job_locale_show(project_id, job_id, id, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s/locale/%s", project_id, job_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobLocaleShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobLocaleShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4425,15 +5358,28 @@ end
     #   project_id
     # job_id::
     #   job_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::JobLocalesListParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::JobLocale
     #   err
-    def job_locales_list(project_id, job_id, page, per_page)
+    def job_locales_list(project_id, job_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/jobs/%s/locales", project_id, job_id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::JobLocalesListParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::JobLocalesListParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
@@ -4500,6 +5446,10 @@ end
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationKeyParams")
         end
       end
+      if params.branch != nil
+        data_hash["branch"] = params.branch
+      end
+
       if params.data_type != nil
         data_hash["data_type"] = params.data_type
       end
@@ -4580,14 +5530,27 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::KeyDeleteParams
     #
     # == Returns:
     #   err
-    def key_delete(project_id, id)
+    def key_delete(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::KeyDeleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeyDeleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -4604,15 +5567,28 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::KeyShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationKeyDetails
     #   err
-    def key_show(project_id, id)
+    def key_show(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/keys/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::KeyShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::KeyShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -4645,6 +5621,10 @@ end
           raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationKeyParams")
         end
       end
+      if params.branch != nil
+        data_hash["branch"] = params.branch
+      end
+
       if params.data_type != nil
         data_hash["data_type"] = params.data_type
       end
@@ -4941,14 +5921,27 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::LocaleDeleteParams
     #
     # == Returns:
     #   err
-    def locale_delete(project_id, id)
+    def locale_delete(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/locales/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::LocaleDeleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::LocaleDeleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -5224,15 +6217,28 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::OrderConfirmParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
-    def order_confirm(project_id, id)
+    def order_confirm(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/orders/%s/confirm", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::OrderConfirmParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::OrderConfirmParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -5285,14 +6291,27 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::OrderDeleteParams
     #
     # == Returns:
     #   err
-    def order_delete(project_id, id)
+    def order_delete(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/orders/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::OrderDeleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::OrderDeleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -5309,15 +6328,28 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::OrderShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
-    def order_show(project_id, id)
+    def order_show(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/orders/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::OrderShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::OrderShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -5332,15 +6364,28 @@ end
     # == Parameters:
     # project_id::
     #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::OrdersListParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationOrder
     #   err
-    def orders_list(project_id, page, per_page)
+    def orders_list(project_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/orders", project_id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::OrdersListParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::OrdersListParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
@@ -5748,14 +6793,27 @@ end
     #   project_id
     # name::
     #   name
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::TagDeleteParams
     #
     # == Returns:
     #   err
-    def tag_delete(project_id, name)
+    def tag_delete(project_id, name, params)
       path = sprintf("/api/v2/projects/%s/tags/%s", project_id, name)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::TagDeleteParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TagDeleteParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
       if err != nil
@@ -5772,15 +6830,28 @@ end
     #   project_id
     # name::
     #   name
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::TagShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TagWithStats
     #   err
-    def tag_show(project_id, name)
+    def tag_show(project_id, name, params)
       path = sprintf("/api/v2/projects/%s/tags/%s", project_id, name)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::TagShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TagShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -5795,15 +6866,28 @@ end
     # == Parameters:
     # project_id::
     #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::TagsListParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Tag
     #   err
-    def tags_list(project_id, page, per_page)
+    def tags_list(project_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/tags", project_id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::TagsListParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TagsListParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
@@ -5856,15 +6940,28 @@ end
     #   project_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::TranslationShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationDetails
     #   err
-    def translation_show(project_id, id)
+    def translation_show(project_id, id, params)
       path = sprintf("/api/v2/projects/%s/translations/%s", project_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::TranslationShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::TranslationShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -6345,15 +7442,28 @@ end
     # == Parameters:
     # project_id::
     #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::UploadsListParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::Upload
     #   err
-    def uploads_list(project_id, page, per_page)
+    def uploads_list(project_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/uploads", project_id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::UploadsListParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::UploadsListParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
@@ -6372,15 +7482,28 @@ end
     #   translation_id
     # id::
     #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::VersionShowParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationVersionWithUser
     #   err
-    def version_show(project_id, translation_id, id)
+    def version_show(project_id, translation_id, id, params)
       path = sprintf("/api/v2/projects/%s/translations/%s/versions/%s", project_id, translation_id, id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::VersionShowParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::VersionShowParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
       if err != nil
@@ -6397,15 +7520,28 @@ end
     #   project_id
     # translation_id::
     #   translation_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::VersionsListParams
     #
     # == Returns:
     #   PhraseApp::ResponseObjects::TranslationVersion
     #   err
-    def versions_list(project_id, translation_id, page, per_page)
+    def versions_list(project_id, translation_id, page, per_page, params)
       path = sprintf("/api/v2/projects/%s/translations/%s/versions", project_id, translation_id)
       data_hash = {}
       post_body = nil
   
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::VersionsListParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::VersionsListParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
       reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
       rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
       if err != nil
