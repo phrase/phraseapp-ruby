@@ -1,7 +1,7 @@
 
 
-# revision_docs:732b1e2d93a671158c2ef8536bb39c7b76f73b66
-# revision_generator:HEAD/2018-09-18T135234/kirchner
+# revision_docs:cf9c93b944382e16fa7b30acaebc002b51629b47
+# revision_generator:HEAD/2019-02-08T151342/soenke
 require 'ostruct'
 require 'net/https'
 require 'uri'
@@ -111,6 +111,22 @@ module ResponseObjects
 
     class Comment < ::OpenStruct
       #created_at, id, message, updated_at, user, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class Distribution < ::OpenStruct
+      #created_at, deleted_at, id, name, platforms, project, releases, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class DistributionPreview < ::OpenStruct
+      #created_at, deleted_at, id, name, platforms, project, release_count, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -263,6 +279,38 @@ module ResponseObjects
 
     class ProjectLocales < ProjectShort
       #locales, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class Release < ::OpenStruct
+      #app_max_version, app_min_version, created_at, description, environments, id, locales, platforms, project, updated_at, version, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class ReleasePreview < ::OpenStruct
+      #app_max_version, app_min_version, created_at, description, environments, id, locale_codes, platforms, project, updated_at, version, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class Screenshot < ::OpenStruct
+      #created_at, description, id, markers_count, name, screenshot_url, updated_at, 
+      def initialize(hash)
+        super(hash)
+        PhraseApp.handle_times(self)
+      end
+    end
+
+    class ScreenshotMarker < ::OpenStruct
+      #created_at, id, presentation, presentation_type, translation_key, updated_at, 
       def initialize(hash)
         super(hash)
         PhraseApp.handle_times(self)
@@ -551,6 +599,70 @@ end
 
 
 module RequestParams
+  # DistributionsParams
+  # == Parameters:
+  # fallback_to_default_locale::
+  #   Indicates whether to fallback to projects default locale when locale can not be found
+  # fallback_to_non_regional_locale::
+  #   Indicates whether to fallback to non regional locale when locale can not be found
+  # name::
+  #   Name of the distribution
+  # platforms::
+  #   List of platforms the distribution should support.
+  # project_id::
+  #   Project id the distribution should be assigned to.
+  class DistributionsParams < ::OpenStruct
+
+    def fallback_to_default_locale=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def fallback_to_non_regional_locale=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
+    def name=(val)
+      super(val)
+    end
+
+    def platforms=(val)
+      super(val.split(','))
+    end
+
+    def project_id=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if name == nil || name == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"DistributionsParams\" not set")
+      end
+      if platforms == nil
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"platforms\" of \"DistributionsParams\" not set")
+      end
+      if project_id == nil || project_id == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"project_id\" of \"DistributionsParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
   # GlossaryParams
   # == Parameters:
   # name::
@@ -774,9 +886,9 @@ module RequestParams
   # plural::
   #   Indicates whether key supports pluralization
   # remove_screenshot::
-  #   Indicates whether the screenshot will be deleted.
+  #   Indicates whether the screenshot will be deleted. This parameter is deprecated. Please use the Screenshots endpoint instead.
   # screenshot::
-  #   Screenshot/image for the key.
+  #   Screenshot/image for the key. This parameter is deprecated. Please use the Screenshots endpoint instead.
   # tags::
   #   List of tags separated by comma to be associated with the key.
   # unformatted::
@@ -892,7 +1004,7 @@ module RequestParams
   # default::
   #   Indicates whether locale is the default locale. If set to true, the previous default locale the project is no longer the default locale.
   # main::
-  #   Indicates whether locale is a main locale. Main locales are part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Verification System</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
+  #   Indicates whether locale is a main locale. Main locales are part of the <a href="https://help.phraseapp.com/translate-website-and-app-content/verify-and-proofread-translations/verification-and-proofreading" target="_blank">Verification System</a> feature.
   # name::
   #   Locale name
   # rtl::
@@ -900,9 +1012,9 @@ module RequestParams
   # source_locale_id::
   #   Source locale. Can be the name or public id of the locale. Preferred is the public id.
   # unverify_new_translations::
-  #   Indicates that new translations for this locale should be marked as unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
+  #   Indicates that new translations for this locale should be marked as unverified. Part of the <a href="https://help.phraseapp.com/translate-website-and-app-content/verify-and-proofread-translations/verification-and-proofreading" target="_blank">Advanced Workflows</a> feature.
   # unverify_updated_translations::
-  #   Indicates that updated translations for this locale should be marked as unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
+  #   Indicates that updated translations for this locale should be marked as unverified. Part of the <a href="https://help.phraseapp.com/translate-website-and-app-content/verify-and-proofread-translations/verification-and-proofreading" target="_blank">Advanced Workflows</a> feature.
   class LocaleParams < ::OpenStruct
 
     def autotranslate=(val)
@@ -1143,7 +1255,7 @@ module RequestParams
   # account_id::
   #   Account ID to specify the actual account the project should be created in. Required if the requesting user is a member of multiple accounts.
   # main_format::
-  #   Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="http://phraseapp.com/docs/guides/formats/">Format Guide</a> or our <a href="#formats">Formats API Endpoint</a>.
+  #   Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="https://help.phraseapp.com/what-is-phraseapp/supported-platforms-and-formats/supported-platforms-and-formats">Format Guide</a> or our <a href="#formats">Formats API Endpoint</a>.
   # name::
   #   Name of the project
   # project_image::
@@ -1194,6 +1306,105 @@ module RequestParams
       
       if name == nil || name == "" 
         raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"name\" of \"ProjectParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # ReleasesParams
+  # == Parameters:
+  # branch::
+  #   Branch used for release
+  # description::
+  #   Description of the release
+  # platforms::
+  #   List of platforms the release should support.
+  class ReleasesParams < ::OpenStruct
+
+    def branch=(val)
+      super(val)
+    end
+
+    def description=(val)
+      super(val)
+    end
+
+    def platforms=(val)
+      super(val.split(','))
+    end
+
+    def validate
+      
+      if platforms == nil
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"platforms\" of \"ReleasesParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # ScreenshotMarkerParams
+  # == Parameters:
+  # key_id::
+  #   Specify the Key ID which should be highlighted on the specified screenshot. The Key must belong to the project.
+  # presentation::
+  #   Presentation details of the screenshot marker in JSON format.<br/><br/>Each Screenshot Marker is represented as a rectangular shaped highlight box with the name of the specified Key attached. You can specify the marker position on the screenshot (<code>x</code>-axis and <code>y</code>-axis in pixels) from the top left corner of the screenshot and the dimensions of the marker itself (<code>w</code> and <code>h</code> in pixels).
+  class ScreenshotMarkerParams < ::OpenStruct
+
+    def key_id=(val)
+      super(val)
+    end
+
+    def presentation=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if key_id == nil
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"key_id\" of \"ScreenshotMarkerParams\" not set")
+      end
+      if presentation == nil || presentation == "" 
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"presentation\" of \"ScreenshotMarkerParams\" not set")
+      end
+    end
+
+  end
+end
+
+
+module RequestParams
+  # ScreenshotParams
+  # == Parameters:
+  # description::
+  #   Description of the screenshot
+  # filename::
+  #   Screenshot file
+  # name::
+  #   Name of the screenshot
+  class ScreenshotParams < ::OpenStruct
+
+    def description=(val)
+      super(val)
+    end
+
+    def filename=(val)
+      super(val)
+    end
+
+    def name=(val)
+      super(val)
+    end
+
+    def validate
+      
+      if filename == nil
+        raise PhraseApp::ParamsHelpers::ParamsValidationError.new("Required parameter \"filename\" of \"ScreenshotParams\" not set")
       end
     end
 
@@ -1339,7 +1550,7 @@ module RequestParams
   # plural_suffix::
   #   Plural suffix. Can be one of: zero, one, two, few, many, other. Must be specified if the key associated to the translation is pluralized.
   # unverified::
-  #   Indicates whether translation is unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
+  #   Indicates whether translation is unverified. Part of the <a href="https://help.phraseapp.com/translate-website-and-app-content/verify-and-proofread-translations/verification-and-proofreading" target="_blank">Advanced Workflows</a> feature.
   class TranslationParams < ::OpenStruct
 
     def branch=(val)
@@ -1407,7 +1618,7 @@ module RequestParams
   # branch::
   #   specify the branch to use
   # convert_emoji::
-  #   Indicates whether the file contains Emoji symbols that should be converted. <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
+  #   Indicates whether the file contains Emoji symbols that should be converted. <a href="https://help.phraseapp.com/manage-translations-and-languages/work-with-emojis/working-with-emojis">Working with Emojis</a>.
   # file::
   #   File to be imported
   # file_encoding::
@@ -1420,6 +1631,8 @@ module RequestParams
   #   Locale of the file's content. Can be the name or public id of the locale. Preferred is the public id.
   # locale_mapping::
   #   Optional, format specific mapping between locale names and the columns the translations to those locales are contained in.
+  # mark_reviewed::
+  #   Indicated whether the imported translations should be marked as reviewed. This setting is available if the review workflow (currently beta) is enabled for the project.
   # skip_unverification::
   #   Indicates whether the upload should unverify updated translations.
   # skip_upload_tags::
@@ -1478,6 +1691,16 @@ module RequestParams
 
     def locale_mapping=(val)
       super(JSON.load(val))
+    end
+
+    def mark_reviewed=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
     end
 
     def skip_unverification=(val)
@@ -1768,7 +1991,7 @@ module RequestParams
   # locale_ids::
   #   List of locale ids the invited user has access to.
   # permissions::
-  #   Additional permissions depending on invitation role.
+  #   Additional permissions depending on invitation role. Available permissions are <code>create_upload</code> and <code>review_translations</code>
   # project_ids::
   #   List of project ids the invited user has access to.
   # role::
@@ -2441,7 +2664,7 @@ module RequestParams
   # branch::
   #   specify the branch to use
   # convert_emoji::
-  #   Indicates whether Emoji symbols should be converted to actual Emojis. <a href="http://phraseapp.com/docs/guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.
+  #   Indicates whether Emoji symbols should be converted to actual Emojis. <a href="https://help.phraseapp.com/manage-translations-and-languages/work-with-emojis/working-with-emojis">Working with Emojis</a>.
   # encoding::
   #   Enforces a specific encoding on the file contents. Valid options are "UTF-8", "UTF-16" and "ISO-8859-1".
   # fallback_locale_id::
@@ -2449,7 +2672,7 @@ module RequestParams
   # file_format::
   #   File format name. See the format guide for all supported file formats.
   # format_options::
-  #   Additional formatting and render options. See the <a href="http://phraseapp.com/docs/guides/formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>
+  #   Additional formatting and render options. See the <a href="https://help.phraseapp.com/what-is-phraseapp/supported-platforms-and-formats/supported-platforms-and-formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>
   # include_empty_translations::
   #   Indicates whether keys without translations should be included in the output as well.
   # include_translated_keys::
@@ -2459,11 +2682,13 @@ module RequestParams
   # keep_notranslate_tags::
   #   Indicates whether [NOTRANSLATE] tags should be kept.
   # skip_unverified_translations::
-  #   Indicates whether the locale file should skip all unverified translations. This parameter is depricated can be replaced with innclude_unverified_translations.
+  #   Indicates whether the locale file should skip all unverified translations. This parameter is deprecated and should be replaced with <code>include_unverified_translations</code>.
   # tag::
   #   This parameter is deprecated. Please use the "tags" parameter instead
   # tags::
   #   Limit results to keys tagged with a list of comma separated tag names.
+  # use_last_reviewed_version::
+  #   If set to true the last reviewed version of a translation is used. This is only available if the review workflow (currently in beta) is enabled for the project.
   class LocaleDownloadParams < ::OpenStruct
 
     def branch=(val)
@@ -2554,6 +2779,16 @@ module RequestParams
       super(val)
     end
 
+    def use_last_reviewed_version=(val)
+      if val.is_a?(TrueClass)
+        super(true)
+      elsif val.is_a?(FalseClass)
+        return
+      else
+        PhraseApp::ParamsHelpers::ParamsValidationError.new("invalid value #{val}")
+      end
+    end
+
     def validate
       
       if file_format == nil || file_format == "" 
@@ -2609,7 +2844,7 @@ module RequestParams
   # locale_ids::
   #   List of locale ids the user has access to.
   # permissions::
-  #   Additional permissions depending on member role.
+  #   Additional permissions depending on member role. Available permissions are <code>create_upload</code> and <code>review_translations</code>
   # project_ids::
   #   List of project ids the user has access to. 
   # role::
@@ -2807,7 +3042,7 @@ module RequestParams
   # plural_suffix::
   #   Plural suffix. Can be one of: zero, one, two, few, many, other. Must be specified if the key associated to the translation is pluralized.
   # unverified::
-  #   Indicates whether translation is unverified. Part of the <a href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading" target="_blank">Advanced Workflows</a> feature and only available in <a href="https://phraseapp.com/pricing" target="_blank">Control Package</a>.
+  #   Indicates whether translation is unverified. Part of the <a href="https://help.phraseapp.com/translate-website-and-app-content/verify-and-proofread-translations/verification-and-proofreading" target="_blank">Advanced Workflows</a> feature.
   class TranslationUpdateParams < ::OpenStruct
 
     def branch=(val)
@@ -4170,6 +4405,152 @@ end
       end
       
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Comment.new(item) }, err
+    end
+  
+    # Create a new distribution.
+    # API Path: /api/v2/accounts/:account_id/distributions
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::DistributionsParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Distribution
+    #   err
+    def distribution_create(account_id, params)
+      path = sprintf("/api/v2/accounts/%s/distributions", account_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::DistributionsParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::DistributionsParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Distribution.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing distribution.
+    # API Path: /api/v2/accounts/:account_id/distributions/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def distribution_delete(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single distribution.
+    # API Path: /api/v2/accounts/:account_id/distributions/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Distribution
+    #   err
+    def distribution_show(account_id, id)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Distribution.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing distribution.
+    # API Path: /api/v2/accounts/:account_id/distributions/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::DistributionsParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Distribution
+    #   err
+    def distribution_update(account_id, id, params)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s", account_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::DistributionsParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::DistributionsParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Distribution.new(JSON.load(rc.body)), err
+    end
+  
+    # List all distributions for the given account.
+    # API Path: /api/v2/accounts/:account_id/distributions
+    # == Parameters:
+    # account_id::
+    #   account_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::DistributionPreview
+    #   err
+    def distributions_list(account_id, page, per_page)
+      path = sprintf("/api/v2/accounts/%s/distributions", account_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::DistributionPreview.new(item) }, err
     end
   
     # Get a handy list of all localization file formats supported in PhraseApp.
@@ -6583,6 +6964,515 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Project.new(item) }, err
     end
   
+    # Create a new release.
+    # API Path: /api/v2/accounts/:account_id/distributions/:distribution_id/releases
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # distribution_id::
+    #   distribution_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::ReleasesParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Release
+    #   err
+    def release_create(account_id, distribution_id, params)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s/releases", account_id, distribution_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::ReleasesParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ReleasesParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Release.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing release.
+    # API Path: /api/v2/accounts/:account_id/distributions/:distribution_id/releases/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # distribution_id::
+    #   distribution_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def release_delete(account_id, distribution_id, id)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s/releases/%s", account_id, distribution_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Publish a release for production.
+    # API Path: /api/v2/accounts/:account_id/distributions/:distribution_id/releases/:id/publish
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # distribution_id::
+    #   distribution_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Release
+    #   err
+    def release_publish(account_id, distribution_id, id)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s/releases/%s/publish", account_id, distribution_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Release.new(JSON.load(rc.body)), err
+    end
+  
+    # Get details on a single release.
+    # API Path: /api/v2/accounts/:account_id/distributions/:distribution_id/releases/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # distribution_id::
+    #   distribution_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Release
+    #   err
+    def release_show(account_id, distribution_id, id)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s/releases/%s", account_id, distribution_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Release.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing release.
+    # API Path: /api/v2/accounts/:account_id/distributions/:distribution_id/releases/:id
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # distribution_id::
+    #   distribution_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::ReleasesParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Release
+    #   err
+    def release_update(account_id, distribution_id, id, params)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s/releases/%s", account_id, distribution_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::ReleasesParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ReleasesParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Release.new(JSON.load(rc.body)), err
+    end
+  
+    # List all releases for the given distribution.
+    # API Path: /api/v2/accounts/:account_id/distributions/:distribution_id/releases
+    # == Parameters:
+    # account_id::
+    #   account_id
+    # distribution_id::
+    #   distribution_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::ReleasePreview
+    #   err
+    def releases_list(account_id, distribution_id, page, per_page)
+      path = sprintf("/api/v2/accounts/%s/distributions/%s/releases", account_id, distribution_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::ReleasePreview.new(item) }, err
+    end
+  
+    # Create a new screenshot.
+    # API Path: /api/v2/projects/:project_id/screenshots
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::ScreenshotParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Screenshot
+    #   err
+    def screenshot_create(project_id, params)
+      path = sprintf("/api/v2/projects/%s/screenshots", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::ScreenshotParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ScreenshotParams")
+        end
+      end
+      if params.description != nil
+        data_hash["description"] = params.description
+      end
+
+      if params.filename != nil
+        post_body = []
+        post_body << "--#{PhraseApp::MULTIPART_BOUNDARY}\r\n"
+        post_body << "Content-Disposition: form-data; name=\"filename\"; filename=\"#{File.basename(params.filename )}\"\r\n"
+        post_body << "Content-Type: text/plain\r\n"
+        post_body << "\r\n"
+        post_body << File.read(params.filename)
+        post_body << "\r\n"
+      end
+
+      if params.name != nil
+        data_hash["name"] = params.name
+      end
+
+  
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Screenshot.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing screenshot.
+    # API Path: /api/v2/projects/:project_id/screenshots/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   err
+    def screenshot_delete(project_id, id)
+      path = sprintf("/api/v2/projects/%s/screenshots/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single screenshot for a given project.
+    # API Path: /api/v2/projects/:project_id/screenshots/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Screenshot
+    #   err
+    def screenshot_show(project_id, id)
+      path = sprintf("/api/v2/projects/%s/screenshots/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Screenshot.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing screenshot.
+    # API Path: /api/v2/projects/:project_id/screenshots/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::ScreenshotParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Screenshot
+    #   err
+    def screenshot_update(project_id, id, params)
+      path = sprintf("/api/v2/projects/%s/screenshots/%s", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::ScreenshotParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ScreenshotParams")
+        end
+      end
+      if params.description != nil
+        data_hash["description"] = params.description
+      end
+
+      if params.filename != nil
+        post_body = []
+        post_body << "--#{PhraseApp::MULTIPART_BOUNDARY}\r\n"
+        post_body << "Content-Disposition: form-data; name=\"filename\"; filename=\"#{File.basename(params.filename )}\"\r\n"
+        post_body << "Content-Type: text/plain\r\n"
+        post_body << "\r\n"
+        post_body << File.read(params.filename)
+        post_body << "\r\n"
+      end
+
+      if params.name != nil
+        data_hash["name"] = params.name
+      end
+
+  
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::Screenshot.new(JSON.load(rc.body)), err
+    end
+  
+    # Create a new screenshot marker.
+    # API Path: /api/v2/projects/:project_id/screenshots/:screenshot_id/markers
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # screenshot_id::
+    #   screenshot_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::ScreenshotMarkerParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::ScreenshotMarker
+    #   err
+    def screenshot_marker_create(project_id, screenshot_id, params)
+      path = sprintf("/api/v2/projects/%s/screenshots/%s/markers", project_id, screenshot_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::ScreenshotMarkerParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ScreenshotMarkerParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "POST", path, reqHelper.ctype, reqHelper.body, 201)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::ScreenshotMarker.new(JSON.load(rc.body)), err
+    end
+  
+    # Delete an existing screenshot marker.
+    # API Path: /api/v2/projects/:project_id/screenshots/:screenshot_id/markers
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # screenshot_id::
+    #   screenshot_id
+    #
+    # == Returns:
+    #   err
+    def screenshot_marker_delete(project_id, screenshot_id)
+      path = sprintf("/api/v2/projects/%s/screenshots/%s/markers", project_id, screenshot_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "DELETE", path, reqHelper.ctype, reqHelper.body, 204)
+      if err != nil
+        return nil, err
+      end
+      
+      return err
+    end
+  
+    # Get details on a single screenshot marker for a given project.
+    # API Path: /api/v2/projects/:project_id/screenshots/:screenshot_id/markers/:id
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # screenshot_id::
+    #   screenshot_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::ScreenshotMarker
+    #   err
+    def screenshot_marker_show(project_id, screenshot_id, id)
+      path = sprintf("/api/v2/projects/%s/screenshots/%s/markers/%s", project_id, screenshot_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::ScreenshotMarker.new(JSON.load(rc.body)), err
+    end
+  
+    # Update an existing screenshot marker.
+    # API Path: /api/v2/projects/:project_id/screenshots/:screenshot_id/markers
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # screenshot_id::
+    #   screenshot_id
+    # params::
+    #   Parameters of type PhraseApp::RequestParams::ScreenshotMarkerParams
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::ScreenshotMarker
+    #   err
+    def screenshot_marker_update(project_id, screenshot_id, params)
+      path = sprintf("/api/v2/projects/%s/screenshots/%s/markers", project_id, screenshot_id)
+      data_hash = {}
+      post_body = nil
+  
+      if params.present?
+        unless params.kind_of?(PhraseApp::RequestParams::ScreenshotMarkerParams)
+          raise PhraseApp::ParamsHelpers::ParamsError.new("Expects params to be kind_of PhraseApp::RequestParams::ScreenshotMarkerParams")
+        end
+      end
+  
+      data_hash = params.to_h
+      err = params.validate
+      if err != nil
+        return nil, err
+      end
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request(@credentials, "PATCH", path, reqHelper.ctype, reqHelper.body, 200)
+      if err != nil
+        return nil, err
+      end
+      
+      return PhraseApp::ResponseObjects::ScreenshotMarker.new(JSON.load(rc.body)), err
+    end
+  
+    # List all screenshot markers for the given project.
+    # API Path: /api/v2/projects/:project_id/screenshots/:id/markers
+    # == Parameters:
+    # project_id::
+    #   project_id
+    # id::
+    #   id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::ScreenshotMarker
+    #   err
+    def screenshot_markers_list(project_id, id, page, per_page)
+      path = sprintf("/api/v2/projects/%s/screenshots/%s/markers", project_id, id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::ScreenshotMarker.new(item) }, err
+    end
+  
+    # List all screenshots for the given project.
+    # API Path: /api/v2/projects/:project_id/screenshots
+    # == Parameters:
+    # project_id::
+    #   project_id
+    #
+    # == Returns:
+    #   PhraseApp::ResponseObjects::Screenshot
+    #   err
+    def screenshots_list(project_id, page, per_page)
+      path = sprintf("/api/v2/projects/%s/screenshots", project_id)
+      data_hash = {}
+      post_body = nil
+  
+      reqHelper = PhraseApp::ParamsHelpers::BodyTypeHelper.new(data_hash, post_body)
+      rc, err = PhraseApp.send_request_paginated(@credentials, "GET", path, reqHelper.ctype, reqHelper.body, 200, page, per_page)
+      if err != nil
+        return nil, err
+      end
+      
+      return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Screenshot.new(item) }, err
+    end
+  
     # Show details for current User.
     # API Path: /api/v2/user
     # == Parameters:
@@ -7193,7 +8083,7 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Translation.new(item) }, err
     end
   
-    # List translations for the given project if you exceed GET request limitations on translations list. If you want to download all translations for one locale we recommend to use the <code>locales#download</code> endpoint.
+    # Search translations for the given project. Provides the same search interface as <code>translations#index</code> but allows POST requests to avoid limitations imposed by GET requests. If you want to download all translations for one locale we recommend to use the <code>locales#download</code> endpoint.
     # API Path: /api/v2/projects/:project_id/translations/search
     # == Parameters:
     # project_id::
@@ -7229,7 +8119,7 @@ end
       return JSON.load(rc.body).map { |item| PhraseApp::ResponseObjects::Translation.new(item) }, err
     end
   
-    # <div class='alert alert-info'>Only available in the <a href='https://phraseapp.com/pricing' target='_blank'>Control Package</a>.</div>Mark translations matching query as unverified.
+    # Mark translations matching query as unverified.
     # API Path: /api/v2/projects/:project_id/translations/unverify
     # == Parameters:
     # project_id::
@@ -7265,7 +8155,7 @@ end
       return PhraseApp::ResponseObjects::AffectedCount.new(JSON.load(rc.body)), err
     end
   
-    # <div class='alert alert-info'>Only available in the <a href='https://phraseapp.com/pricing' target='_blank'>Control Package</a>.</div>Verify translations matching query.
+    # Verify translations matching query.
     # API Path: /api/v2/projects/:project_id/translations/verify
     # == Parameters:
     # project_id::
@@ -7366,6 +8256,10 @@ end
         params.locale_mapping.each do |key, value|
           data_hash["locale_mapping"][key] = value
         end
+      end
+
+      if params.mark_reviewed != nil
+        data_hash["mark_reviewed"] = (params.mark_reviewed == true)
       end
 
       if params.skip_unverification != nil
