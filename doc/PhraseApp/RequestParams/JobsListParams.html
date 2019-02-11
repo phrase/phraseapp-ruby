@@ -110,6 +110,9 @@
 <dl class="rdoc-list note-list"><dt>assigned_to
 <dd>
 <p>filter by user assigned to job</p>
+</dd><dt>branch
+<dd>
+<p>specify the branch to use</p>
 </dd><dt>owned_by
 <dd>
 <p>filter by user owning job</p>
@@ -144,6 +147,28 @@
   <span class="summary_signature">
     
       <a href="#assigned_to=-instance_method" title="#assigned_to= (instance method)">#<strong>assigned_to=</strong>(val)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#branch=-instance_method" title="#branch= (instance method)">#<strong>branch=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -253,14 +278,44 @@
       <pre class="lines">
 
 
-1773
-1774
-1775</pre>
+2374
+2375
+2376</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1773</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2374</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_assigned_to='>assigned_to=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="branch=-instance_method">
+  
+    #<strong>branch=</strong>(val)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+2378
+2379
+2380</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2378</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_branch='>branch=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -283,12 +338,12 @@
       <pre class="lines">
 
 
-1777
-1778
-1779</pre>
+2382
+2383
+2384</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1777</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2382</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_owned_by='>owned_by=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -313,12 +368,12 @@
       <pre class="lines">
 
 
-1781
-1782
-1783</pre>
+2386
+2387
+2388</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1781</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2386</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_state='>state=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -343,21 +398,21 @@
       <pre class="lines">
 
 
-1785
-1786
-1787
-1788
-1789
-1790
-1791
-1792
-1793
-1794
-1795
-1796</pre>
+2390
+2391
+2392
+2393
+2394
+2395
+2396
+2397
+2398
+2399
+2400
+2401</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1785</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2390</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
@@ -381,7 +436,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Sep  4 15:17:15 2018 by
+  Generated on Mon Feb 11 10:34:59 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.12 (ruby-2.5.0).
 </div>

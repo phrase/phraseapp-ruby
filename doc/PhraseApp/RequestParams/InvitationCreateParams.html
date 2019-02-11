@@ -114,6 +114,10 @@ once created. Create a new invitation for each unique email.</p>
 </dd><dt>locale_ids
 <dd>
 <p>List of locale ids the invited user has access to.</p>
+</dd><dt>permissions
+<dd>
+<p>Additional permissions depending on invitation role. Available permissions
+are <code>create_upload</code> and <code>review_translations</code></p>
 </dd><dt>project_ids
 <dd>
 <p>List of project ids the invited user has access to.</p>
@@ -169,6 +173,28 @@ once created. Create a new invitation for each unique email.</p>
   <span class="summary_signature">
     
       <a href="#locale_ids=-instance_method" title="#locale_ids= (instance method)">#<strong>locale_ids=</strong>(val)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#permissions=-instance_method" title="#permissions= (instance method)">#<strong>permissions=</strong>(val)  &#x21d2; Object </a>
     
 
     
@@ -278,12 +304,12 @@ once created. Create a new invitation for each unique email.</p>
       <pre class="lines">
 
 
-1620
-1621
-1622</pre>
+2001
+2002
+2003</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1620</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2001</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_email='>email=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -308,15 +334,45 @@ once created. Create a new invitation for each unique email.</p>
       <pre class="lines">
 
 
-1624
-1625
-1626</pre>
+2005
+2006
+2007</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1624</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2005</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_ids='>locale_ids=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="permissions=-instance_method">
+  
+    #<strong>permissions=</strong>(val)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+2009
+2010
+2011</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2009</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_permissions='>permissions=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -338,12 +394,12 @@ once created. Create a new invitation for each unique email.</p>
       <pre class="lines">
 
 
-1628
-1629
-1630</pre>
+2013
+2014
+2015</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1628</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2013</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project_ids='>project_ids=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -368,12 +424,12 @@ once created. Create a new invitation for each unique email.</p>
       <pre class="lines">
 
 
-1632
-1633
-1634</pre>
+2017
+2018
+2019</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1632</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2017</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_role='>role=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -398,18 +454,18 @@ once created. Create a new invitation for each unique email.</p>
       <pre class="lines">
 
 
-1636
-1637
-1638
-1639
-1640
-1641
-1642
-1643
-1644</pre>
+2021
+2022
+2023
+2024
+2025
+2026
+2027
+2028
+2029</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1636</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 2021</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
@@ -430,7 +486,7 @@ once created. Create a new invitation for each unique email.</p>
 </div>
 
       <div id="footer">
-  Generated on Tue Sep  4 15:17:15 2018 by
+  Generated on Mon Feb 11 10:34:59 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.12 (ruby-2.5.0).
 </div>
