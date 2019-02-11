@@ -107,7 +107,10 @@
 <p>TranslationParams</p>
 
 <h2 id="label-Parameters-3A">Parameters:</h2>
-<dl class="rdoc-list note-list"><dt>content
+<dl class="rdoc-list note-list"><dt>branch
+<dd>
+<p>specify the branch to use</p>
+</dd><dt>content
 <dd>
 <p>Translation content</p>
 </dd><dt>excluded
@@ -127,11 +130,8 @@ specified if the key associated to the translation is pluralized.</p>
 </dd><dt>unverified
 <dd>
 <p>Indicates whether translation is unverified. Part of the &lt;a href=“<a
-href="https://phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading">phraseapp.com/docs/guides/working-with-phraseapp/verification-proofreading</a>”
-target=“_blank”&gt;Advanced Workflows&lt;/a&gt; feature and only available
-in &lt;a href=“<a
-href="https://phraseapp.com/pricing">phraseapp.com/pricing</a>”
-target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
+href="https://help.phraseapp.com/translate-website-and-app-content/verify-and-proofread-translations/verification-and-proofreading">help.phraseapp.com/translate-website-and-app-content/verify-and-proofread-translations/verification-and-proofreading</a>”
+target=“_blank”&gt;Advanced Workflows&lt;/a&gt; feature.</p>
 </dd></dl>
 
 
@@ -154,6 +154,28 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#branch=-instance_method" title="#branch= (instance method)">#<strong>branch=</strong>(val)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -320,7 +342,37 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="content=-instance_method">
+  <h3 class="signature first" id="branch=-instance_method">
+  
+    #<strong>branch=</strong>(val)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1556
+1557
+1558</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1556</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_branch='>branch=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="content=-instance_method">
   
     #<strong>content=</strong>(val)  &#x21d2; <tt>Object</tt> 
   
@@ -334,12 +386,12 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1307
-1308
-1309</pre>
+1560
+1561
+1562</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1307</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1560</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_content='>content=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -364,18 +416,18 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1311
-1312
-1313
-1314
-1315
-1316
-1317
-1318
-1319</pre>
+1564
+1565
+1566
+1567
+1568
+1569
+1570
+1571
+1572</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1311</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1564</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_excluded='>excluded=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -406,12 +458,12 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1321
-1322
-1323</pre>
+1574
+1575
+1576</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1321</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1574</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_key_id='>key_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -436,12 +488,12 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1325
-1326
-1327</pre>
+1578
+1579
+1580</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1325</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1578</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale_id='>locale_id=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -466,12 +518,12 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1329
-1330
-1331</pre>
+1582
+1583
+1584</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1329</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1582</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_plural_suffix='>plural_suffix=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
@@ -496,18 +548,18 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1333
-1334
-1335
-1336
-1337
-1338
-1339
-1340
-1341</pre>
+1586
+1587
+1588
+1589
+1590
+1591
+1592
+1593
+1594</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1333</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1586</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unverified='>unverified=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>TrueClass</span><span class='rparen'>)</span>
@@ -538,21 +590,21 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
       <pre class="lines">
 
 
-1343
-1344
-1345
-1346
-1347
-1348
-1349
-1350
-1351
-1352
-1353
-1354</pre>
+1596
+1597
+1598
+1599
+1600
+1601
+1602
+1603
+1604
+1605
+1606
+1607</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1343</span>
+      <pre class="code"><span class="info file"># File 'lib/phraseapp-ruby.rb', line 1596</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate'>validate</span>
   
@@ -576,7 +628,7 @@ target=“_blank”&gt;Control Package&lt;/a&gt;.</p>
 </div>
 
       <div id="footer">
-  Generated on Tue Sep  4 15:17:15 2018 by
+  Generated on Mon Feb 11 10:34:59 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.12 (ruby-2.5.0).
 </div>
