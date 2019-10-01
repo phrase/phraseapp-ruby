@@ -1,12 +1,12 @@
 # phraseapp-ruby
 
-phraseapp-ruby is a Ruby gem that allows you to interact with the [PhraseApp API](https://developers.phraseapp.com/api/).
+phraseapp-ruby is a Ruby gem that allows you to interact with the [Phrase API](https://developers.phrase.com/api/).
 
-PhraseApp is a translation management platform for software projects. You can collaborate on language file translation with your team or order translations through our platform. The API allows you to import locale files, download locale files, tag keys or interact in other ways with the localization data stored in PhraseApp for your account.
+Phrase is a translation management platform for software projects. You can collaborate on language file translation with your team or order translations through our platform. The API allows you to import locale files, download locale files, tag keys or interact in other ways with the localization data stored in Phrase for your account.
 
 phraseapp-ruby is not a replacement for the **phrase gem**, it is a pure API client for programmaticly using our features inside your own applications and does not support the push or pull commands for locale files. However, it does support uploading and downloading of single locale files through the according API endpoints.
 
-If you're looking for a CLI sync command for PhraseApp, please user our official [PhraseApp client](https://help.phraseapp.com/phraseapp-for-developers/phraseapp-client/phraseapp-in-your-terminal). The **phrase gem** is deprecated and will be discontinued at the end of 2015.
+If you're looking for a CLI sync command for Phrase, please user our official [Phrase client](https://help.phrase.com/phraseapp-for-developers/phraseapp-client/phraseapp-in-your-terminal). The **phrase gem** is deprecated and will be discontinued at the end of 2015.
 
 ## Installation
 
@@ -24,7 +24,7 @@ and install it via
 
 ## Usage
 
-For usage examples please refer to our [Wiki](https://github.com/phrase/phraseapp-ruby/wiki/Usage-Example) for this. Here is a basic setup with an [Access Token](https://phraseapp.com/settings/oauth_access_tokens) that you can find in your PhraseApp user profile for Authentication.
+For usage examples please refer to our [Wiki](https://github.com/phrase/phraseapp-ruby/wiki/Usage-Example) for this. Here is a basic setup with an [Access Token](https://phrase.com/settings/oauth_access_tokens) that you can find in your Phrase user profile for Authentication.
 
 ```ruby
 # Require the gem
@@ -44,13 +44,13 @@ rsp, err = client.key_create('YOUR_PROJECT_ID', params)
 puts rsp
 ```
 
-There are also other ways of authentication, which are described in our [API v2 Documentation](https://developers.phraseapp.com/api/)
+There are also other ways of authentication, which are described in our [API v2 Documentation](https://developers.phrase.com/api/)
 
 ## Documentation
 
 For a full list of available client actions, see the [phraseapp-ruby Documentation](http://www.rubydoc.info/gems/phraseapp-ruby/PhraseApp/Client)
 
-The actions are generated automatically from our API specification, so once you get the hang of the Ruby specific naming, you should be able to infer names of actions and endpoints through our [API v2 Documentation](https://developers.phraseapp.com/api/)
+The actions are generated automatically from our API specification, so once you get the hang of the Ruby specific naming, you should be able to infer names of actions and endpoints through our [API v2 Documentation](https://developers.phrase.com/api/)
 
 ## OpenSSL
 
@@ -78,5 +78,5 @@ This library is auto-generated from templates that run against a API specificati
 ## Further reading
 
 * [phraseapp-ruby documentation](http://www.rubydoc.info/gems/phraseapp-ruby)
-* [PhraseApp](https://phraseapp.com)
-* [PhraseApp API documentation](https://developers.phraseapp.com/api/)
+* [Phrase](https://phrase.com)
+* [Phrase API documentation](https://developers.phrase.com/api/)
