@@ -24,7 +24,7 @@ and install it via
 
 ## Usage
 
-For usage examples please refer to our [Wiki](https://github.com/phrase/phraseapp-ruby/wiki/Usage-Example) for this. Here is a basic setup with an [Access Token](https://phrase.com/settings/oauth_access_tokens) that you can find in your Phrase user profile for Authentication.
+For usage examples please refer to our [Wiki](https://github.com/phrase/phraseapp-ruby/wiki/Usage-Example) for this. Here is a basic setup with an [Access Token](https://app.phrase.com/settings/oauth_access_tokens) that you can find in your Phrase user profile for Authentication.
 
 ```ruby
 # Require the gem
