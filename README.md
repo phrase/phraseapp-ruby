@@ -1,3 +1,7 @@
+# [Deprecated]
+This library is deprecated and has been replaced by [phrase-ruby](https://github.com/phrase/phrase-ruby)
+
+
 # phraseapp-ruby
 
 phraseapp-ruby is a Ruby gem that allows you to interact with the [Phrase API](https://developers.phrase.com/api/).
@@ -65,12 +69,12 @@ To run the test first install the dependencies
 
     $ bundle install
 
-and run the tests by 
+and run the tests by
 
     $ rake test
 
 
-## Contributing 
+## Contributing
 
 This library is auto-generated from templates that run against a API specification file. Therefore we can not accept any pull requests in this repository. Please use the [GitHub Issue Tracker](https://github.com/phrase/phraseapp-ruby/issues) to report bugs.
 
