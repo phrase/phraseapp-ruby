@@ -84,3 +84,8 @@ This library is auto-generated from templates that run against a API specificati
 * [phraseapp-ruby documentation](http://www.rubydoc.info/gems/phraseapp-ruby)
 * [Phrase](https://phrase.com)
 * [Phrase API documentation](https://developers.phrase.com/api/)
+
+
+## Get help / support
+
+Please contact [support@phrase.com](mailto:support@phrase.com?subject=[GitHub]%20phraseapp-ruby) and we can take more direct action toward finding a solution.
